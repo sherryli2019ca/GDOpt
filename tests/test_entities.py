@@ -43,3 +43,18 @@ def test_entity_table_and_closure():
     table3 = build_entity_table(t.messages[:3], schema)
     closure2 = argument_closure({"flight_number": "HAT268", "date": "2024-05-24"}, table3)
     assert closure2["flight_number"] == "flight_number" and closure2["date"] is None
+
+
+def test_coarse_shape_tolerates_ids_without_digits():
+    from gdopt.entities import learn_shape
+
+    ids = ["H8Q05L", "3ZQ1LD", "IFOYYZ", "NQNU5R", "M20IZO", "N6F783", "ABCDEF", "Q69X3R", "S5IK51", "OUEA45"]
+    shape = learn_shape(ids)
+    assert shape is not None and shape.pattern == "[A-Z0-9]{6}"
+    assert shape.find("It's actually M20IZO, not N6F783.") == ["M20IZO", "N6F783"]
+
+
+def test_coarse_shape_rejects_plain_words():
+    from gdopt.entities import learn_shape
+
+    assert learn_shape(["HELLO", "WORLD", "FLIGHT", "PLEASE", "CANCEL", "REFUND"]) is None

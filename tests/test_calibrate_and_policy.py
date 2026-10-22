@@ -79,3 +79,33 @@ def test_function_decision_model_normalizes():
     m = FunctionDecisionModel(lambda opts, state: {"tool:a": 3.0})
     r = m.choice("q", action_menu({"a": "x"}), {})
     assert set(r.probabilities) == {"message", "tool:a"} and abs(sum(r.probabilities.values()) - 1) < 1e-9
+
+
+def test_decision_records_proposed_action():
+    tasks = make_tasks(30, seed=9)
+    runner = ToyRunner(tasks)
+    trajs = [runner.trajectory(t.id, make_llm_policy(seed=100 * k + i), trial=k) for k in range(3) for i, t in enumerate(tasks)]
+    train, test = split_by_trial(trajs, [0, 1])
+    model = fit_situations(train, max_depth=5, min_leaf=10)
+    table = TierTable.from_profile(profile(model, train, test), default_tau=0.5, code_min_test=5)
+    pol = TieredPolicy(model, table, simulated_decision_model(accuracy=0.97, seed=2), make_llm_policy(seed=3), TOOLS, POLICY_TEXT, lam=0.0)
+    seen_cheap = False
+    for tr in test:
+        for step in tr.steps():
+            d = pol.decide(step.history)
+            if d.tier_used != Tier.LLM or d.fallback_reason:
+                assert d.proposed is not None  # a cheap tier was consulted
+            if not d.llm_called:
+                assert d.proposed == d.message.action
+                seen_cheap = True
+    assert seen_cheap
+
+
+def test_cheap_tier_never_repeats_a_call_in_the_same_turn():
+    from gdopt.tiers import _already_called_since_user_turn
+    from gdopt.trace import Message, ToolCall
+
+    hist = [Message("user", "hi"), Message("assistant", tool_calls=[ToolCall("lookup", {"id": "A1"})]), Message("tool", "{}", tool_name="lookup")]
+    assert _already_called_since_user_turn(hist, "lookup", {"id": "A1"})
+    assert not _already_called_since_user_turn(hist, "lookup", {"id": "B2"})
+    assert not _already_called_since_user_turn(hist + [Message("user", "ok")], "lookup", {"id": "A1"})

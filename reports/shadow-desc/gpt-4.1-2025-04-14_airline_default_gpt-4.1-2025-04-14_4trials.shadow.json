@@ -86,7 +86,7 @@
  {
   "trajectory_id": "08fad612-ff21-41ce-9038-6e0d65430ea5",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.06,
@@ -431,7 +431,7 @@
  {
   "trajectory_id": "10cc191b-3b09-43d7-94f3-33560c1d61a5",
   "step_index": 6,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.23,
@@ -452,8 +452,10 @@
   },
   "success": true,
   "llm_gold": false,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "M20IZO"
+  },
   "verdict": "agree"
  },
  {
@@ -510,7 +512,7 @@
   "llm_gold": true,
   "jev_gold": false,
   "jev_args": {
-   "reservation_id": "M20IZO"
+   "reservation_id": "IFOYYZ"
   },
   "verdict": "agree"
  },
@@ -661,7 +663,7 @@
  {
   "trajectory_id": "1236f61b-84e2-4729-81f4-4d213df62fb4",
   "step_index": 6,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "message",
   "probabilities": {
    "message": 0.59,
@@ -689,7 +691,7 @@
  {
   "trajectory_id": "1236f61b-84e2-4729-81f4-4d213df62fb4",
   "step_index": 8,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.08,
@@ -861,7 +863,7 @@
  {
   "trajectory_id": "1338b573-f9d5-480d-ad03-6741ea9db6a3",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 9,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.02,
@@ -1087,7 +1089,7 @@
  {
   "trajectory_id": "15c97b2d-5873-4280-9d61-541b9bce2b7e",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "message",
   "probabilities": {
    "message": 0.63,
@@ -1203,7 +1205,7 @@
  {
   "trajectory_id": "177d63f2-6983-49b2-b796-9a72db32aa40",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.68,
@@ -1511,7 +1513,7 @@
  {
   "trajectory_id": "1c09a44b-19b5-4289-9962-442da8e3cb87",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.06,
@@ -1767,7 +1769,7 @@
  {
   "trajectory_id": "23b53960-c18d-4d14-a85d-b947deca5a9f",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 9,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.03,
@@ -2029,7 +2031,7 @@
  {
   "trajectory_id": "27b3a2fe-d706-4039-b0ab-22e7906a3a62",
   "step_index": 4,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.06,
@@ -2050,8 +2052,10 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "H8Q05L"
+  },
   "verdict": "agree"
  },
  {
@@ -2281,7 +2285,7 @@
  {
   "trajectory_id": "2ec2be7b-a57e-4ce5-a734-fa144dc5e69a",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.01,
@@ -2388,9 +2392,9 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
+  "jev_gold": true,
   "jev_args": {
-   "reservation_id": "H8Q05L"
+   "reservation_id": "S61CZX"
   },
   "verdict": "agree"
  },
@@ -2453,7 +2457,7 @@
  {
   "trajectory_id": "2f3d3511-b0d4-427c-afb1-9572ce2ea1a6",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.37,
@@ -2474,8 +2478,10 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "PEP4E0"
+  },
   "verdict": "agree"
  },
  {
@@ -3315,7 +3321,7 @@
  {
   "trajectory_id": "4cc5d02b-bf9a-4b44-84bf-c72bd39676ec",
   "step_index": 6,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.29,
@@ -3511,7 +3517,7 @@
  {
   "trajectory_id": "4cffc770-83a1-4ff3-870f-66f69794c8fc",
   "step_index": 6,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "message",
   "probabilities": {
    "message": 0.2,
@@ -3532,9 +3538,11 @@
   },
   "success": false,
   "llm_gold": null,
-  "jev_gold": false,
-  "jev_args": null,
-  "verdict": "undecidable"
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "3RK2T9"
+  },
+  "verdict": "jev_right"
  },
  {
   "trajectory_id": "4fc94945-bc29-4e28-ab87-d55ffd818f99",
@@ -3623,7 +3631,7 @@
  {
   "trajectory_id": "51b2fdfe-119e-461d-b917-0ab432cfd52a",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.06,
@@ -3731,7 +3739,9 @@
   "success": false,
   "llm_gold": null,
   "jev_gold": null,
-  "jev_args": null,
+  "jev_args": {
+   "reservation_id": "K1NW8N"
+  },
   "verdict": "agree"
  },
  {
@@ -3871,7 +3881,9 @@
   "success": true,
   "llm_gold": null,
   "jev_gold": null,
-  "jev_args": null,
+  "jev_args": {
+   "reservation_id": "XEWRD9"
+  },
   "verdict": "agree"
  },
  {
@@ -4499,7 +4511,7 @@
  {
   "trajectory_id": "6dd57d9b-2ff0-475f-90ac-66c2b7084eaf",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 9,
   "llm_action": "message",
   "probabilities": {
    "message": 0.07,
@@ -4529,7 +4541,7 @@
  {
   "trajectory_id": "6dd57d9b-2ff0-475f-90ac-66c2b7084eaf",
   "step_index": 6,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "message",
   "probabilities": {
    "message": 0.73,
@@ -4557,7 +4569,7 @@
  {
   "trajectory_id": "6dd57d9b-2ff0-475f-90ac-66c2b7084eaf",
   "step_index": 8,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.18,
@@ -4578,8 +4590,10 @@
   },
   "success": false,
   "llm_gold": false,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "M20IZO"
+  },
   "verdict": "agree"
  },
  {
@@ -4704,7 +4718,7 @@
  {
   "trajectory_id": "709a7ef2-1a9e-49bf-8f14-d4da5a110c9e",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.07,
@@ -5307,7 +5321,7 @@
  {
   "trajectory_id": "7c34d96d-e752-44c4-bc36-7c795339e2cd",
   "step_index": 4,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.72,
@@ -6695,7 +6709,7 @@
  {
   "trajectory_id": "a2c25d55-f1ba-42b2-973a-4d405ad43d3e",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.02,
@@ -6776,9 +6790,9 @@
   },
   "success": false,
   "llm_gold": true,
-  "jev_gold": false,
+  "jev_gold": true,
   "jev_args": {
-   "reservation_id": "4XGCCM"
+   "reservation_id": "LU15PA"
   },
   "verdict": "agree"
  },
@@ -6925,7 +6939,7 @@
  {
   "trajectory_id": "adaa4da0-cf3a-4d63-8c12-0b3a65e37d2e",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.03,
@@ -7715,7 +7729,7 @@
  {
   "trajectory_id": "c36cf70e-cc32-4c8f-affd-14964eb0bdaa",
   "step_index": 6,
-  "leaf_id": 9,
+  "leaf_id": 6,
   "llm_action": "message",
   "probabilities": {
    "message": 0.37,
@@ -7736,14 +7750,16 @@
   },
   "success": true,
   "llm_gold": null,
-  "jev_gold": false,
-  "jev_args": null,
-  "verdict": "undecidable"
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "1N99U6"
+  },
+  "verdict": "jev_right"
  },
  {
   "trajectory_id": "c36cf70e-cc32-4c8f-affd-14964eb0bdaa",
   "step_index": 8,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.11,
@@ -7764,8 +7780,10 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "1N99U6"
+  },
   "verdict": "agree"
  },
  {
@@ -8137,7 +8155,7 @@
  {
   "trajectory_id": "c9565c5b-f969-429a-ad81-223cd2dc7567",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.01,
@@ -8451,7 +8469,7 @@
  {
   "trajectory_id": "cb969122-6899-4b0f-8444-a2fc43dd55a6",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.08,
@@ -8472,8 +8490,10 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "H8Q05L"
+  },
   "verdict": "agree"
  },
  {
@@ -8787,7 +8807,7 @@
  {
   "trajectory_id": "d663842b-0c52-4842-9183-819a23388fed",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.67,
@@ -9291,7 +9311,7 @@
  {
   "trajectory_id": "de8045f7-4c30-4b7f-892d-210abcad11aa",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.01,
@@ -9312,9 +9332,11 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
-  "verdict": "llm_right"
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "JMO1MG"
+  },
+  "verdict": "undecidable"
  },
  {
   "trajectory_id": "de8045f7-4c30-4b7f-892d-210abcad11aa",
@@ -9375,7 +9397,7 @@
  {
   "trajectory_id": "df7b6da3-1ac5-4689-96b0-c61c7e2835e0",
   "step_index": 4,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_reservation_details",
   "probabilities": {
    "message": 0.2,
@@ -9396,8 +9418,10 @@
   },
   "success": true,
   "llm_gold": true,
-  "jev_gold": false,
-  "jev_args": null,
+  "jev_gold": true,
+  "jev_args": {
+   "reservation_id": "EUJUY6"
+  },
   "verdict": "agree"
  },
  {
@@ -9801,7 +9825,7 @@
  {
   "trajectory_id": "e80f6eb9-d140-412c-afda-5bbf7efc6843",
   "step_index": 10,
-  "leaf_id": 8,
+  "leaf_id": 6,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.66,
@@ -9913,7 +9937,7 @@
  {
   "trajectory_id": "ea299d73-2409-4eb1-b870-956019e033f3",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.02,
@@ -10449,7 +10473,7 @@
  {
   "trajectory_id": "f0ffbf77-3add-4801-8f90-e16103027910",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.03,
@@ -11213,7 +11237,7 @@
  {
   "trajectory_id": "ff166fa8-9416-4334-a3f1-074e7c71a5fe",
   "step_index": 4,
-  "leaf_id": 6,
+  "leaf_id": 8,
   "llm_action": "tool:get_user_details",
   "probabilities": {
    "message": 0.05,

@@ -106,6 +106,18 @@ class TierTable:
         return table
 
 
+def _already_called_since_user_turn(history: list[Message], tool: str, args: dict[str, Any]) -> bool:
+    """True if the agent already issued exactly this call since the user last spoke."""
+    for m in reversed(history):
+        if m.role == "user":
+            return False
+        if m.role == "assistant":
+            for tc in m.tool_calls:
+                if tc.name == tool and dict(tc.arguments) == args:
+                    return True
+    return False
+
+
 def effective_tau(tau: float, lam: float) -> float:
     return tau + lam * (1.0 - tau)
 
@@ -119,6 +131,7 @@ class Decision:
     fallback_reason: str | None = None
     decision_cost: float = 0.0
     llm_called: bool = False
+    proposed: str | None = None  # action the cheap tier proposed (also recorded when it fell back)
 
 
 LLMFallback = Callable[[list[Message]], Message]
@@ -162,9 +175,11 @@ class TieredPolicy:
             args[name] = v
         return args
 
-    def _fallback(self, history: list[Message], leaf_id: int, tier: Tier, conf: float, reason: str, cost: float) -> Decision:
+    def _fallback(self, history: list[Message], leaf_id: int, tier: Tier, conf: float, reason: str, cost: float,
+                  proposed: str | None = None) -> Decision:
         msg = self.llm(history)
-        return Decision(msg, Tier.LLM, leaf_id, conf, fallback_reason=f"{tier.value}: {reason}", decision_cost=cost, llm_called=True)
+        return Decision(msg, Tier.LLM, leaf_id, conf, fallback_reason=f"{tier.value}: {reason}", decision_cost=cost,
+                        llm_called=True, proposed=proposed)
 
     # -- main entry --------------------------------------------------------
     def decide(self, history: list[Message]) -> Decision:
@@ -176,7 +191,7 @@ class TieredPolicy:
         tau = effective_tau(rule.tau, self.lam)
         if rule.tier == Tier.CODE:
             if rule.confidence < tau:
-                return self._fallback(history, leaf.id, Tier.CODE, rule.confidence, "below threshold", 0.0)
+                return self._fallback(history, leaf.id, Tier.CODE, rule.confidence, "below threshold", 0.0, rule.action)
             return self._emit(rule.action, history, leaf.id, Tier.CODE, rule.confidence, 0.0)
 
         # JEV tier
@@ -185,17 +200,22 @@ class TieredPolicy:
         state = conversation_state(history, self.policy_text)
         res = self.decision_model.choice(self.instructions, self.menu, state)
         if res.p_max < tau:
-            return self._fallback(history, leaf.id, Tier.JEV, res.p_max, "below threshold", res.cost)
+            return self._fallback(history, leaf.id, Tier.JEV, res.p_max, "below threshold", res.cost, res.top)
         return self._emit(res.top, history, leaf.id, Tier.JEV, res.p_max, res.cost)
 
     def _emit(self, action: str | None, history: list[Message], leaf_id: int, tier: Tier, conf: float, cost: float) -> Decision:
         if action is None or action == MESSAGE_ACTION or not is_tool_action(action):
             # Deciding "send a message" still needs the generative model for the text.
             msg = self.llm(history)
-            return Decision(msg, tier, leaf_id, conf, fallback_reason="message text needs LLM", decision_cost=cost, llm_called=True)
+            return Decision(msg, tier, leaf_id, conf, fallback_reason="message text needs LLM", decision_cost=cost,
+                            llm_called=True, proposed=action)
         tool = action_tool_name(action) or ""
         args = self._fill_args(tool, history)
         if args is None:
-            return self._fallback(history, leaf_id, tier, conf, "open argument", cost)
+            return self._fallback(history, leaf_id, tier, conf, "open argument", cost, action)
+        if _already_called_since_user_turn(history, tool, args):
+            # A cheap tier must never loop: repeating a call the agent already made in this turn means the
+            # situation/argument rule is wrong for this history, so hand the step to the LLM.
+            return self._fallback(history, leaf_id, tier, conf, "duplicate call", cost, action)
         msg = Message(role="assistant", tool_calls=[ToolCall(tool, args)], cost=0.0)
-        return Decision(msg, tier, leaf_id, conf, decision_cost=cost)
+        return Decision(msg, tier, leaf_id, conf, decision_cost=cost, proposed=action)

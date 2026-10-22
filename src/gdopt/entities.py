@@ -88,8 +88,10 @@ _COARSE_CLASSES = (
 
 def _learn_coarse_shape(vals: list[str], min_coverage: float) -> Shape | None:
     """Fallback for identifiers whose letter/digit runs vary (``H8Q05L``, ``3ZQ1LD``)."""
+    # Identifiers mix letters and digits, but not every instance has a digit (airline ``IFOYYZ``), so only
+    # require that a clear majority does; this keeps plain words out without dropping real id types.
     with_digit = sum(1 for v in vals if any(c.isdigit() for c in v)) / len(vals)
-    if with_digit < min_coverage:
+    if with_digit < 0.5:
         return None
     for cls, rx in _COARSE_CLASSES:
         matched = [v for v in vals if rx.fullmatch(v)]
