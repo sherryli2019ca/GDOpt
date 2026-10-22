@@ -131,7 +131,10 @@ class OpenRouterJev:
     def noul(self, instructions: str, criteria: dict[str, str], state: Any) -> ChoiceResult:
         data = self._post({"q": {"type": "noul", "instructions": instructions, "criteria": criteria}}, state)
         ans = self._answer(data, "q")
-        p = float(ans.get("probability", ans.get("prob", 0.5)))
+        # Response shape: {"answers": {"q": {"type": "noul", "noul": 0.84}}}
+        if "noul" not in ans and "probability" not in ans:
+            raise RuntimeError(f"unexpected noul answer: {json.dumps(ans)[:300]}")
+        p = float(ans.get("noul", ans.get("probability")))
         return ChoiceResult({"true": p, "false": 1 - p}, cost=float((data.get("usage") or {}).get("cost") or 0.0), latency_s=data["_latency_s"], raw=data)
 
 
@@ -159,6 +162,57 @@ class FunctionDecisionModel:
     def noul(self, instructions: str, criteria: dict[str, str], state: Any) -> ChoiceResult:
         self.n_calls += 1
         return ChoiceResult(self._norm(criteria, self.fn(criteria, state)), cost=self.cost_per_call)
+
+
+TOOL_NEEDED_INSTRUCTIONS = (
+    "You are the customer-service agent in this conversation. Given the policy and the conversation so far, "
+    "should the agent's next step be a tool call (rather than sending a message to the user)?"
+)
+TOOL_NEEDED_CRITERIA = {
+    "true": "The agent has what it needs and the policy allows it: the correct next step is to call a tool now.",
+    "false": "The agent should send a message to the user now: ask for missing information, list details and "
+    "request confirmation, answer, refuse, or close the conversation.",
+}
+WHICH_TOOL_INSTRUCTIONS = (
+    "You are the customer-service agent in this conversation. The next step is a tool call. "
+    "Given the policy and the conversation so far, which tool should the agent call?"
+)
+
+
+@dataclass
+class TwoStageDecisionModel:
+    """Noul "is a tool needed now?" followed by Choice over the tools only.
+
+    Combines into one distribution over the full menu:
+    ``p(message) = p(false)``, ``p(tool:x) = p(true) * p_choice(x)``.
+    The second call is skipped when ``p(true)`` is below ``skip_below``.
+    """
+
+    inner: DecisionModel
+    skip_below: float = 0.05
+    message_label: str = "message"
+
+    def choice(self, instructions: str, options: dict[str, str], state: Any) -> ChoiceResult:
+        if self.message_label not in options or len(options) < 2:
+            return self.inner.choice(instructions, options, state)
+        gate = self.inner.noul(TOOL_NEEDED_INSTRUCTIONS, TOOL_NEEDED_CRITERIA, state)
+        p_tool = gate.probabilities.get("true", 0.0)
+        tools = {k: v for k, v in options.items() if k != self.message_label}
+        probs = {self.message_label: 1.0 - p_tool}
+        cost, latency = gate.cost, gate.latency_s
+        if p_tool >= self.skip_below:
+            pick = self.inner.choice(WHICH_TOOL_INSTRUCTIONS, tools, state)
+            cost += pick.cost
+            latency += pick.latency_s
+            for k in tools:
+                probs[k] = p_tool * pick.probabilities.get(k, 0.0)
+        else:
+            for k in tools:
+                probs[k] = p_tool / len(tools)
+        return ChoiceResult(probs, cost=cost, latency_s=latency, raw={"gate": gate.raw})
+
+    def noul(self, instructions: str, criteria: dict[str, str], state: Any) -> ChoiceResult:
+        return self.inner.noul(instructions, criteria, state)
 
 
 @dataclass

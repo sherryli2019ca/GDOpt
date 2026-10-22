@@ -6,3 +6,4 @@ dist/
 .pytest_cache/
 .venv/
 reports/shadow/*.shadow-cache.json
+reports/shadow-*/*.shadow-cache.json

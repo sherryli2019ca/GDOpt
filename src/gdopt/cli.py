@@ -68,23 +68,27 @@ def cmd_shadow(args: argparse.Namespace) -> int:
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
     cache_path = out / f"{Path(path).stem}.shadow-cache.json"
-    jev = CachedDecisionModel(OpenRouterJev(model=args.model))
+    live = OpenRouterJev(model=args.model)
+    cached = CachedDecisionModel(live)
     if cache_path.exists():
         raw = json.loads(cache_path.read_text())
-        jev.cache = {k: ChoiceResult(**v) for k, v in raw.items()}
+        cached.cache = {k: ChoiceResult(**v) for k, v in raw.items()}
+    from .decision import TwoStageDecisionModel
+
+    jev = TwoStageDecisionModel(cached) if args.two_stage else cached
     done = 0
 
     def save() -> None:
-        cache_path.write_text(json.dumps({k: {"probabilities": v.probabilities, "cost": v.cost, "latency_s": v.latency_s} for k, v in jev.cache.items()}))
+        cache_path.write_text(json.dumps({k: {"probabilities": v.probabilities, "cost": v.cost, "latency_s": v.latency_s} for k, v in cached.cache.items()}))
 
     def on_record(rec) -> None:
         nonlocal done
         done += 1
         if done % 25 == 0:
             save()
-            print(f"  {done}/{len(steps)} shadow calls, ${jev.inner.total_cost:.4f}", file=sys.stderr)
+            print(f"  {done}/{len(steps)} shadow calls, ${live.total_cost:.4f}", file=sys.stderr)
 
-    print(f"{len(steps)} steps in {len(keep)} candidate situations; calling {args.model} ...", file=sys.stderr)
+    print(f"{len(steps)} steps in {len(keep)} candidate situations; calling {args.model} ({'two-stage' if args.two_stage else 'one-stage'}) ...", file=sys.stderr)
     shadow: ShadowResult = shadow_evaluate(steps, model, jev, menu, policy=policy, on_record=on_record)
     save()
     gold = load_gold_actions(path)
@@ -116,6 +120,7 @@ def main(argv: list[str] | None = None) -> int:
     ps.add_argument("--policy", default=None, help="domain policy markdown to include in the decision state")
     ps.add_argument("--tool-descriptions", default=None, help="JSON {tool name: description} for the action menu")
     ps.add_argument("--model", default="typesafe/jev-1.14")
+    ps.add_argument("--two-stage", action="store_true", help="ask Noul 'tool needed?' first, then Choice over tools")
     ps.add_argument("--tiers", default="code,jev", help="candidate tiers to shadow")
     ps.add_argument("--max-steps", type=int, default=400, help="sample at most this many held-out steps (cost control)")
     ps.add_argument("--seed", type=int, default=0)

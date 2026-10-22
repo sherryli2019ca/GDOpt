@@ -44,3 +44,34 @@ Reading:
   two-stage question, Noul "does the agent need to call a tool now?" then Choice over tools.
 * Agreement with GPT-4.1 is a proxy. The reference-action check settles only tool-vs-tool disagreements;
   message-vs-tool disagreements need counterfactual replay (stage 3b), which is the next experiment.
+
+## Variants: tool descriptions and a two-stage question (same 400 sampled steps per domain)
+
+| domain | variant | agreement | on success | ECE | @ p≥0.9 (kept) | @ p≥0.8 (kept) | LLM called tool: agree | LLM sent msg: agree | same tool when both tool (n) | LLM right / Jev right |
+| --- | --- | ---: | ---: | ---: | --- | --- | ---: | ---: | ---: | ---: |
+| airline | baseline (names only) | 78.2% | 80.9% | 0.031 | 95.6% (45.5%) | 92.2% (61.3%) | 56.1% | 93.6% | 91.1% (101) | 11 / 1 |
+| airline | + tool descriptions | 78.8% | 83.3% | 0.045 | 95.5% (49.8%) | 91.0% (66.5%) | 56.1% | 94.5% | 92.0% (100) | 11 / 0 |
+| airline | + descriptions, two-stage | 74.0% | 76.6% | 0.069 | 98.8% (20.0%) | 87.8% (57.2%) | 37.2% | 99.6% | 95.3% (64) | 21 / 1 |
+| retail | baseline (names only) | 81.2% | 82.6% | 0.059 | 98.8% (42.5%) | 95.8% (65.2%) | 63.9% | 95.5% | 97.5% (118) | 23 / 0 |
+| retail | + tool descriptions | 86.2% | 88.4% | 0.054 | 98.9% (45.8%) | 98.0% (63.5%) | 75.0% | 95.5% | 97.1% (139) | 15 / 0 |
+| retail | + descriptions, two-stage | 75.2% | 76.5% | 0.127 | 100.0% (9.2%) | 92.9% (63.7%) | 46.1% | 99.1% | 100.0% (83) | 40 / 0 |
+| telecom | baseline (names only) | 72.5% | 76.2% | 0.085 | 100.0% (24.8%) | 88.4% (41.0%) | 46.8% | 86.2% | 70.7% (92) | 1 / 2 |
+| telecom | + tool descriptions | 71.2% | 80.0% | 0.088 | 100.0% (21.0%) | 88.3% (38.5%) | 51.8% | 81.6% | 76.6% (94) | 0 / 2 |
+| telecom | + descriptions, two-stage | 70.5% | 67.6% | 0.070 | 100.0% (7.2%) | 88.7% (35.2%) | 17.3% | 98.9% | 88.9% (27) | 1 / 2 |
+
+Reading:
+
+* **Tool descriptions help where tools are many and similar** (retail +5 points overall, tool-step agreement
+  64 → 75 %) and are neutral elsewhere. They cost nothing extra, so they are now the default input
+  (`examples/tau2_tool_descriptions/`, extracted from the τ²-bench tool docstrings).
+* **The two-stage question does not fix the message-vs-tool bias; it makes it worse.** The Noul gate
+  "should the next step be a tool call?" says *no* even more often (tool-step agreement drops to 17–46 %),
+  while the second-stage Choice, once reached, picks the right tool 95–100 % of the time. The product
+  `p(tool) · p(which tool)` also lowers tool confidences structurally, so high-confidence coverage shrinks to
+  7–20 %. Two calls per step, half the coverage: not worth it as formulated. The gate's criteria wording may
+  be part of the cause (it enumerates many reasons to send a message); a neutral wording is worth one more
+  try, but the single-question form with descriptions is the one to build on.
+* **The remaining disagreements are of one kind**: the LLM calls a tool, Jev wants to talk to the user
+  first. In these domains that is often *also* policy-compliant (confirm before a write, ask for a missing
+  id), just slower and more expensive; sometimes it is a needless question. Only counterfactual replay can
+  tell these apart, which is why replay is the next stage rather than more prompt variants.
