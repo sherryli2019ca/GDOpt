@@ -33,7 +33,17 @@ gdopt profile path/to/tau2-bench/data/tau2/results/final/gpt-4.1-2025-04-14_airl
 
 # full loop on the toy environment (profile -> tiers -> Learn-then-Test -> held-out evaluation)
 python examples/toy_pipeline.py
+
+# stage 3a: local verification without calibration or replay (needs OPENROUTER_API_KEY)
+# samples 400 held-out steps from the candidate situations, shadow-calls Jev, and reports agreement,
+# calibration, the coverage curve and gold-action verdicts for every disagreement; ~$0.05 at Jev prices
+export OPENROUTER_API_KEY=...
+gdopt shadow path/to/tau2-bench/data/tau2/results/final/gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.json \
+  --policy path/to/tau2-bench/data/tau2/domains/airline/policy.md --max-steps 400 --out-dir reports/shadow
 ```
+
+`gdopt shadow` caches every Jev answer in `<out-dir>/<stem>.shadow-cache.json`, so re-running (for example
+with more steps) only pays for new calls.
 
 `reports/tau2/` holds the stage-2 profiles for the nine τ²-bench runs (GPT-4.1, Claude 3.7 Sonnet, o4-mini ×
 airline, retail, telecom); `reports/tau2/SUMMARY.md` summarizes them.
@@ -51,6 +61,7 @@ airline, retail, telecom); `reports/tau2/SUMMARY.md` summarizes them.
 ## Status
 
 First version. What is real: the offline stages on τ²-bench's own traces, the Jev client, the tiered policy, and
-the calibration, all exercised end to end on the toy environment. What is not done yet: running Jev shadow
-calls on τ²-bench traces (needs an OpenRouter key), plugging the tiered policy into τ²-bench's orchestrator for
-counterfactual replay, and the Noul sub-decision extraction for policy checks.
+the calibration, all exercised end to end on the toy environment; `gdopt shadow` (local verification against
+logged actions and τ²-bench reference actions) is implemented but has not been run against the live Jev API
+yet. What is not done yet: plugging the tiered policy into τ²-bench's orchestrator for counterfactual replay,
+and the Noul sub-decision extraction for policy checks.

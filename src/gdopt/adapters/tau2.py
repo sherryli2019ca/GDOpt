@@ -76,6 +76,27 @@ def load_results(path: str | Path, agent_only: bool = True) -> list[Trajectory]:
     return out
 
 
+def load_gold_actions(path: str | Path) -> dict[str, list[tuple[str, dict[str, Any]]]]:
+    """Expected agent tool calls per task (``evaluation_criteria.actions``).
+
+    τ²-bench grades a task by database state, but it also lists the tool calls
+    the reference solution makes.  They are a free local oracle: an action a
+    decision model proposes can be checked against them without running
+    anything.
+    """
+    data = json.loads(Path(path).read_text())
+    out: dict[str, list[tuple[str, dict[str, Any]]]] = {}
+    for task in data.get("tasks", []):
+        crit = task.get("evaluation_criteria") or {}
+        gold = [
+            (a["name"], dict(a.get("arguments") or {}))
+            for a in crit.get("actions") or []
+            if a.get("requestor", "assistant") == "assistant"
+        ]
+        out[str(task.get("id"))] = gold
+    return out
+
+
 def results_info(path: str | Path) -> dict[str, Any]:
     data = json.loads(Path(path).read_text())
     info = data.get("info", {})
