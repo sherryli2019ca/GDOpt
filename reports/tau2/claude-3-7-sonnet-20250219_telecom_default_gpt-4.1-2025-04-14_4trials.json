@@ -1,0 +1,1813 @@
+{
+ "n_trajectories_train": 228,
+ "n_trajectories_test": 228,
+ "n_steps_test": 4237,
+ "n_options": 19,
+ "total_cost_test": 130.918836,
+ "action_counts_test": {
+  "message": 2719,
+  "tool:check_network_status": 22,
+  "tool:check_status_bar": 3,
+  "tool:can_send_mms": 28,
+  "tool:get_customer_by_phone": 229,
+  "tool:get_details_by_id": 709,
+  "tool:get_data_usage": 110,
+  "tool:refuel_data": 92,
+  "tool:get_bills_for_customer": 55,
+  "tool:enable_roaming": 39,
+  "tool:run_speed_test": 1,
+  "tool:check_apn_settings": 4,
+  "tool:reset_apn_settings": 2,
+  "tool:transfer_to_human_agents": 129,
+  "tool:toggle_data": 2,
+  "tool:set_network_mode_preference": 4,
+  "tool:reseat_sim_card": 2,
+  "tool:toggle_data_saver_mode": 1,
+  "tool:reboot_device": 2,
+  "tool:send_payment_request": 42,
+  "tool:resume_line": 42
+ },
+ "closed_tool_step_rate": 0.19966957753127212,
+ "max_saving_share": 0.19371279800462549,
+ "llm_usd_per_prompt_token": 3.21696735864679e-06,
+ "jev_to_llm_price_ratio": 0.013055774373062714,
+ "situations": [
+  {
+   "leaf_id": 25,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=0 & called:refuel_data=0 & called:check_network_status=0",
+   "n_train": 381,
+   "n_test": 400,
+   "train_counts": {
+    "tool:get_details_by_id": 126,
+    "message": 137,
+    "tool:get_data_usage": 60,
+    "tool:check_network_status": 1,
+    "tool:get_bills_for_customer": 41,
+    "tool:enable_roaming": 4,
+    "tool:can_send_mms": 8,
+    "tool:transfer_to_human_agents": 3,
+    "tool:check_network_mode_preference": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 139,
+    "tool:get_data_usage": 58,
+    "message": 145,
+    "tool:get_bills_for_customer": 43,
+    "tool:transfer_to_human_agents": 1,
+    "tool:can_send_mms": 7,
+    "tool:check_network_status": 1,
+    "tool:enable_roaming": 6
+   },
+   "majority": "message",
+   "majority_test_acc": 0.3625,
+   "norm_entropy_test": 0.4818051299898374,
+   "tool_rate": 0.6375,
+   "closed_tool_rate": 0.5175,
+   "latest_rule_acc": 0.9565217391304348,
+   "mean_cost": 0.030111405,
+   "cost_share": 0.0920002221834603,
+   "mean_prompt_tokens": 9463.0725,
+   "max_saving_share": 0.046401491288363336
+  },
+  {
+   "leaf_id": 5,
+   "rule": "n_tool_calls=0 & have:phone_number=1",
+   "n_train": 201,
+   "n_test": 204,
+   "train_counts": {
+    "tool:get_customer_by_phone": 201
+   },
+   "test_counts": {
+    "tool:get_customer_by_phone": 204
+   },
+   "majority": "tool:get_customer_by_phone",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 1.0,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.02586245588235294,
+   "cost_share": 0.04029932713425591,
+   "mean_prompt_tokens": 8296.89705882353,
+   "max_saving_share": 0.03977318821180482
+  },
+  {
+   "leaf_id": 42,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=0 & user_confirms=0 & called:get_data_usage=0",
+   "n_train": 373,
+   "n_test": 439,
+   "train_counts": {
+    "message": 304,
+    "tool:refuel_data": 17,
+    "tool:check_network_status": 3,
+    "tool:get_data_usage": 14,
+    "tool:get_details_by_id": 9,
+    "tool:transfer_to_human_agents": 19,
+    "tool:get_bills_for_customer": 4,
+    "tool:resume_line": 1,
+    "tool:set_network_mode_preference": 1,
+    "tool:run_speed_test": 1
+   },
+   "test_counts": {
+    "message": 366,
+    "tool:get_details_by_id": 11,
+    "tool:refuel_data": 21,
+    "tool:get_data_usage": 18,
+    "tool:enable_roaming": 3,
+    "tool:transfer_to_human_agents": 15,
+    "tool:set_network_mode_preference": 1,
+    "tool:get_bills_for_customer": 3,
+    "tool:check_network_status": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8337129840546698,
+   "norm_entropy_test": 0.2484746557763522,
+   "tool_rate": 0.1662870159453303,
+   "closed_tool_rate": 0.10022779043280182,
+   "latest_rule_acc": 0.9318181818181818,
+   "mean_cost": 0.034268446469248294,
+   "cost_share": 0.11490972926157089,
+   "mean_prompt_tokens": 10447.76993166287,
+   "max_saving_share": 0.011200830998436712
+  },
+  {
+   "leaf_id": 58,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=0 & called:send_payment_request=1 & prev_role=tool",
+   "n_train": 177,
+   "n_test": 83,
+   "train_counts": {
+    "message": 45,
+    "tool:resume_line": 40,
+    "tool:get_details_by_id": 92
+   },
+   "test_counts": {
+    "message": 42,
+    "tool:resume_line": 41
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.0,
+   "norm_entropy_test": 0.23538426309163962,
+   "tool_rate": 0.4939759036144578,
+   "closed_tool_rate": 0.4939759036144578,
+   "latest_rule_acc": 0.7560975609756098,
+   "mean_cost": 0.03309809638554217,
+   "cost_share": 0.020983550449531953,
+   "mean_prompt_tokens": 10524.927710843374,
+   "max_saving_share": 0.010475904520899611
+  },
+  {
+   "leaf_id": 59,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=0 & called:send_payment_request=1 & prev_role=user",
+   "n_train": 50,
+   "n_test": 42,
+   "train_counts": {
+    "tool:get_details_by_id": 43,
+    "tool:transfer_to_human_agents": 1,
+    "message": 6
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 41,
+    "tool:resume_line": 1
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.9761904761904762,
+   "norm_entropy_test": 0.03821302968604638,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 1.0,
+   "latest_rule_acc": 0.9761904761904762,
+   "mean_cost": 0.03275221428571429,
+   "cost_share": 0.01050721990837132,
+   "mean_prompt_tokens": 10465.02380952381,
+   "max_saving_share": 0.010370040015959472
+  },
+  {
+   "leaf_id": 56,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=0 & called:send_payment_request=0 & user_confirms=1",
+   "n_train": 42,
+   "n_test": 42,
+   "train_counts": {
+    "tool:send_payment_request": 40,
+    "message": 2
+   },
+   "test_counts": {
+    "message": 3,
+    "tool:send_payment_request": 39
+   },
+   "majority": "tool:send_payment_request",
+   "majority_test_acc": 0.9285714285714286,
+   "norm_entropy_test": 0.08739139862109745,
+   "tool_rate": 0.9285714285714286,
+   "closed_tool_rate": 0.9285714285714286,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03286328571428571,
+   "cost_share": 0.01054285267247564,
+   "mean_prompt_tokens": 10391.92857142857,
+   "max_saving_share": 0.009459618842947257
+  },
+  {
+   "leaf_id": 41,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=0 & user_confirms=0 & called:get_data_usage=1",
+   "n_train": 279,
+   "n_test": 232,
+   "train_counts": {
+    "message": 224,
+    "tool:enable_roaming": 10,
+    "tool:get_data_usage": 2,
+    "tool:get_details_by_id": 9,
+    "tool:transfer_to_human_agents": 15,
+    "tool:refuel_data": 14,
+    "tool:check_network_status": 2,
+    "tool:get_bills_for_customer": 3
+   },
+   "test_counts": {
+    "tool:refuel_data": 16,
+    "message": 176,
+    "tool:get_details_by_id": 17,
+    "tool:enable_roaming": 1,
+    "tool:reset_apn_settings": 1,
+    "tool:get_data_usage": 3,
+    "tool:transfer_to_human_agents": 15,
+    "tool:get_bills_for_customer": 2,
+    "tool:can_send_mms": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7586206896551724,
+   "norm_entropy_test": 0.31592130988922484,
+   "tool_rate": 0.2413793103448276,
+   "closed_tool_rate": 0.12931034482758622,
+   "latest_rule_acc": 0.6,
+   "mean_cost": 0.036157590517241385,
+   "cost_share": 0.06407451560293434,
+   "mean_prompt_tokens": 10988.650862068966,
+   "max_saving_share": 0.008074039958165698
+  },
+  {
+   "leaf_id": 33,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=1 & called:refuel_data=0 & called:enable_roaming=0",
+   "n_train": 131,
+   "n_test": 152,
+   "train_counts": {
+    "tool:get_details_by_id": 14,
+    "message": 104,
+    "tool:refuel_data": 6,
+    "tool:can_send_mms": 1,
+    "tool:enable_roaming": 2,
+    "tool:transfer_to_human_agents": 2,
+    "tool:check_network_status": 1,
+    "tool:get_data_usage": 1
+   },
+   "test_counts": {
+    "message": 112,
+    "tool:refuel_data": 9,
+    "tool:get_details_by_id": 19,
+    "tool:get_bills_for_customer": 4,
+    "tool:get_data_usage": 2,
+    "tool:enable_roaming": 3,
+    "tool:run_speed_test": 1,
+    "tool:check_apn_settings": 1,
+    "tool:check_network_status": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7368421052631579,
+   "norm_entropy_test": 0.3333922911156131,
+   "tool_rate": 0.2631578947368421,
+   "closed_tool_rate": 0.17763157894736842,
+   "latest_rule_acc": 0.9629629629629629,
+   "mean_cost": 0.03395966447368421,
+   "cost_share": 0.03942800866332176,
+   "mean_prompt_tokens": 10603.473684210527,
+   "max_saving_share": 0.007083355352546656
+  },
+  {
+   "leaf_id": 48,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=1 & called:get_data_usage=1 & called:can_send_mms=0",
+   "n_train": 193,
+   "n_test": 255,
+   "train_counts": {
+    "message": 148,
+    "tool:transfer_to_human_agents": 16,
+    "tool:run_speed_test": 1,
+    "tool:get_details_by_id": 11,
+    "tool:enable_roaming": 3,
+    "tool:get_bills_for_customer": 3,
+    "tool:get_data_usage": 7,
+    "tool:reset_apn_settings": 3,
+    "tool:reseat_sim_card": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 11,
+    "message": 214,
+    "tool:get_data_usage": 4,
+    "tool:transfer_to_human_agents": 16,
+    "tool:get_bills_for_customer": 2,
+    "tool:reset_apn_settings": 1,
+    "tool:toggle_data": 2,
+    "tool:enable_roaming": 1,
+    "tool:set_network_mode_preference": 1,
+    "tool:check_network_status": 1,
+    "tool:reseat_sim_card": 1,
+    "tool:check_apn_settings": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8392156862745098,
+   "norm_entropy_test": 0.24725546858683997,
+   "tool_rate": 0.1607843137254902,
+   "closed_tool_rate": 0.09019607843137255,
+   "latest_rule_acc": 0.6521739130434783,
+   "mean_cost": 0.037565635294117654,
+   "cost_share": 0.07316928024016346,
+   "mean_prompt_tokens": 11377.819607843137,
+   "max_saving_share": 0.006339793465466577
+  },
+  {
+   "leaf_id": 45,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=1 & called:get_data_usage=0 & user_confirms=0",
+   "n_train": 192,
+   "n_test": 155,
+   "train_counts": {
+    "tool:get_data_usage": 10,
+    "message": 153,
+    "tool:transfer_to_human_agents": 22,
+    "tool:can_send_mms": 3,
+    "tool:get_details_by_id": 3,
+    "tool:get_bills_for_customer": 1
+   },
+   "test_counts": {
+    "message": 110,
+    "tool:transfer_to_human_agents": 21,
+    "tool:get_details_by_id": 8,
+    "tool:get_data_usage": 8,
+    "tool:can_send_mms": 4,
+    "tool:reseat_sim_card": 1,
+    "tool:set_network_mode_preference": 1,
+    "tool:enable_roaming": 1,
+    "tool:check_network_status": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7096774193548387,
+   "norm_entropy_test": 0.35480079397673964,
+   "tool_rate": 0.2903225806451613,
+   "closed_tool_rate": 0.14838709677419354,
+   "latest_rule_acc": 0.8695652173913043,
+   "mean_cost": 0.037693761290322585,
+   "cost_share": 0.0446271382981132,
+   "mean_prompt_tokens": 11368.845161290323,
+   "max_saving_share": 0.005752370980673768
+  },
+  {
+   "leaf_id": 39,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=0 & user_confirms=1 & called:get_data_usage=1",
+   "n_train": 84,
+   "n_test": 84,
+   "train_counts": {
+    "message": 53,
+    "tool:get_details_by_id": 14,
+    "tool:refuel_data": 17
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 17,
+    "message": 45,
+    "tool:enable_roaming": 2,
+    "tool:refuel_data": 17,
+    "tool:transfer_to_human_agents": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5357142857142857,
+   "norm_entropy_test": 0.4038177878335397,
+   "tool_rate": 0.4642857142857143,
+   "closed_tool_rate": 0.27380952380952384,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03476128571428572,
+   "cost_share": 0.022303498023767947,
+   "mean_prompt_tokens": 10706.559523809523,
+   "max_saving_share": 0.00558763757883998
+  },
+  {
+   "leaf_id": 16,
+   "rule": "n_tool_calls=1 & have:customer_id=0 & prev_role=user",
+   "n_train": 27,
+   "n_test": 24,
+   "train_counts": {
+    "tool:get_customer_by_phone": 27
+   },
+   "test_counts": {
+    "tool:get_customer_by_phone": 24
+   },
+   "majority": "tool:get_customer_by_phone",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 1.0,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.026607500000000003,
+   "cost_share": 0.004877678564144888,
+   "mean_prompt_tokens": 8439.583333333334,
+   "max_saving_share": 0.004813996693347088
+  },
+  {
+   "leaf_id": 26,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=0 & called:refuel_data=0 & called:check_network_status=1",
+   "n_train": 64,
+   "n_test": 43,
+   "train_counts": {
+    "tool:get_details_by_id": 38,
+    "tool:get_data_usage": 14,
+    "tool:run_speed_test": 1,
+    "message": 10,
+    "tool:check_apn_settings": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 25,
+    "tool:get_data_usage": 10,
+    "message": 8
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.5813953488372093,
+   "norm_entropy_test": 0.32855254911527504,
+   "tool_rate": 0.813953488372093,
+   "closed_tool_rate": 0.4883720930232558,
+   "latest_rule_acc": 0.9047619047619048,
+   "mean_cost": 0.029547348837209306,
+   "cost_share": 0.009704760894757728,
+   "mean_prompt_tokens": 9397.023255813954,
+   "max_saving_share": 0.004624046687580752
+  },
+  {
+   "leaf_id": 4,
+   "rule": "n_tool_calls=0 & have:phone_number=0 & prev_role=user",
+   "n_train": 228,
+   "n_test": 228,
+   "train_counts": {
+    "message": 201,
+    "tool:check_network_status": 17,
+    "tool:get_customer_by_phone": 1,
+    "tool:check_status_bar": 2,
+    "tool:can_send_mms": 7
+   },
+   "test_counts": {
+    "tool:check_network_status": 11,
+    "message": 204,
+    "tool:check_status_bar": 3,
+    "tool:can_send_mms": 9,
+    "tool:get_customer_by_phone": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8947368421052632,
+   "norm_entropy_test": 0.15424053245950062,
+   "tool_rate": 0.10526315789473684,
+   "closed_tool_rate": 0.10087719298245613,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.025586986842105263,
+   "cost_share": 0.0445606849116807,
+   "mean_prompt_tokens": 8219.171052631578,
+   "max_saving_share": 0.0045441451075864114
+  },
+  {
+   "leaf_id": 38,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=0 & user_confirms=1 & called:get_data_usage=0",
+   "n_train": 115,
+   "n_test": 122,
+   "train_counts": {
+    "tool:refuel_data": 28,
+    "message": 72,
+    "tool:enable_roaming": 11,
+    "tool:get_bills_for_customer": 1,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_data_usage": 1,
+    "tool:get_details_by_id": 1
+   },
+   "test_counts": {
+    "tool:refuel_data": 21,
+    "message": 84,
+    "tool:enable_roaming": 15,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_details_by_id": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6885245901639344,
+   "norm_entropy_test": 0.30439774697369343,
+   "tool_rate": 0.3114754098360656,
+   "closed_tool_rate": 0.16393442622950818,
+   "latest_rule_acc": 0.95,
+   "mean_cost": 0.03296419672131148,
+   "cost_share": 0.030718513262675207,
+   "mean_prompt_tokens": 10141.057377049181,
+   "max_saving_share": 0.004535890344864098
+  },
+  {
+   "leaf_id": 62,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=1 & prev_role=user",
+   "n_train": 202,
+   "n_test": 214,
+   "train_counts": {
+    "message": 165,
+    "tool:transfer_to_human_agents": 27,
+    "tool:get_details_by_id": 7,
+    "tool:check_status_bar": 3
+   },
+   "test_counts": {
+    "message": 178,
+    "tool:check_network_status": 2,
+    "tool:transfer_to_human_agents": 25,
+    "tool:get_details_by_id": 9
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8317757009345794,
+   "norm_entropy_test": 0.1973118909688277,
+   "tool_rate": 0.16822429906542055,
+   "closed_tool_rate": 0.0514018691588785,
+   "latest_rule_acc": 0.45454545454545453,
+   "mean_cost": 0.03924520093457944,
+   "cost_share": 0.06415022663354569,
+   "mean_prompt_tokens": 11852.130841121496,
+   "max_saving_share": 0.0032061046097700673
+  },
+  {
+   "leaf_id": 54,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=0 & called:send_payment_request=0 & user_confirms=0 & called:get_data_usage=1",
+   "n_train": 25,
+   "n_test": 49,
+   "train_counts": {
+    "tool:get_details_by_id": 4,
+    "tool:transfer_to_human_agents": 5,
+    "message": 14,
+    "tool:enable_roaming": 2
+   },
+   "test_counts": {
+    "tool:transfer_to_human_agents": 5,
+    "message": 34,
+    "tool:get_details_by_id": 3,
+    "tool:enable_roaming": 3,
+    "tool:get_data_usage": 3,
+    "tool:refuel_data": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6938775510204082,
+   "norm_entropy_test": 0.3664343570798099,
+   "tool_rate": 0.30612244897959184,
+   "closed_tool_rate": 0.20408163265306123,
+   "latest_rule_acc": 0.8,
+   "mean_cost": 0.042510489795918364,
+   "cost_share": 0.015910728078883926,
+   "mean_prompt_tokens": 13041.795918367347,
+   "max_saving_share": 0.0030965537313402385
+  },
+  {
+   "leaf_id": 30,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=1 & called:refuel_data=1 & called:check_network_status=0",
+   "n_train": 79,
+   "n_test": 91,
+   "train_counts": {
+    "tool:transfer_to_human_agents": 4,
+    "message": 73,
+    "tool:get_data_usage": 1,
+    "tool:get_details_by_id": 1
+   },
+   "test_counts": {
+    "message": 80,
+    "tool:get_details_by_id": 1,
+    "tool:toggle_data_saver_mode": 1,
+    "tool:enable_roaming": 1,
+    "tool:transfer_to_human_agents": 5,
+    "tool:reboot_device": 2,
+    "tool:set_network_mode_preference": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8791208791208791,
+   "norm_entropy_test": 0.1884446390431304,
+   "tool_rate": 0.12087912087912088,
+   "closed_tool_rate": 0.054945054945054944,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03570886813186813,
+   "cost_share": 0.02482077521679157,
+   "mean_prompt_tokens": 11260.923076923076,
+   "max_saving_share": 0.001339691450360807
+  },
+  {
+   "leaf_id": 8,
+   "rule": "n_tool_calls=1 & have:customer_id=1 & prev_role=tool",
+   "n_train": 201,
+   "n_test": 204,
+   "train_counts": {
+    "message": 66,
+    "tool:get_details_by_id": 133,
+    "tool:can_send_mms": 2
+   },
+   "test_counts": {
+    "message": 71,
+    "tool:get_details_by_id": 128,
+    "tool:can_send_mms": 5
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.6274509803921569,
+   "norm_entropy_test": 0.25494910384698455,
+   "tool_rate": 0.6519607843137255,
+   "closed_tool_rate": 0.024509803921568627,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.02738598529411765,
+   "cost_share": 0.042673317077154584,
+   "mean_prompt_tokens": 8603.78431372549,
+   "max_saving_share": 0.001031845340289208
+  },
+  {
+   "leaf_id": 27,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=0 & called:refuel_data=1",
+   "n_train": 78,
+   "n_test": 87,
+   "train_counts": {
+    "message": 74,
+    "tool:check_apn_settings": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:check_network_status": 1
+   },
+   "test_counts": {
+    "message": 81,
+    "tool:check_apn_settings": 2,
+    "tool:enable_roaming": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_details_by_id": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9310344827586207,
+   "norm_entropy_test": 0.1163738116027328,
+   "tool_rate": 0.06896551724137931,
+   "closed_tool_rate": 0.04597701149425287,
+   "latest_rule_acc": 0.75,
+   "mean_cost": 0.03472268965517242,
+   "cost_share": 0.02307440313630653,
+   "mean_prompt_tokens": 11015.83908045977,
+   "max_saving_share": 0.0010246082880395085
+  },
+  {
+   "leaf_id": 55,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=0 & called:send_payment_request=0 & user_confirms=0 & called:get_data_usage=0",
+   "n_train": 58,
+   "n_test": 60,
+   "train_counts": {
+    "message": 51,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_details_by_id": 1,
+    "tool:send_payment_request": 2
+   },
+   "test_counts": {
+    "message": 53,
+    "tool:send_payment_request": 3,
+    "tool:get_details_by_id": 1,
+    "tool:transfer_to_human_agents": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8833333333333333,
+   "norm_entropy_test": 0.16213348159996965,
+   "tool_rate": 0.11666666666666667,
+   "closed_tool_rate": 0.06666666666666667,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03333795,
+   "cost_share": 0.015278756373910933,
+   "mean_prompt_tokens": 10516.316666666668,
+   "max_saving_share": 0.0010047742417176756
+  },
+  {
+   "leaf_id": 49,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=1 & called:get_data_usage=1 & called:can_send_mms=1",
+   "n_train": 53,
+   "n_test": 38,
+   "train_counts": {
+    "tool:check_network_status": 4,
+    "message": 34,
+    "tool:transfer_to_human_agents": 8,
+    "tool:get_details_by_id": 4,
+    "tool:check_apn_settings": 1,
+    "tool:get_data_usage": 2
+   },
+   "test_counts": {
+    "message": 30,
+    "tool:get_data_usage": 1,
+    "tool:transfer_to_human_agents": 4,
+    "tool:check_network_status": 2,
+    "tool:get_details_by_id": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7894736842105263,
+   "norm_entropy_test": 0.26151779159554056,
+   "tool_rate": 0.21052631578947367,
+   "closed_tool_rate": 0.10526315789473684,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03795,
+   "cost_share": 0.01101522167520646,
+   "mean_prompt_tokens": 11363.947368421053,
+   "max_saving_share": 0.0009718682697698223
+  },
+  {
+   "leaf_id": 31,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=1 & called:refuel_data=1 & called:check_network_status=1",
+   "n_train": 56,
+   "n_test": 27,
+   "train_counts": {
+    "message": 42,
+    "tool:get_data_usage": 3,
+    "tool:enable_roaming": 5,
+    "tool:get_details_by_id": 3,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_bills_for_customer": 1
+   },
+   "test_counts": {
+    "message": 23,
+    "tool:enable_roaming": 2,
+    "tool:get_bills_for_customer": 1,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8518518518518519,
+   "norm_entropy_test": 0.1947794062486022,
+   "tool_rate": 0.14814814814814814,
+   "closed_tool_rate": 0.1111111111111111,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.035318333333333334,
+   "cost_share": 0.007283864027022055,
+   "mean_prompt_tokens": 10957.037037037036,
+   "max_saving_share": 0.0007666526069142767
+  },
+  {
+   "leaf_id": 19,
+   "rule": "n_tool_calls=2 & called:get_details_by_id=0",
+   "n_train": 49,
+   "n_test": 46,
+   "train_counts": {
+    "tool:get_details_by_id": 39,
+    "message": 10
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 36,
+    "message": 10
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.782608695652174,
+   "norm_entropy_test": 0.177822105054962,
+   "tool_rate": 0.782608695652174,
+   "closed_tool_rate": 0.06521739130434782,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.029102021739130436,
+   "cost_share": 0.010225365890054202,
+   "mean_prompt_tokens": 9272.739130434782,
+   "max_saving_share": 0.0007653182754057381
+  },
+  {
+   "leaf_id": 12,
+   "rule": "n_tool_calls=1 & have:customer_id=1 & prev_role=user & user_short=0 & user_confirms=0",
+   "n_train": 258,
+   "n_test": 270,
+   "train_counts": {
+    "tool:get_details_by_id": 19,
+    "message": 229,
+    "tool:transfer_to_human_agents": 5,
+    "tool:check_network_status": 2,
+    "tool:get_data_usage": 2,
+    "tool:can_send_mms": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 23,
+    "message": 235,
+    "tool:get_data_usage": 3,
+    "tool:transfer_to_human_agents": 7,
+    "tool:check_network_status": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8703703703703703,
+   "norm_entropy_test": 0.17377574880082003,
+   "tool_rate": 0.12962962962962962,
+   "closed_tool_rate": 0.007407407407407408,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03078677777777778,
+   "cost_share": 0.06349300264172836,
+   "mean_prompt_tokens": 9627.685185185184,
+   "max_saving_share": 0.0004192967147169736
+  },
+  {
+   "leaf_id": 10,
+   "rule": "n_tool_calls=1 & have:customer_id=1 & prev_role=user & user_short=1",
+   "n_train": 37,
+   "n_test": 39,
+   "train_counts": {
+    "tool:get_details_by_id": 16,
+    "message": 16,
+    "tool:transfer_to_human_agents": 2,
+    "tool:can_send_mms": 3
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 20,
+    "message": 16,
+    "tool:can_send_mms": 2,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.5128205128205128,
+   "norm_entropy_test": 0.32409242864998816,
+   "tool_rate": 0.5897435897435898,
+   "closed_tool_rate": 0.05128205128205128,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.029241692307692305,
+   "cost_share": 0.008710939043179393,
+   "mean_prompt_tokens": 9256.71794871795,
+   "max_saving_share": 0.00041678636221785905
+  },
+  {
+   "leaf_id": 61,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=1 & called:resume_line=1 & prev_role=tool",
+   "n_train": 78,
+   "n_test": 82,
+   "train_counts": {
+    "message": 77,
+    "tool:transfer_to_human_agents": 1
+   },
+   "test_counts": {
+    "message": 78,
+    "tool:transfer_to_human_agents": 3,
+    "tool:get_details_by_id": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9512195121951219,
+   "norm_entropy_test": 0.07551172614726531,
+   "tool_rate": 0.04878048780487805,
+   "closed_tool_rate": 0.012195121951219513,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.03687424390243902,
+   "cost_share": 0.023095897369573314,
+   "mean_prompt_tokens": 11828.182926829268,
+   "max_saving_share": 0.0003179553674328982
+  },
+  {
+   "leaf_id": 46,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=user & called:refuel_data=1 & called:get_data_usage=0 & user_confirms=1",
+   "n_train": 36,
+   "n_test": 29,
+   "train_counts": {
+    "tool:run_speed_test": 1,
+    "message": 34,
+    "tool:get_data_usage": 1
+   },
+   "test_counts": {
+    "message": 27,
+    "tool:get_details_by_id": 1,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9310344827586207,
+   "norm_entropy_test": 0.10146518922729292,
+   "tool_rate": 0.06896551724137931,
+   "closed_tool_rate": 0.034482758620689655,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.03767389655172414,
+   "cost_share": 0.008345193353231464,
+   "mean_prompt_tokens": 11415.379310344828,
+   "max_saving_share": 0.00031499269916817734
+  },
+  {
+   "leaf_id": 3,
+   "rule": "n_tool_calls=0 & have:phone_number=0 & prev_role=start",
+   "n_train": 228,
+   "n_test": 228,
+   "train_counts": {
+    "message": 228
+   },
+   "test_counts": {
+    "message": 228
+   },
+   "majority": "message",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 0.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.0,
+   "cost_share": 0.0,
+   "mean_prompt_tokens": 0.0,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 13,
+   "rule": "n_tool_calls=1 & have:customer_id=1 & prev_role=user & user_short=0 & user_confirms=1",
+   "n_train": 46,
+   "n_test": 37,
+   "train_counts": {
+    "tool:get_details_by_id": 11,
+    "message": 32,
+    "tool:get_data_usage": 1,
+    "tool:can_send_mms": 1,
+    "tool:transfer_to_human_agents": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 12,
+    "message": 25
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6756756756756757,
+   "norm_entropy_test": 0.21399191799083114,
+   "tool_rate": 0.32432432432432434,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.030306243243243245,
+   "cost_share": 0.008565085317440494,
+   "mean_prompt_tokens": 9581.54054054054,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 15,
+   "rule": "n_tool_calls=1 & have:customer_id=0 & prev_role=tool",
+   "n_train": 27,
+   "n_test": 24,
+   "train_counts": {
+    "message": 27
+   },
+   "test_counts": {
+    "message": 24
+   },
+   "majority": "message",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 0.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.026044875,
+   "cost_share": 0.004774538325409493,
+   "mean_prompt_tokens": 8352.666666666666,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 18,
+   "rule": "n_tool_calls=2 & called:get_details_by_id=1",
+   "n_train": 179,
+   "n_test": 183,
+   "train_counts": {
+    "tool:get_details_by_id": 179
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 183
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.02805940983606558,
+   "cost_share": 0.03922179693073349,
+   "mean_prompt_tokens": 9016.469945355191,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 34,
+   "rule": "n_tool_calls=3+ & called:get_bills_for_customer=0 & prev_role=tool & called:get_data_usage=1 & called:refuel_data=0 & called:enable_roaming=1",
+   "n_train": 34,
+   "n_test": 24,
+   "train_counts": {
+    "message": 27,
+    "tool:refuel_data": 7
+   },
+   "test_counts": {
+    "message": 17,
+    "tool:refuel_data": 7
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7083333333333334,
+   "norm_entropy_test": 0.2050092583923113,
+   "tool_rate": 0.2916666666666667,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.036296749999999996,
+   "cost_share": 0.006653908838602873,
+   "mean_prompt_tokens": 11472.041666666666,
+   "max_saving_share": 0.0
+  }
+ ],
+ "tree": {
+  "id": 0,
+  "counts": {
+   "message": 2658,
+   "tool:get_customer_by_phone": 229,
+   "tool:get_details_by_id": 777,
+   "tool:refuel_data": 89,
+   "tool:get_data_usage": 119,
+   "tool:transfer_to_human_agents": 140,
+   "tool:run_speed_test": 4,
+   "tool:check_network_status": 31,
+   "tool:enable_roaming": 37,
+   "tool:get_bills_for_customer": 54,
+   "tool:reset_apn_settings": 3,
+   "tool:send_payment_request": 42,
+   "tool:resume_line": 41,
+   "tool:check_status_bar": 5,
+   "tool:can_send_mms": 26,
+   "tool:set_network_mode_preference": 1,
+   "tool:check_apn_settings": 3,
+   "tool:check_network_mode_preference": 1,
+   "tool:reseat_sim_card": 1
+  },
+  "split": "n_tool_calls",
+  "default": "3+",
+  "children": {
+   "0": {
+    "id": 1,
+    "counts": {
+     "message": 429,
+     "tool:get_customer_by_phone": 202,
+     "tool:check_network_status": 17,
+     "tool:check_status_bar": 2,
+     "tool:can_send_mms": 7
+    },
+    "split": "have:phone_number",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 2,
+      "counts": {
+       "message": 429,
+       "tool:check_network_status": 17,
+       "tool:get_customer_by_phone": 1,
+       "tool:check_status_bar": 2,
+       "tool:can_send_mms": 7
+      },
+      "split": "prev_role",
+      "default": "start",
+      "children": {
+       "start": {
+        "id": 3,
+        "counts": {
+         "message": 228
+        }
+       },
+       "user": {
+        "id": 4,
+        "counts": {
+         "message": 201,
+         "tool:check_network_status": 17,
+         "tool:get_customer_by_phone": 1,
+         "tool:check_status_bar": 2,
+         "tool:can_send_mms": 7
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 5,
+      "counts": {
+       "tool:get_customer_by_phone": 201
+      }
+     }
+    }
+   },
+   "1": {
+    "id": 6,
+    "counts": {
+     "message": 370,
+     "tool:get_details_by_id": 179,
+     "tool:get_customer_by_phone": 27,
+     "tool:can_send_mms": 7,
+     "tool:transfer_to_human_agents": 8,
+     "tool:check_network_status": 2,
+     "tool:get_data_usage": 3
+    },
+    "split": "have:customer_id",
+    "default": "1",
+    "children": {
+     "1": {
+      "id": 7,
+      "counts": {
+       "message": 343,
+       "tool:get_details_by_id": 179,
+       "tool:can_send_mms": 7,
+       "tool:transfer_to_human_agents": 8,
+       "tool:check_network_status": 2,
+       "tool:get_data_usage": 3
+      },
+      "split": "prev_role",
+      "default": "user",
+      "children": {
+       "tool": {
+        "id": 8,
+        "counts": {
+         "message": 66,
+         "tool:get_details_by_id": 133,
+         "tool:can_send_mms": 2
+        }
+       },
+       "user": {
+        "id": 9,
+        "counts": {
+         "tool:get_details_by_id": 46,
+         "message": 277,
+         "tool:transfer_to_human_agents": 8,
+         "tool:check_network_status": 2,
+         "tool:can_send_mms": 5,
+         "tool:get_data_usage": 3
+        },
+        "split": "user_short",
+        "default": "0",
+        "children": {
+         "1": {
+          "id": 10,
+          "counts": {
+           "tool:get_details_by_id": 16,
+           "message": 16,
+           "tool:transfer_to_human_agents": 2,
+           "tool:can_send_mms": 3
+          }
+         },
+         "0": {
+          "id": 11,
+          "counts": {
+           "tool:get_details_by_id": 30,
+           "message": 261,
+           "tool:transfer_to_human_agents": 6,
+           "tool:check_network_status": 2,
+           "tool:get_data_usage": 3,
+           "tool:can_send_mms": 2
+          },
+          "split": "user_confirms",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 12,
+            "counts": {
+             "tool:get_details_by_id": 19,
+             "message": 229,
+             "tool:transfer_to_human_agents": 5,
+             "tool:check_network_status": 2,
+             "tool:get_data_usage": 2,
+             "tool:can_send_mms": 1
+            }
+           },
+           "1": {
+            "id": 13,
+            "counts": {
+             "tool:get_details_by_id": 11,
+             "message": 32,
+             "tool:get_data_usage": 1,
+             "tool:can_send_mms": 1,
+             "tool:transfer_to_human_agents": 1
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "0": {
+      "id": 14,
+      "counts": {
+       "message": 27,
+       "tool:get_customer_by_phone": 27
+      },
+      "split": "prev_role",
+      "default": "tool",
+      "children": {
+       "tool": {
+        "id": 15,
+        "counts": {
+         "message": 27
+        }
+       },
+       "user": {
+        "id": 16,
+        "counts": {
+         "tool:get_customer_by_phone": 27
+        }
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "id": 17,
+    "counts": {
+     "tool:get_details_by_id": 218,
+     "message": 10
+    },
+    "split": "called:get_details_by_id",
+    "default": "1",
+    "children": {
+     "1": {
+      "id": 18,
+      "counts": {
+       "tool:get_details_by_id": 179
+      }
+     },
+     "0": {
+      "id": 19,
+      "counts": {
+       "tool:get_details_by_id": 39,
+       "message": 10
+      }
+     }
+    }
+   },
+   "3+": {
+    "id": 20,
+    "counts": {
+     "tool:get_details_by_id": 380,
+     "message": 1849,
+     "tool:refuel_data": 89,
+     "tool:get_data_usage": 116,
+     "tool:transfer_to_human_agents": 132,
+     "tool:run_speed_test": 4,
+     "tool:enable_roaming": 37,
+     "tool:check_network_status": 12,
+     "tool:get_bills_for_customer": 54,
+     "tool:reset_apn_settings": 3,
+     "tool:send_payment_request": 42,
+     "tool:resume_line": 41,
+     "tool:check_status_bar": 3,
+     "tool:can_send_mms": 12,
+     "tool:set_network_mode_preference": 1,
+     "tool:check_apn_settings": 3,
+     "tool:check_network_mode_preference": 1,
+     "tool:reseat_sim_card": 1
+    },
+    "split": "called:get_bills_for_customer",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 21,
+      "counts": {
+       "tool:get_details_by_id": 233,
+       "message": 1489,
+       "tool:refuel_data": 89,
+       "tool:get_data_usage": 116,
+       "tool:transfer_to_human_agents": 94,
+       "tool:run_speed_test": 4,
+       "tool:enable_roaming": 35,
+       "tool:check_network_status": 12,
+       "tool:get_bills_for_customer": 54,
+       "tool:reset_apn_settings": 3,
+       "tool:resume_line": 1,
+       "tool:can_send_mms": 12,
+       "tool:set_network_mode_preference": 1,
+       "tool:check_apn_settings": 3,
+       "tool:check_network_mode_preference": 1,
+       "tool:reseat_sim_card": 1
+      },
+      "split": "prev_role",
+      "default": "user",
+      "children": {
+       "tool": {
+        "id": 22,
+        "counts": {
+         "tool:get_details_by_id": 182,
+         "message": 467,
+         "tool:transfer_to_human_agents": 13,
+         "tool:get_data_usage": 79,
+         "tool:refuel_data": 13,
+         "tool:check_network_status": 3,
+         "tool:run_speed_test": 1,
+         "tool:enable_roaming": 11,
+         "tool:get_bills_for_customer": 42,
+         "tool:can_send_mms": 9,
+         "tool:check_apn_settings": 2,
+         "tool:check_network_mode_preference": 1
+        },
+        "split": "called:get_data_usage",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 23,
+          "counts": {
+           "tool:get_details_by_id": 164,
+           "message": 221,
+           "tool:get_data_usage": 74,
+           "tool:check_network_status": 2,
+           "tool:run_speed_test": 1,
+           "tool:get_bills_for_customer": 41,
+           "tool:enable_roaming": 4,
+           "tool:can_send_mms": 8,
+           "tool:check_apn_settings": 2,
+           "tool:transfer_to_human_agents": 5,
+           "tool:check_network_mode_preference": 1
+          },
+          "split": "called:refuel_data",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 24,
+            "counts": {
+             "tool:get_details_by_id": 164,
+             "message": 147,
+             "tool:get_data_usage": 74,
+             "tool:check_network_status": 1,
+             "tool:run_speed_test": 1,
+             "tool:get_bills_for_customer": 41,
+             "tool:enable_roaming": 4,
+             "tool:can_send_mms": 8,
+             "tool:transfer_to_human_agents": 3,
+             "tool:check_network_mode_preference": 1,
+             "tool:check_apn_settings": 1
+            },
+            "split": "called:check_network_status",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 25,
+              "counts": {
+               "tool:get_details_by_id": 126,
+               "message": 137,
+               "tool:get_data_usage": 60,
+               "tool:check_network_status": 1,
+               "tool:get_bills_for_customer": 41,
+               "tool:enable_roaming": 4,
+               "tool:can_send_mms": 8,
+               "tool:transfer_to_human_agents": 3,
+               "tool:check_network_mode_preference": 1
+              }
+             },
+             "1": {
+              "id": 26,
+              "counts": {
+               "tool:get_details_by_id": 38,
+               "tool:get_data_usage": 14,
+               "tool:run_speed_test": 1,
+               "message": 10,
+               "tool:check_apn_settings": 1
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 27,
+            "counts": {
+             "message": 74,
+             "tool:check_apn_settings": 1,
+             "tool:transfer_to_human_agents": 2,
+             "tool:check_network_status": 1
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 28,
+          "counts": {
+           "tool:transfer_to_human_agents": 8,
+           "message": 246,
+           "tool:get_details_by_id": 18,
+           "tool:refuel_data": 13,
+           "tool:get_data_usage": 5,
+           "tool:enable_roaming": 7,
+           "tool:can_send_mms": 1,
+           "tool:check_network_status": 1,
+           "tool:get_bills_for_customer": 1
+          },
+          "split": "called:refuel_data",
+          "default": "0",
+          "children": {
+           "1": {
+            "id": 29,
+            "counts": {
+             "tool:transfer_to_human_agents": 6,
+             "message": 115,
+             "tool:get_data_usage": 4,
+             "tool:enable_roaming": 5,
+             "tool:get_details_by_id": 4,
+             "tool:get_bills_for_customer": 1
+            },
+            "split": "called:check_network_status",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 30,
+              "counts": {
+               "tool:transfer_to_human_agents": 4,
+               "message": 73,
+               "tool:get_data_usage": 1,
+               "tool:get_details_by_id": 1
+              }
+             },
+             "1": {
+              "id": 31,
+              "counts": {
+               "message": 42,
+               "tool:get_data_usage": 3,
+               "tool:enable_roaming": 5,
+               "tool:get_details_by_id": 3,
+               "tool:transfer_to_human_agents": 2,
+               "tool:get_bills_for_customer": 1
+              }
+             }
+            }
+           },
+           "0": {
+            "id": 32,
+            "counts": {
+             "tool:get_details_by_id": 14,
+             "message": 131,
+             "tool:refuel_data": 13,
+             "tool:can_send_mms": 1,
+             "tool:enable_roaming": 2,
+             "tool:transfer_to_human_agents": 2,
+             "tool:check_network_status": 1,
+             "tool:get_data_usage": 1
+            },
+            "split": "called:enable_roaming",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 33,
+              "counts": {
+               "tool:get_details_by_id": 14,
+               "message": 104,
+               "tool:refuel_data": 6,
+               "tool:can_send_mms": 1,
+               "tool:enable_roaming": 2,
+               "tool:transfer_to_human_agents": 2,
+               "tool:check_network_status": 1,
+               "tool:get_data_usage": 1
+              }
+             },
+             "1": {
+              "id": 34,
+              "counts": {
+               "message": 27,
+               "tool:refuel_data": 7
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "user": {
+        "id": 35,
+        "counts": {
+         "tool:refuel_data": 76,
+         "tool:get_data_usage": 37,
+         "message": 1022,
+         "tool:get_details_by_id": 51,
+         "tool:run_speed_test": 3,
+         "tool:transfer_to_human_agents": 81,
+         "tool:enable_roaming": 24,
+         "tool:check_network_status": 9,
+         "tool:get_bills_for_customer": 12,
+         "tool:reset_apn_settings": 3,
+         "tool:resume_line": 1,
+         "tool:set_network_mode_preference": 1,
+         "tool:can_send_mms": 3,
+         "tool:check_apn_settings": 1,
+         "tool:reseat_sim_card": 1
+        },
+        "split": "called:refuel_data",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 36,
+          "counts": {
+           "tool:refuel_data": 76,
+           "message": 653,
+           "tool:get_details_by_id": 33,
+           "tool:enable_roaming": 21,
+           "tool:get_data_usage": 17,
+           "tool:transfer_to_human_agents": 35,
+           "tool:check_network_status": 5,
+           "tool:get_bills_for_customer": 8,
+           "tool:resume_line": 1,
+           "tool:set_network_mode_preference": 1,
+           "tool:run_speed_test": 1
+          },
+          "split": "user_confirms",
+          "default": "0",
+          "children": {
+           "1": {
+            "id": 37,
+            "counts": {
+             "tool:refuel_data": 45,
+             "message": 125,
+             "tool:get_details_by_id": 15,
+             "tool:enable_roaming": 11,
+             "tool:get_bills_for_customer": 1,
+             "tool:transfer_to_human_agents": 1,
+             "tool:get_data_usage": 1
+            },
+            "split": "called:get_data_usage",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 38,
+              "counts": {
+               "tool:refuel_data": 28,
+               "message": 72,
+               "tool:enable_roaming": 11,
+               "tool:get_bills_for_customer": 1,
+               "tool:transfer_to_human_agents": 1,
+               "tool:get_data_usage": 1,
+               "tool:get_details_by_id": 1
+              }
+             },
+             "1": {
+              "id": 39,
+              "counts": {
+               "message": 53,
+               "tool:get_details_by_id": 14,
+               "tool:refuel_data": 17
+              }
+             }
+            }
+           },
+           "0": {
+            "id": 40,
+            "counts": {
+             "message": 528,
+             "tool:enable_roaming": 10,
+             "tool:refuel_data": 31,
+             "tool:get_data_usage": 16,
+             "tool:get_details_by_id": 18,
+             "tool:transfer_to_human_agents": 34,
+             "tool:check_network_status": 5,
+             "tool:get_bills_for_customer": 7,
+             "tool:resume_line": 1,
+             "tool:set_network_mode_preference": 1,
+             "tool:run_speed_test": 1
+            },
+            "split": "called:get_data_usage",
+            "default": "0",
+            "children": {
+             "1": {
+              "id": 41,
+              "counts": {
+               "message": 224,
+               "tool:enable_roaming": 10,
+               "tool:get_data_usage": 2,
+               "tool:get_details_by_id": 9,
+               "tool:transfer_to_human_agents": 15,
+               "tool:refuel_data": 14,
+               "tool:check_network_status": 2,
+               "tool:get_bills_for_customer": 3
+              }
+             },
+             "0": {
+              "id": 42,
+              "counts": {
+               "message": 304,
+               "tool:refuel_data": 17,
+               "tool:check_network_status": 3,
+               "tool:get_data_usage": 14,
+               "tool:get_details_by_id": 9,
+               "tool:transfer_to_human_agents": 19,
+               "tool:get_bills_for_customer": 4,
+               "tool:resume_line": 1,
+               "tool:set_network_mode_preference": 1,
+               "tool:run_speed_test": 1
+              }
+             }
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 43,
+          "counts": {
+           "tool:get_data_usage": 20,
+           "message": 369,
+           "tool:run_speed_test": 2,
+           "tool:transfer_to_human_agents": 46,
+           "tool:get_details_by_id": 18,
+           "tool:enable_roaming": 3,
+           "tool:get_bills_for_customer": 4,
+           "tool:reset_apn_settings": 3,
+           "tool:check_network_status": 4,
+           "tool:can_send_mms": 3,
+           "tool:check_apn_settings": 1,
+           "tool:reseat_sim_card": 1
+          },
+          "split": "called:get_data_usage",
+          "default": "1",
+          "children": {
+           "0": {
+            "id": 44,
+            "counts": {
+             "tool:get_data_usage": 11,
+             "tool:run_speed_test": 1,
+             "message": 187,
+             "tool:transfer_to_human_agents": 22,
+             "tool:can_send_mms": 3,
+             "tool:get_details_by_id": 3,
+             "tool:get_bills_for_customer": 1
+            },
+            "split": "user_confirms",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 45,
+              "counts": {
+               "tool:get_data_usage": 10,
+               "message": 153,
+               "tool:transfer_to_human_agents": 22,
+               "tool:can_send_mms": 3,
+               "tool:get_details_by_id": 3,
+               "tool:get_bills_for_customer": 1
+              }
+             },
+             "1": {
+              "id": 46,
+              "counts": {
+               "tool:run_speed_test": 1,
+               "message": 34,
+               "tool:get_data_usage": 1
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 47,
+            "counts": {
+             "message": 182,
+             "tool:transfer_to_human_agents": 24,
+             "tool:run_speed_test": 1,
+             "tool:get_details_by_id": 15,
+             "tool:enable_roaming": 3,
+             "tool:get_bills_for_customer": 3,
+             "tool:get_data_usage": 9,
+             "tool:reset_apn_settings": 3,
+             "tool:check_network_status": 4,
+             "tool:check_apn_settings": 1,
+             "tool:reseat_sim_card": 1
+            },
+            "split": "called:can_send_mms",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 48,
+              "counts": {
+               "message": 148,
+               "tool:transfer_to_human_agents": 16,
+               "tool:run_speed_test": 1,
+               "tool:get_details_by_id": 11,
+               "tool:enable_roaming": 3,
+               "tool:get_bills_for_customer": 3,
+               "tool:get_data_usage": 7,
+               "tool:reset_apn_settings": 3,
+               "tool:reseat_sim_card": 1
+              }
+             },
+             "1": {
+              "id": 49,
+              "counts": {
+               "tool:check_network_status": 4,
+               "message": 34,
+               "tool:transfer_to_human_agents": 8,
+               "tool:get_details_by_id": 4,
+               "tool:check_apn_settings": 1,
+               "tool:get_data_usage": 2
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 50,
+      "counts": {
+       "tool:get_details_by_id": 147,
+       "tool:transfer_to_human_agents": 38,
+       "message": 360,
+       "tool:send_payment_request": 42,
+       "tool:resume_line": 40,
+       "tool:check_status_bar": 3,
+       "tool:enable_roaming": 2
+      },
+      "split": "called:resume_line",
+      "default": "0",
+      "children": {
+       "0": {
+        "id": 51,
+        "counts": {
+         "tool:get_details_by_id": 140,
+         "tool:transfer_to_human_agents": 10,
+         "message": 118,
+         "tool:send_payment_request": 42,
+         "tool:resume_line": 40,
+         "tool:enable_roaming": 2
+        },
+        "split": "called:send_payment_request",
+        "default": "1",
+        "children": {
+         "0": {
+          "id": 52,
+          "counts": {
+           "tool:get_details_by_id": 5,
+           "tool:transfer_to_human_agents": 9,
+           "message": 67,
+           "tool:send_payment_request": 42,
+           "tool:enable_roaming": 2
+          },
+          "split": "user_confirms",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 53,
+            "counts": {
+             "tool:get_details_by_id": 5,
+             "tool:transfer_to_human_agents": 9,
+             "message": 65,
+             "tool:enable_roaming": 2,
+             "tool:send_payment_request": 2
+            },
+            "split": "called:get_data_usage",
+            "default": "0",
+            "children": {
+             "1": {
+              "id": 54,
+              "counts": {
+               "tool:get_details_by_id": 4,
+               "tool:transfer_to_human_agents": 5,
+               "message": 14,
+               "tool:enable_roaming": 2
+              }
+             },
+             "0": {
+              "id": 55,
+              "counts": {
+               "message": 51,
+               "tool:transfer_to_human_agents": 4,
+               "tool:get_details_by_id": 1,
+               "tool:send_payment_request": 2
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 56,
+            "counts": {
+             "tool:send_payment_request": 40,
+             "message": 2
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 57,
+          "counts": {
+           "message": 51,
+           "tool:get_details_by_id": 135,
+           "tool:resume_line": 40,
+           "tool:transfer_to_human_agents": 1
+          },
+          "split": "prev_role",
+          "default": "tool",
+          "children": {
+           "tool": {
+            "id": 58,
+            "counts": {
+             "message": 45,
+             "tool:resume_line": 40,
+             "tool:get_details_by_id": 92
+            }
+           },
+           "user": {
+            "id": 59,
+            "counts": {
+             "tool:get_details_by_id": 43,
+             "tool:transfer_to_human_agents": 1,
+             "message": 6
+            }
+           }
+          }
+         }
+        }
+       },
+       "1": {
+        "id": 60,
+        "counts": {
+         "message": 242,
+         "tool:transfer_to_human_agents": 28,
+         "tool:get_details_by_id": 7,
+         "tool:check_status_bar": 3
+        },
+        "split": "prev_role",
+        "default": "user",
+        "children": {
+         "tool": {
+          "id": 61,
+          "counts": {
+           "message": 77,
+           "tool:transfer_to_human_agents": 1
+          }
+         },
+         "user": {
+          "id": 62,
+          "counts": {
+           "message": 165,
+           "tool:transfer_to_human_agents": 27,
+           "tool:get_details_by_id": 7,
+           "tool:check_status_bar": 3
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

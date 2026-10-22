@@ -1,0 +1,1522 @@
+{
+ "n_trajectories_train": 228,
+ "n_trajectories_test": 228,
+ "n_steps_test": 4264,
+ "n_options": 14,
+ "total_cost_test": 21.1391807,
+ "action_counts_test": {
+  "message": 2230,
+  "tool:transfer_to_human_agents": 171,
+  "tool:send_payment_request": 177,
+  "tool:enable_roaming": 58,
+  "tool:get_customer_by_phone": 395,
+  "tool:get_details_by_id": 938,
+  "tool:get_customer_by_id": 37,
+  "tool:get_data_usage": 71,
+  "tool:get_customer_by_name": 5,
+  "tool:disable_roaming": 40,
+  "tool:get_bills_for_customer": 39,
+  "tool:suspend_line": 4,
+  "tool:refuel_data": 54,
+  "tool:resume_line": 45
+ },
+ "closed_tool_step_rate": 0.29901500938086306,
+ "max_saving_share": 0.28125634805472466,
+ "llm_usd_per_prompt_token": 6.704290388849642e-07,
+ "jev_to_llm_price_ratio": 0.06264645109921409,
+ "situations": [
+  {
+   "leaf_id": 21,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=1 & prev_role=tool & called:send_payment_request=0",
+   "n_train": 531,
+   "n_test": 578,
+   "train_counts": {
+    "tool:get_details_by_id": 151,
+    "tool:get_customer_by_phone": 31,
+    "message": 241,
+    "tool:send_payment_request": 16,
+    "tool:get_bills_for_customer": 21,
+    "tool:get_customer_by_name": 1,
+    "tool:get_data_usage": 22,
+    "tool:get_customer_by_id": 1,
+    "tool:enable_roaming": 21,
+    "tool:resume_line": 2,
+    "tool:transfer_to_human_agents": 21,
+    "tool:refuel_data": 3
+   },
+   "test_counts": {
+    "message": 249,
+    "tool:get_customer_by_id": 12,
+    "tool:get_details_by_id": 169,
+    "tool:get_customer_by_phone": 29,
+    "tool:get_bills_for_customer": 25,
+    "tool:enable_roaming": 16,
+    "tool:get_data_usage": 22,
+    "tool:transfer_to_human_agents": 25,
+    "tool:send_payment_request": 16,
+    "tool:suspend_line": 2,
+    "tool:refuel_data": 7,
+    "tool:disable_roaming": 4,
+    "tool:get_customer_by_name": 1,
+    "tool:resume_line": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.43079584775086505,
+   "norm_entropy_test": 0.635477891831174,
+   "tool_rate": 0.5692041522491349,
+   "closed_tool_rate": 0.43252595155709345,
+   "latest_rule_acc": 0.952,
+   "mean_cost": 0.0052948538062283735,
+   "cost_share": 0.14477502905304176,
+   "mean_prompt_tokens": 7630.804498269897,
+   "max_saving_share": 0.053609970099051336
+  },
+  {
+   "leaf_id": 24,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=1 & prev_role=user & called:enable_roaming=0",
+   "n_train": 466,
+   "n_test": 609,
+   "train_counts": {
+    "message": 246,
+    "tool:get_details_by_id": 90,
+    "tool:suspend_line": 2,
+    "tool:enable_roaming": 12,
+    "tool:transfer_to_human_agents": 35,
+    "tool:send_payment_request": 38,
+    "tool:get_bills_for_customer": 1,
+    "tool:get_customer_by_phone": 26,
+    "tool:get_customer_by_id": 3,
+    "tool:resume_line": 2,
+    "tool:get_data_usage": 6,
+    "tool:disable_roaming": 4,
+    "tool:refuel_data": 1
+   },
+   "test_counts": {
+    "tool:send_payment_request": 45,
+    "tool:get_details_by_id": 96,
+    "message": 341,
+    "tool:get_data_usage": 8,
+    "tool:get_customer_by_phone": 28,
+    "tool:transfer_to_human_agents": 47,
+    "tool:disable_roaming": 13,
+    "tool:get_customer_by_id": 4,
+    "tool:enable_roaming": 12,
+    "tool:suspend_line": 1,
+    "tool:resume_line": 7,
+    "tool:get_bills_for_customer": 5,
+    "tool:refuel_data": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5599343185550082,
+   "norm_entropy_test": 0.5749121518611658,
+   "tool_rate": 0.4400656814449918,
+   "closed_tool_rate": 0.27586206896551724,
+   "latest_rule_acc": 0.9166666666666666,
+   "mean_cost": 0.005877153694581281,
+   "cost_share": 0.16931529422992256,
+   "mean_prompt_tokens": 8218.223316912972,
+   "max_saving_share": 0.04001692115528381
+  },
+  {
+   "leaf_id": 32,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=0 & user_confirms=0 & called:get_bills_for_customer=0",
+   "n_train": 473,
+   "n_test": 437,
+   "train_counts": {
+    "tool:send_payment_request": 40,
+    "tool:get_details_by_id": 59,
+    "tool:transfer_to_human_agents": 38,
+    "message": 272,
+    "tool:refuel_data": 17,
+    "tool:get_data_usage": 3,
+    "tool:disable_roaming": 4,
+    "tool:get_customer_by_phone": 17,
+    "tool:get_bills_for_customer": 6,
+    "tool:enable_roaming": 8,
+    "tool:get_customer_by_id": 4,
+    "tool:resume_line": 4,
+    "tool:suspend_line": 1
+   },
+   "test_counts": {
+    "message": 234,
+    "tool:get_data_usage": 15,
+    "tool:get_details_by_id": 84,
+    "tool:refuel_data": 13,
+    "tool:send_payment_request": 21,
+    "tool:enable_roaming": 6,
+    "tool:transfer_to_human_agents": 26,
+    "tool:get_bills_for_customer": 3,
+    "tool:suspend_line": 1,
+    "tool:resume_line": 3,
+    "tool:get_customer_by_phone": 23,
+    "tool:disable_roaming": 6,
+    "tool:get_customer_by_id": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5354691075514875,
+   "norm_entropy_test": 0.593089375728057,
+   "tool_rate": 0.4645308924485126,
+   "closed_tool_rate": 0.33867276887871856,
+   "latest_rule_acc": 0.9121621621621622,
+   "mean_cost": 0.005707436842105263,
+   "cost_share": 0.11798706560089152,
+   "mean_prompt_tokens": 8163.050343249428,
+   "max_saving_share": 0.03510910869637745
+  },
+  {
+   "leaf_id": 22,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=1 & prev_role=tool & called:send_payment_request=1",
+   "n_train": 241,
+   "n_test": 329,
+   "train_counts": {
+    "tool:get_data_usage": 6,
+    "message": 120,
+    "tool:get_customer_by_id": 3,
+    "tool:get_bills_for_customer": 1,
+    "tool:get_customer_by_phone": 20,
+    "tool:send_payment_request": 23,
+    "tool:get_details_by_id": 50,
+    "tool:enable_roaming": 1,
+    "tool:transfer_to_human_agents": 10,
+    "tool:disable_roaming": 6,
+    "tool:refuel_data": 1
+   },
+   "test_counts": {
+    "message": 180,
+    "tool:send_payment_request": 26,
+    "tool:get_details_by_id": 73,
+    "tool:get_customer_by_phone": 18,
+    "tool:get_data_usage": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:resume_line": 9,
+    "tool:get_bills_for_customer": 2,
+    "tool:enable_roaming": 11,
+    "tool:disable_roaming": 3,
+    "tool:get_customer_by_name": 1,
+    "tool:refuel_data": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.547112462006079,
+   "norm_entropy_test": 0.5375340844628567,
+   "tool_rate": 0.45288753799392095,
+   "closed_tool_rate": 0.41033434650455924,
+   "latest_rule_acc": 0.8740740740740741,
+   "mean_cost": 0.006012633434650456,
+   "cost_share": 0.093577723189622,
+   "mean_prompt_tokens": 8371.0273556231,
+   "max_saving_share": 0.033191179739653
+  },
+  {
+   "leaf_id": 3,
+   "rule": "n_tool_calls=0 & have:phone_number=1",
+   "n_train": 224,
+   "n_test": 223,
+   "train_counts": {
+    "tool:get_customer_by_phone": 224
+   },
+   "test_counts": {
+    "tool:get_customer_by_phone": 221,
+    "message": 1,
+    "tool:send_payment_request": 1
+   },
+   "majority": "tool:get_customer_by_phone",
+   "majority_test_acc": 0.9910313901345291,
+   "norm_entropy_test": 0.021758938147427978,
+   "tool_rate": 0.9955156950672646,
+   "closed_tool_rate": 0.9865470852017937,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.0033331726457399105,
+   "cost_share": 0.03516207702411097,
+   "mean_prompt_tokens": 6364.739910313901,
+   "max_saving_share": 0.0323089646118517
+  },
+  {
+   "leaf_id": 33,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=0 & user_confirms=0 & called:get_bills_for_customer=1",
+   "n_train": 357,
+   "n_test": 248,
+   "train_counts": {
+    "tool:get_customer_by_phone": 24,
+    "tool:get_details_by_id": 82,
+    "message": 162,
+    "tool:get_data_usage": 3,
+    "tool:refuel_data": 1,
+    "tool:transfer_to_human_agents": 18,
+    "tool:send_payment_request": 32,
+    "tool:resume_line": 23,
+    "tool:get_bills_for_customer": 5,
+    "tool:enable_roaming": 3,
+    "tool:get_customer_by_id": 4
+   },
+   "test_counts": {
+    "message": 112,
+    "tool:transfer_to_human_agents": 19,
+    "tool:send_payment_request": 22,
+    "tool:get_details_by_id": 54,
+    "tool:resume_line": 19,
+    "tool:get_customer_by_phone": 10,
+    "tool:get_data_usage": 3,
+    "tool:refuel_data": 1,
+    "tool:get_customer_by_id": 6,
+    "tool:enable_roaming": 1,
+    "tool:get_bills_for_customer": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.45161290322580644,
+   "norm_entropy_test": 0.6210817678585671,
+   "tool_rate": 0.5483870967741935,
+   "closed_tool_rate": 0.4596774193548387,
+   "latest_rule_acc": 0.8596491228070176,
+   "mean_cost": 0.006157538306451613,
+   "cost_share": 0.07223882144117345,
+   "mean_prompt_tokens": 8684.213709677419,
+   "max_saving_share": 0.029453020554627063
+  },
+  {
+   "leaf_id": 39,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=1 & called:disable_roaming=0 & called:enable_roaming=0",
+   "n_train": 312,
+   "n_test": 231,
+   "train_counts": {
+    "message": 197,
+    "tool:send_payment_request": 26,
+    "tool:get_data_usage": 14,
+    "tool:enable_roaming": 9,
+    "tool:get_details_by_id": 29,
+    "tool:transfer_to_human_agents": 12,
+    "tool:get_customer_by_id": 2,
+    "tool:get_customer_by_phone": 17,
+    "tool:disable_roaming": 4,
+    "tool:get_bills_for_customer": 1,
+    "tool:refuel_data": 1
+   },
+   "test_counts": {
+    "message": 136,
+    "tool:get_data_usage": 7,
+    "tool:get_customer_by_phone": 20,
+    "tool:get_details_by_id": 34,
+    "tool:transfer_to_human_agents": 17,
+    "tool:send_payment_request": 10,
+    "tool:get_bills_for_customer": 1,
+    "tool:get_customer_by_id": 4,
+    "tool:disable_roaming": 1,
+    "tool:enable_roaming": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5887445887445888,
+   "norm_entropy_test": 0.5231264126000943,
+   "tool_rate": 0.41125541125541126,
+   "closed_tool_rate": 0.30303030303030304,
+   "latest_rule_acc": 0.8285714285714286,
+   "mean_cost": 0.006103519047619048,
+   "cost_share": 0.06669666719864882,
+   "mean_prompt_tokens": 8542.194805194806,
+   "max_saving_share": 0.017313843801624925
+  },
+  {
+   "leaf_id": 25,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=1 & prev_role=user & called:enable_roaming=1",
+   "n_train": 148,
+   "n_test": 158,
+   "train_counts": {
+    "message": 99,
+    "tool:get_customer_by_phone": 8,
+    "tool:get_data_usage": 6,
+    "tool:suspend_line": 1,
+    "tool:transfer_to_human_agents": 11,
+    "tool:get_details_by_id": 14,
+    "tool:send_payment_request": 3,
+    "tool:get_bills_for_customer": 2,
+    "tool:enable_roaming": 1,
+    "tool:disable_roaming": 2,
+    "tool:get_customer_by_id": 1
+   },
+   "test_counts": {
+    "message": 92,
+    "tool:get_data_usage": 7,
+    "tool:get_bills_for_customer": 1,
+    "tool:send_payment_request": 5,
+    "tool:get_details_by_id": 23,
+    "tool:transfer_to_human_agents": 12,
+    "tool:enable_roaming": 3,
+    "tool:get_customer_by_id": 2,
+    "tool:resume_line": 1,
+    "tool:refuel_data": 2,
+    "tool:get_customer_by_phone": 8,
+    "tool:disable_roaming": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5822784810126582,
+   "norm_entropy_test": 0.5664455647487494,
+   "tool_rate": 0.4177215189873418,
+   "closed_tool_rate": 0.2721518987341772,
+   "latest_rule_acc": 0.9767441860465116,
+   "mean_cost": 0.006057108227848102,
+   "cost_share": 0.045272478322681636,
+   "mean_prompt_tokens": 8367.525316455696,
+   "max_saving_share": 0.011041468373991335
+  },
+  {
+   "leaf_id": 35,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=0 & user_confirms=1 & have:bill_id=0",
+   "n_train": 40,
+   "n_test": 40,
+   "train_counts": {
+    "message": 11,
+    "tool:refuel_data": 23,
+    "tool:get_details_by_id": 4,
+    "tool:send_payment_request": 1,
+    "tool:enable_roaming": 1
+   },
+   "test_counts": {
+    "tool:refuel_data": 19,
+    "message": 14,
+    "tool:get_data_usage": 1,
+    "tool:get_details_by_id": 4,
+    "tool:transfer_to_human_agents": 2
+   },
+   "majority": "tool:refuel_data",
+   "majority_test_acc": 0.475,
+   "norm_entropy_test": 0.45217436738235633,
+   "tool_rate": 0.65,
+   "closed_tool_rate": 0.6,
+   "latest_rule_acc": 0.875,
+   "mean_cost": 0.0053021925000000004,
+   "cost_share": 0.010032919582356378,
+   "mean_prompt_tokens": 7867.075,
+   "max_saving_share": 0.005189690118195565
+  },
+  {
+   "leaf_id": 27,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=0 & have:line_id=1",
+   "n_train": 26,
+   "n_test": 51,
+   "train_counts": {
+    "tool:get_data_usage": 2,
+    "message": 15,
+    "tool:get_bills_for_customer": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_customer_by_phone": 1,
+    "tool:send_payment_request": 1,
+    "tool:refuel_data": 4
+   },
+   "test_counts": {
+    "message": 23,
+    "tool:enable_roaming": 1,
+    "tool:send_payment_request": 6,
+    "tool:resume_line": 1,
+    "tool:get_customer_by_phone": 7,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_data_usage": 2,
+    "tool:get_details_by_id": 6,
+    "tool:get_customer_by_name": 1,
+    "tool:get_customer_by_id": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.45098039215686275,
+   "norm_entropy_test": 0.6621896026291461,
+   "tool_rate": 0.5490196078431373,
+   "closed_tool_rate": 0.4117647058823529,
+   "latest_rule_acc": 0.9523809523809523,
+   "mean_cost": 0.00532885294117647,
+   "cost_share": 0.01285629295935769,
+   "mean_prompt_tokens": 7772.568627450981,
+   "max_saving_share": 0.004691099802699079
+  },
+  {
+   "leaf_id": 40,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=1 & called:disable_roaming=0 & called:enable_roaming=1",
+   "n_train": 97,
+   "n_test": 47,
+   "train_counts": {
+    "tool:enable_roaming": 9,
+    "tool:send_payment_request": 4,
+    "message": 55,
+    "tool:get_customer_by_name": 2,
+    "tool:get_customer_by_id": 2,
+    "tool:get_details_by_id": 10,
+    "tool:transfer_to_human_agents": 7,
+    "tool:get_customer_by_phone": 6,
+    "tool:get_bills_for_customer": 1,
+    "tool:disable_roaming": 1
+   },
+   "test_counts": {
+    "message": 31,
+    "tool:disable_roaming": 2,
+    "tool:get_details_by_id": 9,
+    "tool:send_payment_request": 1,
+    "tool:get_data_usage": 1,
+    "tool:get_customer_by_phone": 1,
+    "tool:resume_line": 1,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6595744680851063,
+   "norm_entropy_test": 0.43005377284893914,
+   "tool_rate": 0.3404255319148936,
+   "closed_tool_rate": 0.2978723404255319,
+   "latest_rule_acc": 0.7142857142857143,
+   "mean_cost": 0.00710653829787234,
+   "cost_share": 0.01580039003119927,
+   "mean_prompt_tokens": 9656.404255319148,
+   "max_saving_share": 0.004670272365336821
+  },
+  {
+   "leaf_id": 36,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=0 & user_confirms=1 & have:bill_id=1",
+   "n_train": 35,
+   "n_test": 19,
+   "train_counts": {
+    "tool:refuel_data": 5,
+    "message": 14,
+    "tool:send_payment_request": 9,
+    "tool:get_details_by_id": 2,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_customer_by_id": 1,
+    "tool:get_customer_by_phone": 1,
+    "tool:disable_roaming": 1
+   },
+   "test_counts": {
+    "tool:refuel_data": 7,
+    "tool:send_payment_request": 6,
+    "tool:get_details_by_id": 1,
+    "message": 4,
+    "tool:disable_roaming": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.21052631578947367,
+   "norm_entropy_test": 0.5190696216221252,
+   "tool_rate": 0.7894736842105263,
+   "closed_tool_rate": 0.7894736842105263,
+   "latest_rule_acc": 0.8666666666666667,
+   "mean_cost": 0.006054342105263158,
+   "cost_share": 0.005441672581000266,
+   "mean_prompt_tokens": 8756.78947368421,
+   "max_saving_share": 0.003979259941189032
+  },
+  {
+   "leaf_id": 41,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=1 & have:gb_amount=1 & called:disable_roaming=1",
+   "n_train": 41,
+   "n_test": 29,
+   "train_counts": {
+    "message": 19,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_details_by_id": 1,
+    "tool:disable_roaming": 15,
+    "tool:enable_roaming": 2
+   },
+   "test_counts": {
+    "tool:disable_roaming": 4,
+    "message": 14,
+    "tool:transfer_to_human_agents": 3,
+    "tool:send_payment_request": 2,
+    "tool:get_bills_for_customer": 1,
+    "tool:get_customer_by_phone": 1,
+    "tool:get_details_by_id": 2,
+    "tool:enable_roaming": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.4827586206896552,
+   "norm_entropy_test": 0.6233270536546726,
+   "tool_rate": 0.5172413793103449,
+   "closed_tool_rate": 0.3448275862068966,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.006765493103448276,
+   "cost_share": 0.00928131050982501,
+   "mean_prompt_tokens": 9407.275862068966,
+   "max_saving_share": 0.0028999889657448192
+  },
+  {
+   "leaf_id": 6,
+   "rule": "n_tool_calls=1 & prev_role=user",
+   "n_train": 52,
+   "n_test": 73,
+   "train_counts": {
+    "message": 25,
+    "tool:get_customer_by_phone": 8,
+    "tool:enable_roaming": 1,
+    "tool:send_payment_request": 10,
+    "tool:get_details_by_id": 7,
+    "tool:transfer_to_human_agents": 1
+   },
+   "test_counts": {
+    "tool:disable_roaming": 2,
+    "tool:get_customer_by_id": 2,
+    "tool:enable_roaming": 2,
+    "message": 38,
+    "tool:get_details_by_id": 4,
+    "tool:get_data_usage": 1,
+    "tool:transfer_to_human_agents": 4,
+    "tool:send_payment_request": 10,
+    "tool:get_customer_by_phone": 10
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5205479452054794,
+   "norm_entropy_test": 0.5900525619164904,
+   "tool_rate": 0.4794520547945205,
+   "closed_tool_rate": 0.1643835616438356,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.005145106849315069,
+   "cost_share": 0.01776761386026659,
+   "mean_prompt_tokens": 6979.561643835616,
+   "max_saving_share": 0.002074890768040011
+  },
+  {
+   "leaf_id": 28,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=0 & have:limit=0 & called:get_details_by_id=0 & have:line_id=0",
+   "n_train": 34,
+   "n_test": 20,
+   "train_counts": {
+    "tool:get_details_by_id": 3,
+    "message": 15,
+    "tool:get_customer_by_phone": 13,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_bills_for_customer": 1,
+    "tool:resume_line": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 3,
+    "message": 9,
+    "tool:get_customer_by_phone": 7,
+    "tool:resume_line": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.45,
+   "norm_entropy_test": 0.439975594790278,
+   "tool_rate": 0.55,
+   "closed_tool_rate": 0.35,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.005279835,
+   "cost_share": 0.0049953071265434615,
+   "mean_prompt_tokens": 7574.25,
+   "max_saving_share": 0.0012647180875081563
+  },
+  {
+   "leaf_id": 13,
+   "rule": "n_tool_calls=2 & prev_role=user & have:line_id=1 & have:limit=0",
+   "n_train": 29,
+   "n_test": 29,
+   "train_counts": {
+    "message": 18,
+    "tool:get_data_usage": 2,
+    "tool:transfer_to_human_agents": 3,
+    "tool:get_details_by_id": 5,
+    "tool:send_payment_request": 1
+   },
+   "test_counts": {
+    "message": 21,
+    "tool:get_details_by_id": 3,
+    "tool:get_customer_by_phone": 1,
+    "tool:get_customer_by_id": 1,
+    "tool:enable_roaming": 1,
+    "tool:transfer_to_human_agents": 1,
+    "tool:send_payment_request": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7241379310344828,
+   "norm_entropy_test": 0.39748742555536176,
+   "tool_rate": 0.27586206896551724,
+   "closed_tool_rate": 0.20689655172413793,
+   "latest_rule_acc": 0.8333333333333334,
+   "mean_cost": 0.004428827586206896,
+   "cost_share": 0.006075732159288462,
+   "mean_prompt_tokens": 7221.931034482759,
+   "max_saving_share": 0.0010596141668798328
+  },
+  {
+   "leaf_id": 14,
+   "rule": "n_tool_calls=2 & prev_role=user & have:line_id=1 & have:limit=1",
+   "n_train": 25,
+   "n_test": 5,
+   "train_counts": {
+    "tool:send_payment_request": 2,
+    "message": 17,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_details_by_id": 4,
+    "tool:enable_roaming": 1
+   },
+   "test_counts": {
+    "message": 2,
+    "tool:get_details_by_id": 2,
+    "tool:resume_line": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.4,
+   "norm_entropy_test": 0.39973370648220746,
+   "tool_rate": 0.6,
+   "closed_tool_rate": 0.4,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.00634546,
+   "cost_share": 0.0015008765216714382,
+   "mean_prompt_tokens": 7075.0,
+   "max_saving_share": 0.0007497877450412811
+  },
+  {
+   "leaf_id": 9,
+   "rule": "n_tool_calls=2 & prev_role=tool & called:get_details_by_id=1",
+   "n_train": 196,
+   "n_test": 186,
+   "train_counts": {
+    "tool:get_details_by_id": 175,
+    "message": 18,
+    "tool:get_bills_for_customer": 2,
+    "tool:refuel_data": 1
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 176,
+    "tool:get_customer_by_phone": 2,
+    "message": 8
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.946236559139785,
+   "norm_entropy_test": 0.08956006568710445,
+   "tool_rate": 0.956989247311828,
+   "closed_tool_rate": 0.021505376344086023,
+   "latest_rule_acc": 0.5,
+   "mean_cost": 0.0039494435483870965,
+   "cost_share": 0.0347504716679961,
+   "mean_prompt_tokens": 6765.6505376344085,
+   "max_saving_share": 0.0006458456630296385
+  },
+  {
+   "leaf_id": 10,
+   "rule": "n_tool_calls=2 & prev_role=tool & called:get_details_by_id=0",
+   "n_train": 32,
+   "n_test": 41,
+   "train_counts": {
+    "message": 17,
+    "tool:get_details_by_id": 9,
+    "tool:get_customer_by_phone": 4,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_customer_by_name": 1
+   },
+   "test_counts": {
+    "message": 28,
+    "tool:get_details_by_id": 6,
+    "tool:get_data_usage": 1,
+    "tool:enable_roaming": 1,
+    "tool:get_customer_by_phone": 1,
+    "tool:disable_roaming": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:send_payment_request": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6829268292682927,
+   "norm_entropy_test": 0.43269217113262726,
+   "tool_rate": 0.3170731707317073,
+   "closed_tool_rate": 0.0975609756097561,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.0043782414634146345,
+   "cost_share": 0.008491715102279248,
+   "mean_prompt_tokens": 6991.243902439024,
+   "max_saving_share": 0.0006425776576355606
+  },
+  {
+   "leaf_id": 5,
+   "rule": "n_tool_calls=1 & prev_role=tool",
+   "n_train": 228,
+   "n_test": 228,
+   "train_counts": {
+    "tool:get_details_by_id": 189,
+    "tool:get_data_usage": 1,
+    "message": 27,
+    "tool:send_payment_request": 1,
+    "tool:get_customer_by_id": 1,
+    "tool:get_customer_by_phone": 9
+   },
+   "test_counts": {
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_details_by_id": 182,
+    "message": 36,
+    "tool:get_customer_by_id": 2,
+    "tool:get_data_usage": 1,
+    "tool:get_customer_by_phone": 3,
+    "tool:send_payment_request": 1,
+    "tool:get_customer_by_name": 1
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.7982456140350878,
+   "norm_entropy_test": 0.25874217527006793,
+   "tool_rate": 0.8421052631578947,
+   "closed_tool_rate": 0.017543859649122806,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.004023505701754386,
+   "cost_share": 0.04339616151727205,
+   "mean_prompt_tokens": 6601.223684210527,
+   "max_saving_share": 0.0006103853656938974
+  },
+  {
+   "leaf_id": 42,
+   "rule": "n_tool_calls=3+ & called:transfer_to_human_agents=1",
+   "n_train": 180,
+   "n_test": 172,
+   "train_counts": {
+    "message": 179,
+    "tool:get_details_by_id": 1
+   },
+   "test_counts": {
+    "message": 169,
+    "tool:get_details_by_id": 2,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9825581395348837,
+   "norm_entropy_test": 0.03751752090733783,
+   "tool_rate": 0.01744186046511628,
+   "closed_tool_rate": 0.011627906976744186,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.0046462720930232565,
+   "cost_share": 0.0378046250392287,
+   "mean_prompt_tokens": 8873.976744186046,
+   "max_saving_share": 0.0004454242575928298
+  },
+  {
+   "leaf_id": 15,
+   "rule": "n_tool_calls=2 & prev_role=user & have:line_id=0",
+   "n_train": 39,
+   "n_test": 50,
+   "train_counts": {
+    "tool:get_details_by_id": 7,
+    "message": 25,
+    "tool:get_customer_by_phone": 3,
+    "tool:disable_roaming": 1,
+    "tool:send_payment_request": 1,
+    "tool:get_customer_by_id": 1,
+    "tool:get_customer_by_name": 1
+   },
+   "test_counts": {
+    "message": 33,
+    "tool:get_details_by_id": 5,
+    "tool:disable_roaming": 1,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_customer_by_phone": 3,
+    "tool:get_customer_by_name": 1,
+    "tool:get_data_usage": 1,
+    "tool:send_payment_request": 1,
+    "tool:resume_line": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.66,
+   "norm_entropy_test": 0.4799304369760813,
+   "tool_rate": 0.34,
+   "closed_tool_rate": 0.04,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.00525899,
+   "cost_share": 0.012438963634952985,
+   "mean_prompt_tokens": 7426.98,
+   "max_saving_share": 0.00028831611767753134
+  },
+  {
+   "leaf_id": 2,
+   "rule": "n_tool_calls=0 & have:phone_number=0",
+   "n_train": 456,
+   "n_test": 461,
+   "train_counts": {
+    "message": 452,
+    "tool:get_customer_by_phone": 4
+   },
+   "test_counts": {
+    "message": 455,
+    "tool:transfer_to_human_agents": 1,
+    "tool:send_payment_request": 2,
+    "tool:enable_roaming": 1,
+    "tool:get_customer_by_phone": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9869848156182213,
+   "norm_entropy_test": 0.032868983258572654,
+   "tool_rate": 0.013015184381778741,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.0015746989154013017,
+   "cost_share": 0.03434079164666964,
+   "mean_prompt_tokens": 3184.229934924078,
+   "max_saving_share": 0.0
+  }
+ ],
+ "tree": {
+  "id": 0,
+  "counts": {
+   "message": 2244,
+   "tool:get_customer_by_phone": 416,
+   "tool:get_details_by_id": 892,
+   "tool:send_payment_request": 208,
+   "tool:transfer_to_human_agents": 167,
+   "tool:get_data_usage": 65,
+   "tool:suspend_line": 4,
+   "tool:enable_roaming": 69,
+   "tool:get_bills_for_customer": 42,
+   "tool:refuel_data": 57,
+   "tool:get_customer_by_name": 5,
+   "tool:get_customer_by_id": 23,
+   "tool:disable_roaming": 38,
+   "tool:resume_line": 32
+  },
+  "split": "n_tool_calls",
+  "default": "3+",
+  "children": {
+   "0": {
+    "id": 1,
+    "counts": {
+     "message": 452,
+     "tool:get_customer_by_phone": 228
+    },
+    "split": "have:phone_number",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 2,
+      "counts": {
+       "message": 452,
+       "tool:get_customer_by_phone": 4
+      }
+     },
+     "1": {
+      "id": 3,
+      "counts": {
+       "tool:get_customer_by_phone": 224
+      }
+     }
+    }
+   },
+   "1": {
+    "id": 4,
+    "counts": {
+     "tool:get_details_by_id": 196,
+     "tool:get_data_usage": 1,
+     "message": 52,
+     "tool:get_customer_by_phone": 17,
+     "tool:enable_roaming": 1,
+     "tool:send_payment_request": 11,
+     "tool:get_customer_by_id": 1,
+     "tool:transfer_to_human_agents": 1
+    },
+    "split": "prev_role",
+    "default": "tool",
+    "children": {
+     "tool": {
+      "id": 5,
+      "counts": {
+       "tool:get_details_by_id": 189,
+       "tool:get_data_usage": 1,
+       "message": 27,
+       "tool:send_payment_request": 1,
+       "tool:get_customer_by_id": 1,
+       "tool:get_customer_by_phone": 9
+      }
+     },
+     "user": {
+      "id": 6,
+      "counts": {
+       "message": 25,
+       "tool:get_customer_by_phone": 8,
+       "tool:enable_roaming": 1,
+       "tool:send_payment_request": 10,
+       "tool:get_details_by_id": 7,
+       "tool:transfer_to_human_agents": 1
+      }
+     }
+    }
+   },
+   "2": {
+    "id": 7,
+    "counts": {
+     "tool:get_details_by_id": 200,
+     "message": 95,
+     "tool:get_data_usage": 2,
+     "tool:transfer_to_human_agents": 5,
+     "tool:send_payment_request": 4,
+     "tool:get_bills_for_customer": 2,
+     "tool:get_customer_by_phone": 7,
+     "tool:refuel_data": 1,
+     "tool:disable_roaming": 1,
+     "tool:get_customer_by_id": 1,
+     "tool:get_customer_by_name": 2,
+     "tool:enable_roaming": 1
+    },
+    "split": "prev_role",
+    "default": "tool",
+    "children": {
+     "tool": {
+      "id": 8,
+      "counts": {
+       "tool:get_details_by_id": 184,
+       "message": 35,
+       "tool:get_bills_for_customer": 2,
+       "tool:refuel_data": 1,
+       "tool:get_customer_by_phone": 4,
+       "tool:transfer_to_human_agents": 1,
+       "tool:get_customer_by_name": 1
+      },
+      "split": "called:get_details_by_id",
+      "default": "1",
+      "children": {
+       "1": {
+        "id": 9,
+        "counts": {
+         "tool:get_details_by_id": 175,
+         "message": 18,
+         "tool:get_bills_for_customer": 2,
+         "tool:refuel_data": 1
+        }
+       },
+       "0": {
+        "id": 10,
+        "counts": {
+         "message": 17,
+         "tool:get_details_by_id": 9,
+         "tool:get_customer_by_phone": 4,
+         "tool:transfer_to_human_agents": 1,
+         "tool:get_customer_by_name": 1
+        }
+       }
+      }
+     },
+     "user": {
+      "id": 11,
+      "counts": {
+       "message": 60,
+       "tool:get_data_usage": 2,
+       "tool:transfer_to_human_agents": 4,
+       "tool:send_payment_request": 4,
+       "tool:get_details_by_id": 16,
+       "tool:get_customer_by_phone": 3,
+       "tool:disable_roaming": 1,
+       "tool:get_customer_by_id": 1,
+       "tool:get_customer_by_name": 1,
+       "tool:enable_roaming": 1
+      },
+      "split": "have:line_id",
+      "default": "1",
+      "children": {
+       "1": {
+        "id": 12,
+        "counts": {
+         "message": 35,
+         "tool:get_data_usage": 2,
+         "tool:transfer_to_human_agents": 4,
+         "tool:send_payment_request": 3,
+         "tool:get_details_by_id": 9,
+         "tool:enable_roaming": 1
+        },
+        "split": "have:limit",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 13,
+          "counts": {
+           "message": 18,
+           "tool:get_data_usage": 2,
+           "tool:transfer_to_human_agents": 3,
+           "tool:get_details_by_id": 5,
+           "tool:send_payment_request": 1
+          }
+         },
+         "1": {
+          "id": 14,
+          "counts": {
+           "tool:send_payment_request": 2,
+           "message": 17,
+           "tool:transfer_to_human_agents": 1,
+           "tool:get_details_by_id": 4,
+           "tool:enable_roaming": 1
+          }
+         }
+        }
+       },
+       "0": {
+        "id": 15,
+        "counts": {
+         "tool:get_details_by_id": 7,
+         "message": 25,
+         "tool:get_customer_by_phone": 3,
+         "tool:disable_roaming": 1,
+         "tool:send_payment_request": 1,
+         "tool:get_customer_by_id": 1,
+         "tool:get_customer_by_name": 1
+        }
+       }
+      }
+     }
+    }
+   },
+   "3+": {
+    "id": 16,
+    "counts": {
+     "tool:get_details_by_id": 496,
+     "tool:get_customer_by_phone": 164,
+     "message": 1645,
+     "tool:send_payment_request": 193,
+     "tool:transfer_to_human_agents": 161,
+     "tool:get_data_usage": 62,
+     "tool:suspend_line": 4,
+     "tool:enable_roaming": 67,
+     "tool:get_bills_for_customer": 40,
+     "tool:refuel_data": 56,
+     "tool:get_customer_by_name": 3,
+     "tool:get_customer_by_id": 21,
+     "tool:disable_roaming": 37,
+     "tool:resume_line": 32
+    },
+    "split": "called:transfer_to_human_agents",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 17,
+      "counts": {
+       "tool:get_details_by_id": 495,
+       "tool:get_customer_by_phone": 164,
+       "message": 1466,
+       "tool:send_payment_request": 193,
+       "tool:transfer_to_human_agents": 161,
+       "tool:get_data_usage": 62,
+       "tool:suspend_line": 4,
+       "tool:enable_roaming": 67,
+       "tool:get_bills_for_customer": 40,
+       "tool:refuel_data": 56,
+       "tool:get_customer_by_name": 3,
+       "tool:get_customer_by_id": 21,
+       "tool:disable_roaming": 37,
+       "tool:resume_line": 32
+      },
+      "split": "have:limit",
+      "default": "0",
+      "children": {
+       "0": {
+        "id": 18,
+        "counts": {
+         "tool:get_details_by_id": 308,
+         "tool:get_customer_by_phone": 99,
+         "message": 736,
+         "tool:send_payment_request": 81,
+         "tool:get_data_usage": 42,
+         "tool:suspend_line": 3,
+         "tool:enable_roaming": 35,
+         "tool:get_bills_for_customer": 27,
+         "tool:get_customer_by_name": 1,
+         "tool:get_customer_by_id": 8,
+         "tool:transfer_to_human_agents": 80,
+         "tool:resume_line": 5,
+         "tool:disable_roaming": 12,
+         "tool:refuel_data": 9
+        },
+        "split": "called:get_details_by_id",
+        "default": "1",
+        "children": {
+         "1": {
+          "id": 19,
+          "counts": {
+           "tool:get_details_by_id": 305,
+           "tool:get_customer_by_phone": 85,
+           "message": 706,
+           "tool:send_payment_request": 80,
+           "tool:get_data_usage": 40,
+           "tool:suspend_line": 3,
+           "tool:enable_roaming": 35,
+           "tool:get_bills_for_customer": 25,
+           "tool:get_customer_by_name": 1,
+           "tool:get_customer_by_id": 8,
+           "tool:transfer_to_human_agents": 77,
+           "tool:resume_line": 4,
+           "tool:disable_roaming": 12,
+           "tool:refuel_data": 5
+          },
+          "split": "prev_role",
+          "default": "tool",
+          "children": {
+           "tool": {
+            "id": 20,
+            "counts": {
+             "tool:get_details_by_id": 201,
+             "tool:get_customer_by_phone": 51,
+             "message": 361,
+             "tool:send_payment_request": 39,
+             "tool:get_data_usage": 28,
+             "tool:get_bills_for_customer": 22,
+             "tool:get_customer_by_name": 1,
+             "tool:get_customer_by_id": 4,
+             "tool:enable_roaming": 22,
+             "tool:resume_line": 2,
+             "tool:transfer_to_human_agents": 31,
+             "tool:disable_roaming": 6,
+             "tool:refuel_data": 4
+            },
+            "split": "called:send_payment_request",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 21,
+              "counts": {
+               "tool:get_details_by_id": 151,
+               "tool:get_customer_by_phone": 31,
+               "message": 241,
+               "tool:send_payment_request": 16,
+               "tool:get_bills_for_customer": 21,
+               "tool:get_customer_by_name": 1,
+               "tool:get_data_usage": 22,
+               "tool:get_customer_by_id": 1,
+               "tool:enable_roaming": 21,
+               "tool:resume_line": 2,
+               "tool:transfer_to_human_agents": 21,
+               "tool:refuel_data": 3
+              }
+             },
+             "1": {
+              "id": 22,
+              "counts": {
+               "tool:get_data_usage": 6,
+               "message": 120,
+               "tool:get_customer_by_id": 3,
+               "tool:get_bills_for_customer": 1,
+               "tool:get_customer_by_phone": 20,
+               "tool:send_payment_request": 23,
+               "tool:get_details_by_id": 50,
+               "tool:enable_roaming": 1,
+               "tool:transfer_to_human_agents": 10,
+               "tool:disable_roaming": 6,
+               "tool:refuel_data": 1
+              }
+             }
+            }
+           },
+           "user": {
+            "id": 23,
+            "counts": {
+             "message": 345,
+             "tool:get_details_by_id": 104,
+             "tool:suspend_line": 3,
+             "tool:enable_roaming": 13,
+             "tool:get_customer_by_phone": 34,
+             "tool:transfer_to_human_agents": 46,
+             "tool:send_payment_request": 41,
+             "tool:get_bills_for_customer": 3,
+             "tool:get_data_usage": 12,
+             "tool:get_customer_by_id": 4,
+             "tool:resume_line": 2,
+             "tool:disable_roaming": 6,
+             "tool:refuel_data": 1
+            },
+            "split": "called:enable_roaming",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 24,
+              "counts": {
+               "message": 246,
+               "tool:get_details_by_id": 90,
+               "tool:suspend_line": 2,
+               "tool:enable_roaming": 12,
+               "tool:transfer_to_human_agents": 35,
+               "tool:send_payment_request": 38,
+               "tool:get_bills_for_customer": 1,
+               "tool:get_customer_by_phone": 26,
+               "tool:get_customer_by_id": 3,
+               "tool:resume_line": 2,
+               "tool:get_data_usage": 6,
+               "tool:disable_roaming": 4,
+               "tool:refuel_data": 1
+              }
+             },
+             "1": {
+              "id": 25,
+              "counts": {
+               "message": 99,
+               "tool:get_customer_by_phone": 8,
+               "tool:get_data_usage": 6,
+               "tool:suspend_line": 1,
+               "tool:transfer_to_human_agents": 11,
+               "tool:get_details_by_id": 14,
+               "tool:send_payment_request": 3,
+               "tool:get_bills_for_customer": 2,
+               "tool:enable_roaming": 1,
+               "tool:disable_roaming": 2,
+               "tool:get_customer_by_id": 1
+              }
+             }
+            }
+           }
+          }
+         },
+         "0": {
+          "id": 26,
+          "counts": {
+           "tool:get_data_usage": 2,
+           "message": 30,
+           "tool:get_bills_for_customer": 2,
+           "tool:transfer_to_human_agents": 3,
+           "tool:get_details_by_id": 3,
+           "tool:get_customer_by_phone": 14,
+           "tool:resume_line": 1,
+           "tool:send_payment_request": 1,
+           "tool:refuel_data": 4
+          },
+          "split": "have:line_id",
+          "default": "0",
+          "children": {
+           "1": {
+            "id": 27,
+            "counts": {
+             "tool:get_data_usage": 2,
+             "message": 15,
+             "tool:get_bills_for_customer": 1,
+             "tool:transfer_to_human_agents": 2,
+             "tool:get_customer_by_phone": 1,
+             "tool:send_payment_request": 1,
+             "tool:refuel_data": 4
+            }
+           },
+           "0": {
+            "id": 28,
+            "counts": {
+             "tool:get_details_by_id": 3,
+             "message": 15,
+             "tool:get_customer_by_phone": 13,
+             "tool:transfer_to_human_agents": 1,
+             "tool:get_bills_for_customer": 1,
+             "tool:resume_line": 1
+            }
+           }
+          }
+         }
+        }
+       },
+       "1": {
+        "id": 29,
+        "counts": {
+         "tool:send_payment_request": 112,
+         "tool:get_details_by_id": 187,
+         "tool:transfer_to_human_agents": 81,
+         "message": 730,
+         "tool:get_customer_by_phone": 65,
+         "tool:refuel_data": 47,
+         "tool:get_data_usage": 20,
+         "tool:enable_roaming": 32,
+         "tool:get_customer_by_id": 13,
+         "tool:disable_roaming": 25,
+         "tool:get_customer_by_name": 2,
+         "tool:get_bills_for_customer": 13,
+         "tool:resume_line": 27,
+         "tool:suspend_line": 1
+        },
+        "split": "have:gb_amount",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 30,
+          "counts": {
+           "tool:send_payment_request": 82,
+           "tool:get_details_by_id": 147,
+           "tool:transfer_to_human_agents": 58,
+           "message": 459,
+           "tool:get_customer_by_phone": 42,
+           "tool:refuel_data": 46,
+           "tool:get_data_usage": 6,
+           "tool:disable_roaming": 5,
+           "tool:resume_line": 27,
+           "tool:get_bills_for_customer": 11,
+           "tool:enable_roaming": 12,
+           "tool:get_customer_by_id": 9,
+           "tool:suspend_line": 1
+          },
+          "split": "user_confirms",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 31,
+            "counts": {
+             "tool:send_payment_request": 72,
+             "tool:get_details_by_id": 141,
+             "tool:transfer_to_human_agents": 56,
+             "message": 434,
+             "tool:get_customer_by_phone": 41,
+             "tool:get_data_usage": 6,
+             "tool:refuel_data": 18,
+             "tool:disable_roaming": 4,
+             "tool:resume_line": 27,
+             "tool:get_bills_for_customer": 11,
+             "tool:enable_roaming": 11,
+             "tool:get_customer_by_id": 8,
+             "tool:suspend_line": 1
+            },
+            "split": "called:get_bills_for_customer",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 32,
+              "counts": {
+               "tool:send_payment_request": 40,
+               "tool:get_details_by_id": 59,
+               "tool:transfer_to_human_agents": 38,
+               "message": 272,
+               "tool:refuel_data": 17,
+               "tool:get_data_usage": 3,
+               "tool:disable_roaming": 4,
+               "tool:get_customer_by_phone": 17,
+               "tool:get_bills_for_customer": 6,
+               "tool:enable_roaming": 8,
+               "tool:get_customer_by_id": 4,
+               "tool:resume_line": 4,
+               "tool:suspend_line": 1
+              }
+             },
+             "1": {
+              "id": 33,
+              "counts": {
+               "tool:get_customer_by_phone": 24,
+               "tool:get_details_by_id": 82,
+               "message": 162,
+               "tool:get_data_usage": 3,
+               "tool:refuel_data": 1,
+               "tool:transfer_to_human_agents": 18,
+               "tool:send_payment_request": 32,
+               "tool:resume_line": 23,
+               "tool:get_bills_for_customer": 5,
+               "tool:enable_roaming": 3,
+               "tool:get_customer_by_id": 4
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 34,
+            "counts": {
+             "message": 25,
+             "tool:refuel_data": 28,
+             "tool:get_details_by_id": 6,
+             "tool:send_payment_request": 10,
+             "tool:transfer_to_human_agents": 2,
+             "tool:enable_roaming": 1,
+             "tool:get_customer_by_id": 1,
+             "tool:get_customer_by_phone": 1,
+             "tool:disable_roaming": 1
+            },
+            "split": "have:bill_id",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 35,
+              "counts": {
+               "message": 11,
+               "tool:refuel_data": 23,
+               "tool:get_details_by_id": 4,
+               "tool:send_payment_request": 1,
+               "tool:enable_roaming": 1
+              }
+             },
+             "1": {
+              "id": 36,
+              "counts": {
+               "tool:refuel_data": 5,
+               "message": 14,
+               "tool:send_payment_request": 9,
+               "tool:get_details_by_id": 2,
+               "tool:transfer_to_human_agents": 2,
+               "tool:get_customer_by_id": 1,
+               "tool:get_customer_by_phone": 1,
+               "tool:disable_roaming": 1
+              }
+             }
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 37,
+          "counts": {
+           "message": 271,
+           "tool:send_payment_request": 30,
+           "tool:get_data_usage": 14,
+           "tool:enable_roaming": 20,
+           "tool:get_details_by_id": 40,
+           "tool:transfer_to_human_agents": 23,
+           "tool:get_customer_by_id": 4,
+           "tool:get_customer_by_phone": 23,
+           "tool:get_customer_by_name": 2,
+           "tool:get_bills_for_customer": 2,
+           "tool:disable_roaming": 20,
+           "tool:refuel_data": 1
+          },
+          "split": "called:disable_roaming",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 38,
+            "counts": {
+             "message": 252,
+             "tool:send_payment_request": 30,
+             "tool:get_data_usage": 14,
+             "tool:enable_roaming": 18,
+             "tool:get_details_by_id": 39,
+             "tool:transfer_to_human_agents": 19,
+             "tool:get_customer_by_id": 4,
+             "tool:get_customer_by_phone": 23,
+             "tool:get_customer_by_name": 2,
+             "tool:get_bills_for_customer": 2,
+             "tool:disable_roaming": 5,
+             "tool:refuel_data": 1
+            },
+            "split": "called:enable_roaming",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 39,
+              "counts": {
+               "message": 197,
+               "tool:send_payment_request": 26,
+               "tool:get_data_usage": 14,
+               "tool:enable_roaming": 9,
+               "tool:get_details_by_id": 29,
+               "tool:transfer_to_human_agents": 12,
+               "tool:get_customer_by_id": 2,
+               "tool:get_customer_by_phone": 17,
+               "tool:disable_roaming": 4,
+               "tool:get_bills_for_customer": 1,
+               "tool:refuel_data": 1
+              }
+             },
+             "1": {
+              "id": 40,
+              "counts": {
+               "tool:enable_roaming": 9,
+               "tool:send_payment_request": 4,
+               "message": 55,
+               "tool:get_customer_by_name": 2,
+               "tool:get_customer_by_id": 2,
+               "tool:get_details_by_id": 10,
+               "tool:transfer_to_human_agents": 7,
+               "tool:get_customer_by_phone": 6,
+               "tool:get_bills_for_customer": 1,
+               "tool:disable_roaming": 1
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 41,
+            "counts": {
+             "message": 19,
+             "tool:transfer_to_human_agents": 4,
+             "tool:get_details_by_id": 1,
+             "tool:disable_roaming": 15,
+             "tool:enable_roaming": 2
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 42,
+      "counts": {
+       "message": 179,
+       "tool:get_details_by_id": 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

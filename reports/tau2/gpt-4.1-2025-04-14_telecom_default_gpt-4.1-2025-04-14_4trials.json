@@ -1,0 +1,1060 @@
+{
+ "n_trajectories_train": 228,
+ "n_trajectories_test": 228,
+ "n_steps_test": 4118,
+ "n_options": 11,
+ "total_cost_test": 24.709698,
+ "action_counts_test": {
+  "message": 2574,
+  "tool:get_customer_by_phone": 228,
+  "tool:get_details_by_id": 894,
+  "tool:transfer_to_human_agents": 131,
+  "tool:refuel_data": 66,
+  "tool:enable_roaming": 17,
+  "tool:get_data_usage": 69,
+  "tool:get_bills_for_customer": 47,
+  "tool:resume_line": 43,
+  "tool:send_payment_request": 46,
+  "tool:get_customer_by_id": 3
+ },
+ "closed_tool_step_rate": 0.23967945604662458,
+ "max_saving_share": 0.2554604441526693,
+ "llm_usd_per_prompt_token": 8.010618235041803e-07,
+ "jev_to_llm_price_ratio": 0.05243041019764791,
+ "situations": [
+  {
+   "leaf_id": 15,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=0 & called:transfer_to_human_agents=0 & have:gb_amount=0 & called:get_data_usage=0",
+   "n_train": 439,
+   "n_test": 498,
+   "train_counts": {
+    "message": 133,
+    "tool:get_bills_for_customer": 43,
+    "tool:get_details_by_id": 208,
+    "tool:enable_roaming": 12,
+    "tool:get_data_usage": 40,
+    "tool:transfer_to_human_agents": 3
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 283,
+    "message": 125,
+    "tool:enable_roaming": 10,
+    "tool:transfer_to_human_agents": 6,
+    "tool:get_bills_for_customer": 40,
+    "tool:get_data_usage": 33,
+    "tool:resume_line": 1
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.5682730923694779,
+   "norm_entropy_test": 0.4982296144247134,
+   "tool_rate": 0.748995983935743,
+   "closed_tool_rate": 0.7329317269076305,
+   "latest_rule_acc": 0.9671232876712329,
+   "mean_cost": 0.0077549718875502,
+   "cost_share": 0.15629393770818242,
+   "mean_prompt_tokens": 9599.951807228916,
+   "max_saving_share": 0.11550274355529286
+  },
+  {
+   "leaf_id": 3,
+   "rule": "n_tool_calls=0 & have:phone_number=1",
+   "n_train": 228,
+   "n_test": 228,
+   "train_counts": {
+    "tool:get_customer_by_phone": 228
+   },
+   "test_counts": {
+    "tool:get_customer_by_phone": 228
+   },
+   "majority": "tool:get_customer_by_phone",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 1.0,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.0036692456140350878,
+   "cost_share": 0.03385666631781578,
+   "mean_prompt_tokens": 6398.394736842105,
+   "max_saving_share": 0.03208154741484781
+  },
+  {
+   "leaf_id": 25,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=1 & called:send_payment_request=1 & called:resume_line=1",
+   "n_train": 93,
+   "n_test": 127,
+   "train_counts": {
+    "message": 76,
+    "tool:get_details_by_id": 13,
+    "tool:transfer_to_human_agents": 3,
+    "tool:get_customer_by_id": 1
+   },
+   "test_counts": {
+    "message": 72,
+    "tool:get_details_by_id": 48,
+    "tool:get_data_usage": 1,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_customer_by_id": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5669291338582677,
+   "norm_entropy_test": 0.37612604234383956,
+   "tool_rate": 0.4330708661417323,
+   "closed_tool_rate": 0.3937007874015748,
+   "latest_rule_acc": 0.16,
+   "mean_cost": 0.00830555905511811,
+   "cost_share": 0.04268793572466972,
+   "mean_prompt_tokens": 9528.685039370079,
+   "max_saving_share": 0.017170891761132023
+  },
+  {
+   "leaf_id": 30,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=0 & called:refuel_data=0 & called:get_data_usage=0 & user_confirms=0",
+   "n_train": 448,
+   "n_test": 462,
+   "train_counts": {
+    "message": 366,
+    "tool:get_details_by_id": 33,
+    "tool:transfer_to_human_agents": 19,
+    "tool:refuel_data": 17,
+    "tool:get_data_usage": 10,
+    "tool:get_bills_for_customer": 3
+   },
+   "test_counts": {
+    "tool:refuel_data": 21,
+    "message": 368,
+    "tool:get_data_usage": 19,
+    "tool:get_details_by_id": 30,
+    "tool:transfer_to_human_agents": 23,
+    "tool:get_bills_for_customer": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7965367965367965,
+   "norm_entropy_test": 0.330759815803457,
+   "tool_rate": 0.20346320346320346,
+   "closed_tool_rate": 0.12121212121212122,
+   "latest_rule_acc": 0.875,
+   "mean_cost": 0.006608363636363636,
+   "cost_share": 0.12355731745487136,
+   "mean_prompt_tokens": 7887.012987012987,
+   "max_saving_share": 0.01366787092739843
+  },
+  {
+   "leaf_id": 22,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=1 & called:send_payment_request=0",
+   "n_train": 70,
+   "n_test": 55,
+   "train_counts": {
+    "tool:send_payment_request": 43,
+    "tool:get_details_by_id": 16,
+    "message": 10,
+    "tool:transfer_to_human_agents": 1
+   },
+   "test_counts": {
+    "tool:send_payment_request": 42,
+    "tool:get_details_by_id": 7,
+    "message": 6
+   },
+   "majority": "tool:send_payment_request",
+   "majority_test_acc": 0.7636363636363637,
+   "norm_entropy_test": 0.29608748823946734,
+   "tool_rate": 0.8909090909090909,
+   "closed_tool_rate": 0.8909090909090909,
+   "latest_rule_acc": 0.8571428571428571,
+   "mean_cost": 0.0070599999999999994,
+   "cost_share": 0.015714477773058982,
+   "mean_prompt_tokens": 8359.963636363636,
+   "max_saving_share": 0.013097941693797818
+  },
+  {
+   "leaf_id": 24,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=1 & called:send_payment_request=1 & called:resume_line=0",
+   "n_train": 113,
+   "n_test": 100,
+   "train_counts": {
+    "message": 55,
+    "tool:resume_line": 44,
+    "tool:get_details_by_id": 12,
+    "tool:transfer_to_human_agents": 2
+   },
+   "test_counts": {
+    "message": 50,
+    "tool:resume_line": 41,
+    "tool:get_data_usage": 1,
+    "tool:get_details_by_id": 7,
+    "tool:transfer_to_human_agents": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5,
+   "norm_entropy_test": 0.4130207172624329,
+   "tool_rate": 0.5,
+   "closed_tool_rate": 0.49,
+   "latest_rule_acc": 0.8979591836734694,
+   "mean_cost": 0.0072536,
+   "cost_share": 0.029355275811141036,
+   "mean_prompt_tokens": 8505.56,
+   "max_saving_share": 0.012786478550526108
+  },
+  {
+   "leaf_id": 37,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=1 & called:resume_line=0",
+   "n_train": 57,
+   "n_test": 52,
+   "train_counts": {
+    "tool:get_details_by_id": 50,
+    "tool:send_payment_request": 5,
+    "tool:transfer_to_human_agents": 2
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 44,
+    "tool:send_payment_request": 3,
+    "tool:transfer_to_human_agents": 3,
+    "message": 1,
+    "tool:resume_line": 1
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.8461538461538461,
+   "norm_entropy_test": 0.2595918829076965,
+   "tool_rate": 0.9807692307692307,
+   "closed_tool_rate": 0.9230769230769231,
+   "latest_rule_acc": 0.9375,
+   "mean_cost": 0.006932153846153847,
+   "cost_share": 0.014588280277646453,
+   "mean_prompt_tokens": 8443.0,
+   "max_saving_share": 0.01216892099582928
+  },
+  {
+   "leaf_id": 19,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=0 & called:transfer_to_human_agents=0 & have:gb_amount=1 & called:get_data_usage=1",
+   "n_train": 78,
+   "n_test": 96,
+   "train_counts": {
+    "message": 48,
+    "tool:get_details_by_id": 24,
+    "tool:get_data_usage": 2,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_bills_for_customer": 2
+   },
+   "test_counts": {
+    "message": 51,
+    "tool:transfer_to_human_agents": 12,
+    "tool:get_details_by_id": 28,
+    "tool:get_data_usage": 2,
+    "tool:get_bills_for_customer": 2,
+    "tool:get_customer_by_id": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.53125,
+   "norm_entropy_test": 0.4855000931058859,
+   "tool_rate": 0.46875,
+   "closed_tool_rate": 0.3333333333333333,
+   "latest_rule_acc": 0.46875,
+   "mean_cost": 0.0075728958333333325,
+   "cost_share": 0.029421565573160786,
+   "mean_prompt_tokens": 8800.322916666666,
+   "max_saving_share": 0.009917811732552259
+  },
+  {
+   "leaf_id": 35,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=0 & called:refuel_data=1",
+   "n_train": 225,
+   "n_test": 205,
+   "train_counts": {
+    "message": 171,
+    "tool:transfer_to_human_agents": 37,
+    "tool:get_details_by_id": 15,
+    "tool:get_bills_for_customer": 2
+   },
+   "test_counts": {
+    "message": 154,
+    "tool:get_details_by_id": 20,
+    "tool:transfer_to_human_agents": 24,
+    "tool:get_data_usage": 4,
+    "tool:get_bills_for_customer": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.751219512195122,
+   "norm_entropy_test": 0.34684358846444613,
+   "tool_rate": 0.24878048780487805,
+   "closed_tool_rate": 0.13170731707317074,
+   "latest_rule_acc": 0.9629629629629629,
+   "mean_cost": 0.007348390243902438,
+   "cost_share": 0.060964727290475175,
+   "mean_prompt_tokens": 8420.146341463415,
+   "max_saving_share": 0.007439144935148875
+  },
+  {
+   "leaf_id": 18,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=0 & called:transfer_to_human_agents=0 & have:gb_amount=1 & called:get_data_usage=0",
+   "n_train": 53,
+   "n_test": 61,
+   "train_counts": {
+    "message": 41,
+    "tool:get_details_by_id": 7,
+    "tool:get_data_usage": 3,
+    "tool:transfer_to_human_agents": 2
+   },
+   "test_counts": {
+    "message": 39,
+    "tool:get_details_by_id": 12,
+    "tool:get_data_usage": 6,
+    "tool:enable_roaming": 2,
+    "tool:transfer_to_human_agents": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.639344262295082,
+   "norm_entropy_test": 0.44125018830716506,
+   "tool_rate": 0.36065573770491804,
+   "closed_tool_rate": 0.32786885245901637,
+   "latest_rule_acc": 0.9,
+   "mean_cost": 0.006938524590163934,
+   "cost_share": 0.017128902182454837,
+   "mean_prompt_tokens": 8197.786885245901,
+   "max_saving_share": 0.005437298221892307
+  },
+  {
+   "leaf_id": 16,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=0 & called:transfer_to_human_agents=0 & have:gb_amount=0 & called:get_data_usage=1",
+   "n_train": 82,
+   "n_test": 76,
+   "train_counts": {
+    "message": 58,
+    "tool:get_details_by_id": 16,
+    "tool:get_bills_for_customer": 2,
+    "tool:enable_roaming": 1,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_data_usage": 4
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 15,
+    "message": 52,
+    "tool:transfer_to_human_agents": 4,
+    "tool:enable_roaming": 2,
+    "tool:get_data_usage": 2,
+    "tool:get_bills_for_customer": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6842105263157895,
+   "norm_entropy_test": 0.4100775055351197,
+   "tool_rate": 0.3157894736842105,
+   "closed_tool_rate": 0.23684210526315788,
+   "latest_rule_acc": 0.7777777777777778,
+   "mean_cost": 0.0075791578947368415,
+   "cost_share": 0.02331133306445105,
+   "mean_prompt_tokens": 8387.842105263158,
+   "max_saving_share": 0.004948513535344507
+  },
+  {
+   "leaf_id": 38,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=1 & called:resume_line=1",
+   "n_train": 164,
+   "n_test": 157,
+   "train_counts": {
+    "message": 132,
+    "tool:transfer_to_human_agents": 21,
+    "tool:get_details_by_id": 11
+   },
+   "test_counts": {
+    "message": 127,
+    "tool:transfer_to_human_agents": 19,
+    "tool:get_details_by_id": 11
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8089171974522293,
+   "norm_entropy_test": 0.2557913139371314,
+   "tool_rate": 0.1910828025477707,
+   "closed_tool_rate": 0.07006369426751592,
+   "latest_rule_acc": 0.7272727272727273,
+   "mean_cost": 0.007927261146496816,
+   "cost_share": 0.050368078152958407,
+   "mean_prompt_tokens": 8654.433121019109,
+   "max_saving_share": 0.0031298939703952823
+  },
+  {
+   "leaf_id": 8,
+   "rule": "n_tool_calls=2 & prev_role=tool",
+   "n_train": 216,
+   "n_test": 217,
+   "train_counts": {
+    "tool:get_details_by_id": 187,
+    "message": 25,
+    "tool:enable_roaming": 2,
+    "tool:get_data_usage": 2
+   },
+   "test_counts": {
+    "tool:get_details_by_id": 181,
+    "tool:enable_roaming": 3,
+    "tool:get_data_usage": 1,
+    "message": 32
+   },
+   "majority": "tool:get_details_by_id",
+   "majority_test_acc": 0.8341013824884793,
+   "norm_entropy_test": 0.21583901027035512,
+   "tool_rate": 0.8525345622119815,
+   "closed_tool_rate": 0.06912442396313365,
+   "latest_rule_acc": 0.8,
+   "mean_cost": 0.005347972350230414,
+   "cost_share": 0.046965770281773574,
+   "mean_prompt_tokens": 7350.907834101383,
+   "max_saving_share": 0.0031019765647929917
+  },
+  {
+   "leaf_id": 33,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=0 & called:refuel_data=0 & called:get_data_usage=1 & user_confirms=0",
+   "n_train": 56,
+   "n_test": 34,
+   "train_counts": {
+    "tool:refuel_data": 19,
+    "tool:get_details_by_id": 7,
+    "message": 25,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_data_usage": 1
+   },
+   "test_counts": {
+    "tool:refuel_data": 15,
+    "message": 14,
+    "tool:get_details_by_id": 5
+   },
+   "majority": "message",
+   "majority_test_acc": 0.4117647058823529,
+   "norm_entropy_test": 0.42048532939454347,
+   "tool_rate": 0.5882352941176471,
+   "closed_tool_rate": 0.20588235294117646,
+   "latest_rule_acc": 0.8571428571428571,
+   "mean_cost": 0.006627588235294117,
+   "cost_share": 0.009119415380956902,
+   "mean_prompt_tokens": 8313.676470588236,
+   "max_saving_share": 0.0018444661739821153
+  },
+  {
+   "leaf_id": 34,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=0 & called:refuel_data=0 & called:get_data_usage=1 & user_confirms=1",
+   "n_train": 27,
+   "n_test": 31,
+   "train_counts": {
+    "tool:refuel_data": 20,
+    "tool:transfer_to_human_agents": 2,
+    "message": 4,
+    "tool:get_details_by_id": 1
+   },
+   "test_counts": {
+    "tool:refuel_data": 23,
+    "tool:transfer_to_human_agents": 3,
+    "message": 4,
+    "tool:get_details_by_id": 1
+   },
+   "majority": "tool:refuel_data",
+   "majority_test_acc": 0.7419354838709677,
+   "norm_entropy_test": 0.3429919502863459,
+   "tool_rate": 0.8709677419354839,
+   "closed_tool_rate": 0.1935483870967742,
+   "latest_rule_acc": 0.16666666666666666,
+   "mean_cost": 0.007301032258064517,
+   "cost_share": 0.009159642501498805,
+   "mean_prompt_tokens": 8680.58064516129,
+   "max_saving_share": 0.001572731646375203
+  },
+  {
+   "leaf_id": 9,
+   "rule": "n_tool_calls=2 & prev_role=user",
+   "n_train": 46,
+   "n_test": 63,
+   "train_counts": {
+    "message": 36,
+    "tool:get_details_by_id": 5,
+    "tool:transfer_to_human_agents": 4,
+    "tool:enable_roaming": 1
+   },
+   "test_counts": {
+    "message": 51,
+    "tool:get_details_by_id": 6,
+    "tool:transfer_to_human_agents": 6
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8095238095238095,
+   "norm_entropy_test": 0.25811833856057526,
+   "tool_rate": 0.19047619047619047,
+   "closed_tool_rate": 0.07936507936507936,
+   "latest_rule_acc": 0.8,
+   "mean_cost": 0.007301174603174603,
+   "cost_share": 0.01861512026573534,
+   "mean_prompt_tokens": 8299.222222222223,
+   "max_saving_share": 0.0013853629049290596
+  },
+  {
+   "leaf_id": 31,
+   "rule": "n_tool_calls=3+ & prev_role=user & called:get_bills_for_customer=0 & called:refuel_data=0 & called:get_data_usage=0 & user_confirms=1",
+   "n_train": 79,
+   "n_test": 64,
+   "train_counts": {
+    "message": 57,
+    "tool:transfer_to_human_agents": 6,
+    "tool:get_details_by_id": 2,
+    "tool:refuel_data": 14
+   },
+   "test_counts": {
+    "message": 53,
+    "tool:transfer_to_human_agents": 4,
+    "tool:refuel_data": 6,
+    "tool:send_payment_request": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.828125,
+   "norm_entropy_test": 0.2570438549302838,
+   "tool_rate": 0.171875,
+   "closed_tool_rate": 0.015625,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.00674646875,
+   "cost_share": 0.017473867952574735,
+   "mean_prompt_tokens": 7906.359375,
+   "max_saving_share": 0.0002068495684323575
+  },
+  {
+   "leaf_id": 2,
+   "rule": "n_tool_calls=0 & have:phone_number=0",
+   "n_train": 456,
+   "n_test": 456,
+   "train_counts": {
+    "message": 456
+   },
+   "test_counts": {
+    "message": 456
+   },
+   "majority": "message",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 0.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.0019373640350877192,
+   "cost_share": 0.03575268301538934,
+   "mean_prompt_tokens": 3145.839912280702,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 5,
+   "rule": "n_tool_calls=1 & prev_role=tool",
+   "n_train": 228,
+   "n_test": 228,
+   "train_counts": {
+    "tool:get_details_by_id": 71,
+    "message": 157
+   },
+   "test_counts": {
+    "message": 154,
+    "tool:get_details_by_id": 74
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6754385964912281,
+   "norm_entropy_test": 0.26283884550485864,
+   "tool_rate": 0.32456140350877194,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.004405245614035088,
+   "cost_share": 0.040647846040044684,
+   "mean_prompt_tokens": 6633.5,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 6,
+   "rule": "n_tool_calls=1 & prev_role=user",
+   "n_train": 885,
+   "n_test": 824,
+   "train_counts": {
+    "tool:get_details_by_id": 131,
+    "message": 740,
+    "tool:transfer_to_human_agents": 14
+   },
+   "test_counts": {
+    "message": 681,
+    "tool:get_details_by_id": 122,
+    "tool:transfer_to_human_agents": 20,
+    "tool:refuel_data": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8264563106796117,
+   "norm_entropy_test": 0.2246738592373928,
+   "tool_rate": 0.17354368932038836,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.005993915048543689,
+   "cost_share": 0.1998804679846755,
+   "mean_prompt_tokens": 7352.8458737864075,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 20,
+   "rule": "n_tool_calls=3+ & prev_role=tool & called:get_bills_for_customer=0 & called:transfer_to_human_agents=1",
+   "n_train": 80,
+   "n_test": 84,
+   "train_counts": {
+    "message": 80
+   },
+   "test_counts": {
+    "message": 84
+   },
+   "majority": "message",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 0.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.007394285714285714,
+   "cost_share": 0.02513668924646509,
+   "mean_prompt_tokens": 8982.57142857143,
+   "max_saving_share": 0.0
+  }
+ ],
+ "tree": {
+  "id": 0,
+  "counts": {
+   "message": 2670,
+   "tool:get_customer_by_phone": 228,
+   "tool:get_details_by_id": 809,
+   "tool:get_bills_for_customer": 52,
+   "tool:send_payment_request": 48,
+   "tool:resume_line": 44,
+   "tool:enable_roaming": 16,
+   "tool:transfer_to_human_agents": 123,
+   "tool:refuel_data": 70,
+   "tool:get_data_usage": 62,
+   "tool:get_customer_by_id": 1
+  },
+  "split": "n_tool_calls",
+  "default": "3+",
+  "children": {
+   "0": {
+    "id": 1,
+    "counts": {
+     "message": 456,
+     "tool:get_customer_by_phone": 228
+    },
+    "split": "have:phone_number",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 2,
+      "counts": {
+       "message": 456
+      }
+     },
+     "1": {
+      "id": 3,
+      "counts": {
+       "tool:get_customer_by_phone": 228
+      }
+     }
+    }
+   },
+   "1": {
+    "id": 4,
+    "counts": {
+     "tool:get_details_by_id": 202,
+     "message": 897,
+     "tool:transfer_to_human_agents": 14
+    },
+    "split": "prev_role",
+    "default": "user",
+    "children": {
+     "tool": {
+      "id": 5,
+      "counts": {
+       "tool:get_details_by_id": 71,
+       "message": 157
+      }
+     },
+     "user": {
+      "id": 6,
+      "counts": {
+       "tool:get_details_by_id": 131,
+       "message": 740,
+       "tool:transfer_to_human_agents": 14
+      }
+     }
+    }
+   },
+   "2": {
+    "id": 7,
+    "counts": {
+     "tool:get_details_by_id": 192,
+     "message": 61,
+     "tool:transfer_to_human_agents": 4,
+     "tool:enable_roaming": 3,
+     "tool:get_data_usage": 2
+    },
+    "split": "prev_role",
+    "default": "tool",
+    "children": {
+     "tool": {
+      "id": 8,
+      "counts": {
+       "tool:get_details_by_id": 187,
+       "message": 25,
+       "tool:enable_roaming": 2,
+       "tool:get_data_usage": 2
+      }
+     },
+     "user": {
+      "id": 9,
+      "counts": {
+       "message": 36,
+       "tool:get_details_by_id": 5,
+       "tool:transfer_to_human_agents": 4,
+       "tool:enable_roaming": 1
+      }
+     }
+    }
+   },
+   "3+": {
+    "id": 10,
+    "counts": {
+     "message": 1256,
+     "tool:get_bills_for_customer": 52,
+     "tool:send_payment_request": 48,
+     "tool:get_details_by_id": 415,
+     "tool:resume_line": 44,
+     "tool:enable_roaming": 13,
+     "tool:transfer_to_human_agents": 105,
+     "tool:refuel_data": 70,
+     "tool:get_data_usage": 60,
+     "tool:get_customer_by_id": 1
+    },
+    "split": "prev_role",
+    "default": "user",
+    "children": {
+     "tool": {
+      "id": 11,
+      "counts": {
+       "message": 501,
+       "tool:get_bills_for_customer": 47,
+       "tool:send_payment_request": 43,
+       "tool:resume_line": 44,
+       "tool:get_details_by_id": 296,
+       "tool:enable_roaming": 13,
+       "tool:get_data_usage": 49,
+       "tool:transfer_to_human_agents": 14,
+       "tool:get_customer_by_id": 1
+      },
+      "split": "called:get_bills_for_customer",
+      "default": "0",
+      "children": {
+       "0": {
+        "id": 12,
+        "counts": {
+         "message": 360,
+         "tool:get_bills_for_customer": 47,
+         "tool:get_details_by_id": 255,
+         "tool:enable_roaming": 13,
+         "tool:get_data_usage": 49,
+         "tool:transfer_to_human_agents": 8
+        },
+        "split": "called:transfer_to_human_agents",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 13,
+          "counts": {
+           "message": 280,
+           "tool:get_bills_for_customer": 47,
+           "tool:get_details_by_id": 255,
+           "tool:enable_roaming": 13,
+           "tool:get_data_usage": 49,
+           "tool:transfer_to_human_agents": 8
+          },
+          "split": "have:gb_amount",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 14,
+            "counts": {
+             "message": 191,
+             "tool:get_bills_for_customer": 45,
+             "tool:get_details_by_id": 224,
+             "tool:enable_roaming": 13,
+             "tool:get_data_usage": 44,
+             "tool:transfer_to_human_agents": 4
+            },
+            "split": "called:get_data_usage",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 15,
+              "counts": {
+               "message": 133,
+               "tool:get_bills_for_customer": 43,
+               "tool:get_details_by_id": 208,
+               "tool:enable_roaming": 12,
+               "tool:get_data_usage": 40,
+               "tool:transfer_to_human_agents": 3
+              }
+             },
+             "1": {
+              "id": 16,
+              "counts": {
+               "message": 58,
+               "tool:get_details_by_id": 16,
+               "tool:get_bills_for_customer": 2,
+               "tool:enable_roaming": 1,
+               "tool:transfer_to_human_agents": 1,
+               "tool:get_data_usage": 4
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 17,
+            "counts": {
+             "message": 89,
+             "tool:get_details_by_id": 31,
+             "tool:get_data_usage": 5,
+             "tool:transfer_to_human_agents": 4,
+             "tool:get_bills_for_customer": 2
+            },
+            "split": "called:get_data_usage",
+            "default": "1",
+            "children": {
+             "0": {
+              "id": 18,
+              "counts": {
+               "message": 41,
+               "tool:get_details_by_id": 7,
+               "tool:get_data_usage": 3,
+               "tool:transfer_to_human_agents": 2
+              }
+             },
+             "1": {
+              "id": 19,
+              "counts": {
+               "message": 48,
+               "tool:get_details_by_id": 24,
+               "tool:get_data_usage": 2,
+               "tool:transfer_to_human_agents": 2,
+               "tool:get_bills_for_customer": 2
+              }
+             }
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 20,
+          "counts": {
+           "message": 80
+          }
+         }
+        }
+       },
+       "1": {
+        "id": 21,
+        "counts": {
+         "tool:send_payment_request": 43,
+         "message": 141,
+         "tool:resume_line": 44,
+         "tool:get_details_by_id": 41,
+         "tool:transfer_to_human_agents": 6,
+         "tool:get_customer_by_id": 1
+        },
+        "split": "called:send_payment_request",
+        "default": "1",
+        "children": {
+         "0": {
+          "id": 22,
+          "counts": {
+           "tool:send_payment_request": 43,
+           "tool:get_details_by_id": 16,
+           "message": 10,
+           "tool:transfer_to_human_agents": 1
+          }
+         },
+         "1": {
+          "id": 23,
+          "counts": {
+           "message": 131,
+           "tool:resume_line": 44,
+           "tool:get_details_by_id": 25,
+           "tool:transfer_to_human_agents": 5,
+           "tool:get_customer_by_id": 1
+          },
+          "split": "called:resume_line",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 24,
+            "counts": {
+             "message": 55,
+             "tool:resume_line": 44,
+             "tool:get_details_by_id": 12,
+             "tool:transfer_to_human_agents": 2
+            }
+           },
+           "1": {
+            "id": 25,
+            "counts": {
+             "message": 76,
+             "tool:get_details_by_id": 13,
+             "tool:transfer_to_human_agents": 3,
+             "tool:get_customer_by_id": 1
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "user": {
+      "id": 26,
+      "counts": {
+       "message": 755,
+       "tool:get_details_by_id": 119,
+       "tool:transfer_to_human_agents": 91,
+       "tool:send_payment_request": 5,
+       "tool:refuel_data": 70,
+       "tool:get_data_usage": 11,
+       "tool:get_bills_for_customer": 5
+      },
+      "split": "called:get_bills_for_customer",
+      "default": "0",
+      "children": {
+       "0": {
+        "id": 27,
+        "counts": {
+         "message": 623,
+         "tool:get_details_by_id": 58,
+         "tool:transfer_to_human_agents": 68,
+         "tool:refuel_data": 70,
+         "tool:get_data_usage": 11,
+         "tool:get_bills_for_customer": 5
+        },
+        "split": "called:refuel_data",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 28,
+          "counts": {
+           "message": 452,
+           "tool:get_details_by_id": 43,
+           "tool:transfer_to_human_agents": 31,
+           "tool:refuel_data": 70,
+           "tool:get_data_usage": 11,
+           "tool:get_bills_for_customer": 3
+          },
+          "split": "called:get_data_usage",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 29,
+            "counts": {
+             "message": 423,
+             "tool:get_details_by_id": 35,
+             "tool:transfer_to_human_agents": 25,
+             "tool:refuel_data": 31,
+             "tool:get_data_usage": 10,
+             "tool:get_bills_for_customer": 3
+            },
+            "split": "user_confirms",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 30,
+              "counts": {
+               "message": 366,
+               "tool:get_details_by_id": 33,
+               "tool:transfer_to_human_agents": 19,
+               "tool:refuel_data": 17,
+               "tool:get_data_usage": 10,
+               "tool:get_bills_for_customer": 3
+              }
+             },
+             "1": {
+              "id": 31,
+              "counts": {
+               "message": 57,
+               "tool:transfer_to_human_agents": 6,
+               "tool:get_details_by_id": 2,
+               "tool:refuel_data": 14
+              }
+             }
+            }
+           },
+           "1": {
+            "id": 32,
+            "counts": {
+             "tool:refuel_data": 39,
+             "tool:get_details_by_id": 8,
+             "message": 29,
+             "tool:transfer_to_human_agents": 6,
+             "tool:get_data_usage": 1
+            },
+            "split": "user_confirms",
+            "default": "0",
+            "children": {
+             "0": {
+              "id": 33,
+              "counts": {
+               "tool:refuel_data": 19,
+               "tool:get_details_by_id": 7,
+               "message": 25,
+               "tool:transfer_to_human_agents": 4,
+               "tool:get_data_usage": 1
+              }
+             },
+             "1": {
+              "id": 34,
+              "counts": {
+               "tool:refuel_data": 20,
+               "tool:transfer_to_human_agents": 2,
+               "message": 4,
+               "tool:get_details_by_id": 1
+              }
+             }
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 35,
+          "counts": {
+           "message": 171,
+           "tool:transfer_to_human_agents": 37,
+           "tool:get_details_by_id": 15,
+           "tool:get_bills_for_customer": 2
+          }
+         }
+        }
+       },
+       "1": {
+        "id": 36,
+        "counts": {
+         "tool:get_details_by_id": 61,
+         "message": 132,
+         "tool:transfer_to_human_agents": 23,
+         "tool:send_payment_request": 5
+        },
+        "split": "called:resume_line",
+        "default": "1",
+        "children": {
+         "0": {
+          "id": 37,
+          "counts": {
+           "tool:get_details_by_id": 50,
+           "tool:send_payment_request": 5,
+           "tool:transfer_to_human_agents": 2
+          }
+         },
+         "1": {
+          "id": 38,
+          "counts": {
+           "message": 132,
+           "tool:transfer_to_human_agents": 21,
+           "tool:get_details_by_id": 11
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

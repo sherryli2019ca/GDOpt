@@ -1,0 +1,1185 @@
+{
+ "n_trajectories_train": 100,
+ "n_trajectories_test": 100,
+ "n_steps_test": 1107,
+ "n_options": 15,
+ "total_cost_test": 5.4223539999999995,
+ "action_counts_test": {
+  "message": 638,
+  "tool:transfer_to_human_agents": 18,
+  "tool:get_flight_status": 23,
+  "tool:get_user_details": 74,
+  "tool:get_reservation_details": 133,
+  "tool:search_direct_flight": 51,
+  "tool:calculate": 62,
+  "tool:cancel_reservation": 24,
+  "tool:update_reservation_flights": 34,
+  "tool:update_reservation_passengers": 3,
+  "tool:search_onestop_flight": 16,
+  "tool:update_reservation_baggages": 12,
+  "tool:send_certificate": 5,
+  "tool:book_reservation": 14
+ },
+ "closed_tool_step_rate": 0.16621499548328816,
+ "max_saving_share": 0.15924446852096272,
+ "llm_usd_per_prompt_token": 1.0768122955912955e-06,
+ "jev_to_llm_price_ratio": 0.03900401227953764,
+ "situations": [
+  {
+   "leaf_id": 31,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=0 & called:cancel_reservation=0",
+   "n_train": 71,
+   "n_test": 85,
+   "train_counts": {
+    "tool:search_direct_flight": 5,
+    "tool:calculate": 16,
+    "message": 44,
+    "tool:search_onestop_flight": 2,
+    "tool:update_reservation_baggages": 3,
+    "tool:book_reservation": 1
+   },
+   "test_counts": {
+    "tool:update_reservation_flights": 3,
+    "tool:cancel_reservation": 1,
+    "message": 50,
+    "tool:search_onestop_flight": 5,
+    "tool:transfer_to_human_agents": 2,
+    "tool:search_direct_flight": 5,
+    "tool:calculate": 9,
+    "tool:book_reservation": 1,
+    "tool:update_reservation_baggages": 4,
+    "tool:get_reservation_details": 2,
+    "tool:get_user_details": 1,
+    "tool:get_flight_status": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5882352941176471,
+   "norm_entropy_test": 0.5784709376417257,
+   "tool_rate": 0.4117647058823529,
+   "closed_tool_rate": 0.23529411764705882,
+   "latest_rule_acc": 0.3,
+   "mean_cost": 0.007834941176470588,
+   "cost_share": 0.12281935115265437,
+   "mean_prompt_tokens": 6319.964705882353,
+   "max_saving_share": 0.024345532741164536
+  },
+  {
+   "leaf_id": 21,
+   "rule": "n_tool_calls=2 & user_confirms=1",
+   "n_train": 50,
+   "n_test": 36,
+   "train_counts": {
+    "tool:update_reservation_passengers": 3,
+    "tool:cancel_reservation": 11,
+    "tool:transfer_to_human_agents": 1,
+    "message": 13,
+    "tool:search_onestop_flight": 2,
+    "tool:search_direct_flight": 9,
+    "tool:update_reservation_flights": 6,
+    "tool:get_flight_status": 2,
+    "tool:send_certificate": 1,
+    "tool:get_user_details": 1,
+    "tool:get_reservation_details": 1
+   },
+   "test_counts": {
+    "tool:transfer_to_human_agents": 1,
+    "tool:cancel_reservation": 9,
+    "tool:update_reservation_flights": 5,
+    "message": 8,
+    "tool:update_reservation_passengers": 1,
+    "tool:get_reservation_details": 4,
+    "tool:search_direct_flight": 7,
+    "tool:get_user_details": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.2222222222222222,
+   "norm_entropy_test": 0.6706587289087037,
+   "tool_rate": 0.7777777777777778,
+   "closed_tool_rate": 0.4444444444444444,
+   "latest_rule_acc": 0.375,
+   "mean_cost": 0.005849055555555555,
+   "cost_share": 0.03883294967462471,
+   "mean_prompt_tokens": 5165.527777777777,
+   "max_saving_share": 0.017493522179469645
+  },
+  {
+   "leaf_id": 20,
+   "rule": "n_tool_calls=2 & user_confirms=0 & prev_role=user",
+   "n_train": 47,
+   "n_test": 50,
+   "train_counts": {
+    "message": 31,
+    "tool:transfer_to_human_agents": 4,
+    "tool:cancel_reservation": 2,
+    "tool:search_direct_flight": 7,
+    "tool:get_flight_status": 2,
+    "tool:get_reservation_details": 1
+   },
+   "test_counts": {
+    "message": 28,
+    "tool:get_flight_status": 3,
+    "tool:transfer_to_human_agents": 3,
+    "tool:update_reservation_flights": 1,
+    "tool:search_direct_flight": 4,
+    "tool:cancel_reservation": 3,
+    "tool:search_onestop_flight": 4,
+    "tool:get_user_details": 2,
+    "tool:calculate": 1,
+    "tool:update_reservation_baggages": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.56,
+   "norm_entropy_test": 0.5903528974896768,
+   "tool_rate": 0.44,
+   "closed_tool_rate": 0.3,
+   "latest_rule_acc": 0.26666666666666666,
+   "mean_cost": 0.0056004,
+   "cost_share": 0.05164177772236929,
+   "mean_prompt_tokens": 5056.84,
+   "max_saving_share": 0.014186082804829173
+  },
+  {
+   "leaf_id": 26,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=0 & called:get_flight_status=0",
+   "n_train": 54,
+   "n_test": 82,
+   "train_counts": {
+    "message": 37,
+    "tool:update_reservation_flights": 2,
+    "tool:get_reservation_details": 9,
+    "tool:search_onestop_flight": 2,
+    "tool:search_direct_flight": 2,
+    "tool:get_flight_status": 1,
+    "tool:transfer_to_human_agents": 1
+   },
+   "test_counts": {
+    "message": 44,
+    "tool:get_reservation_details": 14,
+    "tool:cancel_reservation": 2,
+    "tool:search_direct_flight": 8,
+    "tool:calculate": 10,
+    "tool:get_flight_status": 1,
+    "tool:search_onestop_flight": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5365853658536586,
+   "norm_entropy_test": 0.5113764645037782,
+   "tool_rate": 0.4634146341463415,
+   "closed_tool_rate": 0.13414634146341464,
+   "latest_rule_acc": 0.09090909090909091,
+   "mean_cost": 0.00610509756097561,
+   "cost_share": 0.0923248463674633,
+   "mean_prompt_tokens": 5679.182926829269,
+   "max_saving_share": 0.012998297000047242
+  },
+  {
+   "leaf_id": 35,
+   "rule": "n_tool_calls=3+ & user_confirms=1 & called:calculate=0",
+   "n_train": 43,
+   "n_test": 36,
+   "train_counts": {
+    "tool:update_reservation_flights": 12,
+    "tool:search_onestop_flight": 2,
+    "tool:cancel_reservation": 5,
+    "tool:transfer_to_human_agents": 1,
+    "message": 4,
+    "tool:book_reservation": 3,
+    "tool:send_certificate": 2,
+    "tool:calculate": 3,
+    "tool:search_direct_flight": 5,
+    "tool:get_reservation_details": 5,
+    "tool:get_user_details": 1
+   },
+   "test_counts": {
+    "tool:book_reservation": 5,
+    "tool:search_onestop_flight": 2,
+    "message": 4,
+    "tool:update_reservation_flights": 11,
+    "tool:get_user_details": 1,
+    "tool:get_reservation_details": 2,
+    "tool:cancel_reservation": 2,
+    "tool:calculate": 3,
+    "tool:send_certificate": 2,
+    "tool:search_direct_flight": 4
+   },
+   "majority": "tool:update_reservation_flights",
+   "majority_test_acc": 0.3055555555555556,
+   "norm_entropy_test": 0.7657341535048227,
+   "tool_rate": 0.8888888888888888,
+   "closed_tool_rate": 0.2777777777777778,
+   "latest_rule_acc": 0.5,
+   "mean_cost": 0.007476388888888889,
+   "cost_share": 0.04963711332753266,
+   "mean_prompt_tokens": 6250.194444444444,
+   "max_saving_share": 0.011783926911362399
+  },
+  {
+   "leaf_id": 6,
+   "rule": "n_tool_calls=0 & have:user_id=1 & user_short=1",
+   "n_train": 49,
+   "n_test": 51,
+   "train_counts": {
+    "tool:get_reservation_details": 9,
+    "message": 17,
+    "tool:get_user_details": 23
+   },
+   "test_counts": {
+    "message": 15,
+    "tool:get_user_details": 29,
+    "tool:get_reservation_details": 7
+   },
+   "majority": "tool:get_user_details",
+   "majority_test_acc": 0.5686274509803921,
+   "norm_entropy_test": 0.3521048937112323,
+   "tool_rate": 0.7058823529411765,
+   "closed_tool_rate": 0.5686274509803921,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.002315058823529412,
+   "cost_share": 0.021774306878525454,
+   "mean_prompt_tokens": 3351.4901960784314,
+   "max_saving_share": 0.011535452471149883
+  },
+  {
+   "leaf_id": 19,
+   "rule": "n_tool_calls=2 & user_confirms=0 & prev_role=tool",
+   "n_train": 89,
+   "n_test": 88,
+   "train_counts": {
+    "message": 63,
+    "tool:send_certificate": 1,
+    "tool:cancel_reservation": 2,
+    "tool:search_direct_flight": 10,
+    "tool:get_reservation_details": 8,
+    "tool:get_flight_status": 4,
+    "tool:calculate": 1
+   },
+   "test_counts": {
+    "message": 63,
+    "tool:get_flight_status": 6,
+    "tool:search_direct_flight": 5,
+    "tool:get_reservation_details": 8,
+    "tool:cancel_reservation": 2,
+    "tool:calculate": 4
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7159090909090909,
+   "norm_entropy_test": 0.38027780248226445,
+   "tool_rate": 0.2840909090909091,
+   "closed_tool_rate": 0.125,
+   "latest_rule_acc": 0.09090909090909091,
+   "mean_cost": 0.005298318181818182,
+   "cost_share": 0.08598700859442228,
+   "mean_prompt_tokens": 4605.568181818182,
+   "max_saving_share": 0.01124656991940495
+  },
+  {
+   "leaf_id": 27,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=0 & called:get_flight_status=1",
+   "n_train": 44,
+   "n_test": 65,
+   "train_counts": {
+    "message": 28,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_reservation_details": 8,
+    "tool:get_flight_status": 3,
+    "tool:send_certificate": 2,
+    "tool:search_direct_flight": 1
+   },
+   "test_counts": {
+    "tool:send_certificate": 3,
+    "message": 36,
+    "tool:transfer_to_human_agents": 3,
+    "tool:get_flight_status": 8,
+    "tool:get_reservation_details": 12,
+    "tool:search_direct_flight": 2,
+    "tool:get_user_details": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5538461538461539,
+   "norm_entropy_test": 0.49934371742102296,
+   "tool_rate": 0.4461538461538462,
+   "closed_tool_rate": 0.18461538461538463,
+   "latest_rule_acc": 0.16666666666666666,
+   "mean_cost": 0.005863353846153846,
+   "cost_share": 0.07028644754658217,
+   "mean_prompt_tokens": 5271.492307692308,
+   "max_saving_share": 0.010478815800288963
+  },
+  {
+   "leaf_id": 33,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=1",
+   "n_train": 101,
+   "n_test": 95,
+   "train_counts": {
+    "tool:calculate": 26,
+    "message": 69,
+    "tool:transfer_to_human_agents": 3,
+    "tool:book_reservation": 3
+   },
+   "test_counts": {
+    "message": 57,
+    "tool:calculate": 26,
+    "tool:book_reservation": 4,
+    "tool:get_user_details": 1,
+    "tool:cancel_reservation": 1,
+    "tool:update_reservation_flights": 4,
+    "tool:update_reservation_baggages": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6,
+   "norm_entropy_test": 0.40805129890955816,
+   "tool_rate": 0.4,
+   "closed_tool_rate": 0.06315789473684211,
+   "latest_rule_acc": 0.3333333333333333,
+   "mean_cost": 0.009435747368421052,
+   "cost_share": 0.16531491673173682,
+   "mean_prompt_tokens": 7574.126315789474,
+   "max_saving_share": 0.010422811575533503
+  },
+  {
+   "leaf_id": 9,
+   "rule": "n_tool_calls=0 & have:user_id=1 & user_short=0 & user_confirms=0",
+   "n_train": 38,
+   "n_test": 38,
+   "train_counts": {
+    "message": 5,
+    "tool:get_reservation_details": 9,
+    "tool:get_user_details": 23,
+    "tool:search_direct_flight": 1
+   },
+   "test_counts": {
+    "tool:get_user_details": 17,
+    "tool:get_reservation_details": 14,
+    "message": 7
+   },
+   "majority": "tool:get_user_details",
+   "majority_test_acc": 0.4473684210526316,
+   "norm_entropy_test": 0.38380180951410237,
+   "tool_rate": 0.8157894736842105,
+   "closed_tool_rate": 0.4473684210526316,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.002559421052631579,
+   "cost_share": 0.017936490313985403,
+   "mean_prompt_tokens": 3478.1315789473683,
+   "max_saving_share": 0.007619055766573463
+  },
+  {
+   "leaf_id": 36,
+   "rule": "n_tool_calls=3+ & user_confirms=1 & called:calculate=1",
+   "n_train": 32,
+   "n_test": 32,
+   "train_counts": {
+    "tool:book_reservation": 5,
+    "tool:update_reservation_flights": 8,
+    "tool:update_reservation_baggages": 3,
+    "tool:calculate": 4,
+    "message": 7,
+    "tool:update_reservation_passengers": 1,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_user_details": 1,
+    "tool:cancel_reservation": 1,
+    "tool:search_onestop_flight": 1
+   },
+   "test_counts": {
+    "message": 10,
+    "tool:update_reservation_flights": 8,
+    "tool:book_reservation": 3,
+    "tool:calculate": 3,
+    "tool:update_reservation_baggages": 3,
+    "tool:transfer_to_human_agents": 1,
+    "tool:get_reservation_details": 1,
+    "tool:get_user_details": 1,
+    "tool:cancel_reservation": 1,
+    "tool:search_onestop_flight": 1
+   },
+   "majority": "tool:update_reservation_flights",
+   "majority_test_acc": 0.25,
+   "norm_entropy_test": 0.7080123436599677,
+   "tool_rate": 0.6875,
+   "closed_tool_rate": 0.15625,
+   "latest_rule_acc": 0.2,
+   "mean_cost": 0.008803687499999999,
+   "cost_share": 0.051954925849548,
+   "mean_prompt_tokens": 7255.09375,
+   "max_saving_share": 0.007352149556188264
+  },
+  {
+   "leaf_id": 13,
+   "rule": "n_tool_calls=1 & called:get_user_details=0 & prev_role=user",
+   "n_train": 41,
+   "n_test": 47,
+   "train_counts": {
+    "message": 24,
+    "tool:cancel_reservation": 1,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_user_details": 6,
+    "tool:update_reservation_flights": 2,
+    "tool:send_certificate": 1,
+    "tool:search_direct_flight": 4,
+    "tool:list_all_airports": 1
+   },
+   "test_counts": {
+    "message": 30,
+    "tool:transfer_to_human_agents": 6,
+    "tool:search_direct_flight": 4,
+    "tool:update_reservation_passengers": 1,
+    "tool:update_reservation_flights": 1,
+    "tool:get_user_details": 2,
+    "tool:search_onestop_flight": 1,
+    "tool:cancel_reservation": 2
+   },
+   "majority": "message",
+   "majority_test_acc": 0.6382978723404256,
+   "norm_entropy_test": 0.4702503481833819,
+   "tool_rate": 0.3617021276595745,
+   "closed_tool_rate": 0.19148936170212766,
+   "latest_rule_acc": 0.2222222222222222,
+   "mean_cost": 0.00413731914893617,
+   "cost_share": 0.03586154647962859,
+   "mean_prompt_tokens": 4050.3617021276596,
+   "max_saving_share": 0.007096585973601643
+  },
+  {
+   "leaf_id": 8,
+   "rule": "n_tool_calls=0 & have:user_id=1 & user_short=0 & user_confirms=1",
+   "n_train": 31,
+   "n_test": 32,
+   "train_counts": {
+    "tool:get_reservation_details": 11,
+    "tool:cancel_reservation": 1,
+    "tool:get_user_details": 18,
+    "message": 1
+   },
+   "test_counts": {
+    "tool:get_reservation_details": 11,
+    "tool:get_user_details": 16,
+    "message": 4,
+    "tool:cancel_reservation": 1
+   },
+   "majority": "tool:get_user_details",
+   "majority_test_acc": 0.5,
+   "norm_entropy_test": 0.3995045018275775,
+   "tool_rate": 0.875,
+   "closed_tool_rate": 0.5,
+   "latest_rule_acc": 1.0,
+   "mean_cost": 0.0023310625,
+   "cost_share": 0.013756755829663648,
+   "mean_prompt_tokens": 3442.28125,
+   "max_saving_share": 0.006307209970244624
+  },
+  {
+   "leaf_id": 28,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=1",
+   "n_train": 25,
+   "n_test": 22,
+   "train_counts": {
+    "tool:get_reservation_details": 2,
+    "tool:get_flight_status": 1,
+    "tool:calculate": 2,
+    "message": 11,
+    "tool:update_reservation_baggages": 5,
+    "tool:update_reservation_passengers": 2,
+    "tool:get_user_details": 1,
+    "tool:cancel_reservation": 1
+   },
+   "test_counts": {
+    "tool:calculate": 2,
+    "message": 13,
+    "tool:update_reservation_passengers": 1,
+    "tool:update_reservation_baggages": 2,
+    "tool:search_direct_flight": 1,
+    "tool:get_user_details": 1,
+    "tool:get_reservation_details": 1,
+    "tool:update_reservation_flights": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.5909090909090909,
+   "norm_entropy_test": 0.5352056618526293,
+   "tool_rate": 0.4090909090909091,
+   "closed_tool_rate": 0.13636363636363635,
+   "latest_rule_acc": 0.3333333333333333,
+   "mean_cost": 0.007741545454545454,
+   "cost_share": 0.03140960549606315,
+   "mean_prompt_tokens": 6175.681818181818,
+   "max_saving_share": 0.0034343350231370215
+  },
+  {
+   "leaf_id": 12,
+   "rule": "n_tool_calls=1 & called:get_user_details=0 & prev_role=tool",
+   "n_train": 36,
+   "n_test": 37,
+   "train_counts": {
+    "message": 28,
+    "tool:search_direct_flight": 6,
+    "tool:get_reservation_details": 1,
+    "tool:cancel_reservation": 1
+   },
+   "test_counts": {
+    "message": 29,
+    "tool:search_direct_flight": 6,
+    "tool:get_user_details": 1,
+    "tool:get_reservation_details": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.7837837837837838,
+   "norm_entropy_test": 0.2515206165736112,
+   "tool_rate": 0.21621621621621623,
+   "closed_tool_rate": 0.05405405405405406,
+   "latest_rule_acc": 0.5,
+   "mean_cost": 0.0035328648648648648,
+   "cost_share": 0.024106873140337208,
+   "mean_prompt_tokens": 3758.5405405405404,
+   "max_saving_share": 0.0011835323193574688
+  },
+  {
+   "leaf_id": 32,
+   "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=0 & called:cancel_reservation=1",
+   "n_train": 26,
+   "n_test": 16,
+   "train_counts": {
+    "message": 18,
+    "tool:search_direct_flight": 2,
+    "tool:get_user_details": 1,
+    "tool:book_reservation": 3,
+    "tool:search_onestop_flight": 2
+   },
+   "test_counts": {
+    "tool:calculate": 1,
+    "message": 13,
+    "tool:book_reservation": 1,
+    "tool:search_direct_flight": 1
+   },
+   "majority": "message",
+   "majority_test_acc": 0.8125,
+   "norm_entropy_test": 0.25426684077792466,
+   "tool_rate": 0.1875,
+   "closed_tool_rate": 0.0625,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.00792525,
+   "cost_share": 0.023385415264292966,
+   "mean_prompt_tokens": 6478.875,
+   "max_saving_share": 0.0008861427967636034
+  },
+  {
+   "leaf_id": 16,
+   "rule": "n_tool_calls=1 & called:get_user_details=1 & prev_role=user",
+   "n_train": 30,
+   "n_test": 26,
+   "train_counts": {
+    "tool:get_reservation_details": 28,
+    "tool:calculate": 2
+   },
+   "test_counts": {
+    "tool:get_reservation_details": 24,
+    "tool:search_direct_flight": 1,
+    "tool:calculate": 1
+   },
+   "majority": "tool:get_reservation_details",
+   "majority_test_acc": 0.9230769230769231,
+   "norm_entropy_test": 0.1198310085976219,
+   "tool_rate": 1.0,
+   "closed_tool_rate": 0.038461538461538464,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.003326076923076923,
+   "cost_share": 0.015948423876419725,
+   "mean_prompt_tokens": 3838.423076923077,
+   "max_saving_share": 0.0008744457118463238
+  },
+  {
+   "leaf_id": 3,
+   "rule": "n_tool_calls=0 & have:user_id=0 & prev_role=start",
+   "n_train": 100,
+   "n_test": 100,
+   "train_counts": {
+    "message": 100
+   },
+   "test_counts": {
+    "message": 100
+   },
+   "majority": "message",
+   "majority_test_acc": 1.0,
+   "norm_entropy_test": 0.0,
+   "tool_rate": 0.0,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.0,
+   "cost_share": 0.0,
+   "mean_prompt_tokens": 0.0,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 4,
+   "rule": "n_tool_calls=0 & have:user_id=0 & prev_role=user",
+   "n_train": 105,
+   "n_test": 106,
+   "train_counts": {
+    "message": 100,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_flight_status": 3
+   },
+   "test_counts": {
+    "message": 101,
+    "tool:transfer_to_human_agents": 2,
+    "tool:get_flight_status": 3
+   },
+   "majority": "message",
+   "majority_test_acc": 0.9528301886792453,
+   "norm_entropy_test": 0.08191941636457434,
+   "tool_rate": 0.04716981132075472,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.0024669245283018867,
+   "cost_share": 0.04822518042901663,
+   "mean_prompt_tokens": 3291.4245283018868,
+   "max_saving_share": 0.0
+  },
+  {
+   "leaf_id": 15,
+   "rule": "n_tool_calls=1 & called:get_user_details=1 & prev_role=tool",
+   "n_train": 64,
+   "n_test": 63,
+   "train_counts": {
+    "message": 30,
+    "tool:get_reservation_details": 33,
+    "tool:search_direct_flight": 1
+   },
+   "test_counts": {
+    "tool:get_reservation_details": 32,
+    "message": 26,
+    "tool:search_direct_flight": 3,
+    "tool:calculate": 2
+   },
+   "majority": "tool:get_reservation_details",
+   "majority_test_acc": 0.5079365079365079,
+   "norm_entropy_test": 0.3559129447281379,
+   "tool_rate": 0.5873015873015873,
+   "closed_tool_rate": 0.0,
+   "latest_rule_acc": 0.0,
+   "mean_cost": 0.003339142857142857,
+   "cost_share": 0.0387960653251337,
+   "mean_prompt_tokens": 3782.904761904762,
+   "max_saving_share": 0.0
+  }
+ ],
+ "tree": {
+  "id": 0,
+  "counts": {
+   "message": 630,
+   "tool:transfer_to_human_agents": 17,
+   "tool:get_reservation_details": 125,
+   "tool:cancel_reservation": 25,
+   "tool:get_user_details": 75,
+   "tool:update_reservation_passengers": 6,
+   "tool:get_flight_status": 16,
+   "tool:send_certificate": 7,
+   "tool:update_reservation_flights": 30,
+   "tool:calculate": 54,
+   "tool:search_onestop_flight": 11,
+   "tool:search_direct_flight": 53,
+   "tool:book_reservation": 15,
+   "tool:update_reservation_baggages": 11,
+   "tool:list_all_airports": 1
+  },
+  "split": "n_tool_calls",
+  "default": "3+",
+  "children": {
+   "0": {
+    "id": 1,
+    "counts": {
+     "message": 223,
+     "tool:transfer_to_human_agents": 2,
+     "tool:get_reservation_details": 29,
+     "tool:cancel_reservation": 1,
+     "tool:get_user_details": 64,
+     "tool:get_flight_status": 3,
+     "tool:search_direct_flight": 1
+    },
+    "split": "have:user_id",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 2,
+      "counts": {
+       "message": 200,
+       "tool:transfer_to_human_agents": 2,
+       "tool:get_flight_status": 3
+      },
+      "split": "prev_role",
+      "default": "user",
+      "children": {
+       "start": {
+        "id": 3,
+        "counts": {
+         "message": 100
+        }
+       },
+       "user": {
+        "id": 4,
+        "counts": {
+         "message": 100,
+         "tool:transfer_to_human_agents": 2,
+         "tool:get_flight_status": 3
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 5,
+      "counts": {
+       "tool:get_reservation_details": 29,
+       "message": 23,
+       "tool:cancel_reservation": 1,
+       "tool:get_user_details": 64,
+       "tool:search_direct_flight": 1
+      },
+      "split": "user_short",
+      "default": "0",
+      "children": {
+       "1": {
+        "id": 6,
+        "counts": {
+         "tool:get_reservation_details": 9,
+         "message": 17,
+         "tool:get_user_details": 23
+        }
+       },
+       "0": {
+        "id": 7,
+        "counts": {
+         "tool:get_reservation_details": 20,
+         "message": 6,
+         "tool:cancel_reservation": 1,
+         "tool:get_user_details": 41,
+         "tool:search_direct_flight": 1
+        },
+        "split": "user_confirms",
+        "default": "0",
+        "children": {
+         "1": {
+          "id": 8,
+          "counts": {
+           "tool:get_reservation_details": 11,
+           "tool:cancel_reservation": 1,
+           "tool:get_user_details": 18,
+           "message": 1
+          }
+         },
+         "0": {
+          "id": 9,
+          "counts": {
+           "message": 5,
+           "tool:get_reservation_details": 9,
+           "tool:get_user_details": 23,
+           "tool:search_direct_flight": 1
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "1": {
+    "id": 10,
+    "counts": {
+     "message": 82,
+     "tool:cancel_reservation": 2,
+     "tool:get_reservation_details": 62,
+     "tool:transfer_to_human_agents": 2,
+     "tool:get_user_details": 6,
+     "tool:update_reservation_flights": 2,
+     "tool:search_direct_flight": 11,
+     "tool:send_certificate": 1,
+     "tool:calculate": 2,
+     "tool:list_all_airports": 1
+    },
+    "split": "called:get_user_details",
+    "default": "1",
+    "children": {
+     "0": {
+      "id": 11,
+      "counts": {
+       "message": 52,
+       "tool:cancel_reservation": 2,
+       "tool:transfer_to_human_agents": 2,
+       "tool:get_user_details": 6,
+       "tool:update_reservation_flights": 2,
+       "tool:search_direct_flight": 10,
+       "tool:send_certificate": 1,
+       "tool:get_reservation_details": 1,
+       "tool:list_all_airports": 1
+      },
+      "split": "prev_role",
+      "default": "user",
+      "children": {
+       "tool": {
+        "id": 12,
+        "counts": {
+         "message": 28,
+         "tool:search_direct_flight": 6,
+         "tool:get_reservation_details": 1,
+         "tool:cancel_reservation": 1
+        }
+       },
+       "user": {
+        "id": 13,
+        "counts": {
+         "message": 24,
+         "tool:cancel_reservation": 1,
+         "tool:transfer_to_human_agents": 2,
+         "tool:get_user_details": 6,
+         "tool:update_reservation_flights": 2,
+         "tool:send_certificate": 1,
+         "tool:search_direct_flight": 4,
+         "tool:list_all_airports": 1
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 14,
+      "counts": {
+       "message": 30,
+       "tool:get_reservation_details": 61,
+       "tool:calculate": 2,
+       "tool:search_direct_flight": 1
+      },
+      "split": "prev_role",
+      "default": "tool",
+      "children": {
+       "tool": {
+        "id": 15,
+        "counts": {
+         "message": 30,
+         "tool:get_reservation_details": 33,
+         "tool:search_direct_flight": 1
+        }
+       },
+       "user": {
+        "id": 16,
+        "counts": {
+         "tool:get_reservation_details": 28,
+         "tool:calculate": 2
+        }
+       }
+      }
+     }
+    }
+   },
+   "2": {
+    "id": 17,
+    "counts": {
+     "message": 107,
+     "tool:update_reservation_passengers": 3,
+     "tool:transfer_to_human_agents": 5,
+     "tool:cancel_reservation": 15,
+     "tool:send_certificate": 2,
+     "tool:search_onestop_flight": 2,
+     "tool:search_direct_flight": 26,
+     "tool:update_reservation_flights": 6,
+     "tool:get_flight_status": 8,
+     "tool:get_reservation_details": 10,
+     "tool:get_user_details": 1,
+     "tool:calculate": 1
+    },
+    "split": "user_confirms",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 18,
+      "counts": {
+       "message": 94,
+       "tool:transfer_to_human_agents": 4,
+       "tool:send_certificate": 1,
+       "tool:cancel_reservation": 4,
+       "tool:search_direct_flight": 17,
+       "tool:get_reservation_details": 9,
+       "tool:get_flight_status": 6,
+       "tool:calculate": 1
+      },
+      "split": "prev_role",
+      "default": "tool",
+      "children": {
+       "tool": {
+        "id": 19,
+        "counts": {
+         "message": 63,
+         "tool:send_certificate": 1,
+         "tool:cancel_reservation": 2,
+         "tool:search_direct_flight": 10,
+         "tool:get_reservation_details": 8,
+         "tool:get_flight_status": 4,
+         "tool:calculate": 1
+        }
+       },
+       "user": {
+        "id": 20,
+        "counts": {
+         "message": 31,
+         "tool:transfer_to_human_agents": 4,
+         "tool:cancel_reservation": 2,
+         "tool:search_direct_flight": 7,
+         "tool:get_flight_status": 2,
+         "tool:get_reservation_details": 1
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 21,
+      "counts": {
+       "tool:update_reservation_passengers": 3,
+       "tool:cancel_reservation": 11,
+       "tool:transfer_to_human_agents": 1,
+       "message": 13,
+       "tool:search_onestop_flight": 2,
+       "tool:search_direct_flight": 9,
+       "tool:update_reservation_flights": 6,
+       "tool:get_flight_status": 2,
+       "tool:send_certificate": 1,
+       "tool:get_user_details": 1,
+       "tool:get_reservation_details": 1
+      }
+     }
+    }
+   },
+   "3+": {
+    "id": 22,
+    "counts": {
+     "message": 218,
+     "tool:transfer_to_human_agents": 8,
+     "tool:get_reservation_details": 24,
+     "tool:get_flight_status": 5,
+     "tool:calculate": 51,
+     "tool:update_reservation_flights": 22,
+     "tool:search_direct_flight": 15,
+     "tool:book_reservation": 15,
+     "tool:search_onestop_flight": 9,
+     "tool:update_reservation_baggages": 11,
+     "tool:update_reservation_passengers": 3,
+     "tool:cancel_reservation": 7,
+     "tool:get_user_details": 4,
+     "tool:send_certificate": 4
+    },
+    "split": "user_confirms",
+    "default": "0",
+    "children": {
+     "0": {
+      "id": 23,
+      "counts": {
+       "message": 207,
+       "tool:transfer_to_human_agents": 6,
+       "tool:get_reservation_details": 19,
+       "tool:get_flight_status": 5,
+       "tool:calculate": 44,
+       "tool:search_direct_flight": 10,
+       "tool:search_onestop_flight": 6,
+       "tool:update_reservation_flights": 2,
+       "tool:update_reservation_baggages": 8,
+       "tool:update_reservation_passengers": 2,
+       "tool:get_user_details": 2,
+       "tool:cancel_reservation": 1,
+       "tool:book_reservation": 7,
+       "tool:send_certificate": 2
+      },
+      "split": "called:search_direct_flight",
+      "default": "1",
+      "children": {
+       "0": {
+        "id": 24,
+        "counts": {
+         "message": 76,
+         "tool:transfer_to_human_agents": 3,
+         "tool:get_reservation_details": 19,
+         "tool:get_flight_status": 5,
+         "tool:calculate": 2,
+         "tool:update_reservation_flights": 2,
+         "tool:update_reservation_baggages": 5,
+         "tool:update_reservation_passengers": 2,
+         "tool:get_user_details": 1,
+         "tool:cancel_reservation": 1,
+         "tool:send_certificate": 2,
+         "tool:search_onestop_flight": 2,
+         "tool:search_direct_flight": 3
+        },
+        "split": "called:update_reservation_flights",
+        "default": "0",
+        "children": {
+         "0": {
+          "id": 25,
+          "counts": {
+           "message": 65,
+           "tool:transfer_to_human_agents": 3,
+           "tool:update_reservation_flights": 2,
+           "tool:get_reservation_details": 17,
+           "tool:get_flight_status": 4,
+           "tool:send_certificate": 2,
+           "tool:search_onestop_flight": 2,
+           "tool:search_direct_flight": 3
+          },
+          "split": "called:get_flight_status",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 26,
+            "counts": {
+             "message": 37,
+             "tool:update_reservation_flights": 2,
+             "tool:get_reservation_details": 9,
+             "tool:search_onestop_flight": 2,
+             "tool:search_direct_flight": 2,
+             "tool:get_flight_status": 1,
+             "tool:transfer_to_human_agents": 1
+            }
+           },
+           "1": {
+            "id": 27,
+            "counts": {
+             "message": 28,
+             "tool:transfer_to_human_agents": 2,
+             "tool:get_reservation_details": 8,
+             "tool:get_flight_status": 3,
+             "tool:send_certificate": 2,
+             "tool:search_direct_flight": 1
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 28,
+          "counts": {
+           "tool:get_reservation_details": 2,
+           "tool:get_flight_status": 1,
+           "tool:calculate": 2,
+           "message": 11,
+           "tool:update_reservation_baggages": 5,
+           "tool:update_reservation_passengers": 2,
+           "tool:get_user_details": 1,
+           "tool:cancel_reservation": 1
+          }
+         }
+        }
+       },
+       "1": {
+        "id": 29,
+        "counts": {
+         "tool:search_direct_flight": 7,
+         "tool:calculate": 42,
+         "message": 131,
+         "tool:search_onestop_flight": 4,
+         "tool:update_reservation_baggages": 3,
+         "tool:transfer_to_human_agents": 3,
+         "tool:book_reservation": 7,
+         "tool:get_user_details": 1
+        },
+        "split": "called:calculate",
+        "default": "1",
+        "children": {
+         "0": {
+          "id": 30,
+          "counts": {
+           "tool:search_direct_flight": 7,
+           "tool:calculate": 16,
+           "message": 62,
+           "tool:search_onestop_flight": 4,
+           "tool:update_reservation_baggages": 3,
+           "tool:get_user_details": 1,
+           "tool:book_reservation": 4
+          },
+          "split": "called:cancel_reservation",
+          "default": "0",
+          "children": {
+           "0": {
+            "id": 31,
+            "counts": {
+             "tool:search_direct_flight": 5,
+             "tool:calculate": 16,
+             "message": 44,
+             "tool:search_onestop_flight": 2,
+             "tool:update_reservation_baggages": 3,
+             "tool:book_reservation": 1
+            }
+           },
+           "1": {
+            "id": 32,
+            "counts": {
+             "message": 18,
+             "tool:search_direct_flight": 2,
+             "tool:get_user_details": 1,
+             "tool:book_reservation": 3,
+             "tool:search_onestop_flight": 2
+            }
+           }
+          }
+         },
+         "1": {
+          "id": 33,
+          "counts": {
+           "tool:calculate": 26,
+           "message": 69,
+           "tool:transfer_to_human_agents": 3,
+           "tool:book_reservation": 3
+          }
+         }
+        }
+       }
+      }
+     },
+     "1": {
+      "id": 34,
+      "counts": {
+       "tool:update_reservation_flights": 20,
+       "tool:book_reservation": 8,
+       "tool:search_onestop_flight": 3,
+       "tool:cancel_reservation": 6,
+       "tool:transfer_to_human_agents": 2,
+       "message": 11,
+       "tool:send_certificate": 2,
+       "tool:calculate": 7,
+       "tool:search_direct_flight": 5,
+       "tool:get_reservation_details": 5,
+       "tool:update_reservation_baggages": 3,
+       "tool:get_user_details": 2,
+       "tool:update_reservation_passengers": 1
+      },
+      "split": "called:calculate",
+      "default": "0",
+      "children": {
+       "0": {
+        "id": 35,
+        "counts": {
+         "tool:update_reservation_flights": 12,
+         "tool:search_onestop_flight": 2,
+         "tool:cancel_reservation": 5,
+         "tool:transfer_to_human_agents": 1,
+         "message": 4,
+         "tool:book_reservation": 3,
+         "tool:send_certificate": 2,
+         "tool:calculate": 3,
+         "tool:search_direct_flight": 5,
+         "tool:get_reservation_details": 5,
+         "tool:get_user_details": 1
+        }
+       },
+       "1": {
+        "id": 36,
+        "counts": {
+         "tool:book_reservation": 5,
+         "tool:update_reservation_flights": 8,
+         "tool:update_reservation_baggages": 3,
+         "tool:calculate": 4,
+         "message": 7,
+         "tool:update_reservation_passengers": 1,
+         "tool:transfer_to_human_agents": 1,
+         "tool:get_user_details": 1,
+         "tool:cancel_reservation": 1,
+         "tool:search_onestop_flight": 1
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
