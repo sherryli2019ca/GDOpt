@@ -44,7 +44,8 @@ def main() -> None:
     summ.setdefault("llm_agent", next(s for s in json.loads((bdir / "summary.json").read_text()) if s["agent"] == "llm_agent"))
     base, tier = per_task(load(bdir / "baseline.json")), per_task(load(out / "tiered.json"))
     keys = sorted(set(base) & set(tier))
-    b, t = summ["llm_agent"], summ["gdopt_tiered"]
+    b = summ["llm_agent"]
+    t = next(v for k, v in summ.items() if k != "llm_agent")
     n = len(keys)
     both = sum(1 for k in keys if base[k]["reward"] >= 1 and tier[k]["reward"] >= 1)
     only_b = sum(1 for k in keys if base[k]["reward"] >= 1 and tier[k]["reward"] < 1)

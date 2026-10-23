@@ -27,6 +27,7 @@ from tau2.data_model.message import (  # type: ignore[import-not-found]
     UserMessage,
 )
 from tau2.registry import registry  # type: ignore[import-not-found]
+from tau2.utils.llm_utils import generate  # type: ignore[import-not-found]
 
 from ..decision import DecisionModel
 from ..situation import SituationModel
@@ -75,12 +76,16 @@ class TieredLLMAgent(LLMAgent):
     """τ²-bench LLMAgent whose next-message generation goes through a TieredPolicy."""
 
     def __init__(self, tools, domain_policy, llm, llm_args, situation_model: SituationModel, tier_table: TierTable,
-                 decision_model: Optional[DecisionModel], lam: float = 0.0, additional_stop_tool_names=frozenset()):
+                 decision_model: Optional[DecisionModel], lam: float = 0.0, additional_stop_tool_names=frozenset(),
+                 message_llm: Optional[str] = None, message_llm_args: Optional[dict] = None):
         super().__init__(tools=tools, domain_policy=domain_policy, llm=llm, llm_args=llm_args,
                          additional_stop_tool_names=additional_stop_tool_names)
         self._pending: dict[str, Any] = {}
+        self.message_llm = message_llm
+        self.message_llm_args = message_llm_args or {}
         self.policy = TieredPolicy(
             situation_model, tier_table, decision_model, self._llm_fallback, tool_descriptions(tools), policy_text=domain_policy, lam=lam,
+            message_llm=self._message_llm_fallback if message_llm else None,
         )
         self.stats = {"steps": 0, "llm_steps": 0, "decision_cost": 0.0, "tiers": {}}
 
@@ -91,6 +96,18 @@ class TieredLLMAgent(LLMAgent):
         self._pending["llm_message"] = t2
         return to_gdopt_history([t2])[0]
 
+    def _message_llm_fallback(self, history: list[Message]) -> Message:
+        """Same as the parent's LLM call, but with the cheaper generative model (cascade for message steps)."""
+        message, state = self._pending["message"], self._pending["state"]
+        if isinstance(message, MultiToolMessage):
+            state.messages.extend(message.tool_messages)
+        else:
+            state.messages.append(message)
+        t2 = generate(model=self.message_llm, tools=self.tools, messages=state.system_messages + state.messages,
+                      call_name="agent_response_cheap", **self.message_llm_args)
+        self._pending["llm_message"] = t2
+        return to_gdopt_history([t2])[0]
+
     def _generate_next_message(self, message, state: LLMAgentState) -> AssistantMessage:
         incoming = message.tool_messages if isinstance(message, MultiToolMessage) else [message]
         history = to_gdopt_history(list(state.messages) + list(incoming))
@@ -98,7 +115,7 @@ class TieredLLMAgent(LLMAgent):
         d: Decision = self.policy.decide(history)
         info = {"tier": d.tier_used.value, "leaf_id": d.leaf_id, "confidence": round(d.confidence, 4),
                 "fallback_reason": d.fallback_reason, "decision_cost": d.decision_cost, "llm_called": d.llm_called,
-                "proposed": d.proposed}
+                "proposed": d.proposed, "generator": d.generator}
         self.stats["steps"] += 1
         self.stats["decision_cost"] += d.decision_cost
         self.stats["tiers"][d.tier_used.value] = self.stats["tiers"].get(d.tier_used.value, 0) + 1
@@ -125,12 +142,14 @@ class TieredLLMAgent(LLMAgent):
 
 
 def register_tiered_agent(situation_model: SituationModel, tier_table: TierTable, decision_model: Optional[DecisionModel],
-                          name: str = "gdopt_tiered", lam: float = 0.0) -> list[TieredLLMAgent]:
+                          name: str = "gdopt_tiered", lam: float = 0.0, message_llm: Optional[str] = None,
+                          message_llm_args: Optional[dict] = None) -> list[TieredLLMAgent]:
     """Register a τ²-bench agent factory; returns the list of agents created (for stats)."""
     created: list[TieredLLMAgent] = []
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any) -> TieredLLMAgent:
-        a = TieredLLMAgent(tools, domain_policy, llm, llm_args or {}, situation_model, tier_table, decision_model, lam=lam)
+        a = TieredLLMAgent(tools, domain_policy, llm, llm_args or {}, situation_model, tier_table, decision_model, lam=lam,
+                           message_llm=message_llm, message_llm_args=message_llm_args)
         created.append(a)
         return a
 

@@ -145,6 +145,7 @@ class Decision:
     decision_cost: float = 0.0
     llm_called: bool = False
     proposed: str | None = None  # action the cheap tier proposed (also recorded when it fell back)
+    generator: str | None = None  # which generative model wrote the step: "llm" (original) or "message_llm" (cheap)
 
 
 LLMFallback = Callable[[list[Message]], Message]
@@ -163,6 +164,7 @@ class TieredPolicy:
         policy_text: str | None = None,
         lam: float = 0.0,
         instructions: str = NEXT_ACTION_INSTRUCTIONS,
+        message_llm: LLMFallback | None = None,
     ):
         self.situation_model = situation_model
         self.tier_table = tier_table
@@ -172,6 +174,9 @@ class TieredPolicy:
         self.policy_text = policy_text
         self.lam = lam
         self.instructions = instructions
+        # Cascade: when a cheap tier is confident the next step is *send a message*, a cheaper generative
+        # model may write the text (the original LLM is kept for uncertain steps).
+        self.message_llm = message_llm
         from .decision import action_menu
 
         self.menu = action_menu(tools)
@@ -192,14 +197,14 @@ class TieredPolicy:
                   proposed: str | None = None) -> Decision:
         msg = self.llm(history)
         return Decision(msg, Tier.LLM, leaf_id, conf, fallback_reason=f"{tier.value}: {reason}", decision_cost=cost,
-                        llm_called=True, proposed=proposed)
+                        llm_called=True, proposed=proposed, generator="llm")
 
     # -- main entry --------------------------------------------------------
     def decide(self, history: list[Message]) -> Decision:
         leaf = self.situation_model.situation(history)
         rule = self.tier_table.get(leaf.id)
         if rule.tier == Tier.LLM or self.lam >= 1.0:
-            return Decision(self.llm(history), Tier.LLM, leaf.id, 0.0, llm_called=True)
+            return Decision(self.llm(history), Tier.LLM, leaf.id, 0.0, llm_called=True, generator="llm")
 
         tau = effective_tau(rule.tau, self.lam)
         if rule.tier == Tier.CODE:
@@ -218,10 +223,15 @@ class TieredPolicy:
 
     def _emit(self, action: str | None, history: list[Message], leaf_id: int, tier: Tier, conf: float, cost: float) -> Decision:
         if action is None or action == MESSAGE_ACTION or not is_tool_action(action):
-            # Deciding "send a message" still needs the generative model for the text.
+            # Deciding "send a message" still needs a generative model for the text; with a cascade the
+            # cheaper one writes it.
+            if self.message_llm is not None:
+                msg = self.message_llm(history)
+                return Decision(msg, tier, leaf_id, conf, fallback_reason="message text by message_llm", decision_cost=cost,
+                                llm_called=True, proposed=action, generator="message_llm")
             msg = self.llm(history)
             return Decision(msg, tier, leaf_id, conf, fallback_reason="message text needs LLM", decision_cost=cost,
-                            llm_called=True, proposed=action)
+                            llm_called=True, proposed=action, generator="llm")
         tool = action_tool_name(action) or ""
         args = self._fill_args(tool, history)
         if args is None:

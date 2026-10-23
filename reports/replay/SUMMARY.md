@@ -22,6 +22,9 @@ calls (≈ $0.00018 each vs ≈ $0.0022 per DeepSeek step, ratio ≈ 8 %); the u
 step cost in that run) − (all Jev calls), as a share of the run's cost. "Cost vs run 1" is the raw total,
 which also carries dialogue-length noise.
 
+| cascade: DeepSeek + qwen3.7-flash writes confident message steps | 44% | 398 | 313 (78.6% DeepSeek; 85 steps by qwen) | 272 | 47 | $0.0133 | $0.00116 | −8.4% | — | Jev routes "message" steps (p ≥ τ) to qwen ($0.00014/step vs $0.00225); 18 of the 85 qwen steps called a tool instead |
+| **qwen3.7-flash as the whole agent (control)** | **68%** | 469 | 469 (100%) | 0 | 0 | **$0.0014** ($0.0022 at list price) | 0 | **−90%** | — | newer cheap model beats the "strong" DeepSeek-chat by 26+ points at 1/10 the cost |
+
 ## What the replay showed
 
 1. **The replay found two defects the offline stages could not see.** In v1 the entity table had no learned
@@ -52,12 +55,22 @@ which also carries dialogue-length noise.
    ≈ 1 %, so the net saving approaches the gross share of skipped steps (≈ 11 % here, ceiling 12–28 % from
    stage 2). The cost-aware tier table (`min_tool_coverage`) is the knob to set from that ratio.
 
+6. **The control run changes the question.** `qwen/qwen3.7-flash` alone scores 68 % at $0.0014 per task, far above
+   DeepSeek-chat (42 % / 32 %) and far outside run-to-run noise. The cascade premise (the expensive model is the
+   accurate one) is false for this pair, so the cascade only saved 8 %. Jev's own price (≈ $0.025 per million
+   state tokens) equals a flash-class model's, so step replacement cannot save money on a flash-class agent; its
+   value scales with c_LLM / c_Jev and is only large for frontier-priced agents (GPT-4.1 / Claude: 50–100×).
+   The decisive next experiment is a cascade over an expensive *and* more accurate baseline (grok-4.7,
+   glm-5.3-prime or qwen3.8-max-prime are callable with this key; OpenAI/Anthropic are not).
+
 ## Files
 
 - `airline/`: original run 1 (`baseline.json`) and tiered v2 (`tiered.json`, `tier_table.json`, `REPORT.md`).
 - `airline-baseline-rep2/`: original run 2.
 - `airline-v1-before-guard/`: tiered v1 with the loop (kept as evidence; `REPORT.md`).
 - `airline-v3-cost-aware/`: tiered v3 (`REPORT.md` compares with run 1).
+- `airline-cascade/`: cascade (DeepSeek strong model, qwen3.7-flash for confident message steps).
+- `airline-small-only/`: qwen3.7-flash as the whole agent (control).
 
 ## Next
 

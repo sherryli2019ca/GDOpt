@@ -37,26 +37,83 @@ def build_tier_table(fit_results: str, shadow_json: str, min_agreement: float, m
     return model, rep, table
 
 
-DEFAULT_PRICES = {"openrouter/deepseek/deepseek-chat": (0.2574e-6, 1.0287e-6)}  # $/token (prompt, completion), OpenRouter 2026-10-22
+# $/token (prompt, completion, cached prompt), OpenRouter 2026-10-22. deepseek-chat reports cached tokens but
+# is not discounted for them on OpenRouter (verified), so its cache price equals its prompt price.
+DEFAULT_PRICES = {"openrouter/deepseek/deepseek-chat": (0.2574e-6, 1.0287e-6, 0.2574e-6)}
+_MODEL_LIST: list[dict] | None = None
 
 
-def openrouter_prices(llm: str) -> tuple[float, float]:
-    """(prompt, completion) $/token for an ``openrouter/<id>`` model, from the OpenRouter model list."""
+def openrouter_prices(llm: str) -> tuple[float, float, float]:
+    """(prompt, completion, cached-prompt) $/token for an ``openrouter/<id>`` model, from the OpenRouter model list."""
+    global _MODEL_LIST
     try:
-        import urllib.request
+        if _MODEL_LIST is None:
+            import urllib.request
 
-        with urllib.request.urlopen("https://openrouter.ai/api/v1/models", timeout=20) as r:
-            data = json.load(r)["data"]
+            with urllib.request.urlopen("https://openrouter.ai/api/v1/models", timeout=20) as r:
+                _MODEL_LIST = json.load(r)["data"]
         mid = llm.split("openrouter/", 1)[1]
-        for m in data:
+        for m in _MODEL_LIST:
             if m["id"] == mid:
-                return float(m["pricing"]["prompt"]), float(m["pricing"]["completion"])
+                p = m["pricing"]
+                prompt = float(p["prompt"])
+                cached = float(p["input_cache_read"]) if p.get("input_cache_read") else prompt
+                if mid == "deepseek/deepseek-chat":
+                    cached = prompt
+                return prompt, float(p["completion"]), cached
     except Exception as e:  # pragma: no cover - network
         print("price lookup failed:", e)
-    return DEFAULT_PRICES.get(llm, (0.0, 0.0))
+    return DEFAULT_PRICES.get(llm, (0.0, 0.0, 0.0))
 
 
-def register_price(llm: str, prices: tuple[float, float]) -> None:
+def patch_tau2_usage() -> None:
+    """Make τ²-bench keep cached-token counts and the model name in every message's ``usage``."""
+    from tau2.utils import llm_utils  # type: ignore[import-not-found]
+
+    def get_response_usage(response):
+        usage = response.get("usage")
+        if usage is None:
+            return None
+        details = getattr(usage, "prompt_tokens_details", None)
+        return {
+            "completion_tokens": usage.completion_tokens,
+            "prompt_tokens": usage.prompt_tokens,
+            "cached_tokens": int(getattr(details, "cached_tokens", 0) or 0) if details else 0,
+            "model": getattr(response, "model", None),
+        }
+
+    llm_utils.get_response_usage = get_response_usage
+
+
+def usage_cost(usage: dict, prices_by_model: dict[str, tuple[float, float, float]], default: tuple[float, float, float]) -> float:
+    """Cost of one generative call from its token usage, honouring the cache-read price."""
+    pr = default
+    model = (usage.get("model") or "")
+    for k, v in prices_by_model.items():
+        if model and k.split("openrouter/", 1)[-1] in model:
+            pr = v
+    pt, ct, cached = int(usage.get("prompt_tokens") or 0), int(usage.get("completion_tokens") or 0), int(usage.get("cached_tokens") or 0)
+    return (pt - cached) * pr[0] + cached * pr[2] + ct * pr[1]
+
+
+def recost(path: Path, prices_by_model: dict[str, tuple[float, float, float]], default: tuple[float, float, float]) -> None:
+    """Rewrite every assistant message's ``cost`` in a saved τ² results file from usage + OpenRouter prices
+    (cache-aware), plus the recorded decision-model cost."""
+    d = json.loads(path.read_text())
+    for s in d["simulations"]:
+        for m in s["messages"]:
+            if m.get("role") != "assistant":
+                continue
+            g = (m.get("raw_data") or {}).get("gdopt") or {}
+            if m.get("usage") and m["usage"].get("prompt_tokens"):
+                m["cost"] = usage_cost(m["usage"], prices_by_model, default) + float(g.get("decision_cost") or 0.0)
+            elif g:
+                m["cost"] = float(g.get("decision_cost") or 0.0)
+        s["agent_cost"] = sum(float(m.get("cost") or 0.0) for m in s["messages"] if m.get("role") == "assistant")
+    path.write_text(json.dumps(d, indent=2))
+
+
+def register_price(llm: str, prices: tuple[float, ...]) -> None:
     """Teach litellm the price so τ²-bench's per-message ``cost`` is filled in."""
     import litellm  # type: ignore[import-not-found]
 
@@ -69,7 +126,7 @@ def action_of(m) -> str:
     return f"tool:{calls[0].name}" if calls else MESSAGE_ACTION
 
 
-def summarize(results, name: str, prices: tuple[float, float] = (0.0, 0.0)) -> dict:
+def summarize(results, name: str, prices: tuple[float, ...] = (0.0, 0.0, 0.0), prices_by_model: dict | None = None) -> dict:
     sims = results.simulations
     rewards = [float((s.reward_info.reward if s.reward_info else 0.0) or 0.0) for s in sims]
     # τ²'s ``agent_cost`` is None when any message lacks a cost (the fixed greeting), so sum per message.
@@ -77,6 +134,8 @@ def summarize(results, name: str, prices: tuple[float, float] = (0.0, 0.0)) -> d
     tiers: Counter = Counter()
     fallback: Counter = Counter()
     agree: Counter = Counter()  # in-loop shadow: cheap tier proposal vs what the LLM did on fallback steps
+    generators: Counter = Counter()
+    prices_by_model = prices_by_model or {}
     n_steps = n_llm = 0
     llm_cost_usage = decision_cost = 0.0
     prompt_tokens = completion_tokens = 0
@@ -92,9 +151,11 @@ def summarize(results, name: str, prices: tuple[float, float] = (0.0, 0.0)) -> d
             pt, ct = int(usage.get("prompt_tokens") or 0), int(usage.get("completion_tokens") or 0)
             prompt_tokens += pt
             completion_tokens += ct
-            llm_cost_usage += pt * prices[0] + ct * prices[1]
+            llm_cost_usage += usage_cost(usage, prices_by_model, tuple(prices)) if usage else 0.0
             if g:
                 tiers[g["tier"]] += 1
+                if g.get("generator"):
+                    generators[g["generator"]] += 1
                 n_llm += 1 if g["llm_called"] else 0
                 decision_cost += float(g.get("decision_cost") or 0.0)
                 if g.get("fallback_reason"):
@@ -113,7 +174,7 @@ def summarize(results, name: str, prices: tuple[float, float] = (0.0, 0.0)) -> d
         "llm_cost_from_usage": llm_cost_usage, "decision_cost": decision_cost, "total_cost_from_usage": llm_cost_usage + decision_cost,
         "prompt_tokens": prompt_tokens, "completion_tokens": completion_tokens,
         "steps": n_steps, "llm_steps": n_llm, "llm_step_share": n_llm / max(1, n_steps), "tiers": dict(tiers),
-        "fallback_reasons": dict(fallback), "in_loop_agreement": dict(agree),
+        "fallback_reasons": dict(fallback), "in_loop_agreement": dict(agree), "generators": dict(generators),
         "rewards": rewards,
     }
 
@@ -125,6 +186,12 @@ def main() -> None:
     ap.add_argument("--shadow", required=True)
     ap.add_argument("--llm", default="openrouter/deepseek/deepseek-chat")
     ap.add_argument("--llm-user", default=None, help="user simulator LLM (default: same as --llm)")
+    ap.add_argument("--llm-args-agent", default='{"temperature": 0.0}', help="JSON kwargs for the agent LLM (litellm)")
+    ap.add_argument("--message-llm", default=None,
+                    help="cascade: cheaper generative model that writes the text when a cheap tier is confident the next "
+                         "step is a message (tiered agent only)")
+    ap.add_argument("--message-llm-args", default='{"temperature": 0.0}', help="JSON kwargs for --message-llm")
+    ap.add_argument("--agent-name", default="gdopt_tiered", help="name used in summary.json for the tiered agent")
     ap.add_argument("--num-tasks", type=int, default=50)
     ap.add_argument("--task-offset", type=int, default=0)
     ap.add_argument("--num-trials", type=int, default=1)
@@ -152,10 +219,15 @@ def main() -> None:
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     prices = openrouter_prices(args.llm)
-    print("prices $/token (prompt, completion):", prices)
+    print("prices $/token (prompt, completion, cached):", prices)
     register_price(args.llm, prices)
-    if args.llm_user and args.llm_user != args.llm:
-        register_price(args.llm_user, openrouter_prices(args.llm_user))
+    prices_by_model = {args.llm: prices}
+    for extra in (args.llm_user, args.message_llm):
+        if extra and extra not in prices_by_model:
+            prices_by_model[extra] = openrouter_prices(extra)
+            register_price(extra, prices_by_model[extra])
+    patch_tau2_usage()
+    llm_args_agent = json.loads(args.llm_args_agent)
     model, rep, table = build_tier_table(args.fit_results, args.shadow, args.min_agreement, args.max_depth, args.min_leaf, args.min_tool_coverage)
     rules = {s.leaf_id: s.rule for s in rep.situations}
     (out / "tier_table.json").write_text(json.dumps(
@@ -163,11 +235,12 @@ def main() -> None:
     print("tier table:", table.counts())
 
     jev = CachedDecisionModel(OpenRouterJev())
-    agents = register_tiered_agent(model, table, jev, name="gdopt_tiered", lam=args.lam)
+    agents = register_tiered_agent(model, table, jev, name="gdopt_tiered", lam=args.lam,
+                                   message_llm=args.message_llm, message_llm_args=json.loads(args.message_llm_args))
 
     tasks = registry.get_tasks_loader(args.domain)()[args.task_offset: args.task_offset + args.num_tasks]
     llm_user = args.llm_user or args.llm
-    common = dict(domain=args.domain, user="user_simulator", llm_agent=args.llm, llm_args_agent={"temperature": 0.0},
+    common = dict(domain=args.domain, user="user_simulator", llm_agent=args.llm, llm_args_agent=llm_args_agent,
                   llm_user=llm_user, llm_args_user={"temperature": 0.0}, num_trials=args.num_trials,
                   max_concurrency=args.max_concurrency, seed=args.seed, log_level="ERROR",
                   # τ²-bench's current default scores communicate_info with an OpenAI judge; use the original
@@ -176,11 +249,13 @@ def main() -> None:
     summaries = []
     if not args.skip_baseline:
         res = run_tasks(TextRunConfig(agent="llm_agent", **common), tasks, save_path=out / "baseline.json", console_display=False)
-        summaries.append(summarize(res, "llm_agent", prices))
+        recost(out / "baseline.json", prices_by_model, prices)
+        summaries.append(summarize(res, "llm_agent", prices, prices_by_model))
         print(json.dumps(summaries[-1], indent=1))
     if not args.skip_tiered:
         res = run_tasks(TextRunConfig(agent="gdopt_tiered", **common), tasks, save_path=out / "tiered.json", console_display=False)
-        s = summarize(res, "gdopt_tiered", prices)
+        recost(out / "tiered.json", prices_by_model, prices)
+        s = summarize(res, args.agent_name, prices, prices_by_model)
         s["jev_cost_total"] = jev.inner.total_cost
         s["jev_calls"] = jev.inner.n_calls
         summaries.append(s)
