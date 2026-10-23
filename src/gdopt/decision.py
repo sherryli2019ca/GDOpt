@@ -128,6 +128,22 @@ class OpenRouterJev:
         probs = {k: float(probs.get(k, 0.0)) for k in options}
         return ChoiceResult(probs, cost=float((data.get("usage") or {}).get("cost") or 0.0), latency_s=data["_latency_s"], raw=data)
 
+    def nouls(self, questions: dict[str, tuple[str, dict[str, str]]], state: Any) -> dict[str, ChoiceResult]:
+        """Several yes/no questions about the same state in ONE request (the state is read once, so it costs
+        about the same as a single ``noul``).  ``questions`` maps a name to ``(instructions, criteria)``."""
+        body = {name: {"type": "noul", "instructions": ins, "criteria": crit} for name, (ins, crit) in questions.items()}
+        data = self._post(body, state)
+        cost = float((data.get("usage") or {}).get("cost") or 0.0)
+        out: dict[str, ChoiceResult] = {}
+        for i, name in enumerate(questions):
+            ans = self._answer(data, name)
+            if "noul" not in ans and "probability" not in ans:
+                raise RuntimeError(f"unexpected noul answer: {json.dumps(ans)[:300]}")
+            p = float(ans.get("noul", ans.get("probability")))
+            # Charge the request's cost to the first answer only, so sums over answers stay correct.
+            out[name] = ChoiceResult({"true": p, "false": 1 - p}, cost=cost if i == 0 else 0.0, latency_s=data["_latency_s"], raw=data if i == 0 else None)
+        return out
+
     def noul(self, instructions: str, criteria: dict[str, str], state: Any) -> ChoiceResult:
         data = self._post({"q": {"type": "noul", "instructions": instructions, "criteria": criteria}}, state)
         ans = self._answer(data, "q")
@@ -237,3 +253,14 @@ class CachedDecisionModel:
         if k not in self.cache:
             self.cache[k] = self.inner.noul(instructions, criteria, state)
         return self.cache[k]
+
+    def nouls(self, questions: dict[str, tuple[str, dict[str, str]]], state: Any) -> dict[str, ChoiceResult]:
+        k = self._key("nouls", json.dumps(sorted(questions.items()), default=str), {}, state)
+        if k not in self.cache:
+            inner_nouls = getattr(self.inner, "nouls", None)
+            if inner_nouls is not None:
+                res = inner_nouls(questions, state)
+            else:  # any DecisionModel: fall back to one call per question
+                res = {name: self.inner.noul(ins, crit, state) for name, (ins, crit) in questions.items()}
+            self.cache[k] = ChoiceResult({}, raw=res)  # type: ignore[arg-type]
+        return self.cache[k].raw
