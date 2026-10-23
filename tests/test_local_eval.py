@@ -32,3 +32,14 @@ def test_local_evaluate_on_toy():
     assert set(rep.verdicts) <= {"agree", "jev_right", "llm_right", "neither", "undecidable"}
     md = local_eval_markdown(rep, {s.leaf_id: "r" for s in rep.situations})
     assert "Coverage curve" in md and "Per situation" in md
+
+
+def test_tool_coverage_and_cost_aware_tier_table():
+    from gdopt.shadow import ShadowRecord, ShadowResult
+
+    recs = [ShadowRecord("t", i, 1, "message", {"message": 0.95, "tool:a": 0.05}, 0.0) for i in range(8)]
+    recs += [ShadowRecord("t", 10 + i, 1, "tool:a", {"message": 0.05, "tool:a": 0.95}, 0.0) for i in range(2)]
+    sh = ShadowResult(recs, 0.0).by_situation()[1]
+    assert sh.agreement == 1.0
+    assert abs(sh.tool_coverage[0.9] - 0.2) < 1e-9  # only the 2 confident tool decisions skip the LLM
+    assert abs(sh.coverage_curve[0.9][1] - 1.0) < 1e-9

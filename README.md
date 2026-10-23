@@ -40,10 +40,21 @@ python examples/toy_pipeline.py
 export OPENROUTER_API_KEY=...
 gdopt shadow path/to/tau2-bench/data/tau2/results/final/gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.json \
   --policy path/to/tau2-bench/data/tau2/domains/airline/policy.md --max-steps 400 --out-dir reports/shadow
+
+# stage 3b/4 replay on τ²-bench itself: original agent vs tiered agent on the same tasks
+# (τ²-bench importable via PYTHONPATH; agent + user simulator through OpenRouter)
+PYTHONPATH=path/to/tau2-bench/src:src python examples/tau2_replay.py --domain airline \
+  --fit-results path/to/tau2-bench/data/tau2/results/final/gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.json \
+  --shadow reports/shadow-desc/gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.shadow.json \
+  --llm openrouter/deepseek/deepseek-chat --num-tasks 50 --min-tool-coverage 0.16 --out reports/replay/airline
+python examples/tau2_replay_report.py reports/replay/airline
 ```
 
-`gdopt shadow` caches every Jev answer in `<out-dir>/<stem>.shadow-cache.json`, so re-running (for example
-with more steps) only pays for new calls.
+`gdopt.adapters.tau2_agent.TieredLLMAgent` is a τ²-bench agent that runs `TieredPolicy` in front of the LLM:
+cheap-tier tool calls are executed without an LLM call, every assistant message records the tier, the
+confidence, the proposed action and the decision cost in `raw_data["gdopt"]`. `reports/replay/` holds the
+airline runs and `reports/replay/SUMMARY.md` the findings. `gdopt shadow` caches every Jev answer in
+`<out-dir>/<stem>.shadow-cache.json`, so re-running (for example with more steps) only pays for new calls.
 
 `reports/tau2/` holds the stage-2 profiles for the nine τ²-bench runs (GPT-4.1, Claude 3.7 Sonnet, o4-mini ×
 airline, retail, telecom); `reports/tau2/SUMMARY.md` summarizes them.
@@ -60,8 +71,10 @@ airline, retail, telecom); `reports/tau2/SUMMARY.md` summarizes them.
 
 ## Status
 
-First version. What is real: the offline stages on τ²-bench's own traces, the Jev client, the tiered policy, and
-the calibration, all exercised end to end on the toy environment; `gdopt shadow` (local verification against
-logged actions and τ²-bench reference actions) is implemented but has not been run against the live Jev API
-yet. What is not done yet: plugging the tiered policy into τ²-bench's orchestrator for counterfactual replay,
-and the Noul sub-decision extraction for policy checks.
+What is real: the offline stages on τ²-bench's own traces, the Jev client, the tiered policy and the
+calibration (end to end on the toy environment); `gdopt shadow` run against the live Jev API on the three
+τ²-bench domains (`reports/shadow/SUMMARY.md`); and the tiered agent replayed inside τ²-bench on airline
+against the original agent (`reports/replay/SUMMARY.md`). The replay caught two defects the offline stages
+could not (an unlearned id shape and cheap-tier loops), both fixed with tests. Not done yet: calibration of λ
+on τ²-bench (needs more tasks than one domain has), retail/telecom replays, and the Noul sub-decision
+extraction for policy checks.

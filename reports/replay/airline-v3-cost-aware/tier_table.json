@@ -1,0 +1,162 @@
+[
+ {
+  "leaf_id": 31,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=0 & called:cancel_reservation=0",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.09 at tau 0.8 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 21,
+  "rule": "n_tool_calls=2 & user_confirms=1",
+  "tier": "jev",
+  "tau": 0.8,
+  "action": null,
+  "rationale": "entropy 0.67, shadow agreement 0.64, tau 0.8, tool coverage 0.43"
+ },
+ {
+  "leaf_id": 6,
+  "rule": "n_tool_calls=0 & have:user_id=1 & have:reservation_id=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "shadow agreement 0.57 too low"
+ },
+ {
+  "leaf_id": 20,
+  "rule": "n_tool_calls=2 & user_confirms=0 & prev_role=user",
+  "tier": "jev",
+  "tau": 0.7,
+  "action": null,
+  "rationale": "entropy 0.59, shadow agreement 0.67, tau 0.7, tool coverage 0.22"
+ },
+ {
+  "leaf_id": 26,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=0 & called:get_flight_status=0",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.13 at tau 0.95 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 9,
+  "rule": "n_tool_calls=0 & have:user_id=1 & have:reservation_id=0 & user_short=0",
+  "tier": "jev",
+  "tau": 0.95,
+  "action": null,
+  "rationale": "entropy 0.11, shadow agreement 0.62, tau 0.95, tool coverage 0.38"
+ },
+ {
+  "leaf_id": 35,
+  "rule": "n_tool_calls=3+ & user_confirms=1 & called:calculate=0",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "entropy 0.77"
+ },
+ {
+  "leaf_id": 19,
+  "rule": "n_tool_calls=2 & user_confirms=0 & prev_role=tool",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.11 at tau 0.7 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 8,
+  "rule": "n_tool_calls=0 & have:user_id=1 & have:reservation_id=0 & user_short=1",
+  "tier": "jev",
+  "tau": 0.5,
+  "action": null,
+  "rationale": "entropy 0.17, shadow agreement 1.00, tau 0.5, tool coverage 0.91"
+ },
+ {
+  "leaf_id": 27,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=0 & called:get_flight_status=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "shadow agreement 0.70 too low"
+ },
+ {
+  "leaf_id": 33,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.11 at tau 0.9 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 36,
+  "rule": "n_tool_calls=3+ & user_confirms=1 & called:calculate=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.11 at tau 0.9 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 13,
+  "rule": "n_tool_calls=1 & called:get_user_details=0 & prev_role=user",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.12 at tau 0.7 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 28,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=0 & called:update_reservation_flights=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.00 at tau 0.9 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 16,
+  "rule": "n_tool_calls=1 & called:get_user_details=1 & prev_role=user",
+  "tier": "jev",
+  "tau": 0.5,
+  "action": null,
+  "rationale": "entropy 0.12, shadow agreement 0.85, tau 0.5, tool coverage 0.85"
+ },
+ {
+  "leaf_id": 12,
+  "rule": "n_tool_calls=1 & called:get_user_details=0 & prev_role=tool",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.00 at tau 0.9 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 32,
+  "rule": "n_tool_calls=3+ & user_confirms=0 & called:search_direct_flight=1 & called:calculate=0 & called:cancel_reservation=1",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.00 at tau 0.6 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 15,
+  "rule": "n_tool_calls=1 & called:get_user_details=1 & prev_role=tool",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "shadow agreement 0.71 too low"
+ },
+ {
+  "leaf_id": 3,
+  "rule": "n_tool_calls=0 & have:user_id=0 & prev_role=start",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.00 at tau 0.5 below 0.16: no expected saving"
+ },
+ {
+  "leaf_id": 4,
+  "rule": "n_tool_calls=0 & have:user_id=0 & prev_role=user",
+  "tier": "llm",
+  "tau": 1.0,
+  "action": null,
+  "rationale": "tool coverage 0.02 at tau 0.5 below 0.16: no expected saving"
+ }
+]

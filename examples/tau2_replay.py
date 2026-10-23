@@ -26,14 +26,14 @@ from gdopt.shadow import ShadowRecord, ShadowResult
 from gdopt.tiers import TierTable
 
 
-def build_tier_table(fit_results: str, shadow_json: str, min_agreement: float, max_depth: int, min_leaf: int):
+def build_tier_table(fit_results: str, shadow_json: str, min_agreement: float, max_depth: int, min_leaf: int, min_tool_coverage: float = 0.0):
     trajs = load_results(fit_results)
     train, test = split_by_trial(trajs, [0, 1])
     model = fit_situations(train, max_depth=max_depth, min_leaf=min_leaf)
     rep = profile(model, train, test)
     recs = [ShadowRecord(r["trajectory_id"], r["step_index"], r["leaf_id"], r["llm_action"], r["probabilities"], 0.0) for r in json.loads(Path(shadow_json).read_text())]
     shadow = ShadowResult(recs, 0.0).by_situation()
-    table = TierTable.from_profile(rep, shadow, min_agreement=min_agreement)
+    table = TierTable.from_profile(rep, shadow, min_agreement=min_agreement, min_tool_coverage=min_tool_coverage)
     return model, rep, table
 
 
@@ -132,6 +132,9 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=300)
     ap.add_argument("--lam", type=float, default=0.0)
     ap.add_argument("--min-agreement", type=float, default=0.9)
+    ap.add_argument("--min-tool-coverage", type=float, default=0.0,
+                    help="cost-aware tier table: drop Jev situations whose confident-tool coverage at tau is below this "
+                         "(Jev/LLM cost ratio is ~0.08 for DeepSeek; 0.16 = require 2x break-even)")
     ap.add_argument("--max-depth", type=int, default=6)
     ap.add_argument("--min-leaf", type=int, default=25)
     ap.add_argument("--skip-baseline", action="store_true")
@@ -153,7 +156,7 @@ def main() -> None:
     register_price(args.llm, prices)
     if args.llm_user and args.llm_user != args.llm:
         register_price(args.llm_user, openrouter_prices(args.llm_user))
-    model, rep, table = build_tier_table(args.fit_results, args.shadow, args.min_agreement, args.max_depth, args.min_leaf)
+    model, rep, table = build_tier_table(args.fit_results, args.shadow, args.min_agreement, args.max_depth, args.min_leaf, args.min_tool_coverage)
     rules = {s.leaf_id: s.rule for s in rep.situations}
     (out / "tier_table.json").write_text(json.dumps(
         [{"leaf_id": r.leaf_id, "rule": rules.get(r.leaf_id, ""), "tier": r.tier.value, "tau": r.tau, "action": r.action, "rationale": r.rationale} for r in table.rules.values()], indent=1))

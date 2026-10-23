@@ -67,6 +67,7 @@ class TierTable:
         shadow: dict[int, SituationShadow] | None = None,
         min_agreement: float = 0.9,
         default_tau: float = 0.8,
+        min_tool_coverage: float = 0.0,
         **candidate_kw: Any,
     ) -> "TierTable":
         """Build the table from stage-2 candidates and (optionally) stage-3 shadow stats.
@@ -75,7 +76,12 @@ class TierTable:
         ``default_tau``; with them, a candidate is kept only when the decision
         model agrees with the LLM often enough, and ``tau`` is the smallest
         threshold on its coverage curve whose agreement reaches
-        ``min_agreement``.
+        ``min_agreement``.  ``min_tool_coverage`` makes the table cost-aware: a
+        ``jev`` situation is kept only when, at its ``tau``, the decision model
+        would act without the LLM (confident *tool* decision) on at least that
+        fraction of steps.  Consulting the model costs ``c_jev`` on every step
+        and saves ``c_llm`` only on those, so the saving is positive iff
+        tool coverage > ``c_jev / c_llm``; pass a multiple of that ratio.
         """
         cands = candidate_tiers(report, **candidate_kw)
         table = cls()
@@ -99,7 +105,14 @@ class TierTable:
                         table.rules[s.leaf_id] = TierRule(s.leaf_id, Tier.LLM, rationale=f"shadow agreement {sh.agreement:.2f} too low")
                         continue
                     tau = ok[0]
-                    rationale += f", shadow agreement {sh.agreement:.2f}, tau {tau}"
+                    tool_cov = sh.tool_coverage.get(tau, 1.0)
+                    if tool_cov < min_tool_coverage:
+                        table.rules[s.leaf_id] = TierRule(
+                            s.leaf_id, Tier.LLM,
+                            rationale=f"tool coverage {tool_cov:.2f} at tau {tau} below {min_tool_coverage:.2f}: no expected saving",
+                        )
+                        continue
+                    rationale += f", shadow agreement {sh.agreement:.2f}, tau {tau}, tool coverage {tool_cov:.2f}"
                 table.rules[s.leaf_id] = TierRule(s.leaf_id, Tier.JEV, tau=tau, rationale=rationale)
             else:
                 table.rules[s.leaf_id] = TierRule(s.leaf_id, Tier.LLM, rationale=f"entropy {s.norm_entropy_test:.2f}")

@@ -14,7 +14,7 @@ from typing import Any, Callable, Iterable
 
 from .decision import NEXT_ACTION_INSTRUCTIONS, ChoiceResult, DecisionModel, conversation_state
 from .situation import SituationModel
-from .trace import Step
+from .trace import is_tool_action, Step
 
 
 @dataclass
@@ -68,6 +68,9 @@ class SituationShadow:
     mean_p_max: float
     # Agreement among steps whose p_max >= tau, and the fraction of steps kept, per tau.
     coverage_curve: dict[float, tuple[float, float]] = field(default_factory=dict)
+    # Fraction of steps where the model would *act without the LLM* at tau: p_max >= tau and the top
+    # action is a tool call (a "message" decision still needs the LLM for the text).
+    tool_coverage: dict[float, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -82,12 +85,14 @@ class ShadowResult:
         out: dict[int, SituationShadow] = {}
         for leaf_id, recs in groups.items():
             curve = {}
+            tool_cov = {}
             for tau in taus:
                 kept = [r for r in recs if r.p_max >= tau]
                 curve[tau] = (
                     sum(r.agree for r in kept) / len(kept) if kept else 0.0,
                     len(kept) / len(recs),
                 )
+                tool_cov[tau] = sum(1 for r in kept if is_tool_action(r.top)) / len(recs)
             out[leaf_id] = SituationShadow(
                 leaf_id=leaf_id,
                 n=len(recs),
@@ -95,6 +100,7 @@ class ShadowResult:
                 ece=expected_calibration_error((r.p_max for r in recs), (r.agree for r in recs)),
                 mean_p_max=sum(r.p_max for r in recs) / len(recs),
                 coverage_curve=curve,
+                tool_coverage=tool_cov,
             )
         return out
 
