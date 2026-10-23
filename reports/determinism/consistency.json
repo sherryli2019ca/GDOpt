@@ -1,0 +1,300 @@
+{
+ "our_two_runs_airline_deepseek": {
+  "n": 50,
+  "both": 16,
+  "only_run1": 5,
+  "only_run2": 0,
+  "neither": 29,
+  "pass1_run1": 0.42,
+  "pass1_run2": 0.32,
+  "pass_hat2_est": 0.32,
+  "pass_at2_est": 0.42,
+  "first_action_same": 1.0,
+  "tool_sequence_same": 0.32,
+  "tool_set_jaccard_mean": 0.739,
+  "same_seed": [
+   true
+  ]
+ },
+ "shipped": [
+  {
+   "file": "claude-3-7-sonnet-20250219_airline_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "claude-3-7-sonnet-20250219",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 50,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.5,
+    "2": 0.41,
+    "3": 0.375,
+    "4": 0.36
+   },
+   "success_hist": {
+    "0": 16,
+    "1": 7,
+    "2": 6,
+    "3": 3,
+    "4": 18
+   },
+   "flaky_tasks": 16,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.12,
+   "tool_set_jaccard_mean": 0.808,
+   "H_action_given_situation_bits": 1.653,
+   "H_action_given_situation_and_task_bits": 0.791,
+   "flakiness_share_of_entropy": 0.479,
+   "cells_unanimous": 0.536,
+   "n_cells": 500,
+   "n_situations": 22,
+   "n_steps": 2900
+  },
+  {
+   "file": "claude-3-7-sonnet-20250219_retail_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "claude-3-7-sonnet-20250219",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.787,
+    "2": 0.693,
+    "3": 0.634,
+    "4": 0.596
+   },
+   "success_hist": {
+    "0": 8,
+    "1": 6,
+    "2": 15,
+    "3": 17,
+    "4": 68
+   },
+   "flaky_tasks": 38,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.237,
+   "tool_set_jaccard_mean": 0.947,
+   "H_action_given_situation_bits": 1.262,
+   "H_action_given_situation_and_task_bits": 0.627,
+   "flakiness_share_of_entropy": 0.497,
+   "cells_unanimous": 0.594,
+   "n_cells": 1000,
+   "n_situations": 30,
+   "n_steps": 6743
+  },
+  {
+   "file": "claude-3-7-sonnet-20250219_telecom_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "claude-3-7-sonnet-20250219",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.493,
+    "2": 0.374,
+    "3": 0.307,
+    "4": 0.254
+   },
+   "success_hist": {
+    "0": 34,
+    "1": 17,
+    "2": 10,
+    "3": 24,
+    "4": 29
+   },
+   "flaky_tasks": 51,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.009,
+   "tool_set_jaccard_mean": 0.738,
+   "H_action_given_situation_bits": 0.974,
+   "H_action_given_situation_and_task_bits": 0.545,
+   "flakiness_share_of_entropy": 0.559,
+   "cells_unanimous": 0.58,
+   "n_cells": 1428,
+   "n_situations": 33,
+   "n_steps": 8498
+  },
+  {
+   "file": "gpt-4.1-2025-04-14_airline_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "gpt-4.1-2025-04-14",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 50,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.56,
+    "2": 0.457,
+    "3": 0.42,
+    "4": 0.4
+   },
+   "success_hist": {
+    "0": 11,
+    "1": 10,
+    "2": 5,
+    "3": 4,
+    "4": 20
+   },
+   "flaky_tasks": 19,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.06,
+   "tool_set_jaccard_mean": 0.787,
+   "H_action_given_situation_bits": 1.418,
+   "H_action_given_situation_and_task_bits": 0.607,
+   "flakiness_share_of_entropy": 0.428,
+   "cells_unanimous": 0.604,
+   "n_cells": 439,
+   "n_situations": 20,
+   "n_steps": 2183
+  },
+  {
+   "file": "gpt-4.1-2025-04-14_retail_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "gpt-4.1-2025-04-14",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.741,
+    "2": 0.642,
+    "3": 0.579,
+    "4": 0.526
+   },
+   "success_hist": {
+    "0": 11,
+    "1": 12,
+    "2": 7,
+    "3": 24,
+    "4": 60
+   },
+   "flaky_tasks": 43,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.211,
+   "tool_set_jaccard_mean": 0.922,
+   "H_action_given_situation_bits": 1.031,
+   "H_action_given_situation_and_task_bits": 0.388,
+   "flakiness_share_of_entropy": 0.376,
+   "cells_unanimous": 0.666,
+   "n_cells": 1055,
+   "n_situations": 26,
+   "n_steps": 5560
+  },
+  {
+   "file": "gpt-4.1-2025-04-14_telecom_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "gpt-4.1-2025-04-14",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.342,
+    "2": 0.259,
+    "3": 0.219,
+    "4": 0.193
+   },
+   "success_hist": {
+    "0": 57,
+    "1": 14,
+    "2": 9,
+    "3": 12,
+    "4": 22
+   },
+   "flaky_tasks": 35,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.07,
+   "tool_set_jaccard_mean": 0.757,
+   "H_action_given_situation_bits": 0.899,
+   "H_action_given_situation_and_task_bits": 0.534,
+   "flakiness_share_of_entropy": 0.594,
+   "cells_unanimous": 0.518,
+   "n_cells": 1146,
+   "n_situations": 21,
+   "n_steps": 8241
+  },
+  {
+   "file": "o4-mini-2025-04-16_airline_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "o4-mini-2025-04-16",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 50,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.59,
+    "2": 0.483,
+    "3": 0.42,
+    "4": 0.38
+   },
+   "success_hist": {
+    "0": 12,
+    "1": 4,
+    "2": 7,
+    "3": 8,
+    "4": 19
+   },
+   "flaky_tasks": 19,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.14,
+   "tool_set_jaccard_mean": 0.758,
+   "H_action_given_situation_bits": 1.483,
+   "H_action_given_situation_and_task_bits": 0.677,
+   "flakiness_share_of_entropy": 0.456,
+   "cells_unanimous": 0.445,
+   "n_cells": 371,
+   "n_situations": 17,
+   "n_steps": 2187
+  },
+  {
+   "file": "o4-mini-2025-04-16_retail_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "o4-mini-2025-04-16",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.715,
+    "2": 0.594,
+    "3": 0.518,
+    "4": 0.456
+   },
+   "success_hist": {
+    "0": 10,
+    "1": 14,
+    "2": 10,
+    "3": 28,
+    "4": 52
+   },
+   "flaky_tasks": 52,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.158,
+   "tool_set_jaccard_mean": 0.899,
+   "H_action_given_situation_bits": 1.293,
+   "H_action_given_situation_and_task_bits": 0.657,
+   "flakiness_share_of_entropy": 0.508,
+   "cells_unanimous": 0.517,
+   "n_cells": 1033,
+   "n_situations": 31,
+   "n_steps": 6409
+  },
+  {
+   "file": "o4-mini-2025-04-16_telecom_default_gpt-4.1-2025-04-14_4trials.json",
+   "agent": "o4-mini-2025-04-16",
+   "user": "gpt-4.1-2025-04-14",
+   "n_tasks": 114,
+   "n_trials": 4,
+   "pass_hat": {
+    "1": 0.421,
+    "2": 0.329,
+    "3": 0.287,
+    "4": 0.263
+   },
+   "success_hist": {
+    "0": 46,
+    "1": 15,
+    "2": 12,
+    "3": 11,
+    "4": 30
+   },
+   "flaky_tasks": 38,
+   "first_action_unanimous": 1.0,
+   "tool_sequence_unanimous": 0.026,
+   "tool_set_jaccard_mean": 0.648,
+   "H_action_given_situation_bits": 1.63,
+   "H_action_given_situation_and_task_bits": 1.117,
+   "flakiness_share_of_entropy": 0.686,
+   "cells_unanimous": 0.448,
+   "n_cells": 1126,
+   "n_situations": 23,
+   "n_steps": 8526
+  }
+ ]
+}

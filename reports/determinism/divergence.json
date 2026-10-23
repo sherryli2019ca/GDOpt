@@ -1,0 +1,162 @@
+[
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "airline",
+  "pairs": 54,
+  "no_divergence_in_actions": 1,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.509,
+   "different-tool": 0.491
+  },
+  "median_relative_position": 0.33,
+  "tier_counts_over_situations": {
+   "jev": 22
+  }
+ },
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "retail",
+  "pairs": 129,
+  "no_divergence_in_actions": 9,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "different-tool": 0.142,
+   "tool-vs-message": 0.858
+  },
+  "median_relative_position": 0.46,
+  "tier_counts_over_situations": {
+   "jev": 30
+  }
+ },
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "telecom",
+  "pairs": 163,
+  "no_divergence_in_actions": 10,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.882,
+   "different-tool": 0.118
+  },
+  "median_relative_position": 0.25,
+  "tier_counts_over_situations": {
+   "jev": 31,
+   "code": 2
+  }
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "airline",
+  "pairs": 62,
+  "no_divergence_in_actions": 4,
+  "first_divergence_by_candidate_tier": {
+   "jev": 0.983,
+   "llm": 0.017
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.776,
+   "different-tool": 0.224
+  },
+  "median_relative_position": 0.5,
+  "tier_counts_over_situations": {
+   "jev": 19,
+   "llm": 1
+  }
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "retail",
+  "pairs": 136,
+  "no_divergence_in_actions": 6,
+  "first_divergence_by_candidate_tier": {
+   "jev": 0.9,
+   "llm": 0.1
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.831,
+   "different-tool": 0.169
+  },
+  "median_relative_position": 0.42,
+  "tier_counts_over_situations": {
+   "jev": 25,
+   "llm": 1
+  }
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "telecom",
+  "pairs": 114,
+  "no_divergence_in_actions": 8,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.887,
+   "different-tool": 0.113
+  },
+  "median_relative_position": 0.31,
+  "tier_counts_over_situations": {
+   "jev": 20,
+   "code": 1
+  }
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "airline",
+  "pairs": 64,
+  "no_divergence_in_actions": 0,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.875,
+   "different-tool": 0.125
+  },
+  "median_relative_position": 0.31,
+  "tier_counts_over_situations": {
+   "jev": 17
+  }
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "retail",
+  "pairs": 166,
+  "no_divergence_in_actions": 1,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "tool-vs-message": 0.891,
+   "different-tool": 0.109
+  },
+  "median_relative_position": 0.29,
+  "tier_counts_over_situations": {
+   "jev": 31
+  }
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "telecom",
+  "pairs": 126,
+  "no_divergence_in_actions": 0,
+  "first_divergence_by_candidate_tier": {
+   "jev": 1.0
+  },
+  "first_divergence_kind": {
+   "different-tool": 0.349,
+   "tool-vs-message": 0.651
+  },
+  "median_relative_position": 0.25,
+  "tier_counts_over_situations": {
+   "jev": 22,
+   "code": 1
+  }
+ }
+]

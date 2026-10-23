@@ -1,0 +1,203 @@
+[
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "airline",
+  "n_tasks": 50,
+  "write_tools": [
+   "book_reservation",
+   "cancel_reservation",
+   "send_certificate",
+   "transfer_to_human_agents",
+   "update_reservation_baggages",
+   "update_reservation_flights",
+   "update_reservation_passengers"
+  ],
+  "write_names_unanimous_all": 0.4,
+  "write_full_unanimous_all": 0.26,
+  "tasks_2succ": 27,
+  "write_names_unanimous_succ": 0.704,
+  "write_full_unanimous_succ": 0.481,
+  "tasks_2fail": 29,
+  "write_names_unanimous_fail": 0.483,
+  "succ_write_names_match_gold": 0.65
+ },
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "retail",
+  "n_tasks": 114,
+  "write_tools": [
+   "cancel_pending_order",
+   "exchange_delivered_order_items",
+   "modify_pending_order_address",
+   "modify_pending_order_items",
+   "modify_pending_order_payment",
+   "modify_user_address",
+   "return_delivered_order_items",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.588,
+  "write_full_unanimous_all": 0.465,
+  "tasks_2succ": 100,
+  "write_names_unanimous_succ": 0.8,
+  "write_full_unanimous_succ": 0.71,
+  "tasks_2fail": 29,
+  "write_names_unanimous_fail": 0.414,
+  "succ_write_names_match_gold": 0.891
+ },
+ {
+  "agent": "claude-3-7-sonnet-20250219",
+  "domain": "telecom",
+  "n_tasks": 114,
+  "write_tools": [
+   "disable_roaming",
+   "enable_roaming",
+   "refuel_data",
+   "resume_line",
+   "send_payment_request",
+   "suspend_line",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.404,
+  "write_full_unanimous_all": 0.149,
+  "tasks_2succ": 63,
+  "write_names_unanimous_succ": 0.889,
+  "write_full_unanimous_succ": 0.571,
+  "tasks_2fail": 61,
+  "write_names_unanimous_fail": 0.475,
+  "succ_write_names_match_gold": 0.769
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "airline",
+  "n_tasks": 50,
+  "write_tools": [
+   "book_reservation",
+   "cancel_reservation",
+   "send_certificate",
+   "transfer_to_human_agents",
+   "update_reservation_baggages",
+   "update_reservation_flights",
+   "update_reservation_passengers"
+  ],
+  "write_names_unanimous_all": 0.42,
+  "write_full_unanimous_all": 0.28,
+  "tasks_2succ": 29,
+  "write_names_unanimous_succ": 0.69,
+  "write_full_unanimous_succ": 0.586,
+  "tasks_2fail": 26,
+  "write_names_unanimous_fail": 0.346,
+  "succ_write_names_match_gold": 0.741
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "retail",
+  "n_tasks": 114,
+  "write_tools": [
+   "cancel_pending_order",
+   "exchange_delivered_order_items",
+   "modify_pending_order_address",
+   "modify_pending_order_items",
+   "modify_pending_order_payment",
+   "modify_user_address",
+   "return_delivered_order_items",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.544,
+  "write_full_unanimous_all": 0.447,
+  "tasks_2succ": 91,
+  "write_names_unanimous_succ": 0.802,
+  "write_full_unanimous_succ": 0.758,
+  "tasks_2fail": 30,
+  "write_names_unanimous_fail": 0.3,
+  "succ_write_names_match_gold": 0.879
+ },
+ {
+  "agent": "gpt-4.1-2025-04-14",
+  "domain": "telecom",
+  "n_tasks": 114,
+  "write_tools": [
+   "disable_roaming",
+   "enable_roaming",
+   "refuel_data",
+   "resume_line",
+   "send_payment_request",
+   "suspend_line",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.298,
+  "write_full_unanimous_all": 0.175,
+  "tasks_2succ": 43,
+  "write_names_unanimous_succ": 0.93,
+  "write_full_unanimous_succ": 0.651,
+  "tasks_2fail": 80,
+  "write_names_unanimous_fail": 0.3,
+  "succ_write_names_match_gold": 0.731
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "airline",
+  "n_tasks": 50,
+  "write_tools": [
+   "book_reservation",
+   "cancel_reservation",
+   "send_certificate",
+   "transfer_to_human_agents",
+   "update_reservation_baggages",
+   "update_reservation_flights",
+   "update_reservation_passengers"
+  ],
+  "write_names_unanimous_all": 0.3,
+  "write_full_unanimous_all": 0.1,
+  "tasks_2succ": 34,
+  "write_names_unanimous_succ": 0.588,
+  "write_full_unanimous_succ": 0.294,
+  "tasks_2fail": 23,
+  "write_names_unanimous_fail": 0.217,
+  "succ_write_names_match_gold": 0.483
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "retail",
+  "n_tasks": 114,
+  "write_tools": [
+   "cancel_pending_order",
+   "exchange_delivered_order_items",
+   "modify_pending_order_address",
+   "modify_pending_order_items",
+   "modify_pending_order_payment",
+   "modify_user_address",
+   "return_delivered_order_items",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.5,
+  "write_full_unanimous_all": 0.325,
+  "tasks_2succ": 90,
+  "write_names_unanimous_succ": 0.767,
+  "write_full_unanimous_succ": 0.711,
+  "tasks_2fail": 34,
+  "write_names_unanimous_fail": 0.441,
+  "succ_write_names_match_gold": 0.887
+ },
+ {
+  "agent": "o4-mini-2025-04-16",
+  "domain": "telecom",
+  "n_tasks": 114,
+  "write_tools": [
+   "disable_roaming",
+   "enable_roaming",
+   "refuel_data",
+   "resume_line",
+   "send_payment_request",
+   "suspend_line",
+   "transfer_to_human_agents"
+  ],
+  "write_names_unanimous_all": 0.079,
+  "write_full_unanimous_all": 0.009,
+  "tasks_2succ": 53,
+  "write_names_unanimous_succ": 0.302,
+  "write_full_unanimous_succ": 0.132,
+  "tasks_2fail": 73,
+  "write_names_unanimous_fail": 0.027,
+  "succ_write_names_match_gold": 0.495
+ }
+]
