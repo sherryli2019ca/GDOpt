@@ -39,3 +39,22 @@ Findings:
    agent+user-sim noise; isolating the agent needs resampling at fixed histories).
 4. Aligning a successful and a failed trial of the same task step by step, the first differing action is
    "one called a tool, the other messaged the user" in 51–89% of pairs, in the first half of the dialogue.
+
+## Jev reproducibility (2026-10-23, `examples/determinism/jev_reproducibility.py`, $0.012)
+
+Identical decision calls (same instructions, options, state as in the shadow caches), 8 sequential + 8 concurrent per state.
+
+| state (from shadow-desc cache) | distinct vectors / 16 | max abs diff | p_max range today | p_max yesterday | argmax changed |
+| --- | --- | --- | --- | --- | --- |
+| airline, saturated (p_max = 1.0) | 1 | 0.00 | 1.00 | 1.00 | no |
+| airline, near threshold (p_max ≈ 0.9) | 5 | 0.04 | 0.88–0.92 | 0.89 | no |
+| airline, close top-2 (p_max ≈ 0.5) | 12 | 0.10 | 0.50–0.59 | 0.50 | yes (message vs update_reservation_flights) |
+| telecom, close top-2 yesterday | 14 | 0.12 | 0.59–0.71 | 0.47 | no (today); ~0.2 shift vs yesterday |
+
+Reading: Jev is not byte-reproducible except for saturated decisions. Probabilities jitter by a few hundredths on
+confident states and by up to ~0.1 on uncertain ones; the argmax flips only when the top two are within the jitter.
+Between days one state moved by ~0.2 (one observation, cause unknown: serving or model update). Design consequence:
+the Jev tier is action-deterministic if it acts only when p_max ≥ τ with a margin δ larger than the jitter (τ = 0.9
+already implies a top-2 gap ≥ 0.8), and memoizing (situation, state view) → decision removes the act/defer toggling
+for the 5–10% of steps whose p_max sits within ±0.02 of τ. A fixed probe set re-queried periodically is a cheap drift canary.
+The fifth planned state (telecom, p_max ≈ 0.6) was not run: the budget cap ($0.012) was reached after four.
