@@ -39,13 +39,21 @@ def build_tier_table(fit_results: str, shadow_json: str, min_agreement: float, m
 
 # $/token (prompt, completion, cached prompt), OpenRouter 2026-10-22. deepseek-chat reports cached tokens but
 # is not discounted for them on OpenRouter (verified), so its cache price equals its prompt price.
-DEFAULT_PRICES = {"openrouter/deepseek/deepseek-chat": (0.2574e-6, 1.0287e-6, 0.2574e-6)}
+DEFAULT_PRICES = {
+    "openrouter/deepseek/deepseek-chat": (0.2574e-6, 1.0287e-6, 0.2574e-6),
+    # Direct DeepSeek API (needs DEEPSEEK_API_KEY and api.deepseek.com reachable): cache-miss / output / cache-hit.
+    # List prices as of 2025-09 ($0.27 / $1.10 / $0.07 per M); verify at api-docs.deepseek.com before quoting.
+    "deepseek/deepseek-chat": (0.27e-6, 1.10e-6, 0.07e-6),
+}
 _MODEL_LIST: list[dict] | None = None
 
 
 def openrouter_prices(llm: str) -> tuple[float, float, float]:
-    """(prompt, completion, cached-prompt) $/token for an ``openrouter/<id>`` model, from the OpenRouter model list."""
+    """(prompt, completion, cached-prompt) $/token for an ``openrouter/<id>`` model, from the OpenRouter model list.
+    Non-OpenRouter models fall back to ``DEFAULT_PRICES``."""
     global _MODEL_LIST
+    if not llm.startswith("openrouter/"):
+        return DEFAULT_PRICES.get(llm, (0.0, 0.0, 0.0))
     try:
         if _MODEL_LIST is None:
             import urllib.request
@@ -90,7 +98,7 @@ def usage_cost(usage: dict, prices_by_model: dict[str, tuple[float, float, float
     pr = default
     model = (usage.get("model") or "")
     for k, v in prices_by_model.items():
-        if model and k.split("openrouter/", 1)[-1] in model:
+        if model and (k.split("openrouter/", 1)[-1] in model or k.split("/")[-1] in model):
             pr = v
     pt, ct, cached = int(usage.get("prompt_tokens") or 0), int(usage.get("completion_tokens") or 0), int(usage.get("cached_tokens") or 0)
     return (pt - cached) * pr[0] + cached * pr[2] + ct * pr[1]
@@ -117,8 +125,9 @@ def register_price(llm: str, prices: tuple[float, ...]) -> None:
     """Teach litellm the price so τ²-bench's per-message ``cost`` is filled in."""
     import litellm  # type: ignore[import-not-found]
 
+    provider = llm.split("/", 1)[0] if "/" in llm else "openrouter"
     litellm.register_model({llm: {"input_cost_per_token": prices[0], "output_cost_per_token": prices[1],
-                                  "litellm_provider": "openrouter", "mode": "chat"}})
+                                  "litellm_provider": provider, "mode": "chat"}})
 
 
 def action_of(m) -> str:
