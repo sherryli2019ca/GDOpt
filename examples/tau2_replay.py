@@ -44,6 +44,7 @@ DEFAULT_PRICES = {
     # Direct DeepSeek API (needs DEEPSEEK_API_KEY and api.deepseek.com reachable): cache-miss / output / cache-hit.
     # List prices as of 2025-09 ($0.27 / $1.10 / $0.07 per M); verify at api-docs.deepseek.com before quoting.
     "deepseek/deepseek-chat": (0.27e-6, 1.10e-6, 0.07e-6),
+    "deepseek/deepseek-reasoner": (0.55e-6, 2.19e-6, 0.14e-6),
 }
 _MODEL_LIST: list[dict] | None = None
 

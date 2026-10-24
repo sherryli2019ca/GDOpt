@@ -25,7 +25,7 @@ from tau2_replay import openrouter_prices, patch_tau2_usage, recost, register_pr
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", default="airline")
-    ap.add_argument("--modes", default="none", help="none | comma list of hint,veto,checklist")
+    ap.add_argument("--modes", default="none", help="none | comma list of hint,veto,checklist,deliberate,reasoner,deliberate_all")
     ap.add_argument("--llm", default="deepseek/deepseek-chat")
     ap.add_argument("--llm-user", default=None, help="user simulator LLM (default: same as --llm)")
     ap.add_argument("--llm-args-agent", default='{"temperature": 0.0}')
@@ -37,6 +37,9 @@ def main() -> None:
     ap.add_argument("--tau-hint", type=float, default=0.9)
     ap.add_argument("--tau-veto", type=float, default=0.9)
     ap.add_argument("--max-reconsider", type=int, default=1)
+    ap.add_argument("--tau-uncertain", type=float, default=0.8, help="deliberate/reasoner trigger: Jev p_max below this")
+    ap.add_argument("--reasoner-llm", default=None, help="model for 'reasoner' steps, e.g. deepseek/deepseek-reasoner")
+    ap.add_argument("--reasoner-llm-args", default='{}')
     ap.add_argument("--checklist", default=None, help="JSON file with a list of {name,label,instructions,true,false}")
     ap.add_argument("--budget-usd", type=float, default=None, help="abort when the Jev spend passes this (LLM spend is not metered live)")
     ap.add_argument("--out", required=True)
@@ -55,9 +58,10 @@ def main() -> None:
     register_price(args.llm, prices)
     prices_by_model = {args.llm: prices}
     llm_user = args.llm_user or args.llm
-    if llm_user not in prices_by_model:
-        prices_by_model[llm_user] = openrouter_prices(llm_user)
-        register_price(llm_user, prices_by_model[llm_user])
+    for extra in (llm_user, args.reasoner_llm):
+        if extra and extra not in prices_by_model:
+            prices_by_model[extra] = openrouter_prices(extra)
+            register_price(extra, prices_by_model[extra])
     print("prices $/token (prompt, completion, cached):", prices_by_model)
     patch_tau2_usage()
 
@@ -72,7 +76,8 @@ def main() -> None:
             checklist = [ChecklistQuestion(**q) for q in json.loads(Path(args.checklist).read_text())]
         jev = CachedDecisionModel(OpenRouterJev())
         agents = register_anchored_agent(jev, modes, name="gdopt_anchored", tau_hint=args.tau_hint, tau_veto=args.tau_veto,
-                                         checklist=checklist, max_reconsider=args.max_reconsider)
+                                         checklist=checklist, max_reconsider=args.max_reconsider, tau_uncertain=args.tau_uncertain,
+                                         reasoner_llm=args.reasoner_llm, reasoner_llm_args=json.loads(args.reasoner_llm_args))
         agent_name = "gdopt_anchored"
     else:
         agent_name = "llm_agent"
@@ -94,7 +99,8 @@ def main() -> None:
                 agg[k] = agg.get(k, 0) + v
         s["anchor_stats"] = agg
     s["config"] = {"modes": sorted(modes), "llm": args.llm, "llm_user": llm_user, "num_tasks": args.num_tasks,
-                   "num_trials": args.num_trials, "seed": args.seed, "tau_hint": args.tau_hint, "tau_veto": args.tau_veto}
+                   "num_trials": args.num_trials, "seed": args.seed, "tau_hint": args.tau_hint, "tau_veto": args.tau_veto,
+                   "tau_uncertain": args.tau_uncertain, "reasoner_llm": args.reasoner_llm}
     (out / "summary.json").write_text(json.dumps(s, indent=1))
     print(json.dumps(s, indent=1))
 

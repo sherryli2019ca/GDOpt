@@ -81,3 +81,37 @@ def test_checklist_lines_are_added(monkeypatch):
     note = [m for m in calls[0] if isinstance(m, SystemMessage) and "State tracker" in (m.content or "")]
     assert note and "identity_verified" in out.raw_data["gdopt"]["anchor"]["checklist"]
     assert note[0].content.count("yes (p=0.90)") == 3
+
+
+def test_deliberate_fires_only_when_unsure(monkeypatch):
+    agent, state, calls = make_agent(monkeypatch, {"deliberate"}, lambda o, s: {"message": 0.55, "tool:cancel_reservation": 0.45}, [text_msg()])
+    out = agent._generate_next_message(UserMessage(role="user", content="cancel"), state)
+    note = [m for m in calls[0] if isinstance(m, SystemMessage) and "ambiguous" in (m.content or "")]
+    assert note and "cancel_reservation" in note[0].content
+    assert out.raw_data["gdopt"]["anchor"]["deliberate"]["a"] == "message"
+
+    agent, state, calls = make_agent(monkeypatch, {"deliberate"}, lambda o, s: {"message": 0.95}, [text_msg()])
+    agent._generate_next_message(UserMessage(role="user", content="hi"), state)
+    assert not any("ambiguous" in (m.content or "") for m in calls[0] if isinstance(m, SystemMessage))
+
+
+def test_reasoner_switches_model_only_when_unsure(monkeypatch):
+    seen = []
+
+    def fake_generate(model, tools, messages, call_name, **kw):
+        seen.append(model)
+        out = text_msg(); out.usage = {"prompt_tokens": 1, "completion_tokens": 1}; out.cost = 0.0
+        return out
+
+    monkeypatch.setattr(tau2_anchor, "generate", fake_generate)
+    tools = [FakeTool("get_user_details", "Look up a user.")]
+    dm = FunctionDecisionModel(lambda o, s: {"message": 0.6, "tool:get_user_details": 0.4})
+    agent = tau2_anchor.AnchoredLLMAgent(tools, "policy", "fast", {}, dm, {"reasoner"}, reasoner_llm="slow", reasoner_llm_args={"x": 1})
+    state = LLMAgentState(system_messages=[SystemMessage(role="system", content="sys")], messages=[])
+    out = agent._generate_next_message(UserMessage(role="user", content="hi"), state)
+    assert seen == ["slow"] and out.raw_data["gdopt"]["generator"] == "reasoner"
+    dm.fn = lambda o, s: {"message": 0.95}
+    agent._generate_next_message(UserMessage(role="user", content="more"), state)
+    assert seen == ["slow", "fast"]
+    with pytest.raises(ValueError):
+        tau2_anchor.AnchoredLLMAgent(tools, "policy", "fast", {}, dm, {"reasoner"})
