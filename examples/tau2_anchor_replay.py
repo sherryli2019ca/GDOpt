@@ -85,7 +85,7 @@ def main() -> None:
     tasks = registry.get_tasks_loader(args.domain)()[args.task_offset: args.task_offset + args.num_tasks]
     cfg = TextRunConfig(agent=agent_name, domain=args.domain, user="user_simulator", llm_agent=args.llm,
                         llm_args_agent=json.loads(args.llm_args_agent), llm_user=llm_user, llm_args_user={"temperature": 0.0},
-                        num_trials=args.num_trials, max_concurrency=args.max_concurrency, seed=args.seed, log_level="ERROR",
+                        num_trials=args.num_trials, max_concurrency=args.max_concurrency, seed=args.seed, log_level="ERROR", auto_resume=True,
                         communicate_scoring=CommunicateScoring(scorer=CommunicateScorer.SUBSTRING))
     res = run_tasks(cfg, tasks, save_path=out / "results.json", console_display=False)
     recost(out / "results.json", prices_by_model, prices)
