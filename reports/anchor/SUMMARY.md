@@ -102,3 +102,52 @@ reasoning tokens replaced the longer prompts and the step count was slightly low
 - Cheaper note variants: a one-line "check the policy preconditions for A vs B" without the full template, to see how
   much of the deliberate gain is the content vs the mere interruption.
 - Combine: reasoner on uncertain steps + hint on confident steps (the two gates are disjoint).
+
+## Round 2b (2026-10-24): deliberation note + reasoner together
+
+Dr Cao asked for the fourth cell of the 2×2 (note yes/no × reasoner yes/no, both only at Jev p_max < 0.8):
+`--modes deliberate,reasoner`. Same 50 airline tasks × 4 trials, same seed, same user simulator. The first launch died
+after 24 episodes (process reaped when the shell exited); the run was resumed from τ²'s checkpoint
+(`auto_resume=True` now set in `examples/tau2_anchor_replay.py`), so the 200 episodes come from two processes.
+
+| at Jev-uncertain steps | no reasoner | reasoner |
+| --- | --- | --- |
+| no note | baseline 76.0 / 60.0 (flaky 28%) | reasoner 80.0 / 66.0 (flaky 26%) |
+| note | deliberate 79.5 / 62.0 (flaky 32%) | **deliberate+reasoner 82.0 / 72.0 (flaky 18%)** |
+
+(cells: pass^1 / pass^4; the untargeted control deliberate_all is 75.5 / 52.0, flaky 42%.)
+
+Full row for the new run: pass^1 82.0%, pass^2 77.0%, pass^3 74.0%, pass^4 72.0%, pass@4 90%, flaky 18%, always-fail
+10%, 10.5 steps/ep, trigger on 626 / 2097 steps (29.9%), completion tokens 3 127/ep (baseline 1 314, reasoner 2 104),
+prompt tokens 68 825/ep (baseline 71 191). Spend: DeepSeek 4.99 CNY (6363.95 → 6358.96), Jev $0.38–0.40.
+
+Paired bootstrap over tasks (10 000 resamples):
+
+| comparison | tasks +/−/= | Δpass^1 | 95% CI | P(Δ>0) | Δpass^4 | 95% CI | P(Δ>0) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| vs baseline | 9 / 3 / 38 | +6.0 | [+0.5, +12.5] | 0.98 | +12 | [0, +24] | 0.97 |
+| vs reasoner alone | 8 / 8 / 34 | +2.0 | [−3.5, +8.0] | 0.71 | +6 | [−6, +18] | 0.77 |
+| vs deliberate alone | 9 / 7 / 34 | +2.5 | [−2.0, +7.5] | 0.82 | +10 | [−2, +22] | 0.92 |
+
+### Reading
+
+1. **First configuration that clears the noise floor against the baseline.** pass^1 +6 (CI excludes 0) and pass^4 +12
+   (CI touches 0), with only 3 tasks worse. Flaky tasks fall from 28% to 18%: the gain is mostly consistency, i.e.
+   decision stability under input perturbation, which is the framing Dr Cao chose for the paper.
+2. **The two factors are complementary, not redundant.** Each alone gives +3.5–4 on pass^1 and +2–6 on pass^4; together
+   +6 / +12. The note tells the reasoner *what* is ambiguous (the two candidate actions and "check the policy
+   preconditions"); the reasoner has the budget to act on it. Against either single factor the improvement is not yet
+   significant (P ≈ 0.7–0.9), so "complementary" is the reading, not a proven interaction.
+3. **Cost stays in the same band.** 4.99 CNY vs 3.69 (reasoner) and 3.67 (deliberate) for 200 episodes: the reasoner
+   spends more completion tokens when it also gets the note, but the trigger fires on only 30% of steps, so the run is
+   still far from the untargeted control (6.39 CNY, and worse results).
+4. **Trigger rate drifted down** (37% → 34% → 30% across deliberate / reasoner / combined) because more consistent
+   agents reach fewer ambiguous mid-dialogue states; the trigger is state-dependent, not a fixed budget.
+5. Caveats unchanged: 50 tasks, one domain, one LLM; the resumed run mixes two processes (identical config and seed, so
+   the only difference is wall-clock). Needs retail and a second LLM before it is a claim.
+
+### Next
+
+- Replicate on retail (114 tasks) with baseline and deliberate+reasoner: ~15 CNY + $1 Jev.
+- τ_uncertain sweep on the combined mode (0.7 / 0.9) to trace the coverage–cost curve.
+- Compare against PolicyGuard-style verification before write tools on the same tasks (closest published competitor).
