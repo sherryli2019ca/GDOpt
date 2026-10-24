@@ -1,0 +1,57 @@
+{
+ "agent": "gdopt_anchored:hint",
+ "n_tasks": 2,
+ "success_rate": 0.5,
+ "mean_reward": 0.5,
+ "agent_cost_total": 0.003522042,
+ "agent_cost_per_task": 0.001761021,
+ "llm_cost_from_usage": 0.007504070000000002,
+ "decision_cost": 0.0020767319999999995,
+ "total_cost_from_usage": 0.009580802000000001,
+ "prompt_tokens": 78861,
+ "completion_tokens": 1196,
+ "steps": 13,
+ "llm_steps": 13,
+ "llm_step_share": 1.0,
+ "tiers": {
+  "llm": 13
+ },
+ "fallback_reasons": {
+  "hint": 13
+ },
+ "in_loop_agreement": {
+  "same": 12,
+  "different": 1,
+  "tool:transfer_to_human_agents -> message": 1
+ },
+ "generators": {
+  "llm": 13
+ },
+ "rewards": [
+  1.0,
+  0.0
+ ],
+ "jev_cost_total": 0.002076732,
+ "jev_calls": 13,
+ "anchor_stats": {
+  "steps": 13,
+  "hints": 8,
+  "vetoes": 0,
+  "veto_changed": 0,
+  "checklists": 0,
+  "decision_cost": 0.002076732,
+  "llm_calls": 13
+ },
+ "config": {
+  "modes": [
+   "hint"
+  ],
+  "llm": "deepseek/deepseek-chat",
+  "llm_user": "deepseek/deepseek-chat",
+  "num_tasks": 2,
+  "num_trials": 1,
+  "seed": 300,
+  "tau_hint": 0.9,
+  "tau_veto": 0.9
+ }
+}

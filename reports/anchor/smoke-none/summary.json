@@ -1,0 +1,34 @@
+{
+ "agent": "llm_agent:none",
+ "n_tasks": 2,
+ "success_rate": 0.5,
+ "mean_reward": 0.5,
+ "agent_cost_total": 0.00319131,
+ "agent_cost_per_task": 0.001595655,
+ "llm_cost_from_usage": 0.01064841,
+ "decision_cost": 0.0,
+ "total_cost_from_usage": 0.01064841,
+ "prompt_tokens": 90193,
+ "completion_tokens": 1273,
+ "steps": 15,
+ "llm_steps": 15,
+ "llm_step_share": 1.0,
+ "tiers": {},
+ "fallback_reasons": {},
+ "in_loop_agreement": {},
+ "generators": {},
+ "rewards": [
+  0.0,
+  1.0
+ ],
+ "config": {
+  "modes": [],
+  "llm": "deepseek/deepseek-chat",
+  "llm_user": "deepseek/deepseek-chat",
+  "num_tasks": 2,
+  "num_trials": 1,
+  "seed": 300,
+  "tau_hint": 0.9,
+  "tau_veto": 0.9
+ }
+}
