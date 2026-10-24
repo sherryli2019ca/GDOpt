@@ -1,0 +1,68 @@
+{
+ "agent": "gdopt_anchored:policy",
+ "n_tasks": 2,
+ "success_rate": 0.5,
+ "mean_reward": 0.5,
+ "agent_cost_total": 0.005808138,
+ "agent_cost_per_task": 0.002904069,
+ "llm_cost_from_usage": 0.00844711,
+ "decision_cost": 0.002144478,
+ "total_cost_from_usage": 0.010591588,
+ "prompt_tokens": 85353,
+ "completion_tokens": 1158,
+ "steps": 14,
+ "llm_steps": 14,
+ "llm_step_share": 1.0,
+ "tiers": {
+  "llm": 14
+ },
+ "fallback_reasons": {
+  "policy": 14
+ },
+ "in_loop_agreement": {
+  "same": 13,
+  "different": 1,
+  "message -> tool:get_reservation_details": 1
+ },
+ "generators": {
+  "llm": 14
+ },
+ "rewards": [
+  0.0,
+  1.0
+ ],
+ "jev_cost_total": 0.0021444780000000004,
+ "jev_calls": 14,
+ "anchor_stats": {
+  "steps": 14,
+  "hints": 0,
+  "vetoes": 0,
+  "veto_changed": 0,
+  "checklists": 0,
+  "deliberations": 0,
+  "reasoner_steps": 0,
+  "decision_cost": 0.002144478,
+  "llm_calls": 14,
+  "votes": 0,
+  "vote_changed": 0,
+  "vote_split": 0,
+  "policy_notes": 4
+ },
+ "config": {
+  "modes": [
+   "policy"
+  ],
+  "llm": "deepseek/deepseek-chat",
+  "llm_user": "deepseek/deepseek-chat",
+  "num_tasks": 2,
+  "num_trials": 1,
+  "seed": 300,
+  "tau_hint": 0.9,
+  "tau_veto": 0.9,
+  "tau_uncertain": 0.8,
+  "reasoner_llm": null,
+  "vote_k": 3,
+  "vote_temperature": 0.7,
+  "policy_top_k": 3
+ }
+}

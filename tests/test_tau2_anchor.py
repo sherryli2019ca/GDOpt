@@ -115,3 +115,91 @@ def test_reasoner_switches_model_only_when_unsure(monkeypatch):
     assert seen == ["slow", "fast"]
     with pytest.raises(ValueError):
         tau2_anchor.AnchoredLLMAgent(tools, "policy", "fast", {}, dm, {"reasoner"})
+
+
+def test_vote_takes_majority_action_and_sums_usage(monkeypatch):
+    temps = []
+
+    def fake_generate(model, tools, messages, call_name, **kw):
+        temps.append(kw.get("temperature"))
+        out = outputs.pop(0); out.usage = {"prompt_tokens": 100, "completion_tokens": 10, "model": "deepseek-flash"}; out.cost = 0.001
+        return out
+
+    outputs = [text_msg("cold"), tool_msg("cancel_reservation"), tool_msg("cancel_reservation")]
+    monkeypatch.setattr(tau2_anchor, "generate", fake_generate)
+    tools = [FakeTool("get_user_details", "Look up a user."), FakeTool("cancel_reservation", "Cancel.")]
+    dm = FunctionDecisionModel(lambda o, s: {"message": 0.55, "tool:cancel_reservation": 0.45})
+    agent = tau2_anchor.AnchoredLLMAgent(tools, "policy", "stub", {"temperature": 0.0}, dm, {"vote"}, vote_k=3, vote_temperature=0.7)
+    state = LLMAgentState(system_messages=[SystemMessage(role="system", content="sys")], messages=[])
+    out = agent._generate_next_message(UserMessage(role="user", content="cancel"), state)
+    assert temps == [0.0, 0.7, 0.7]
+    assert out.tool_calls and out.tool_calls[0].name == "cancel_reservation"
+    assert out.usage["prompt_tokens"] == 300 and out.usage["model"] == "deepseek-flash" and out.cost == pytest.approx(0.003)
+    g = out.raw_data["gdopt"]
+    assert g["llm_calls"] == 3 and g["anchor"]["vote"] == {"actions": ["message", "tool:cancel_reservation", "tool:cancel_reservation"],
+                                                           "chosen": "tool:cancel_reservation", "changed": True}
+    assert agent.stats["votes"] == 1 and agent.stats["vote_changed"] == 1 and agent.stats["vote_split"] == 1
+    # confident step: a single call, no vote
+    dm.fn = lambda o, s: {"message": 0.95}
+    outputs[:] = [text_msg("sure")]
+    agent._generate_next_message(UserMessage(role="user", content="thanks"), state)
+    assert len(temps) == 4 and agent.stats["votes"] == 1
+
+
+def test_vote_tie_goes_to_cold_sample(monkeypatch):
+    outputs = [text_msg("cold"), tool_msg("cancel_reservation"), tool_msg("get_user_details")]
+
+    def fake_generate(model, tools, messages, call_name, **kw):
+        out = outputs.pop(0); out.usage = {}; out.cost = 0.0
+        return out
+
+    monkeypatch.setattr(tau2_anchor, "generate", fake_generate)
+    tools = [FakeTool("get_user_details", "Look up a user."), FakeTool("cancel_reservation", "Cancel.")]
+    dm = FunctionDecisionModel(lambda o, s: {"message": 0.5, "tool:cancel_reservation": 0.5})
+    agent = tau2_anchor.AnchoredLLMAgent(tools, "policy", "stub", {}, dm, {"vote"}, vote_k=3)
+    state = LLMAgentState(system_messages=[SystemMessage(role="system", content="sys")], messages=[])
+    out = agent._generate_next_message(UserMessage(role="user", content="cancel"), state)
+    assert out.content == "cold" and out.raw_data["gdopt"]["anchor"]["vote"]["changed"] is False
+
+
+POLICY = """# Test Policy
+
+Always confirm before any update.
+
+## Book flight
+
+The agent must ask for passengers and payment before booking.
+
+## Cancel flight
+
+The booking can be cancelled if it was made within 24 hours or the airline cancelled the flight.
+
+### Refund
+
+Refunds go to the original payment method.
+
+## Baggage
+
+Checked bags can be added but not removed.
+"""
+
+
+def test_split_policy_keeps_heading_path():
+    chunks = tau2_anchor.split_policy(POLICY)
+    assert [c.heading for c in chunks] == ["General rules", "Book flight", "Cancel flight", "Cancel flight / Refund", "Baggage"]
+    assert "24 hours" in chunks[2].text
+
+
+def test_policy_note_retrieves_relevant_sections(monkeypatch):
+    agent, state, calls = make_agent(monkeypatch, {"policy"}, lambda o, s: {"message": 0.55, "tool:cancel_reservation": 0.45}, [text_msg()])
+    agent.retriever = tau2_anchor.PolicyRetriever(POLICY, top_k=2)
+    out = agent._generate_next_message(UserMessage(role="user", content="I want to cancel my flight and get a refund"), state)
+    note = [m for m in calls[0] if isinstance(m, SystemMessage) and "policy sections below" in (m.content or "")]
+    assert note and "Cancel flight" in note[0].content and "Baggage" not in note[0].content
+    secs = out.raw_data["gdopt"]["anchor"]["policy"]["sections"]
+    assert secs[0].startswith("Cancel flight") and len(secs) == 2
+
+    agent, state, calls = make_agent(monkeypatch, {"policy"}, lambda o, s: {"message": 0.95}, [text_msg()])
+    agent.retriever = tau2_anchor.PolicyRetriever(POLICY, top_k=2)
+    agent._generate_next_message(UserMessage(role="user", content="cancel"), state)
+    assert not any("policy sections below" in (m.content or "") for m in calls[0] if isinstance(m, SystemMessage))

@@ -19,6 +19,13 @@ Three anchors, combinable (``modes``):
     model; other steps are unchanged.
 ``deliberate_all``
     Control for ``deliberate``: the same deliberation note on every step, no decision-model call.
+``vote``
+    Same trigger as ``deliberate``: the step is generated ``vote_k`` times (the first at the configured temperature,
+    the rest at ``vote_temperature``) and the majority *action* (tool name or message) wins; ties go to the first
+    sample.  Self-consistency restricted to the steps the decision model finds unstable.
+``policy``
+    Same trigger: the policy sections most relevant to the current request and to the decision model's top-two
+    actions are retrieved (lexical, deterministic) and appended as a note, instead of the generic deliberation text.
 ``checklist``
     Before each LLM call, ask a fixed set of yes/no questions about the conversation state (identity
     verified? pending change confirmed by the user? open user question?) in one request and append the
@@ -31,6 +38,9 @@ added to the message cost, and a reconsidered step carries the summed usage of b
 
 from __future__ import annotations
 
+import math
+import re
+from collections import Counter
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -102,6 +112,94 @@ DELIBERATE_ALL_TEMPLATE = (
     "precondition against the facts established in the conversation (identity, eligibility, required details, explicit "
     "confirmation), and only then decide whether to act, ask, or decline."
 )
+POLICY_TEMPLATE = (
+    "Attention: a calibrated decision model finds this step ambiguous (torn between \"{a}\" and \"{b}\", confidence {p:.2f}). "
+    "The policy sections below are the ones relevant to the user's current request. Check each of their conditions "
+    "against the facts established in the conversation before you act, ask, or decline.\n\n{excerpts}"
+)
+_WORD = re.compile(r"[a-z][a-z0-9]+")
+_STOP = {"the", "and", "for", "you", "with", "that", "this", "are", "not", "should", "can", "any", "has", "have", "will",
+         "user", "agent", "must", "all", "its", "but", "than", "from", "their", "they", "them", "your", "our", "was",
+         "one", "only", "also", "may", "please", "want", "would", "like", "need", "could", "know", "yes", "okay", "hi",
+         "hello", "thanks", "thank", "sure", "just", "get", "let", "tell", "see", "there", "here", "what", "about"}
+
+
+def _tokens(text: str) -> list[str]:
+    return [w for w in _WORD.findall(text.lower()) if w not in _STOP and len(w) > 2]
+
+
+@dataclass
+class PolicyChunk:
+    heading: str
+    text: str
+    tokens: Counter = field(default_factory=Counter)
+    head_tokens: frozenset = frozenset()
+
+
+def split_policy(policy: str) -> list[PolicyChunk]:
+    """Split a markdown policy into chunks at ``##``/``###`` headings (heading path kept; preamble is its own chunk)."""
+    chunks: list[PolicyChunk] = []
+    path: list[str] = []
+    cur: list[str] = []
+    head = "General rules"
+
+    def flush():
+        body = "\n".join(cur).strip()
+        if body:
+            chunks.append(PolicyChunk(head, body, Counter(_tokens(head + " " + body)), frozenset(_tokens(head))))
+
+    for line in policy.splitlines():
+        m = re.match(r"^(#{2,3})\s+(.*)", line)
+        if m:
+            flush(); cur = []
+            level = len(m.group(1)) - 2
+            path = path[:level] + [m.group(2).strip()]
+            head = " / ".join(path)
+        elif not line.startswith("# "):
+            cur.append(line)
+    flush()
+    return chunks
+
+
+class PolicyRetriever:
+    """Deterministic lexical retrieval (IDF-weighted overlap) of the policy chunks relevant to a step."""
+
+    HEAD_BONUS = 2.0
+    ACTION_BONUS = 1.0
+
+    def __init__(self, policy: str, top_k: int = 3):
+        self.chunks = split_policy(policy)
+        self.top_k = top_k
+        n = len(self.chunks)
+        df = Counter(t for c in self.chunks for t in c.tokens)
+        self.idf = {t: math.log((n + 1) / (d + 0.5)) for t, d in df.items()}
+
+    def query_text(self, history, actions: list[str]) -> str:
+        parts = []
+        users = [m.content or "" for m in history if m.role == "user"]
+        parts += users[-2:]
+        tools = [m.tool_calls[0].name for m in history if m.role == "assistant" and m.tool_calls]
+        parts += [t.replace("_", " ") for t in tools[-3:]]
+        parts += [(action_tool_name(a) or "").replace("_", " ") for a in actions]
+        return " ".join(parts)
+
+    def retrieve(self, history, actions: list[str]) -> list[PolicyChunk]:
+        q = set(_tokens(self.query_text(history, actions)))
+        acts = set(_tokens(" ".join((action_tool_name(a) or "").replace("_", " ") for a in actions)))
+        scored = []
+        for c in self.chunks:
+            sc = sum(self.idf.get(t, 0.0) * math.log1p(c.tokens[t]) for t in q if t in c.tokens)
+            # a section whose heading names the request or the candidate action is what the agent must check
+            sc += sum(self.HEAD_BONUS * self.idf.get(t, 0.0) for t in q if t in c.head_tokens)
+            sc += sum(self.ACTION_BONUS for t in acts if t in c.head_tokens)
+            scored.append((sc, c))
+        scored.sort(key=lambda x: -x[0])
+        return [c for sc, c in scored[: self.top_k] if sc > 0]
+
+    def excerpts(self, history, actions: list[str]) -> str:
+        return "\n\n".join(f"### {c.heading}\n{c.text}" for c in self.retrieve(history, actions))
+
+
 CHECKLIST_HEADER = "State tracker (computed by a calibrated decision model from the conversation so far; use it to follow the policy consistently):"
 
 
@@ -121,10 +219,11 @@ class AnchoredLLMAgent(LLMAgent):
     def __init__(self, tools, domain_policy, llm, llm_args, decision_model: DecisionModel, modes: set[str],
                  tau_hint: float = 0.9, tau_veto: float = 0.9, checklist: Optional[list[ChecklistQuestion]] = None,
                  max_reconsider: int = 1, additional_stop_tool_names=frozenset(), tau_uncertain: float = 0.8,
-                 reasoner_llm: Optional[str] = None, reasoner_llm_args: Optional[dict] = None):
+                 reasoner_llm: Optional[str] = None, reasoner_llm_args: Optional[dict] = None,
+                 vote_k: int = 3, vote_temperature: float = 0.7, policy_top_k: int = 3):
         super().__init__(tools=tools, domain_policy=domain_policy, llm=llm, llm_args=llm_args,
                          additional_stop_tool_names=additional_stop_tool_names)
-        unknown = modes - {"hint", "veto", "checklist", "deliberate", "reasoner", "deliberate_all"}
+        unknown = modes - {"hint", "veto", "checklist", "deliberate", "reasoner", "deliberate_all", "vote", "policy"}
         if unknown:
             raise ValueError(f"unknown anchor modes: {sorted(unknown)}")
         self.decision_model = decision_model
@@ -138,8 +237,11 @@ class AnchoredLLMAgent(LLMAgent):
             raise ValueError("mode 'reasoner' needs reasoner_llm")
         self.policy_text = domain_policy
         self.menu = action_menu(tool_descriptions(tools))
+        self.vote_k, self.vote_temperature = vote_k, vote_temperature
+        self.retriever = PolicyRetriever(domain_policy, top_k=policy_top_k) if "policy" in modes else None
         self.stats: dict[str, Any] = {"steps": 0, "hints": 0, "vetoes": 0, "veto_changed": 0, "checklists": 0,
-                                      "deliberations": 0, "reasoner_steps": 0, "decision_cost": 0.0, "llm_calls": 0}
+                                      "deliberations": 0, "reasoner_steps": 0, "decision_cost": 0.0, "llm_calls": 0,
+                                      "votes": 0, "vote_changed": 0, "vote_split": 0, "policy_notes": 0}
 
     # -- decision-model queries ------------------------------------------
     def _next_action(self, history) -> ChoiceResult:
@@ -157,9 +259,16 @@ class AnchoredLLMAgent(LLMAgent):
         return probs, sum(float(r.cost) for r in res.values())
 
     @staticmethod
-    def _merge_usage(a: AssistantMessage, b: AssistantMessage) -> dict[str, Any]:
-        ua, ub = a.usage or {}, b.usage or {}
-        return {k: int(ua.get(k) or 0) + int(ub.get(k) or 0) for k in set(ua) | set(ub)}
+    def _merge_usage(*msgs: AssistantMessage) -> dict[str, Any]:
+        """Sum the numeric usage fields over several LLM calls; non-numeric fields (e.g. ``model``) come from the first."""
+        out: dict[str, Any] = {}
+        for m in msgs:
+            for k, v in (m.usage or {}).items():
+                if isinstance(v, (int, float)) and not isinstance(v, bool):
+                    out[k] = out.get(k, 0) + v
+                else:
+                    out.setdefault(k, v)
+        return out
 
     # -- generation ------------------------------------------------------
     def _generate_next_message(self, message, state: LLMAgentState) -> AssistantMessage:
@@ -172,7 +281,7 @@ class AnchoredLLMAgent(LLMAgent):
         info: dict[str, Any] = {"modes": sorted(self.modes)}
         cost = 0.0
         res: Optional[ChoiceResult] = None
-        if self.modes & {"hint", "veto", "deliberate", "reasoner"}:
+        if self.modes & {"hint", "veto", "deliberate", "reasoner", "vote", "policy"}:
             res = self._next_action(history)
             cost += float(res.cost)
             info.update(jev_top=res.top, jev_p=round(res.p_max, 3))
@@ -187,6 +296,16 @@ class AnchoredLLMAgent(LLMAgent):
             notes.append(SystemMessage(role="system", content=DELIBERATE_TEMPLATE.format(a=describe_action(a), b=describe_action(b), p=res.p_max)))
             info["deliberate"] = {"a": a, "b": b, "p": round(res.p_max, 3)}
             self.stats["deliberations"] += 1
+        if "policy" in self.modes and unsure:
+            ranked = sorted(res.probabilities.items(), key=lambda kv: -kv[1])
+            a, b = ranked[0][0], (ranked[1][0] if len(ranked) > 1 else "")
+            ex = self.retriever.excerpts(history, [a, b])
+            if ex:
+                notes.append(SystemMessage(role="system", content=POLICY_TEMPLATE.format(
+                    a=describe_action(a), b=describe_action(b), p=res.p_max, excerpts=ex)))
+                info["policy"] = {"a": a, "b": b, "p": round(res.p_max, 3),
+                                  "sections": [c.heading for c in self.retriever.retrieve(history, [a, b])]}
+                self.stats["policy_notes"] += 1
         if "deliberate_all" in self.modes:
             notes.append(SystemMessage(role="system", content=DELIBERATE_ALL_TEMPLATE))
             self.stats["deliberations"] += 1
@@ -209,6 +328,24 @@ class AnchoredLLMAgent(LLMAgent):
         messages = state.system_messages + state.messages + notes
         out = generate(model=llm, tools=self.tools, messages=messages, call_name="agent_response", **llm_args)
         llm_calls = 1
+        if "vote" in self.modes and unsure and self.vote_k > 1:
+            samples = [out]
+            hot = dict(llm_args, temperature=self.vote_temperature)
+            for _ in range(self.vote_k - 1):
+                samples.append(generate(model=llm, tools=self.tools, messages=messages, call_name="agent_response", **hot))
+            llm_calls += self.vote_k - 1
+            keys = [action_of_message(m) for m in samples]
+            tally = Counter(keys)
+            best = max(tally.values())
+            winner = next(k for k in keys if tally[k] == best)  # ties -> earliest sample (the cold one first)
+            chosen = next(m for m, k in zip(samples, keys) if k == winner)
+            chosen.usage = self._merge_usage(*samples)
+            chosen.cost = sum(float(m.cost or 0.0) for m in samples)
+            info["vote"] = {"actions": keys, "chosen": winner, "changed": winner != keys[0]}
+            self.stats["votes"] += 1
+            self.stats["vote_changed"] += winner != keys[0]
+            self.stats["vote_split"] += len(tally) > 1
+            out = chosen
         if "veto" in self.modes and res is not None:
             proposed = action_of_message(out)
             reconsidered = 0
@@ -244,13 +381,15 @@ class AnchoredLLMAgent(LLMAgent):
 def register_anchored_agent(decision_model: DecisionModel, modes: set[str], name: str = "gdopt_anchored",
                             tau_hint: float = 0.9, tau_veto: float = 0.9, checklist: Optional[list[ChecklistQuestion]] = None,
                             max_reconsider: int = 1, tau_uncertain: float = 0.8, reasoner_llm: Optional[str] = None,
-                            reasoner_llm_args: Optional[dict] = None) -> list[AnchoredLLMAgent]:
+                            reasoner_llm_args: Optional[dict] = None, vote_k: int = 3, vote_temperature: float = 0.7,
+                            policy_top_k: int = 3) -> list[AnchoredLLMAgent]:
     created: list[AnchoredLLMAgent] = []
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any) -> AnchoredLLMAgent:
         a = AnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, tau_hint=tau_hint,
                              tau_veto=tau_veto, checklist=checklist, max_reconsider=max_reconsider,
-                             tau_uncertain=tau_uncertain, reasoner_llm=reasoner_llm, reasoner_llm_args=reasoner_llm_args)
+                             tau_uncertain=tau_uncertain, reasoner_llm=reasoner_llm, reasoner_llm_args=reasoner_llm_args,
+                             vote_k=vote_k, vote_temperature=vote_temperature, policy_top_k=policy_top_k)
         created.append(a)
         return a
 
