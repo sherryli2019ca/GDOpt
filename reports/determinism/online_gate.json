@@ -1,0 +1,148 @@
+{
+ "steps": 7800,
+ "succ_fail_forks": 149,
+ "all_forks": 861,
+ "rules": {
+  "step_1-p": {
+   "20%": {
+    "threshold": 0.34,
+    "succ_fail_fork_coverage": 0.255,
+    "any_fork_coverage": 0.468,
+    "share_of_fired_with_p<0.8": 1.0
+   },
+   "35%": {
+    "threshold": 0.21,
+    "succ_fail_fork_coverage": 0.523,
+    "any_fork_coverage": 0.75,
+    "share_of_fired_with_p<0.8": 1.0
+   },
+   "50%": {
+    "threshold": 0.12,
+    "succ_fail_fork_coverage": 0.711,
+    "any_fork_coverage": 0.872,
+    "share_of_fired_with_p<0.8": 0.72
+   }
+  },
+  "cum_entropy": {
+   "20%": {
+    "threshold": 5.031,
+    "succ_fail_fork_coverage": 0.067,
+    "any_fork_coverage": 0.072,
+    "share_of_fired_with_p<0.8": 0.429
+   },
+   "35%": {
+    "threshold": 3.685,
+    "succ_fail_fork_coverage": 0.235,
+    "any_fork_coverage": 0.26,
+    "share_of_fired_with_p<0.8": 0.426
+   },
+   "50%": {
+    "threshold": 2.669,
+    "succ_fail_fork_coverage": 0.497,
+    "any_fork_coverage": 0.528,
+    "share_of_fired_with_p<0.8": 0.429
+   }
+  },
+  "leaky_0.5": {
+   "20%": {
+    "threshold": 1.424,
+    "succ_fail_fork_coverage": 0.181,
+    "any_fork_coverage": 0.374,
+    "share_of_fired_with_p<0.8": 0.922
+   },
+   "35%": {
+    "threshold": 1.203,
+    "succ_fail_fork_coverage": 0.47,
+    "any_fork_coverage": 0.655,
+    "share_of_fired_with_p<0.8": 0.779
+   },
+   "50%": {
+    "threshold": 0.984,
+    "succ_fail_fork_coverage": 0.671,
+    "any_fork_coverage": 0.834,
+    "share_of_fired_with_p<0.8": 0.646
+   }
+  },
+  "leaky_0.7": {
+   "20%": {
+    "threshold": 2.03,
+    "succ_fail_fork_coverage": 0.174,
+    "any_fork_coverage": 0.285,
+    "share_of_fired_with_p<0.8": 0.766
+   },
+   "35%": {
+    "threshold": 1.729,
+    "succ_fail_fork_coverage": 0.336,
+    "any_fork_coverage": 0.49,
+    "share_of_fired_with_p<0.8": 0.63
+   },
+   "50%": {
+    "threshold": 1.469,
+    "succ_fail_fork_coverage": 0.604,
+    "any_fork_coverage": 0.689,
+    "share_of_fired_with_p<0.8": 0.544
+   }
+  },
+  "reset_on_p>=0.95": {
+   "20%": {
+    "threshold": 2.913,
+    "succ_fail_fork_coverage": 0.208,
+    "any_fork_coverage": 0.296,
+    "share_of_fired_with_p<0.8": 0.615
+   },
+   "35%": {
+    "threshold": 1.752,
+    "succ_fail_fork_coverage": 0.383,
+    "any_fork_coverage": 0.575,
+    "share_of_fired_with_p<0.8": 0.614
+   },
+   "50%": {
+    "threshold": 0.943,
+    "succ_fail_fork_coverage": 0.658,
+    "any_fork_coverage": 0.826,
+    "share_of_fired_with_p<0.8": 0.608
+   }
+  },
+  "entropy_rate": {
+   "20%": {
+    "threshold": 0.612,
+    "succ_fail_fork_coverage": 0.128,
+    "any_fork_coverage": 0.292,
+    "share_of_fired_with_p<0.8": 0.674
+   },
+   "35%": {
+    "threshold": 0.547,
+    "succ_fail_fork_coverage": 0.295,
+    "any_fork_coverage": 0.488,
+    "share_of_fired_with_p<0.8": 0.583
+   },
+   "50%": {
+    "threshold": 0.492,
+    "succ_fail_fork_coverage": 0.436,
+    "any_fork_coverage": 0.647,
+    "share_of_fired_with_p<0.8": 0.522
+   }
+  },
+  "p<0.8_and_prior_cum": {
+   "20%": {
+    "threshold": 11.985,
+    "succ_fail_fork_coverage": 0.242,
+    "any_fork_coverage": 0.37,
+    "share_of_fired_with_p<0.8": 1.0
+   },
+   "35%": {
+    "threshold": 10.011,
+    "succ_fail_fork_coverage": 0.523,
+    "any_fork_coverage": 0.747,
+    "share_of_fired_with_p<0.8": 1.0
+   },
+   "50%": {
+    "threshold": 0.12,
+    "succ_fail_fork_coverage": 0.711,
+    "any_fork_coverage": 0.872,
+    "share_of_fired_with_p<0.8": 0.72
+   }
+  }
+ },
+ "p<0.8_trigger_rate": 0.361
+}
