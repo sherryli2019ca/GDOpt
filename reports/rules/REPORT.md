@@ -79,3 +79,30 @@ gain nothing. Cost DeepSeek ≈ 1.59 CNY (6341.97 → 6340.38, incl. 2-episode p
 Caveat: the soft checks also fire in successful episodes (basic_economy_path 33, price_quote 31, cheapest_check 11,
 transfer_pending 4 of 1393+), where the reasoner re-generation could change a correct step; only a full 50×4 run
 measures the net effect on pass^k.
+
+## E4: full airline 50×4 with consistency checks (2026-10-25)
+
+`--modes deliberate,reasoner,rules,consistency`, seed 300, τ² HEAD 0c69df4, output `reports/anchor/airline-deliberate_reasoner_rules_consistency`, comparison `reports/rules/e4_compare.json`.
+
+| config | pass^1 | pass^2 | pass^3 | pass^4 | flaky | always-fail |
+|---|---|---|---|---|---|---|
+| baseline | 76.0 | 68.0 | 63.0 | 60.0 | 28% | 12% |
+| deliberate+reasoner run 1 | 82.0 | 77.0 | 74.0 | 72.0 | 18% | 10% |
+| deliberate+reasoner run 2 (+rules, E3) | 81.5 | 73.7 | 68.0 | 64.0 | 28% | 8% |
+| deliberate+reasoner pooled (8 trials) | 81.8 | 75.8 | 71.8 | 68.9 | 30% | 8% |
+| **+ rules + consistency (E4)** | **84.5** | **81.0** | **78.5** | **76.0** | **14%** | 10% |
+
+Paired bootstrap (task resampling, 5000 draws), E4 minus reference:
+
+| reference | Δpass^1 [95% CI] P(>0) | Δpass^4 [95% CI] P(>0) | tasks better/worse |
+|---|---|---|---|
+| baseline | +8.5 [+2.5, +15.0] 1.00 | +16.0 [+4, +30] 0.99 | 13 / 4 |
+| run 1 | +2.5 [−1.5, +7.0] 0.85 | +4.0 [−6, +14] 0.72 | 7 / 4 |
+| run 2 | +3.0 [−2.0, +8.0] 0.87 | +12.0 [+2, +22] 0.98 | 10 / 4 |
+| pooled 8 trials | +2.8 [−1.2, +7.0] 0.89 | +7.1 [−1.3, +15.8] 0.95 | 11 / 5 |
+
+Consistency checks fired at 108 of 1954 steps (5.5%) in 71 of 200 episodes (54 successful, 17 failed); the regenerated action differed from the original 32 times. Per rule (success / failed episodes' fires): price_quote 36/16, basic_economy_path 33/8, cheapest_check 10/5, transfer_pending 4/6, substitute_book 0/1, pax_dob_mismatch 1/0. Certified forbid rules fired once. Reasoner steps 654 (33%).
+
+Cost: DeepSeek ¥5.35 (6340.15 → 6334.80), Jev $0.41 (1713 calls; OpenRouter usage 12.67 → 13.07 of 20).
+
+Reading: best single run so far and the first with flaky below 15%. Against the pooled 8-trial estimate of the previous best config the gain is +2.8 pass^1 / +7.1 pass^4 (P 0.89 / 0.95) — suggestive, not conclusive, and E4 is a single run (the paper rule requires ≥2 runs per config). Run-to-run spread of the same config was 8 pass^4 points (72 vs 64).
