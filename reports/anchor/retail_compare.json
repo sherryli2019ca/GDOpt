@@ -1,0 +1,48 @@
+{
+ "base": {
+  "pass^1": 82.7,
+  "pass^2": 75.0,
+  "pass^3": 70.2,
+  "pass^4": 66.7,
+  "flaky": 28.1,
+  "always_fail": 5.3,
+  "steps": 5548
+ },
+ "dr": {
+  "pass^1": 84.4,
+  "pass^2": 77.8,
+  "pass^3": 73.9,
+  "pass^4": 71.1,
+  "flaky": 24.6,
+  "always_fail": 4.4,
+  "steps": 5433
+ },
+ "delta_pass^1": {
+  "delta": 1.8,
+  "ci": [
+   -2.4,
+   5.7
+  ],
+  "P": 0.79
+ },
+ "delta_pass^2": {
+  "delta": 2.8,
+  "ci": [
+   -2.8,
+   8.3
+  ],
+  "P": 0.83
+ },
+ "delta_pass^4": {
+  "delta": 4.4,
+  "ci": [
+   -3.5,
+   12.3
+  ],
+  "P": 0.85
+ },
+ "tasks_better_worse": [
+  23,
+  14
+ ]
+}

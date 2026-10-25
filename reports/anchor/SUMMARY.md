@@ -199,3 +199,20 @@ policy+reasoner Δpass^1 +3 [−2, +9] P=0.83, Δpass^4 +2 [−10, +14] P=0.57; 
    preconditions" instruction at the Jev-uncertain steps. What neither variant here addresses is *which* branch is
    right at a fork: the 固化 thread's zero-cost result (a cancellation-eligibility predicate flags 16 cancel calls,
    all in failed episodes) points at certified hard constraints at those steps as the next thing to test.
+
+## Round 4: retail validation (2026-10-25)
+
+Retail, all 114 tasks × 4 trials, seed 300, DeepSeek direct (`deepseek-chat` agent and user), τ² HEAD 0c69df4. `deliberate,reasoner` at Jev p_max < 0.8 (reasoner `deepseek-reasoner`). Rules / consistency checks are airline-policy specific and were not used. Comparison: `reports/anchor/retail_compare.json` (`examples/determinism/retail_compare.py`).
+
+| config | pass^1 | pass^2 | pass^3 | pass^4 | flaky | always-fail |
+|---|---|---|---|---|---|---|
+| baseline | 82.7 | 75.0 | 70.2 | 66.7 | 28.1% | 5.3% |
+| deliberate+reasoner | 84.4 | 77.8 | 73.9 | 71.1 | 24.6% | 4.4% |
+
+Paired bootstrap (task resampling): Δpass^1 +1.8 [−2.4, +5.7] P=0.79; Δpass^2 +2.8 [−2.8, +8.3] P=0.83; Δpass^4 +4.4 [−3.5, +12.3] P=0.85; tasks better/worse 23/14. Reasoner triggered on 1775 of 5433 agent steps (33%, same share as airline).
+
+Reading: same direction as airline (every pass^k up, flaky down), but smaller and not significant on its own; retail baseline is already strong (pass^1 83 vs airline 76), leaving less room.
+
+Deviation: in τ² HEAD, retail tasks with NL assertions are judged by an OpenAI model that is not reachable here (403). The judge was replaced with `deepseek-chat` at T=0 (`--nl-judge`), identically for both arms. Must be stated in the paper.
+
+Cost: DeepSeek ¥47.6 and Jev $2.28 in total, of which roughly ¥20 + $0.7 was wasted on simulations that crashed in the judge before the fix (each retried 4×).

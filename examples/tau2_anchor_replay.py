@@ -45,6 +45,8 @@ def main() -> None:
     ap.add_argument("--policy-top-k", type=int, default=3, help="'policy' mode: policy sections injected")
     ap.add_argument("--checklist", default=None, help="JSON file with a list of {name,label,instructions,true,false}")
     ap.add_argument("--budget-usd", type=float, default=None, help="abort when the Jev spend passes this (LLM spend is not metered live)")
+    ap.add_argument("--nl-judge", default="deepseek/deepseek-chat",
+                    help="judge for tasks whose reward basis has NL_ASSERTION (τ² default is an OpenAI model, 403 here)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -67,6 +69,8 @@ def main() -> None:
             register_price(extra, prices_by_model[extra])
     print("prices $/token (prompt, completion, cached):", prices_by_model)
     patch_tau2_usage()
+    import tau2.evaluator.evaluator_nl_assertions as nl_eval  # type: ignore[import-not-found]
+    nl_eval.DEFAULT_LLM_NL_ASSERTIONS, nl_eval.DEFAULT_LLM_NL_ASSERTIONS_ARGS = args.nl_judge, {"temperature": 0.0}
 
     modes = set() if args.modes.strip() in ("", "none") else {m.strip() for m in args.modes.split(",") if m.strip()}
     jev = None
