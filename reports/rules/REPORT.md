@@ -37,3 +37,22 @@ deliberate and reasoner alone unchanged (they no longer make these calls).
 Caveats: one continuation per episode per arm; control at temperature 0 mostly re-takes the logged failing action;
 task 1 contributes 13 of 38 episodes; rules were hand-written from the policy, not learned, so evaluation on the same
 tasks is not leakage, but the 40-fire sample is small.
+
+## E3 — rules on top of deliberate+reasoner, airline 50×4 (2026-10-25)
+
+`--modes deliberate,reasoner,rules`, seed 300, DeepSeek 4.80 CNY (6346.92 → 6342.12) + Jev $0.38. τ²-bench HEAD 0c69df4
+(earlier runs used an older checkout). Table: `E3_REPORT.md`.
+
+| run | pass^1 | pass^2 | pass^3 | pass^4 | flaky |
+| --- | --- | --- | --- | --- | --- |
+| baseline (none) | 76.0 | 68.0 | 63.0 | 60.0 | 28% |
+| deliberate+reasoner (2026-10-24) | 82.0 | 77.0 | 74.0 | 72.0 | 18% |
+| deliberate+reasoner+rules (this run) | 81.5 | 73.7 | 68.0 | 64.0 | 28% |
+| deliberate+reasoner, both runs pooled (8 trials/task) | 81.8 | 75.8 | 71.8 | 68.9 | – |
+
+The rules fired only twice in 1947 steps (task 14, book_payment, Jev p 0.87 and 0.83; one episode still failed), so this
+run is effectively a replication of deliberate+reasoner. Its pass^1 replicates (81.5 vs 82); its pass^4 does not
+(64 vs 72; paired vs the earlier run 5 tasks better / 5 worse, Δpass^4 −8 [−18, 0]). Against the baseline:
+Δpass^1 +5.5 [0, +12] P(>0)=0.97, Δpass^4 +4 [−8, +16] P=0.70. Pooled over 8 trials the config gives pass^4 ≈ 69.
+Reading: the reasoner fallback already removes almost all policy-forbidden writes, so the certified rules add nothing
+measurable on top of it; their value is as a guard for configurations without a reasoner and as a guarantee.
