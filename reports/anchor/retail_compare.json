@@ -17,6 +17,15 @@
   "always_fail": 4.4,
   "steps": 5433
  },
+ "cons": {
+  "pass^1": 86.6,
+  "pass^2": 79.2,
+  "pass^3": 74.1,
+  "pass^4": 70.2,
+  "flaky": 27.2,
+  "always_fail": 2.6,
+  "steps": 5418
+ },
  "delta_pass^1": {
   "delta": 1.8,
   "ci": [
@@ -43,6 +52,62 @@
  },
  "tasks_better_worse": [
   23,
+  14
+ ],
+ "cons_vs_base_delta_pass^1": {
+  "delta": 3.9,
+  "ci": [
+   -0.4,
+   8.3
+  ],
+  "P": 0.96
+ },
+ "cons_vs_base_delta_pass^2": {
+  "delta": 4.2,
+  "ci": [
+   -1.8,
+   10.4
+  ],
+  "P": 0.91
+ },
+ "cons_vs_base_delta_pass^4": {
+  "delta": 3.5,
+  "ci": [
+   -5.3,
+   12.3
+  ],
+  "P": 0.76
+ },
+ "cons_vs_base_tasks_better_worse": [
+  23,
+  16
+ ],
+ "cons_vs_dr_delta_pass^1": {
+  "delta": 2.2,
+  "ci": [
+   -1.3,
+   5.7
+  ],
+  "P": 0.88
+ },
+ "cons_vs_dr_delta_pass^2": {
+  "delta": 1.5,
+  "ci": [
+   -3.8,
+   6.6
+  ],
+  "P": 0.71
+ },
+ "cons_vs_dr_delta_pass^4": {
+  "delta": -0.9,
+  "ci": [
+   -7.9,
+   6.1
+  ],
+  "P": 0.37
+ },
+ "cons_vs_dr_tasks_better_worse": [
+  20,
   14
  ]
 }

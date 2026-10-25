@@ -216,3 +216,19 @@ Reading: same direction as airline (every pass^k up, flaky down), but smaller an
 Deviation: in τ² HEAD, retail tasks with NL assertions are judged by an OpenAI model that is not reachable here (403). The judge was replaced with `deepseek-chat` at T=0 (`--nl-judge`), identically for both arms. Must be stated in the paper.
 
 Cost: DeepSeek ¥47.6 and Jev $2.28 in total, of which roughly ¥20 + $0.7 was wasted on simulations that crashed in the judge before the fix (each retried 4×).
+
+## Round 4b: retail with retail-specific consistency checks (2026-10-25)
+
+Checks: `src/gdopt/adapters/tau2_retail_rules.py`, audited on the 912 logged retail episodes (`examples/determinism/retail_rule_audit.py`, `reports/determinism/retail_rule_audit.json`). Active: status precondition, cancel reason vs user's words, refund method, unavailable/different-product new item, option count (total vs available variants), dollar arithmetic in agent messages (hard); transfer to human with an unattempted in-scope request (soft). Not active: order not mentioned, address not typed by user, payment kind not mentioned, partial item list — they fire mostly in successful episodes. Active checks fire in ~34 of 150 logged failures.
+
+| config | pass^1 | pass^2 | pass^3 | pass^4 | flaky | always-fail |
+|---|---|---|---|---|---|---|
+| baseline | 82.7 | 75.0 | 70.2 | 66.7 | 28.1% | 5.3% |
+| deliberate+reasoner | 84.4 | 77.8 | 73.9 | 71.1 | 24.6% | 4.4% |
+| + retail consistency checks | 86.6 | 79.2 | 74.1 | 70.2 | 27.2% | 2.6% |
+
+Paired bootstrap: vs baseline Δpass^1 +3.9 [−0.4, +8.3] P=0.96, Δpass^4 +3.5 [−5.3, +12.3] P=0.76 (tasks 23/16); vs deliberate+reasoner Δpass^1 +2.2 P=0.88, Δpass^4 −0.9 P=0.37 (tasks 20/14).
+
+Fires: 26 corrections in 24 of 456 episodes (option_count 10, transfer_in_scope 15, arithmetic 1); the action changed 8 times. The targeted option-count tasks 2/3/4 went from 5/12 (deliberate+reasoner) to 11/12 successes. Overall the checks raise pass^1 but not pass^4: they fire too rarely to move consistency on retail, where most failures stem from the user simulator (changed minds, reasons that differ from the gold) rather than from checkable agent errors.
+
+Cost: DeepSeek ¥14.75 (6286.85 → 6272.10), Jev $1.02 (OpenRouter usage 15.36 → 16.38 of 20).

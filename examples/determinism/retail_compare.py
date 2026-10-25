@@ -23,7 +23,7 @@ def m(d, ts, k):
 
 
 R, S = {}, {}
-for k, v in dict(base="retail-none", dr="retail-deliberate_reasoner").items():
+for k, v in dict(base="retail-none", dr="retail-deliberate_reasoner", cons="retail-deliberate_reasoner_consistency").items():
     R[k], S[k] = load(v)
 ts = sorted(R["base"], key=int)
 out = {}
@@ -40,13 +40,15 @@ for k, d in R.items():
                 gens["reasoner"] += bool(a.get("reasoner") or a.get("generator") == "reasoner")
     out[k]["steps"] = gens["steps"]
     print(k, out[k])
-random.seed(0)
-for j in (1, 2, 4):
-    obs = m(R["dr"], ts, j) - m(R["base"], ts, j)
-    bs = sorted(m(R["dr"], s, j) - m(R["base"], s, j) for s in ([random.choice(ts) for _ in ts] for _ in range(5000)))
-    out[f"delta_pass^{j}"] = dict(delta=round(obs, 1), ci=[round(bs[125], 1), round(bs[4875], 1)], P=round(sum(b > 0 for b in bs) / len(bs), 2))
-    print(j, out[f"delta_pass^{j}"])
 rate = lambda d, t: sum(d[t]) / len(d[t])
-out["tasks_better_worse"] = [sum(rate(R["dr"], t) > rate(R["base"], t) for t in ts), sum(rate(R["dr"], t) < rate(R["base"], t) for t in ts)]
-print("tasks better/worse", out["tasks_better_worse"])
+for new, ref in (("dr", "base"), ("cons", "base"), ("cons", "dr")):
+    random.seed(0)
+    tag = "" if (new, ref) == ("dr", "base") else f"{new}_vs_{ref}_"
+    for j in (1, 2, 4):
+        obs = m(R[new], ts, j) - m(R[ref], ts, j)
+        bs = sorted(m(R[new], s, j) - m(R[ref], s, j) for s in ([random.choice(ts) for _ in ts] for _ in range(5000)))
+        out[f"{tag}delta_pass^{j}"] = dict(delta=round(obs, 1), ci=[round(bs[125], 1), round(bs[4875], 1)], P=round(sum(b > 0 for b in bs) / len(bs), 2))
+        print(new, ref, j, out[f"{tag}delta_pass^{j}"])
+    out[f"{tag}tasks_better_worse"] = [sum(rate(R[new], t) > rate(R[ref], t) for t in ts), sum(rate(R[new], t) < rate(R[ref], t) for t in ts)]
+    print(new, ref, "tasks better/worse", out[f"{tag}tasks_better_worse"])
 json.dump(out, open("reports/anchor/retail_compare.json", "w"), indent=1)
