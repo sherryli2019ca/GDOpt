@@ -79,7 +79,7 @@ def main() -> None:
             checklist = [ChecklistQuestion(**q) for q in json.loads(Path(args.checklist).read_text())]
         jev = CachedDecisionModel(OpenRouterJev())
         register = register_anchored_agent
-        if "rules" in modes:  # certified policy-clause guard on top of the other anchors (gdopt.adapters.tau2_rules)
+        if modes & {"rules", "consistency"}:  # certified policy-clause guard on top of the other anchors (gdopt.adapters.tau2_rules)
             from gdopt.adapters.tau2_rules import register_rule_anchored_agent as register
         agents = register(jev, modes, name="gdopt_anchored", tau_hint=args.tau_hint, tau_veto=args.tau_veto,
                                          checklist=checklist, max_reconsider=args.max_reconsider, tau_uncertain=args.tau_uncertain,

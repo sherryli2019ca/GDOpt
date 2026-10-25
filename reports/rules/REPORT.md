@@ -56,3 +56,26 @@ run is effectively a replication of deliberate+reasoner. Its pass^1 replicates (
 Δpass^1 +5.5 [0, +12] P(>0)=0.97, Δpass^4 +4 [−8, +16] P=0.70. Pooled over 8 trials the config gives pass^4 ≈ 69.
 Reading: the reasoner fallback already removes almost all policy-forbidden writes, so the certified rules add nothing
 measurable on top of it; their value is as a guard for configurations without a reasoner and as a guarantee.
+
+## Consistency rules — local replay (2026-10-25)
+
+New checks in `ConsistencyChecker` (`src/gdopt/adapters/tau2_rules.py`): hard `pax_dob_mismatch`; soft (reasoner
+re-generates with a review note) `substitute_book`, `transfer_pending`, `price_quote` (code-computed price × passengers
+when the user stated a budget), `cheapest_check` (code-ranked itineraries), `basic_economy_path` (allow-side hint when
+the agent refuses a basic-economy change). Of 73 failed trials in the two pooled deliberate+reasoner runs, 44 have a
+step where a check (or a certified rule) fires on the logged action; each was replayed from that step once per arm,
+both arms deliberate+reasoner (Jev at p<0.8), treated arm adds rules+consistency.
+
+| arm | success |
+| --- | --- |
+| control (deliberate+reasoner) | 7 / 44 (16%) |
+| + rules + consistency checks | 16 / 44 (36%) |
+
+Paired: treated better 10, control better 1. By first-firing check (treated vs control successes):
+basic_economy_path 9 vs 5 of 11, transfer_pending 2 vs 0 of 9, price_quote 2 vs 1 of 10, cheapest_check 1 vs 0 of 8,
+substitute_book 0 vs 0 of 4, pax_dob 1 vs 0 of 1, cancel_flown 1 vs 1 of 1. Always-failing tasks 7/29/44 (15 trials)
+gain nothing. Cost DeepSeek ≈ 1.59 CNY (6341.97 → 6340.38, incl. 2-episode pilot) + Jev $0.14.
+
+Caveat: the soft checks also fire in successful episodes (basic_economy_path 33, price_quote 31, cheapest_check 11,
+transfer_pending 4 of 1393+), where the reasoner re-generation could change a correct step; only a full 50×4 run
+measures the net effect on pass^k.

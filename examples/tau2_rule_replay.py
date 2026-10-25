@@ -47,6 +47,11 @@ def main() -> None:
     ap.add_argument("--max-concurrency", type=int, default=6)
     ap.add_argument("--seed", type=int, default=400)
     ap.add_argument("--arms", default="rules,control")
+    ap.add_argument("--anchor-modes", default=None,
+                    help="run both arms as AnchoredLLMAgent with these modes (e.g. deliberate,reasoner); the treated arm adds "
+                         "--extra-modes. Default: plain llm_agent vs RuleGuardedLLMAgent")
+    ap.add_argument("--extra-modes", default="rules,consistency")
+    ap.add_argument("--reasoner-llm", default="deepseek/deepseek-reasoner")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -65,7 +70,7 @@ def main() -> None:
     patch_tau2_usage()
 
     audit = json.loads(Path(args.audit).read_text())
-    flagged = [x for x in audit["flagged"] if not x["success"] and set(x["rules"]) & CERTIFIED]
+    flagged = [x for x in audit["flagged"] if not x["success"] and (args.anchor_modes or set(x["rules"]) & CERTIFIED)]
     if args.limit:
         flagged = flagged[: args.limit]
     base_tasks = {str(t.id): t for t in registry.get_tasks_loader("airline")()}
@@ -85,10 +90,23 @@ def main() -> None:
     (out / "replay_tasks.json").write_text(json.dumps(meta, indent=1))
     print(f"{len(tasks)} replay tasks from {len({x['task'] for x in flagged})} base tasks")
 
-    agents = register_rule_agent("gdopt_rules")
+    jev = None
+    if args.anchor_modes:
+        from gdopt.adapters.tau2_anchor import register_anchored_agent
+        from gdopt.adapters.tau2_rules import register_rule_anchored_agent
+        from gdopt.decision import CachedDecisionModel, OpenRouterJev
+        rp = openrouter_prices(args.reasoner_llm)
+        register_price(args.reasoner_llm, rp)
+        jev = CachedDecisionModel(OpenRouterJev())
+        base_modes = {m for m in args.anchor_modes.split(",") if m}
+        kw = dict(tau_uncertain=0.8, reasoner_llm=args.reasoner_llm)
+        register_anchored_agent(jev, base_modes, name="gdopt_control", **kw)
+        agents = register_rule_anchored_agent(jev, base_modes | set(args.extra_modes.split(",")), name="gdopt_rules", **kw)
+    else:
+        agents = register_rule_agent("gdopt_rules")
     summary = {"tasks": len(tasks), "arms": {}}
     for arm in args.arms.split(","):
-        agent = "gdopt_rules" if arm == "rules" else "llm_agent"
+        agent = "gdopt_rules" if arm == "rules" else ("gdopt_control" if args.anchor_modes else "llm_agent")
         trials = args.rule_trials if arm == "rules" else args.control_trials
         cfg = TextRunConfig(agent=agent, domain="airline", user="user_simulator", llm_agent=args.llm,
                             llm_args_agent={"temperature": 0.0}, llm_user=args.llm, llm_args_user={"temperature": 0.0},
@@ -96,7 +114,7 @@ def main() -> None:
                             auto_resume=True, communicate_scoring=CommunicateScoring(scorer=CommunicateScorer.SUBSTRING))
         path = out / f"{arm}.json"
         res = run_tasks(cfg, tasks, save_path=path, console_display=False)
-        recost(path, {args.llm: prices}, prices)
+        recost(path, {args.llm: prices, **({args.reasoner_llm: rp} if args.anchor_modes else {})}, prices)
         per = {}
         for sim in res.simulations:
             r = (sim.reward_info.reward if sim.reward_info else 0.0) or 0.0
@@ -112,6 +130,8 @@ def main() -> None:
                     agg[kk] = agg.get(kk, 0) + vv
             summary["arms"][arm]["agent_stats"] = agg
         print(arm, summary["arms"][arm]["success_rate"], f"{k}/{n}")
+    if jev is not None:
+        summary["jev_cost_total"], summary["jev_calls"] = jev.inner.total_cost, jev.inner.n_calls
     (out / "summary.json").write_text(json.dumps(summary, indent=1))
     print(json.dumps({a: {k: v for k, v in s.items() if k != "per_task"} for a, s in summary["arms"].items()}, indent=1))
 
