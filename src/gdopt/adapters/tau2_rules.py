@@ -228,3 +228,57 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 
     registry.register_agent_factory(factory, name)
     return made
+
+
+def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
+                                 **anchor_kw: Any) -> list:
+    """``AnchoredLLMAgent`` (any anchor modes) plus the certified rule guard on every step.
+
+    The guard is a hard constraint outside λ: it runs after the anchored step is produced, whatever the Jev confidence;
+    the Jev p of the step is logged with each fire so gating by uncertainty can be analysed offline.
+    """
+    from .tau2_anchor import AnchoredLLMAgent
+
+    class RuleAnchoredLLMAgent(AnchoredLLMAgent):
+        def __init__(self, *a: Any, **kw: Any):
+            super().__init__(*a, **kw)
+            self.rules = rules
+            self.stats.update(rule_fires=0, rule_regenerated_ok=0, rule_refused=0)
+
+        _violations = RuleGuardedLLMAgent._violations
+
+        def _generate_next_message(self, message, state):
+            am = super()._generate_next_message(message, state)
+            v = self._violations(state.messages, am)
+            if not v:
+                return am
+            self.stats["rule_fires"] += 1
+            notes = [SystemMessage(role="system", content=NOTE.format(call=c, clause=CLAUSES[r], reason=why)) for r, why, c in v]
+            am2 = generate(model=self.llm, tools=self.tools, messages=state.system_messages + state.messages + notes,
+                           call_name="agent_response", **self.llm_args)
+            refused = bool(self._violations(state.messages, am2))
+            if refused:
+                self.stats["rule_refused"] += 1
+                am2 = AssistantMessage(role="assistant", content=(
+                    "I'm sorry, but I can't do that under our policy: " + " ".join(CLAUSES[r] for r, _, _ in v)))
+            else:
+                self.stats["rule_regenerated_ok"] += 1
+            am2.cost = float(am.cost or 0.0) + float(am2.cost or 0.0)
+            am2.usage = self._merge_usage(am, am2) if am2.usage else am.usage
+            g = dict((am.raw_data or {}).get("gdopt") or {})
+            anchor = dict(g.get("anchor") or {})
+            anchor["rules"] = {"fired": [{"rule": r, "reason": why, "call": c} for r, why, c in v], "refused": refused}
+            g["anchor"] = anchor
+            am2.raw_data = dict(am2.raw_data or {}, gdopt=g)
+            return am2
+
+    created: list = []
+    modes = set(modes) - {"rules"}
+
+    def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any):
+        a = RuleAnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, **anchor_kw)
+        created.append(a)
+        return a
+
+    registry.register_agent_factory(factory, name)
+    return created

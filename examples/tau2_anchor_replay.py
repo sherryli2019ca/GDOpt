@@ -25,7 +25,7 @@ from tau2_replay import openrouter_prices, patch_tau2_usage, recost, register_pr
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", default="airline")
-    ap.add_argument("--modes", default="none", help="none | comma list of hint,veto,checklist,deliberate,reasoner,deliberate_all,vote,policy")
+    ap.add_argument("--modes", default="none", help="none | comma list of hint,veto,checklist,deliberate,reasoner,deliberate_all,vote,policy,rules")
     ap.add_argument("--llm", default="deepseek/deepseek-chat")
     ap.add_argument("--llm-user", default=None, help="user simulator LLM (default: same as --llm)")
     ap.add_argument("--llm-args-agent", default='{"temperature": 0.0}')
@@ -78,7 +78,10 @@ def main() -> None:
         if args.checklist:
             checklist = [ChecklistQuestion(**q) for q in json.loads(Path(args.checklist).read_text())]
         jev = CachedDecisionModel(OpenRouterJev())
-        agents = register_anchored_agent(jev, modes, name="gdopt_anchored", tau_hint=args.tau_hint, tau_veto=args.tau_veto,
+        register = register_anchored_agent
+        if "rules" in modes:  # certified policy-clause guard on top of the other anchors (gdopt.adapters.tau2_rules)
+            from gdopt.adapters.tau2_rules import register_rule_anchored_agent as register
+        agents = register(jev, modes, name="gdopt_anchored", tau_hint=args.tau_hint, tau_veto=args.tau_veto,
                                          checklist=checklist, max_reconsider=args.max_reconsider, tau_uncertain=args.tau_uncertain,
                                          reasoner_llm=args.reasoner_llm, reasoner_llm_args=json.loads(args.reasoner_llm_args),
                                          vote_k=args.vote_k, vote_temperature=args.vote_temperature, policy_top_k=args.policy_top_k)
