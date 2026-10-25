@@ -276,7 +276,11 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
             return am2
 
         def _consistency(self, am, state):
-            hits = ConsistencyChecker(state.messages).check(am)
+            if any(getattr(t, "name", None) == "find_user_id_by_name_zip" for t in self.tools):  # retail domain
+                from .tau2_retail_rules import RetailConsistencyChecker as checker
+            else:
+                checker = ConsistencyChecker
+            hits = checker(state.messages).check(am)
             if not hits:
                 return am
             soft = any(k == "soft" for _, k, _ in hits)
