@@ -79,7 +79,9 @@ OpenRouter $16.38 / $20（含早期 replay ≈ $6、Jev 合计 ≈ $7.7，浪费
 
 - E4 配置复现（airline 第 2 次，≈ ¥5.4 + $0.4）——论文规则要求。
 - PolicyGuard（arXiv 2606.29225）作基线；更强主模型（成本占比结论依赖于此）。
-- RSI（递归自改进）闭环：见设计文档，首个实验零成本离线回放。
+- RSI（递归自改进）闭环：设计文档 https://claude.ai/artifact/GDXeFxyv88rmtMPHd2qAkt 。零成本 R0（`examples/determinism/rsi_fold_transfer.py`，
+  `reports/determinism/rsi_fold_transfer.json`）：200 种 3 折任务划分下，手写一致性检查只有 substitute_book 能被“只看 1/3 任务”的闭环发现且迁移（45%）；
+  pax_dob_mismatch 只在任务 35 触发，cheapest_not_min 成功中误触发 78 次 → E4 的提升部分可能来自对已知任务的拟合，论文需说明。
 
 ## 5. 代码入口
 
