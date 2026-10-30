@@ -47,6 +47,10 @@ def main() -> None:
     ap.add_argument("--budget-usd", type=float, default=None, help="abort when the Jev spend passes this (LLM spend is not metered live)")
     ap.add_argument("--nl-judge", default="deepseek/deepseek-chat",
                     help="judge for tasks whose reward basis has NL_ASSERTION (τ² default is an OpenAI model, 403 here)")
+    ap.add_argument("--task-ids", default=None, help="comma list of task ids (overrides --num-tasks/--task-offset)")
+    ap.add_argument("--mined", default=None, help="R1 result file: add its transferring mined checks as soft review triggers")
+    ap.add_argument("--mined-exclude-fold", type=int, default=None,
+                    help="drop mined checks mined on this fold (run a fold's tasks only with checks mined elsewhere)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -83,9 +87,14 @@ def main() -> None:
             checklist = [ChecklistQuestion(**q) for q in json.loads(Path(args.checklist).read_text())]
         jev = CachedDecisionModel(OpenRouterJev())
         register = register_anchored_agent
-        if modes & {"rules", "consistency"}:  # certified policy-clause guard on top of the other anchors (gdopt.adapters.tau2_rules)
+        extra = {}
+        if args.mined:
+            from gdopt.adapters.tau2_mined import load_checks
+            extra["mined"] = [c for c in load_checks(args.mined) if c["fold"] != args.mined_exclude_fold]
+            print("mined checks:", [c["name"] for c in extra["mined"]])
+        if modes & {"rules", "consistency"} or args.mined:  # certified policy-clause guard on top of the other anchors (gdopt.adapters.tau2_rules)
             from gdopt.adapters.tau2_rules import register_rule_anchored_agent as register
-        agents = register(jev, modes, name="gdopt_anchored", tau_hint=args.tau_hint, tau_veto=args.tau_veto,
+        agents = register(jev, modes, name="gdopt_anchored", **extra, tau_hint=args.tau_hint, tau_veto=args.tau_veto,
                                          checklist=checklist, max_reconsider=args.max_reconsider, tau_uncertain=args.tau_uncertain,
                                          reasoner_llm=args.reasoner_llm, reasoner_llm_args=json.loads(args.reasoner_llm_args),
                                          vote_k=args.vote_k, vote_temperature=args.vote_temperature, policy_top_k=args.policy_top_k)
@@ -94,6 +103,9 @@ def main() -> None:
         agent_name = "llm_agent"
 
     tasks = registry.get_tasks_loader(args.domain)()[args.task_offset: args.task_offset + args.num_tasks]
+    if args.task_ids:
+        want = set(args.task_ids.split(","))
+        tasks = [t for t in registry.get_tasks_loader(args.domain)() if str(t.id) in want]
     cfg = TextRunConfig(agent=agent_name, domain=args.domain, user="user_simulator", llm_agent=args.llm,
                         llm_args_agent=json.loads(args.llm_args_agent), llm_user=llm_user, llm_args_user={"temperature": 0.0},
                         num_trials=args.num_trials, max_concurrency=args.max_concurrency, seed=args.seed, log_level="ERROR", auto_resume=True,
