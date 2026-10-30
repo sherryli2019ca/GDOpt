@@ -28,12 +28,14 @@
 | deliberate+reasoner 合并 8 trials | 81.8 | 75.8 | 71.8 | 68.9 | – | 8% | rules/REPORT.md |
 | policy 检索 / policy+reasoner / 3 样本投票 | 77.5 / 79 / 74.5 | – | – | 64 / 62 / 56 | 22 / 28 / 30% | – | anchor/VOTE_POLICY.md |
 | **E4：deliberate+reasoner+rules+consistency** | **84.5** | **81.0** | **78.5** | **76.0** | **14%** | 10% | rules/REPORT.md, rules/e4_compare.json |
+| E4 第 2 次（2026-10-30，+自动规则但 0 次触发） | 81.0 | 76.3 | 74.0 | 72.0 | 18% | 10% | rsi/FULL.md |
+| **E4 合并 8 trials** | **82.8** | **78.4** | **75.9** | **74.1** | – | – | rsi/full_compare.json |
 
 配对 bootstrap（按任务重采样）：
 - deliberate+reasoner 第 1 次 vs baseline：Δpass^1 +6 [+0.5, +12.5] P=0.98；Δpass^4 +12 [0, +24] P=0.97。复现后合并 8 trials 的 pass^4 ≈ 69，**72 偏乐观**。
 - E4 vs baseline：Δpass^1 +8.5 [+2.5, +15] P=1.00；Δpass^4 +16 [+4, +30] P=0.99（任务 13 好 / 4 差）。
 - E4 vs deliberate+reasoner 合并 8 trials：Δpass^1 +2.8 P=0.89；Δpass^4 +7.1 [−1.3, +15.8] P=0.95。
-- E4 只有 1 次运行；同配置两次运行 pass^4 相差 8 点 → **论文规则：每个 pass^4 结论需 ≥2 次运行或跨域复现**。
+- E4 已有 2 次运行，合并后 vs baseline Δpass^4 +14.1 [+2.7, +26.7] P=0.99，vs D+R 合并 +5.1 P=0.85（原单次 76 略乐观）；同配置两次运行 pass^4 相差 8 点 → **论文规则：每个 pass^4 结论需 ≥2 次运行或跨域复现**。
 
 ### Retail（114 任务 × 4 trials）
 
@@ -77,7 +79,6 @@ OpenRouter $16.38 / $20（含早期 replay ≈ $6、Jev 合计 ≈ $7.7，浪费
 
 ## 4. 待定 / 下一步
 
-- E4 配置复现（airline 第 2 次，≈ ¥5.4 + $0.4）——论文规则要求。
 - PolicyGuard（arXiv 2606.29225）作基线；更强主模型（成本占比结论依赖于此）。
 - RSI（递归自改进）闭环：设计文档 https://claude.ai/artifact/GDXeFxyv88rmtMPHd2qAkt 。零成本 R0（`examples/determinism/rsi_fold_transfer.py`，
   `reports/determinism/rsi_fold_transfer.json`）：200 种 3 折任务划分下，手写一致性检查只有 substitute_book 能被“只看 1/3 任务”的闭环发现且迁移（45%）；
@@ -87,3 +88,7 @@ OpenRouter $16.38 / $20（含早期 replay ≈ $6、Jev 合计 ≈ $7.7，浪费
 
 `src/gdopt/adapters/tau2_anchor.py`（全部 anchor 模式）、`tau2_rules.py`（airline 规则与一致性检查）、`tau2_retail_rules.py`；
 运行器 `examples/tau2_anchor_replay.py`（`--modes ...`）、`examples/tau2_rule_replay.py`；分析脚本 `examples/determinism/`。
+
+## 6. RSI（2026-10-30）
+
+R1 自动挖规则 18 条、4 条跨任务迁移；R2 在留出失败上重放 12/31 vs 5/31；完整 50×4 中这 4 条在 E4 上 0 次触发（E4 已不再犯这些错）。详见 rsi/R1.md、R2.md、FULL.md。
