@@ -52,6 +52,10 @@ def main() -> None:
                          "--extra-modes. Default: plain llm_agent vs RuleGuardedLLMAgent")
     ap.add_argument("--extra-modes", default="rules,consistency")
     ap.add_argument("--reasoner-llm", default="deepseek/deepseek-reasoner")
+    ap.add_argument("--control-extra-modes", default=None,
+                    help="with --anchor-modes: the control arm also gets these modes (e.g. rules,consistency = the E4 config)")
+    ap.add_argument("--mined", default=None, help="R1 result file; its transferring mined checks are added to the treated arm")
+    ap.add_argument("--include-success", action="store_true", help="also replay flagged successful episodes (harm check)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -70,7 +74,8 @@ def main() -> None:
     patch_tau2_usage()
 
     audit = json.loads(Path(args.audit).read_text())
-    flagged = [x for x in audit["flagged"] if not x["success"] and (args.anchor_modes or set(x["rules"]) & CERTIFIED)]
+    flagged = [x for x in audit["flagged"] if (args.include_success or not x["success"])
+               and (args.anchor_modes or set(x["rules"]) & CERTIFIED)]
     if args.limit:
         flagged = flagged[: args.limit]
     base_tasks = {str(t.id): t for t in registry.get_tasks_loader("airline")()}
@@ -100,8 +105,17 @@ def main() -> None:
         jev = CachedDecisionModel(OpenRouterJev())
         base_modes = {m for m in args.anchor_modes.split(",") if m}
         kw = dict(tau_uncertain=0.8, reasoner_llm=args.reasoner_llm)
-        register_anchored_agent(jev, base_modes, name="gdopt_control", **kw)
-        agents = register_rule_anchored_agent(jev, base_modes | set(args.extra_modes.split(",")), name="gdopt_rules", **kw)
+        if args.control_extra_modes:
+            register_rule_anchored_agent(jev, base_modes | set(args.control_extra_modes.split(",")), name="gdopt_control", **kw)
+        else:
+            register_anchored_agent(jev, base_modes, name="gdopt_control", **kw)
+        mined = None
+        if args.mined:
+            from gdopt.adapters.tau2_mined import load_checks
+            mined = load_checks(args.mined)
+            print(f"{len(mined)} mined checks: {[c['name'] for c in mined]}")
+        extra = {m for m in args.extra_modes.split(",") if m}
+        agents = register_rule_anchored_agent(jev, base_modes | extra, name="gdopt_rules", mined=mined, **kw)
     else:
         agents = register_rule_agent("gdopt_rules")
     summary = {"tasks": len(tasks), "arms": {}}

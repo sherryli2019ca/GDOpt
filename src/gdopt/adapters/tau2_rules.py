@@ -231,8 +231,9 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 
 
 def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
-                                 **anchor_kw: Any) -> list:
+                                 mined: Optional[list] = None, **anchor_kw: Any) -> list:
     consistency = "consistency" in modes  # also run ConsistencyChecker (hard: corrective note; soft: reasoner review)
+    # ``mined``: checks from tau2_mined.load_checks, run as soft review triggers next to (or without) the consistency checks
     """``AnchoredLLMAgent`` (any anchor modes) plus the certified rule guard on every step.
 
     The guard is a hard constraint outside λ: it runs after the anchored step is produced, whatever the Jev confidence;
@@ -251,7 +252,7 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
         def _generate_next_message(self, message, state):
             am = super()._generate_next_message(message, state)
             v = self._violations(state.messages, am)
-            if not v and consistency:
+            if not v and (consistency or mined):
                 return self._consistency(am, state)
             if not v:
                 return am
@@ -280,7 +281,13 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
                 from .tau2_retail_rules import RetailConsistencyChecker as checker
             else:
                 checker = ConsistencyChecker
-            hits = checker(state.messages).check(am)
+            hits = checker(state.messages).check(am) if consistency else []
+            if mined:
+                from .tau2_mined import MinedChecker
+                m_hits = MinedChecker(mined).check(state.messages, am)
+                if m_hits:
+                    self.stats["mined_fires"] = self.stats.get("mined_fires", 0) + 1
+                hits += m_hits
             if not hits:
                 return am
             soft = any(k == "soft" for _, k, _ in hits)
