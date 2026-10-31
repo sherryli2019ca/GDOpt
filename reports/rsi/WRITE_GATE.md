@@ -22,7 +22,7 @@ Reading: by the time of the decisive write the failure is already fixed by the c
 stronger model reading the same context makes the same choice. Like the fixed-context vote (14% split), this is
 direct evidence that the instability is in the context (what the user simulator and the agent said earlier), not in
 the write step itself; checks at the write cannot recover it. No harm on successful trials (30 vs 30).
-The point of no return lies between the first divergence from a successful trial (median message index 1, i.e. often
-the user's opening, 19 of 37 user-first) and the decisive write.
+The point of no return lies between the first divergence from a successful trial (median message index 2, i.e. usually the
+user's opening turn; 19 of 37 user-first) and the decisive write.
 
 Cost: DeepSeek ¥1.88 (6254.87 → 6252.99), Jev $0.14 (OpenRouter usage 16.85 → 16.99).
