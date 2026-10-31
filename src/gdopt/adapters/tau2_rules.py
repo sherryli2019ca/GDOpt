@@ -166,6 +166,27 @@ try:  # τ²-bench is optional for the offline audit
 except Exception:  # pragma: no cover
     LLMAgent = object  # type: ignore[misc,assignment]
 
+DECISIVE_TOOLS = {"cancel_reservation", "update_reservation_flights", "update_reservation_baggages",
+                  "update_reservation_passengers", "book_reservation", "send_certificate", "transfer_to_human_agents"}
+WRITE_GATE_NOTE = ("Write check (automatic): two independent readings of this conversation disagree about the next "
+                   "database action. Reading A: {a}. Reading B: {b}. Do not execute either yet. Work out which one matches "
+                   "the policy and what the user actually asked for; if anything (which reservation, flights, cabin, "
+                   "passengers, payment, amounts, or whether to act at all) is not explicitly settled, list the exact "
+                   "details to the user and ask them to confirm before acting. If one reading is clearly right and the user "
+                   "has already confirmed exactly those details, you may make that call.")
+
+
+def _decisive_calls(am: Any) -> list:
+    d = _as_dict(am)
+    # a transfer's free-text summary never matches exactly: compare transfers by name only
+    return sorted((tc["name"], "" if tc["name"] == "transfer_to_human_agents" else json.dumps(tc.get("arguments") or {}, sort_keys=True))
+                  for tc in (d.get("tool_calls") or []) if tc["name"] in DECISIVE_TOOLS)
+
+
+def _fmt_calls(calls: list) -> str:
+    return "; ".join(f"{n}({a})" for n, a in calls)
+
+
 NOTE = ("Policy check (automatic): the call {call} is not allowed. Clause: {clause} Facts: {reason}. Do not make this call; "
         "explain the policy to the user, or transfer to a human agent if the policy says so.")
 
@@ -233,6 +254,7 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
                                  mined: Optional[list] = None, **anchor_kw: Any) -> list:
     consistency = "consistency" in modes  # also run ConsistencyChecker (hard: corrective note; soft: reasoner review)
+    writegate = "writegate" in modes  # every write/transfer re-derived independently by the reasoner (2026-10-31)
     # ``mined``: checks from tau2_mined.load_checks, run as soft review triggers next to (or without) the consistency checks
     """``AnchoredLLMAgent`` (any anchor modes) plus the certified rule guard on every step.
 
@@ -250,6 +272,40 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
         _violations = RuleGuardedLLMAgent._violations
 
         def _generate_next_message(self, message, state):
+            am = self._guarded_step(message, state)
+            return self._write_gate(am, state) if writegate else am
+
+        def _write_gate(self, am, state):
+            """Independent re-derivation of every write / transfer by the reasoner; on disagreement, confirm first."""
+            mine = _decisive_calls(am)
+            if not mine:
+                return am
+            self.stats["writegate_checks"] = self.stats.get("writegate_checks", 0) + 1
+            llm, llm_args = (self.reasoner_llm, self.reasoner_llm_args) if self.reasoner_llm else (self.llm, self.llm_args)
+            ref = generate(model=llm, tools=self.tools, messages=state.system_messages + state.messages,
+                           call_name="agent_response", **llm_args)
+            other = _decisive_calls(ref)
+            agree = other == mine
+            cost = float(am.cost or 0.0) + float(ref.cost or 0.0)
+            out = am
+            if not agree:
+                self.stats["writegate_disagree"] = self.stats.get("writegate_disagree", 0) + 1
+                note = SystemMessage(role="system", content=WRITE_GATE_NOTE.format(
+                    a=_fmt_calls(mine), b=_fmt_calls(other) if other else "no database write or transfer at this point"))
+                out = generate(model=llm, tools=self.tools, messages=state.system_messages + state.messages + [note],
+                               call_name="agent_response", **llm_args)
+                cost += float(out.cost or 0.0)
+                out.usage = self._merge_usage(am, ref, out) if out.usage else am.usage
+            out.cost = cost
+            g = dict((am.raw_data or {}).get("gdopt") or {})
+            anchor = dict(g.get("anchor") or {})
+            anchor["writegate"] = {"proposed": _fmt_calls(mine), "independent": _fmt_calls(other), "agree": agree,
+                                   "final": action_of_message(out)}
+            g["anchor"] = anchor
+            out.raw_data = dict(out.raw_data or {}, gdopt=g)
+            return out
+
+        def _guarded_step(self, message, state):
             am = super()._generate_next_message(message, state)
             v = self._violations(state.messages, am)
             if not v and (consistency or mined):
@@ -307,7 +363,7 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
             return am2
 
     created: list = []
-    modes = set(modes) - {"rules", "consistency"}
+    modes = set(modes) - {"rules", "consistency", "writegate"}
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any):
         a = RuleAnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, **anchor_kw)
