@@ -1,0 +1,928 @@
+{
+ "flagged": [
+  {
+   "run": "e4_mined-fold2",
+   "task": "6",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 6,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 23,
+   "fork_index": 6,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "6",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 15,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 23,
+   "fork_index": 6,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 14,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 17,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 22,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 11,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 22,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 18,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 9,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 18,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 22,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 11,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 22,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 14,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 18,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 12,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 18,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 12,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 18,
+   "fork_index": 12,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 15,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 18,
+   "fork_index": 12,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 18,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 9,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 18,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "14",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 21,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "14",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 15,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 21,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 29,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 15,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 29,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 23,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 13,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 23,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 23,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 13,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 23,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 8,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 25,
+   "fork_index": 8,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 16,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 25,
+   "fork_index": 8,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 26,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 15,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 26,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 13,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 7,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 13,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 3,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 33,
+   "fork_index": 3,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 21,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 33,
+   "fork_index": 3,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 25,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 13,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 25,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 17,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 10,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 17,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 11,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 16,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 8,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 16,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 10,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 10,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 16,
+   "fork_index": 10,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 13,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 16,
+   "fork_index": 10,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "33",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 10,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 22,
+   "fork_index": 10,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "33",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 16,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 22,
+   "fork_index": 10,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 14,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 17,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "42",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 14,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "42",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 17,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 20,
+   "fork_index": 14,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "45",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 3,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 30,
+   "fork_index": 3,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "45",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 16,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 30,
+   "fork_index": 3,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 43,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 43,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 12,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 32,
+   "fork_index": 12,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 24,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 32,
+   "fork_index": 12,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 12,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 38,
+   "fork_index": 12,
+   "next_role": "assistant"
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 34,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 38,
+   "fork_index": 12,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 40,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 24,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 40,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 2,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 28,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 28,
+   "fork_index": 2,
+   "next_role": "assistant"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 1,
+   "rules": [
+    "cut_fork"
+   ],
+   "cut": "fork",
+   "write_index": 24,
+   "fork_index": 1,
+   "next_role": "user"
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 12,
+   "rules": [
+    "cut_mid"
+   ],
+   "cut": "mid",
+   "write_index": 24,
+   "fork_index": 1,
+   "next_role": "assistant"
+  }
+ ]
+}

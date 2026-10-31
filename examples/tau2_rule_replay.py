@@ -88,7 +88,7 @@ def main() -> None:
         s = sims[(x["run"], x["task"], x["trial"])]
         prefix = s["messages"][: x["first_msg_index"]]
         t = base_tasks[x["task"]].model_copy(deep=True)
-        t.id = f"{x['task']}__{x['run']}_{x['trial']}"
+        t.id = f"{x['task']}__{x['run']}_{x['trial']}" + (f"_{x['cut']}" if x.get("cut") else "")
         t.initial_state = InitialState(initialization_data=None, initialization_actions=None, message_history=to_messages(prefix))
         tasks.append(t)
         meta[t.id] = {**x, "prefix_len": len(prefix)}
