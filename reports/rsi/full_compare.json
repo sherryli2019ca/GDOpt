@@ -1,0 +1,112 @@
+{
+ "base": {
+  "pass^1": 76.0,
+  "pass^2": 68.0,
+  "pass^3": 63.0,
+  "pass^4": 60.0,
+  "flaky": 28,
+  "always_fail": 12
+ },
+ "e4": {
+  "pass^1": 84.5,
+  "pass^2": 81.0,
+  "pass^3": 78.5,
+  "pass^4": 76.0,
+  "flaky": 14,
+  "always_fail": 10
+ },
+ "new": {
+  "pass^1": 81.0,
+  "pass^2": 76.3,
+  "pass^3": 74.0,
+  "pass^4": 72.0,
+  "flaky": 18,
+  "always_fail": 10
+ },
+ "new_vs_base_pass^1": {
+  "delta": 5.0,
+  "ci": [
+   -1.0,
+   12.0
+  ],
+  "P": 0.93
+ },
+ "new_vs_base_pass^4": {
+  "delta": 12.0,
+  "ci": [
+   0.0,
+   26.0
+  ],
+  "P": 0.96
+ },
+ "new_vs_base_tasks": [
+  10,
+  7
+ ],
+ "new_vs_e4_pass^1": {
+  "delta": -3.5,
+  "ci": [
+   -8.5,
+   0.5
+  ],
+  "P": 0.04
+ },
+ "new_vs_e4_pass^4": {
+  "delta": -4.0,
+  "ci": [
+   -12.0,
+   4.0
+  ],
+  "P": 0.09
+ },
+ "new_vs_e4_tasks": [
+  3,
+  6
+ ],
+ "mined_fires": {},
+ "mined_fire_episodes": {},
+ "e4_pooled_8_trials": {
+  "pass^1": 82.8,
+  "pass^2": 78.4,
+  "pass^3": 75.9,
+  "pass^4": 74.1,
+  "flaky_tasks": 11
+ },
+ "e4_pooled_vs_base": {
+  "pass^1": {
+   "delta": 6.8,
+   "ci": [
+    1.2,
+    13.2
+   ],
+   "P": 0.99
+  },
+  "pass^4": {
+   "delta": 14.1,
+   "ci": [
+    2.7,
+    26.7
+   ],
+   "P": 0.99
+  }
+ },
+ "e4_pooled_vs_dr_pooled": {
+  "pass^1": {
+   "delta": 1.0,
+   "ci": [
+    -3.8,
+    5.8
+   ],
+   "P": 0.63
+  },
+  "pass^4": {
+   "delta": 5.1,
+   "ci": [
+    -4.7,
+    14.9
+   ],
+   "P": 0.85
+  }
+ },
+ "note": "mined checks never fired in this run (0 fires in 200 episodes), so it is effectively an E4 replication"
+}

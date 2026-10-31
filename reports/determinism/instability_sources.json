@@ -1,0 +1,104 @@
+{
+ "pairs": {
+  "both_fail": 368,
+  "both_pass": 1658,
+  "mixed": 374
+ },
+ "first_divergence_origin": {
+  "both_fail": {
+   "user": 244,
+   "agent": 123,
+   "identical": 1
+  },
+  "both_pass": {
+   "agent": 779,
+   "user": 878,
+   "identical": 1
+  },
+  "mixed": {
+   "user": 240,
+   "agent": 130,
+   "identical": 4
+  }
+ },
+ "first_divergence_agent_kind": {
+  "both_fail": {
+   "message_text": 104,
+   "tool_vs_message": 12,
+   "different_tool": 7
+  },
+  "both_pass": {
+   "message_text": 712,
+   "different_tool": 47,
+   "tool_vs_message": 20
+  },
+  "mixed": {
+   "message_text": 122,
+   "different_tool": 3,
+   "tool_vs_message": 5
+  }
+ },
+ "first_divergence_index_median": {
+  "both_fail": 1,
+  "both_pass": 2,
+  "mixed": 1
+ },
+ "action_fork_preceded_by": {
+  "both_fail": {
+   "no_action_divergence": 29,
+   "user wording first": 226,
+   "agent wording first": 94,
+   "none (fork from identical context)": 19
+  },
+  "both_pass": {
+   "agent wording first": 560,
+   "user wording first": 764,
+   "no_action_divergence": 267,
+   "none (fork from identical context)": 67
+  },
+  "mixed": {
+   "user wording first": 231,
+   "agent wording first": 115,
+   "no_action_divergence": 20,
+   "none (fork from identical context)": 8
+  }
+ },
+ "action_fork_kind": {
+  "both_pass": {
+   "same_tool_diff_args": 265,
+   "tool_vs_message": 761,
+   "different_tool": 365
+  },
+  "both_fail": {
+   "tool_vs_message": 235,
+   "different_tool": 84,
+   "same_tool_diff_args": 20
+  },
+  "mixed": {
+   "different_tool": 83,
+   "tool_vs_message": 251,
+   "same_tool_diff_args": 20
+  }
+ },
+ "failed_episodes": 370,
+ "failure_types_multi": {
+  "forbidden_write": 38,
+  "extra_write": 110,
+  "communicate_only": 9,
+  "unexpected_transfer": 117,
+  "wrong_args_on_gold_write": 165,
+  "missing_gold_write": 156,
+  "other": 2,
+  "termination:max_steps": 1
+ },
+ "failure_primary": {
+  "forbidden_write": 38,
+  "communicate_only": 9,
+  "unexpected_transfer": 111,
+  "wrong_args_on_gold_write": 121,
+  "extra_write": 46,
+  "missing_gold_write": 42,
+  "other": 2,
+  "termination:max_steps": 1
+ }
+}

@@ -1,0 +1,1374 @@
+{
+ "failures": [
+  {
+   "task": "6",
+   "flaky": true,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 7,
+   "n": 8,
+   "first_divergence_index": 6,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "decisive_failed": "book_reservation",
+   "decisive_success": null,
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "7",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "8",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 7,
+   "n": 8,
+   "first_divergence_index": 14,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 8,
+   "failed_action": "transfer_to_human_agents",
+   "success_action": "book_reservation",
+   "jev_p": 0.99,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": true,
+   "user_before": "Okay, so you can't do the seats. Fine. But I'm not booking without knowing I can get aisle and middle together. Can I talk to someone who can actually handle the seating?",
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "14",
+   "flaky": true,
+   "types": [
+    "communicate_only"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 8,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 11,
+   "failed_action": "book_reservation",
+   "success_action": "message",
+   "jev_p": 0.97,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Okay, so the master card charge would be $1,786 \u2014 that's under my $2,000 limit, so yeah, go ahead and book it.",
+   "decisive_failed": null,
+   "decisive_success": null
+  },
+  {
+   "task": "14",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 4,
+   "failed_action": "get_reservation_details",
+   "success_action": "calculate+calculate",
+   "jev_p": 0.74,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Thanks! So just to make sure I've got the totals right \u2014 the gift cards add up to $327, and the certificates come to $1,000, right?\n\nAnd yeah, the second thing \u2014 I want to change my reservation K1NW8N. Same dates, but I'd like to switch it to the cheapest business round trip. Direct flights or not, ",
+   "decisive_failed": null,
+   "decisive_success": "cancel_reservation"
+  },
+  {
+   "task": "14",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 4,
+   "failed_action": "get_reservation_details",
+   "success_action": "calculate+calculate",
+   "jev_p": 0.96,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Great, thanks \u2014 that's exactly what I needed. So $327 on gift cards and $1,000 in certificates, got it.\n\nNow, I want to change my upcoming reservation. I'd like to keep the same dates but switch it to the cheapest business round trip \u2014 direct flights or not, doesn't matter. Can you look into that?",
+   "decisive_failed": null,
+   "decisive_success": "cancel_reservation"
+  },
+  {
+   "task": "14",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 8,
+   "failed_action": "cancel_reservation",
+   "success_action": "message",
+   "jev_p": 0.95,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Okay, that all makes sense \u2014 thanks for breaking it down. $1,786 on the Mastercard works for me, that's under my $2,000 limit.\n\nSo yeah, let's do it:\n1. Cancel K1NW8N \u2014 reason is change of plan.\n2. Book the new business round trip as you described.\n3. No insurance, and no extra bags \u2014 the 2 free per",
+   "decisive_failed": "book_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.82,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "15",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 7,
+   "failed_action": "message",
+   "success_action": "update_reservation_flights",
+   "jev_p": 0.81,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Hmm, that late LGA connection is a bit rough for me. Before we lock it in, could you check if there\u2019s anything on 2024-05-24 that arrives earlier into PHL or EWR in Economy (not Basic) for around the same price? If nothing\u2019s close, I\u2019m okay to go with the $207 PHL option.\n\nAnd yeah, refund to the or",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.96,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "15",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 5,
+   "failed_action": "search_direct_flight+search_onestop_flight",
+   "success_action": "search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight",
+   "jev_p": 0.44,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Yes, that\u2019s all correct:\n- Move it to 2024-05-24.\n- Switch to the cheapest Economy fare (not Basic Economy).\n- Search both PHL and EWR and pick the lowest price.\n- Keep the same passenger (Aarav Garcia) and no checked bags.\n\nAnd I\u2019m fine with any refund going back to the original payment method.",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.97,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "15",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 7,
+   "failed_action": "message",
+   "success_action": "update_reservation_flights",
+   "jev_p": 0.9,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Hmm, yeah, I get the destination restriction, but that layover is pretty rough\u2014getting into PHL at midnight. Before I say yes, could you check if there\u2019s anything on 2024-05-24 that arrives earlier, even if it\u2019s a bit more than $207? Still economy (not basic), ATL \u2192 PHL only. I\u2019m okay with one stop,",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.96,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "15",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 4,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 4,
+   "failed_action": "search_direct_flight+search_direct_flight+search_onestop_flight+search_onestop_flight",
+   "success_action": "message",
+   "jev_p": 0.81,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.95,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "16",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 5,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 7,
+   "failed_action": "message",
+   "success_action": "update_reservation_flights",
+   "jev_p": 0.64,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": true,
+   "user_before": "Okay, that Chicago one at $216 with the 4-hour layover sounds good to me. Let's go with HAT227 then HAT139.\n\nAnd yeah, the gift card gift_card_8887175 is fine for the refund.",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "16",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 5,
+   "n": 8,
+   "first_divergence_index": 12,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 7,
+   "failed_action": "message",
+   "success_action": "update_reservation_flights",
+   "jev_p": 0.59,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": true,
+   "user_before": "Okay, that $216 with the 4-hour layover in Chicago sounds like a better trade-off for me \u2014 shorter wait, only a few bucks more. Let's go with that one.\n\nAnd the gift card ending 8887175 is fine for the refund.",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "16",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 5,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 3,
+   "failed_action": "get_reservation_details+get_reservation_details",
+   "success_action": "get_reservation_details",
+   "jev_p": 0.55,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.97,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "18",
+   "flaky": false,
+   "types": [
+    "extra_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "23",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 3,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 8,
+   "failed_action": "message",
+   "success_action": "cancel_reservation",
+   "jev_p": 0.94,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": true,
+   "user_before": "Hmm, okay, let me think about this for a sec.\n\nSo with the change, my master card would get hit for $1,219. But you mentioned earlier that basic economy can't be changed \u2014 wait, actually, you didn't mention that. Let me ask: is my current reservation in basic economy? Because if it can't be changed,",
+   "decisive_failed": "book_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.97,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "23",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 3,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 8,
+   "failed_action": "message",
+   "success_action": "cancel_reservation",
+   "jev_p": 0.66,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Okay, hm. So cancelling isn't an option, and the change path puts $2,046 on one card with no certificates or gift cards. That's a bit much for me.\n\nLet me ask this \u2014 if I book a brand new business reservation, I can use one certificate plus three gift cards plus my mastercard, right? So how much wou",
+   "decisive_failed": "book_reservation",
+   "decisive_success": "cancel_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.98,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "23",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 3,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 4,
+   "failed_action": "search_direct_flight+search_direct_flight+search_onestop_flight+search_onestop_flight",
+   "success_action": "search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight",
+   "jev_p": 0.83,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": true,
+   "user_before": null,
+   "decisive_failed": "book_reservation",
+   "decisive_success": "cancel_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.97,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "23",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 3,
+   "n": 8,
+   "first_divergence_index": 8,
+   "origin": "agent",
+   "agent_kind": "tool_vs_message",
+   "action_step": 4,
+   "failed_action": "search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight",
+   "success_action": "message",
+   "jev_p": 0.84,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": true,
+   "user_before": null,
+   "decisive_failed": "book_reservation",
+   "decisive_success": "cancel_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.55,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "23",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 3,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 3,
+   "failed_action": "calculate+calculate+get_reservation_details",
+   "success_action": "get_reservation_details",
+   "jev_p": 0.49,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "book_reservation",
+   "decisive_success": "cancel_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.96,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.92,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure. My user ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.67,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "extra_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 3,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 4,
+   "failed_action": "search_direct_flight+search_direct_flight+search_direct_flight",
+   "success_action": "message",
+   "jev_p": 0.36,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Hmm, okay, let me see here. I appreciate the info, but I was really hoping the insurance would cover the change fees given my health situation. Let me think about that one.\n\nBut here's what I want to do: I'd like to switch to nonstop flights from DTW to JFK and back, same dates as my current reserva",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.96,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.96,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure. My user ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.98,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.92,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure thing. User ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.52,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.96,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure, yeah. My user ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.98,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.96,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure, yeah. My user ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.79,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "29",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 2,
+   "failed_action": "get_reservation_details+get_user_details",
+   "success_action": "get_user_details+get_reservation_details",
+   "jev_p": 0.97,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Sure. My user ID is raj_brown_5782, and the reservation ID is VA5SGQ.",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": "book_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.98,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "32",
+   "flaky": false,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "33",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 6,
+   "n": 8,
+   "first_divergence_index": 10,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 5,
+   "failed_action": "message",
+   "success_action": "search_onestop_flight",
+   "jev_p": 0.98,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Okay, so for the outbound I want HAT072 \u2014 the 9am one. And for the return, HAT278 works, the 4pm.\n\nBut wait \u2014 before we go further, are you charging me a fee for these changes?",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "33",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 6,
+   "n": 8,
+   "first_divergence_index": 10,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 8,
+   "failed_action": "message",
+   "success_action": "update_reservation_flights",
+   "jev_p": 0.93,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": true,
+   "user_before": "Option 1 works for me \u2014 the combined one. $192 net charge, and the 2 bags are free. Go ahead and do it all in one transaction.",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.98,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "39",
+   "flaky": false,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 0,
+   "n": 8
+  },
+  {
+   "task": "42",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 6,
+   "n": 8,
+   "first_divergence_index": 14,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 7,
+   "failed_action": "transfer_to_human_agents",
+   "success_action": "cancel_reservation+cancel_reservation",
+   "jev_p": 0.94,
+   "uncertain": false,
+   "generator": "llm",
+   "consistency": false,
+   "user_before": "Wait, so HTR26G is economy and you can't cancel it? That's the one that's actually wrong. That doesn't work for me.\n\nLook, the reason for all of these is the same \u2014 my assistant booked multiple flights by mistake. It's a change of plan, whatever you want to call it. But I need HTR26G gone too. Can I",
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "cancel_reservation",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.94,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "42",
+   "flaky": true,
+   "types": [
+    "extra_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 6,
+   "n": 8,
+   "first_divergence_index": 14,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 7,
+   "failed_action": "cancel_reservation+cancel_reservation+cancel_reservation",
+   "success_action": "cancel_reservation+cancel_reservation",
+   "jev_p": 0.64,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Okay, so three of them are fine, no cost. Go ahead and cancel those three.\n\nBut HTR26G \u2014 that's the May 16 one, right? That's still a mistake booking. I'm not paying for a flight I don't need. What are my options there?",
+   "decisive_failed": "cancel_reservation",
+   "decisive_success": null,
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.64,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 5,
+   "failed_action": "search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight",
+   "success_action": "message",
+   "jev_p": 0.67,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.75,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 12,
+   "origin": "agent",
+   "agent_kind": "different_tool",
+   "action_step": 4,
+   "failed_action": "search_direct_flight",
+   "success_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "jev_p": 0.72,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 12,
+   "origin": "agent",
+   "agent_kind": "different_tool",
+   "action_step": 4,
+   "failed_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "success_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "jev_p": 0.72,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 1.0,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "wrong_args_on_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 4,
+   "failed_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "success_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "jev_p": 0.72,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": true,
+   "decisive_jev_p": 0.64,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 4,
+   "failed_action": "search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight",
+   "success_action": "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status",
+   "jev_p": 0.72,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.99,
+   "decisive_uncertain": false,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "missing_gold_write"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 2,
+   "origin": "agent",
+   "agent_kind": "message_text",
+   "action_step": 5,
+   "failed_action": "search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight",
+   "success_action": "message",
+   "jev_p": 0.73,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": null,
+   "decisive_failed": null,
+   "decisive_success": "update_reservation_flights"
+  },
+  {
+   "task": "44",
+   "flaky": true,
+   "types": [
+    "missing_gold_write",
+    "unexpected_transfer"
+   ],
+   "n_success": 1,
+   "n": 8,
+   "first_divergence_index": 1,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 6,
+   "failed_action": "transfer_to_human_agents",
+   "success_action": "search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight",
+   "jev_p": 0.79,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": false,
+   "user_before": "Hold on. You're telling me you can't even tell me the flight durations? That's the whole reason I called. Like I said, I need the durations to make the call on what gets cancelled and what gets upgraded.\n\nSo who can actually pull the travel times? Can I talk to someone who has that data?",
+   "decisive_failed": "transfer_to_human_agents",
+   "decisive_success": "update_reservation_flights",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.79,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": false
+  },
+  {
+   "task": "45",
+   "flaky": true,
+   "types": [
+    "forbidden_write",
+    "extra_write"
+   ],
+   "n_success": 7,
+   "n": 8,
+   "first_divergence_index": 3,
+   "origin": "user",
+   "agent_kind": null,
+   "action_step": 5,
+   "failed_action": "message",
+   "success_action": "transfer_to_human_agents",
+   "jev_p": 0.59,
+   "uncertain": true,
+   "generator": "reasoner",
+   "consistency": true,
+   "user_before": "No, that doesn't work for me. This is a family emergency. I want a full refund. Like I said, it's an emergency \u2014 there has to be an exception for that.",
+   "decisive_failed": "update_reservation_flights",
+   "decisive_success": "transfer_to_human_agents",
+   "decisive_same_tool": false,
+   "decisive_jev_p": 0.55,
+   "decisive_uncertain": true,
+   "decisive_generator": null,
+   "decisive_consistency": true
+  }
+ ],
+ "summary": {
+  "failures": 69,
+  "flaky_failures": 37,
+  "always_fail_failures": 32,
+  "origin": {
+   "agent": 18,
+   "user": 19
+  },
+  "fork_uncertain": {
+   "null": 1,
+   "false": 19,
+   "true": 17
+  },
+  "fork_kind": {
+   "failed_msg=False,success_msg=False": 20,
+   "failed_msg=False,success_msg=True": 7,
+   "failed_msg=True,success_msg=False": 9
+  },
+  "decisive_kind": {
+   "extra": 2,
+   "different_write": 18,
+   "omitted": 4,
+   "same_tool_diff_args": 13
+  },
+  "decisive_uncertain": {
+   "false": 24,
+   "true": 9
+  },
+  "decisive_reasoner": {
+   "None": 33
+  },
+  "decisive_pairs": {
+   "update_reservation_flights | update_reservation_flights": 11,
+   "cancel_reservation | book_reservation": 6,
+   "book_reservation | cancel_reservation": 4,
+   "transfer_to_human_agents | update_reservation_flights": 4,
+   "None | cancel_reservation": 2,
+   "book_reservation | book_reservation": 2,
+   "book_reservation | None": 1,
+   "transfer_to_human_agents | book_reservation": 1,
+   "None | None": 1,
+   "update_reservation_flights | book_reservation": 1,
+   "transfer_to_human_agents | cancel_reservation": 1,
+   "cancel_reservation | None": 1
+  },
+  "types_flaky": {
+   "extra_write": 4,
+   "missing_gold_write": 14,
+   "unexpected_transfer": 8,
+   "communicate_only": 1,
+   "wrong_args_on_gold_write": 19,
+   "forbidden_write": 1
+  },
+  "types_always": {
+   "wrong_args_on_gold_write": 18,
+   "missing_gold_write": 16,
+   "unexpected_transfer": 14,
+   "extra_write": 8
+  },
+  "fork_pairs": {
+   "get_reservation_details+get_user_details | get_user_details+get_reservation_details": 6,
+   "message | update_reservation_flights": 5,
+   "get_reservation_details | calculate+calculate": 2,
+   "message | cancel_reservation": 2,
+   "search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight+search_direct_flight | message": 2,
+   "get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status | get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status+get_flight_status": 2,
+   "transfer_to_human_agents | book_reservation": 1,
+   "book_reservation | message": 1,
+   "cancel_reservation | message": 1,
+   "search_direct_flight+search_onestop_flight | search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight": 1,
+   "search_direct_flight+search_direct_flight+search_onestop_flight+search_onestop_flight | message": 1,
+   "get_reservation_details+get_reservation_details | get_reservation_details": 1,
+   "search_direct_flight+search_direct_flight+search_onestop_flight+search_onestop_flight | search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight": 1,
+   "search_direct_flight+search_onestop_flight+search_direct_flight+search_onestop_flight | message": 1,
+   "calculate+calculate+get_reservation_details | get_reservation_details": 1
+  }
+ }
+}
