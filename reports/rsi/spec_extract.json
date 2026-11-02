@@ -1,0 +1,7392 @@
+{
+ "points": {
+  "open": {
+   "failures": 37,
+   "failures_with_any_diff": 22,
+   "field_counts": {
+    "other": 18,
+    "time_constraints": 9,
+    "intents": 5,
+    "flight_criterion": 4,
+    "origin": 3,
+    "destination": 3,
+    "reservation_ids": 2
+   },
+   "per_task": {
+    "6": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 2,
+     "majority": {
+      "intents": [
+       "info",
+       "other"
+      ],
+      "reservation_ids": [
+       "pep4e0"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": "today",
+      "passengers": null,
+      "bags": null,
+      "insurance": "yes",
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "insurance not showing online",
+       "needs fixing today"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold2",
+       "trial": 3,
+       "differs": [],
+       "values": {}
+      }
+     ]
+    },
+    "8": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 0,
+     "majority": {
+      "intents": [
+       "book"
+      ],
+      "reservation_ids": [
+       "sophia_silva_7557"
+      ],
+      "origin": "ord",
+      "destination": "phl",
+      "dates": [
+       "2024-05-26"
+      ],
+      "cabin": null,
+      "flight_criterion": "exact same flight taken on may 10",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "one-way"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [],
+       "values": {}
+      }
+     ]
+    },
+    "14": {
+     "n_success": 4,
+     "n_fail": 4,
+     "success_deviating": 4,
+     "majority": {
+      "intents": [
+       "change_flight",
+       "info"
+      ],
+      "reservation_ids": [
+       "mohamed_silva_9265"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "check balances on gift cards and certificates",
+       "look up reservation by user id mohamed_silva_9265"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "reservation_ids"
+       ],
+       "values": {
+        "reservation_ids": null
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info"
+        ],
+        "reservation_ids": null,
+        "other": [
+         "check balances on gift cards and certificates",
+         "user id mohamed_silva_9265"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info"
+        ],
+        "other": [
+         "check gift card and certificate totals"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info"
+        ],
+        "other": [
+         "gift card and certificate totals"
+        ]
+       }
+      }
+     ]
+    },
+    "15": {
+     "n_success": 4,
+     "n_fail": 4,
+     "success_deviating": 3,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": null,
+      "origin": "atl",
+      "destination": null,
+      "dates": null,
+      "cabin": "economy",
+      "flight_criterion": "cheapest",
+      "time_constraints": "next day",
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "destination open to newark or philly",
+       "look up reservation by user id aarav_garcia_1177",
+       "not basic economy"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "day after current reservation",
+        "other": [
+         "destination can be newark or philly",
+         "not basic economy",
+         "look up reservation by user id aarav_garcia_1177"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 1,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": null,
+        "other": [
+         "move to the day after current reservation",
+         "destination open to PHL or EWR",
+         "not basic economy",
+         "look up reservation from account user id aarav_garcia_1177"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 2,
+       "differs": [
+        "other"
+       ],
+       "values": {
+        "other": [
+         "open to flying into either PHL or EWR",
+         "not basic economy",
+         "look up reservation by user id aarav_garcia_1177"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 3,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "day after current reservation",
+        "other": [
+         "not basic economy",
+         "destination can be PHL or EWR",
+         "look up reservation by user id aarav_garcia_1177"
+        ]
+       }
+      }
+     ]
+    },
+    "16": {
+     "n_success": 5,
+     "n_fail": 3,
+     "success_deviating": 3,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": null,
+      "origin": "atl",
+      "destination": "phl",
+      "dates": null,
+      "cabin": "economy",
+      "flight_criterion": "cheapest",
+      "time_constraints": "day after original booking",
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "look up reservation by user id aarav_garcia_1177",
+       "not basic economy"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "next day",
+        "other": [
+         "not basic economy",
+         "user id aarav_garcia_1177"
+        ]
+       }
+      }
+     ]
+    },
+    "23": {
+     "n_success": 3,
+     "n_fail": 5,
+     "success_deviating": 1,
+     "majority": {
+      "intents": [
+       "change_cabin",
+       "info"
+      ],
+      "reservation_ids": [
+       "mohamed_silva_9265"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": "business",
+      "flight_criterion": "cheapest",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "keep same dates",
+       "round trip",
+       "total certificate balances",
+       "total gift card balances"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "keep the same dates",
+        "other": [
+         "total balance on gift cards",
+         "total on certificates",
+         "round trip"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "same dates",
+        "other": [
+         "total gift card balances",
+         "total certificate balances",
+         "round trip"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "keep the same dates",
+        "other": [
+         "total balance on gift cards",
+         "total on certificates",
+         "round trip"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold2",
+       "trial": 1,
+       "differs": [
+        "intents"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "change_cabin"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold2",
+       "trial": 2,
+       "differs": [
+        "intents"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "change_cabin"
+        ]
+       }
+      }
+     ]
+    },
+    "29": {
+     "n_success": 1,
+     "n_fail": 7,
+     "success_deviating": 0,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": [
+       "va5sgq"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": "yes",
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "waive change fees due to health issues"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "other"
+       ],
+       "values": {
+        "other": [
+         "waive change fees due to health issue"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 3,
+       "differs": [
+        "origin",
+        "destination",
+        "flight_criterion",
+        "other"
+       ],
+       "values": {
+        "origin": "DTW",
+        "destination": "JFK",
+        "flight_criterion": "nonstop",
+        "other": [
+         "same dates",
+         "waive change fees due to health"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "origin",
+        "destination",
+        "flight_criterion",
+        "other"
+       ],
+       "values": {
+        "origin": "DTW",
+        "destination": "JFK",
+        "flight_criterion": "nonstop",
+        "other": [
+         "same dates as current reservation",
+         "waive change fees due to health problem"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "origin",
+        "destination",
+        "flight_criterion",
+        "other"
+       ],
+       "values": {
+        "origin": "DTW",
+        "destination": "JFK",
+        "flight_criterion": "nonstop",
+        "other": [
+         "same dates as current reservation",
+         "waive change fees due to health problem"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "other"
+       ],
+       "values": {
+        "other": [
+         "change fees waived due to health issue",
+         "roundtrip flights"
+        ]
+       }
+      }
+     ]
+    },
+    "33": {
+     "n_success": 6,
+     "n_fail": 2,
+     "success_deviating": 3,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": [
+       "hxdubj"
+      ],
+      "origin": null,
+      "destination": "sfo",
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": "nonstop",
+      "time_constraints": "outgoing flight moved to next day; return pushed back by a day",
+      "passengers": [
+       "yara_garcia_1905"
+      ],
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": null
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "time_constraints",
+        "other"
+       ],
+       "values": {
+        "time_constraints": "outgoing flight next day; return pushed back by a day",
+        "other": [
+         "move outgoing flight to nonstop on next day",
+         "push return from sfo back by a day"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 3,
+       "differs": [],
+       "values": {}
+      }
+     ]
+    },
+    "42": {
+     "n_success": 6,
+     "n_fail": 2,
+     "success_deviating": 1,
+     "majority": {
+      "intents": [
+       "info"
+      ],
+      "reservation_ids": null,
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "check profile for multiple flights booked on the same day"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [],
+       "values": {}
+      }
+     ]
+    },
+    "44": {
+     "n_success": 1,
+     "n_fail": 7,
+     "success_deviating": 0,
+     "majority": {
+      "intents": [
+       "cancel",
+       "change_cabin"
+      ],
+      "reservation_ids": null,
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": "business",
+      "flight_criterion": null,
+      "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "pull up bookings for sophia_silva_7557"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 3,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [],
+       "values": {}
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "flight_criterion",
+        "time_constraints"
+       ],
+       "values": {
+        "flight_criterion": "flight longer than 4 hours to cancel; 3 hours or less including layovers to upgrade",
+        "time_constraints": "cancel if flight longer than 4 hours; upgrade if 3 hours or less including layovers"
+       }
+      }
+     ]
+    },
+    "45": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 5,
+     "majority": {
+      "intents": [
+       "cancel"
+      ],
+      "reservation_ids": [
+       "pep4e0"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": [
+       "sophia taylor"
+      ],
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": "full refund",
+      "other": [
+       "family emergency"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold1",
+       "trial": 2,
+       "differs": [
+        "other"
+       ],
+       "values": {
+        "other": [
+         "family emergency",
+         "user id sophia_taylor_9065"
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  "pre_write": {
+   "failures": 37,
+   "failures_with_any_diff": 37,
+   "field_counts": {
+    "other": 37,
+    "intents": 28,
+    "time_constraints": 22,
+    "flight_criterion": 21,
+    "payment_preference": 21,
+    "passengers": 15,
+    "dates": 11,
+    "reservation_ids": 11,
+    "refund_preference": 11,
+    "bags": 10,
+    "insurance": 8,
+    "cabin": 4,
+    "origin": 3,
+    "destination": 2
+   },
+   "per_task": {
+    "6": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 6,
+     "majority": {
+      "intents": [
+       "info",
+       "other"
+      ],
+      "reservation_ids": [
+       "pep4e0"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": "yes",
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "add insurance to existing flight",
+       "fix today",
+       "not a new booking",
+       "not transferred"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold2",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "origin",
+        "destination",
+        "dates",
+        "cabin",
+        "flight_criterion",
+        "passengers",
+        "bags",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "book",
+         "info"
+        ],
+        "origin": "CLT",
+        "destination": "PHX",
+        "dates": [
+         "2024-03-20"
+        ],
+        "cabin": "basic economy",
+        "flight_criterion": "HAT176 plus HAT097",
+        "passengers": [
+         "Sophia Taylor"
+        ],
+        "bags": 1,
+        "payment_preference": "travel certificate first, then Visa ending 9796",
+        "other": [
+         "add insurance to existing reservation PEP4E0",
+         "price out new one-way CLT to PHX for the 20th with insurance included",
+         "routing CLT-DTW-PHX same as original"
+        ]
+       }
+      }
+     ]
+    },
+    "8": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 7,
+     "majority": {
+      "intents": [
+       "book"
+      ],
+      "reservation_ids": [
+       "sophia_silva_7557"
+      ],
+      "origin": "ord",
+      "destination": "phl",
+      "dates": [
+       "2024-05-26"
+      ],
+      "cabin": null,
+      "flight_criterion": "exact same flight as taken on may 10",
+      "time_constraints": null,
+      "passengers": [
+       "kevin smith",
+       "sophia silva"
+      ],
+      "bags": "none",
+      "insurance": "no",
+      "payment_preference": "one $500 certificate",
+      "refund_preference": null,
+      "other": [
+       "aisle and middle seats next to each other",
+       "seats together"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "flight_criterion",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "book",
+         "info"
+        ],
+        "flight_criterion": "same flight as taken on may 10",
+        "other": [
+         "one-way",
+         "aisle and middle seats together",
+         "wants to speak to someone who can handle seating"
+        ]
+       }
+      }
+     ]
+    },
+    "14": {
+     "n_success": 4,
+     "n_fail": 4,
+     "success_deviating": 4,
+     "majority": {
+      "intents": [
+       "book",
+       "cancel",
+       "info"
+      ],
+      "reservation_ids": [
+       "k1nw8n"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": "business",
+      "flight_criterion": "cheapest",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": "none",
+      "insurance": "no",
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "cancel then rebook",
+       "check certificate totals",
+       "check gift card totals",
+       "direct or not doesn't matter",
+       "keep same dates",
+       "round trip"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "reservation_ids",
+        "bags",
+        "insurance",
+        "other"
+       ],
+       "values": {
+        "reservation_ids": null,
+        "bags": null,
+        "insurance": null,
+        "other": [
+         "check gift card and certificate balances",
+         "look up reservation by user id mohamed_silva_9265",
+         "round trip",
+         "same dates as current reservation"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [
+        "intents",
+        "bags",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_cabin",
+         "cancel",
+         "book"
+        ],
+        "bags": null,
+        "insurance": null,
+        "payment_preference": "mastercard",
+        "other": [
+         "check gift card and certificate balances",
+         "apply $1000 certificates and $327 gift cards toward payment",
+         "card charge must stay under $2000",
+         "keep reservation as-is if over limit"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "cancel",
+         "book"
+        ],
+        "reservation_ids": [
+         "mohamed_silva_9265"
+        ],
+        "payment_preference": "use certificates and gift cards to reduce card charge",
+        "other": [
+         "check gift card and certificate totals",
+         "keep same dates",
+         "direct flights or not doesn't matter",
+         "wanted card charge under $2000",
+         "decided to hold off, no changes for now"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "payment_preference": "certificates first, then gift cards, then mastercard",
+        "other": [
+         "check gift card and certificate totals",
+         "keep same dates",
+         "round trip",
+         "cancel reason: change of plan",
+         "2 free bags per passenger sufficient"
+        ]
+       }
+      }
+     ]
+    },
+    "15": {
+     "n_success": 4,
+     "n_fail": 4,
+     "success_deviating": 4,
+     "majority": {
+      "intents": [
+       "change_cabin",
+       "change_flight"
+      ],
+      "reservation_ids": null,
+      "origin": "atl",
+      "destination": "phl",
+      "dates": [
+       "2024-05-24"
+      ],
+      "cabin": "economy",
+      "flight_criterion": "cheapest",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": "gift card on file",
+      "other": [
+       "accepts cheapest phl option at $207",
+       "compare atl-phl and atl-ewr",
+       "no reservation id, lookup by user id",
+       "open to ewr or phl",
+       "requested exception/review to change destination to ewr",
+       "user id aarav_garcia_1177",
+       "wants to move trip to next day"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [
+        "cabin",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "cabin": "economy (not basic)",
+        "time_constraints": "arrives earlier preferred; option b arrives 19:00",
+        "refund_preference": "original payment method (gift_card_8887175)",
+        "other": [
+         "destination flexible between phl and ewr, whichever cheapest",
+         "look up reservation via user id aarav_garcia_1177",
+         "option b: $216 phl itinerary hat227 + hat139",
+         "confirm final total and refund amount"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "flight_criterion",
+        "passengers",
+        "bags",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight"
+        ],
+        "flight_criterion": "cheapest, not basic economy, original routing, search PHL and EWR",
+        "passengers": [
+         "Aarav Garcia"
+        ],
+        "bags": "none",
+        "refund_preference": "original payment method",
+        "other": [
+         "move to day after current reservation",
+         "open to PHL or EWR",
+         "rejected $207 LGA overnight connection",
+         "selected $216 itinerary"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "flight_criterion",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight"
+        ],
+        "flight_criterion": "cheapest economy fare (not basic economy), prefer earlier arrival, one stop ok",
+        "time_constraints": "arrive earlier than midnight, prefer more reasonable arrival time",
+        "refund_preference": "original payment method",
+        "other": [
+         "compare PHL and EWR and pick lowest total",
+         "user id aarav_garcia_1177",
+         "selected option E: ATL-ORD-PHL arriving 19:00 for $216"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight"
+        ],
+        "time_constraints": "no landing after midnight",
+        "refund_preference": "original gift card",
+        "other": [
+         "open to PHL or EWR",
+         "not basic economy",
+         "user id aarav_garcia_1177",
+         "ATL-ORD-PHL option",
+         "refund difference $2,571"
+        ]
+       }
+      }
+     ]
+    },
+    "16": {
+     "n_success": 5,
+     "n_fail": 3,
+     "success_deviating": 5,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": null,
+      "origin": "atl",
+      "destination": "phl",
+      "dates": [
+       "2024-05-24"
+      ],
+      "cabin": "economy",
+      "flight_criterion": "cheapest",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": "original payment method (gift_card_8887175)",
+      "other": [
+       "move to day after original booking",
+       "refund $2,580 to gift_card_8887175"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "dates": [],
+        "flight_criterion": "cheapest, non-basic economy, shorter connection, specific flight numbers HAT227 HAT139",
+        "time_constraints": "day after original booking",
+        "refund_preference": "gift card gift_card_8887175",
+        "other": [
+         "not basic economy",
+         "avoid long LGA layover",
+         "user id aarav_garcia_1177"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "dates",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "dates": [],
+        "time_constraints": "day after original booking",
+        "refund_preference": "gift card ending 8887175",
+        "other": [
+         "not basic economy",
+         "shorter layover preferred",
+         "selected $216 option with 4-hour layover in chicago"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "flight_criterion",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "flight_criterion": "cheapest, not basic economy, arrives earlier in the evening, under $250, specific flight numbers HAT227 + HAT139",
+        "time_constraints": "arrives earlier in the evening, ideally under $250",
+        "refund_preference": "refund to gift card 8887175",
+        "other": [
+         "not basic economy",
+         "refund $2,571",
+         "user id aarav_garcia_1177"
+        ]
+       }
+      }
+     ]
+    },
+    "23": {
+     "n_success": 3,
+     "n_fail": 5,
+     "success_deviating": 2,
+     "majority": {
+      "intents": [
+       "book",
+       "cancel",
+       "info"
+      ],
+      "reservation_ids": [
+       "mohamed_silva_9265"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": "business",
+      "flight_criterion": "cheapest",
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": "minimize master card charge; use certificates and gift cards",
+      "refund_preference": null,
+      "other": [
+       "cancel current reservation and book new one",
+       "keep same dates",
+       "total certificate balances",
+       "total gift card balances"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "passengers",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "change_cabin",
+         "book",
+         "cancel"
+        ],
+        "reservation_ids": [],
+        "passengers": [
+         "mohamed_silva_9265",
+         "raj",
+         "liam"
+        ],
+        "payment_preference": "use certificates and gift cards to minimize master card charge",
+        "other": [
+         "confirm total gift card balance and breakdown",
+         "confirm total certificate balance and breakdown",
+         "split into three separate reservations to use all three certificates",
+         "use $500 certificate and all gift cards toward mohamed's reservation",
+         "use certificate_9984806 for raj",
+         "use other certificate for liam",
+         "cover remaining with master card",
+         "keep same dates",
+         "modify rather than cancel",
+         "option b to minimize master card charge",
+         "reason for cancellation: changing to business class booking"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "passengers",
+        "bags",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "book"
+        ],
+        "passengers": [
+         "mohamed silva",
+         "raj",
+         "liam"
+        ],
+        "bags": "none",
+        "insurance": "no",
+        "payment_preference": "mastercard ending 9363",
+        "other": [
+         "check total gift card balances",
+         "check total certificate balances",
+         "apply certificates and gift cards to reduce card charge",
+         "compare change vs new booking card charge",
+         "book three separate reservations one per passenger to use all certificates"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "passengers",
+        "bags",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "book"
+        ],
+        "passengers": [
+         "mohamed silva",
+         "raj",
+         "liam"
+        ],
+        "bags": "none",
+        "insurance": "no",
+        "payment_preference": "certificates first, then gift cards, then master card",
+        "other": [
+         "know total balance on gift cards and certificates",
+         "keep same dates",
+         "round trip",
+         "book three separate reservations one per passenger",
+         "use all three certificates",
+         "minimize master card payment"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold2",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "passengers",
+        "bags",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "cancel",
+         "book"
+        ],
+        "reservation_ids": [],
+        "passengers": [
+         "mohamed_silva_9265",
+         "raj",
+         "liam"
+        ],
+        "bags": "none",
+        "insurance": "no",
+        "payment_preference": "master card, gift cards, certificates",
+        "other": [
+         "total gift card balances",
+         "total certificate balances",
+         "round trip",
+         "keep same dates",
+         "three separate new reservations one per passenger",
+         "use a different certificate on each",
+         "use $500 certificate and both gift cards for mohamed",
+         "certificate_9984806 for raj",
+         "other certificate for liam"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold2",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "passengers",
+        "bags",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "info",
+         "change_flight",
+         "cancel",
+         "book"
+        ],
+        "passengers": [
+         "mohamed silva",
+         "raj",
+         "liam"
+        ],
+        "bags": "none",
+        "insurance": "no",
+        "payment_preference": "certificates and gift cards, remainder on mastercard",
+        "other": [
+         "check total gift card balances",
+         "check total certificate balances",
+         "round trip keeping same dates",
+         "split into three separate reservations, one per passenger",
+         "use one certificate per reservation",
+         "use $500 certificate plus gift cards for mohamed",
+         "use $250 certificate for raj",
+         "use $250 certificate for liam"
+        ]
+       }
+      }
+     ]
+    },
+    "29": {
+     "n_success": 1,
+     "n_fail": 7,
+     "success_deviating": 0,
+     "majority": {
+      "intents": [
+       "add_bags",
+       "book",
+       "change_flight"
+      ],
+      "reservation_ids": [
+       "va5sgq"
+      ],
+      "origin": "dtw",
+      "destination": "jfk",
+      "dates": [
+       "2024-05-19"
+      ],
+      "cabin": "economy",
+      "flight_criterion": "nonstop, cheapest, arriving before 7am, specific flight numbers hat169 and hat033",
+      "time_constraints": "early flights arriving before 7am at destination",
+      "passengers": "1",
+      "bags": "1",
+      "insurance": "yes",
+      "payment_preference": "visa ending 6521",
+      "refund_preference": null,
+      "other": [
+       "not basic economy",
+       "return on may 19",
+       "waive change fees due to health issues and existing insurance"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 0,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "bags",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight",
+         "cancel",
+         "book"
+        ],
+        "dates": null,
+        "flight_criterion": "nonstop, cheapest, not basic economy, early flights arriving before 7am",
+        "time_constraints": "early flights that get in before 7am at the destination",
+        "passengers": null,
+        "bags": null,
+        "payment_preference": null,
+        "other": [
+         "waive change fees due to health issues",
+         "cancel on health grounds",
+         "rebook as new trip to JFK",
+         "keep same dates as current reservation"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "payment_preference",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight",
+         "add_bags"
+        ],
+        "dates": null,
+        "flight_criterion": "nonstop, cheapest, not basic economy",
+        "time_constraints": "arrive before 7am at destination",
+        "passengers": null,
+        "payment_preference": null,
+        "refund_preference": "credit_card_8003957",
+        "other": [
+         "waive change fees due to health issues",
+         "prefer JFK over LGA",
+         "requested supervisor",
+         "relaxed time requirement if no early flights",
+         "confirmed flights HAT275 + HAT226 outbound and HAT002 + HAT106 return"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "book",
+         "change_flight"
+        ],
+        "dates": [
+         "19"
+        ],
+        "flight_criterion": "nonstop, cheapest economy not basic economy, early flights landing before 7am, HAT169 outbound, HAT033 return",
+        "time_constraints": "land before 7am at destination",
+        "passengers": null,
+        "payment_preference": "visa \u20226521",
+        "other": [
+         "waive change fees due to health issue",
+         "cancellation reason: health issue",
+         "roundtrip"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "book",
+         "add_bags",
+         "change_flight"
+        ],
+        "dates": [],
+        "flight_criterion": "nonstop, cheapest, early flights landing before 7am, specific flight numbers HAT169 and HAT033",
+        "time_constraints": "early flights that land before 7am at destination; return leaves on the 19th",
+        "passengers": null,
+        "refund_preference": "full refund",
+        "other": [
+         "cancel VA5SGQ first then book new reservation",
+         "roundtrip DTW to JFK and back",
+         "same dates",
+         "not basic economy",
+         "add travel insurance on new booking"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight",
+         "cancel",
+         "book",
+         "add_bags",
+         "insurance"
+        ],
+        "dates": [
+         "2024-01-19"
+        ],
+        "flight_criterion": "nonstop, cheapest, specific flight numbers HAT169 and HAT033",
+        "time_constraints": "early flights arriving before 7am at destination; return leaves on the 19th",
+        "passengers": null,
+        "other": [
+         "waive change fees due to health problem",
+         "prefer not to cancel and rebook if another way",
+         "add insurance"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "insurance",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight",
+         "cancel",
+         "book",
+         "add_bags"
+        ],
+        "dates": [
+         "2024-01-19"
+        ],
+        "flight_criterion": "nonstop, cheapest, not basic economy, specific flight numbers HAT169 and HAT033",
+        "time_constraints": "arrive before 7am at destination; return leaves on the 19th",
+        "passengers": null,
+        "insurance": "no",
+        "payment_preference": "credit_card_7686643",
+        "other": [
+         "waive change fees due to health problem and insurance",
+         "prefer not to cancel if alternative exists",
+         "cancel VA5SGQ and book HAT169 and HAT033"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "dates",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "book",
+         "add_bags"
+        ],
+        "dates": [
+         "2025-05-17",
+         "2025-05-19"
+        ],
+        "flight_criterion": "nonstop, cheapest regular economy (not basic), specific flight numbers HAT169 and HAT033",
+        "time_constraints": "arrive before 7am both directions; return departs on the 19th",
+        "passengers": null,
+        "other": [
+         "cancel under insurance due to health issue",
+         "waive change fees",
+         "rebook separately after cancellation",
+         "confirm full booking details before finalizing",
+         "total $312"
+        ]
+       }
+      }
+     ]
+    },
+    "33": {
+     "n_success": 6,
+     "n_fail": 2,
+     "success_deviating": 6,
+     "majority": {
+      "intents": [
+       "change_flight"
+      ],
+      "reservation_ids": [
+       "hxdubj"
+      ],
+      "origin": null,
+      "destination": "sfo",
+      "dates": null,
+      "cabin": null,
+      "flight_criterion": "nonstop",
+      "time_constraints": "outgoing after 8am; return before 9pm",
+      "passengers": [
+       "yara_garcia_1905"
+      ],
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": "gift_card_6941833",
+      "other": [
+       "waive change fees due to insurance"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "flight_criterion",
+        "time_constraints",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "flight_criterion": "nonstop; HAT072; HAT278",
+        "time_constraints": "outbound 9am; return 4pm",
+        "refund_preference": "gift_card_1646646",
+        "other": [
+         "move outgoing flight to next day",
+         "push return from SFO back by a day",
+         "no change fee"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold1",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "cabin",
+        "flight_criterion",
+        "time_constraints",
+        "bags",
+        "insurance",
+        "refund_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "change_flight",
+         "change_cabin",
+         "add_bags"
+        ],
+        "cabin": "economy",
+        "flight_criterion": "nonstop, specific flight numbers",
+        "time_constraints": "outbound 9am, return 4pm",
+        "bags": 2,
+        "insurance": "yes",
+        "refund_preference": "gift card \u20261646646",
+        "other": [
+         "outbound moved to next day nonstop HAT072",
+         "return from SFO pushed back a day on HAT278",
+         "no change fees due to insurance",
+         "upgrade to business class declined",
+         "flight changes and bags in one transaction"
+        ]
+       }
+      }
+     ]
+    },
+    "42": {
+     "n_success": 6,
+     "n_fail": 2,
+     "success_deviating": 5,
+     "majority": {
+      "intents": [
+       "cancel",
+       "info"
+      ],
+      "reservation_ids": [
+       "fdz0t5",
+       "hsr97w"
+      ],
+      "origin": "dfw",
+      "destination": "nyc",
+      "dates": [
+       "2024-05-17",
+       "2024-05-22"
+      ],
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": null,
+      "refund_preference": null,
+      "other": [
+       "cancel fdz0t5 and hsr97w as they clash with new york and boston plans",
+       "check profile for multiple flights booked same day",
+       "do not touch se9kel (for ivan and emma)",
+       "leave mfrb94 (may 27 to 30) alone"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "reservation_ids",
+        "origin",
+        "other"
+       ],
+       "values": {
+        "reservation_ids": [
+         "SE9KEL",
+         "MFRB94",
+         "HTR26G",
+         "FDZ0T5",
+         "HSR97W"
+        ],
+        "origin": "DAL",
+        "other": [
+         "cancel reservations that are hers and don't match her stated travel",
+         "leave SE9KEL alone (Ivan and Emma)",
+         "leave MFRB94 alone (May 27-30, not a conflict)",
+         "reason: assistant booked multiple flights by mistake",
+         "wants to speak to someone who can fix HTR26G cancellation"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [
+        "reservation_ids",
+        "dates",
+        "other"
+       ],
+       "values": {
+        "reservation_ids": [
+         "HTR26G"
+        ],
+        "dates": [
+         "2025-05-17",
+         "2025-05-22",
+         "2025-05-16"
+        ],
+        "other": [
+         "cancel four mistaken bookings, but not bookings for other people",
+         "wants to know cancellation fees before cancelling",
+         "cancel three bookings that are free to cancel",
+         "does not want to pay for HTR26G and asks about options"
+        ]
+       }
+      }
+     ]
+    },
+    "44": {
+     "n_success": 1,
+     "n_fail": 7,
+     "success_deviating": 0,
+     "majority": {
+      "intents": [
+       "cancel",
+       "change_cabin"
+      ],
+      "reservation_ids": [
+       "h8q05l",
+       "kc18k6",
+       "nm1vx1",
+       "s61czx"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": null,
+      "cabin": "business",
+      "flight_criterion": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+      "time_constraints": "cancel if flight longer than 4 hours; upgrade if 3 hours or less including layovers",
+      "passengers": null,
+      "bags": null,
+      "insurance": null,
+      "payment_preference": "visa",
+      "refund_preference": null,
+      "other": [
+       "cancel s61czx reason change of plan",
+       "leave s61czx as is",
+       "upgrade nm1vx1, kc18k6, h8q05l to business where possible",
+       "wants total cost before agreeing"
+      ]
+     },
+     "failures": [
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "origin",
+        "destination",
+        "flight_criterion",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_flight",
+         "change_cabin",
+         "info"
+        ],
+        "origin": "LAX",
+        "destination": "CLT",
+        "flight_criterion": "flights under 4 hours",
+        "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+        "payment_preference": "credit card ending 7238",
+        "other": [
+         "cancel KC18K6 (7 hours total)",
+         "S61CZX: check routing keeping every flight under 4 hours, else leave alone",
+         "upgrade H8Q05L at $163",
+         "hold off NM1VX1 until price is firm",
+         "will not pay $827, agreed to $647"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "flight_criterion",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "compensation",
+         "other"
+        ],
+        "reservation_ids": [],
+        "flight_criterion": "flights longer than 4 hours to cancel; flights 3 hours or less including layovers to upgrade",
+        "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+        "payment_preference": null,
+        "other": [
+         "reason for cancellation is change of plans, no health issue",
+         "wants full total for both upgrades before approving",
+         "wants to speak to a supervisor",
+         "do not touch upgrades yet"
+        ]
+       }
+      },
+      {
+       "run": "deliberate_reasoner_rules_consistency",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "flight_criterion",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "info",
+         "other"
+        ],
+        "reservation_ids": [
+         "KC18K6",
+         "S61CZX"
+        ],
+        "flight_criterion": "total journey time including layovers; cancel if over 4 hours; upgrade if 3 hours or less",
+        "time_constraints": "cancel flights with total journey time over 4 hours; upgrade flights with total journey time 3 hours or less",
+        "payment_preference": null,
+        "other": [
+         "cancel long reservations",
+         "upgrade short reservations to business where possible",
+         "transfer to a human agent",
+         "wants actual cancellation options",
+         "does not have a health issue"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 0,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "info"
+        ],
+        "reservation_ids": null,
+        "time_constraints": "cancel: flight longer than 4 hours; upgrade: 3 hours or less including layovers",
+        "payment_preference": null,
+        "other": [
+         "wants total cost of all qualifying upgrades before any action",
+         "approved $163 upgrade for the one qualifying flight",
+         "wants long flights cancelled despite no health or weather reason",
+         "asked what cancellation options exist"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 1,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "flight_criterion",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "info",
+         "other"
+        ],
+        "reservation_ids": [],
+        "flight_criterion": "flights longer than 4 hours to cancel; flights 3 hours or less including layovers to upgrade",
+        "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+        "payment_preference": null,
+        "other": [
+         "cancellation reason is change of plan",
+         "wants total all-in price for upgrades",
+         "wants supervisor if long flights cannot be cancelled"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "flight_criterion",
+        "time_constraints",
+        "passengers",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "info"
+        ],
+        "flight_criterion": null,
+        "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+        "passengers": [
+         "sophia_silva_7557"
+        ],
+        "payment_preference": null,
+        "other": [
+         "cancel only if insurance covers, otherwise leave S61CZX",
+         "wants full total cost of all proposed upgrades",
+         "agreed to $647 total for both upgrades",
+         "refuses $827 price",
+         "if $647 not honored, do nothing, leave both as they are, no charge"
+        ]
+       }
+      },
+      {
+       "run": "e4_mined-fold0",
+       "trial": 3,
+       "differs": [
+        "intents",
+        "reservation_ids",
+        "flight_criterion",
+        "time_constraints",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_cabin",
+         "info"
+        ],
+        "reservation_ids": [],
+        "flight_criterion": null,
+        "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+        "payment_preference": null,
+        "other": [
+         "pull up bookings under sophia_silva_7557",
+         "needs flight durations",
+         "wants to speak to someone with travel time data"
+        ]
+       }
+      }
+     ]
+    },
+    "45": {
+     "n_success": 7,
+     "n_fail": 1,
+     "success_deviating": 7,
+     "majority": {
+      "intents": [
+       "cancel",
+       "change_flight",
+       "compensation",
+       "insurance",
+       "other"
+      ],
+      "reservation_ids": [
+       "pep4e0"
+      ],
+      "origin": null,
+      "destination": null,
+      "dates": [
+       "2025-05-22"
+      ],
+      "cabin": null,
+      "flight_criterion": null,
+      "time_constraints": null,
+      "passengers": [
+       "sophia taylor"
+      ],
+      "bags": null,
+      "insurance": "yes",
+      "payment_preference": null,
+      "refund_preference": "full refund",
+      "other": [
+       "does not want cabin upgrade",
+       "does not want to be transferred",
+       "family emergency",
+       "wants to speak to someone who can fix it"
+      ]
+     },
+     "failures": [
+      {
+       "run": "e4_mined-fold1",
+       "trial": 2,
+       "differs": [
+        "intents",
+        "cabin",
+        "payment_preference",
+        "other"
+       ],
+       "values": {
+        "intents": [
+         "cancel",
+         "change_flight",
+         "compensation",
+         "info"
+        ],
+        "cabin": "economy",
+        "payment_preference": "travel certificate first, then card ending 5191",
+        "other": [
+         "family emergency",
+         "does not want to be transferred",
+         "does not want cabin upgrade"
+        ]
+       }
+      }
+     ]
+    }
+   }
+  }
+ },
+ "episodes": 88,
+ "specs": [
+  {
+   "task": "6",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to existing flight",
+     "fix today",
+     "not a new booking",
+     "not transferred"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2025-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "same flight as may 10, hat271",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one $500 certificate",
+    "refund_preference": null,
+    "other": [
+     "aisle and middle seats together",
+     "no seat selection accepted"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after current reservation",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "destination can be newark or philly",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": "atl",
+    "destination": "phl",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy (not basic)",
+    "flight_criterion": "cheapest",
+    "time_constraints": "arrives earlier preferred; option b arrives 19:00",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method (gift_card_8887175)",
+    "other": [
+     "destination flexible between phl and ewr, whichever cheapest",
+     "look up reservation via user id aarav_garcia_1177",
+     "option b: $216 phl itinerary hat227 + hat139",
+     "confirm final total and refund amount"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "M05KNL"
+    ],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, not basic economy, specific flight numbers HAT110 + HAT172",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method (gift_card_8887175)",
+    "other": [
+     "move to day after original booking",
+     "refund $2,580 to gift_card_8887175"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate balances"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "K1NW8N"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates and gift cards as much as possible, rest on mastercard",
+    "refund_preference": null,
+    "other": [
+     "check gift card totals",
+     "check certificate totals",
+     "keep same dates",
+     "round trip",
+     "direct or not doesn't matter",
+     "cancel then rebook"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": "keep the same dates",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total balance on gift cards",
+     "total on certificates",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "change_cabin",
+     "book",
+     "cancel"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed_silva_9265",
+     "raj",
+     "liam"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "use certificates and gift cards to minimize master card charge",
+    "refund_preference": null,
+    "other": [
+     "confirm total gift card balance and breakdown",
+     "confirm total certificate balance and breakdown",
+     "split into three separate reservations to use all three certificates",
+     "use $500 certificate and all gift cards toward mohamed's reservation",
+     "use certificate_9984806 for raj",
+     "use other certificate for liam",
+     "cover remaining with master card",
+     "keep same dates",
+     "modify rather than cancel",
+     "option b to minimize master card charge",
+     "reason for cancellation: changing to business class booking"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issues"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": null,
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, not basic economy, early flights arriving before 7am",
+    "time_constraints": "early flights that get in before 7am at the destination",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issues",
+     "cancel on health grounds",
+     "rebook as new trip to JFK",
+     "keep same dates as current reservation"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "next day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "move outgoing flight to nonstop the next day",
+     "push return from sfo back by a day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [
+     "2024-01-19",
+     "2024-01-23"
+    ],
+    "cabin": null,
+    "flight_criterion": "nonstop; specific flight numbers HAT072, HAT278",
+    "time_constraints": "outgoing after 8am; return before 9pm",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "gift_card_6941833",
+    "other": [
+     "waive change fees due to insurance"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W"
+    ],
+    "origin": "DFW",
+    "destination": "NYC",
+    "dates": [
+     "2024-05-17",
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked same day",
+     "do not touch SE9KEL (for Ivan and Emma)",
+     "leave MFRB94 (May 27 to 30) alone",
+     "cancel FDZ0T5 and HSR97W as they clash with New York and Boston plans"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "add_bags",
+     "compensation",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "does not want cabin upgrade",
+     "does not want to be transferred",
+     "wants to speak to someone who can fix it"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "S61CZX",
+     "NM1VX1",
+     "KC18K6",
+     "H8Q05L"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "time_constraints": "cancel if flight longer than 4 hours; upgrade if 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "visa",
+    "refund_preference": null,
+    "other": [
+     "cancel S61CZX reason change of plan",
+     "upgrade NM1VX1, KC18K6, H8Q05L to business where possible",
+     "wants total cost before agreeing",
+     "leave S61CZX as is"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to reservation",
+     "verify whether insurance was paid for",
+     "fix today",
+     "transfer to human agent without being bounced around"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2025-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "Sophia Silva",
+     "Kevin Smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one certificate ending 8045380 ($500)",
+    "refund_preference": null,
+    "other": [
+     "seats together",
+     "aisle and middle seats next to each other"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "next day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card 8887175",
+    "other": [
+     "not basic economy",
+     "change to next day",
+     "user id aarav_garcia_1177",
+     "flights HAT110 + HAT172",
+     "refund $2,580"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "next day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "destination open to newark or philly",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "change_cabin"
+    ],
+    "reservation_ids": null,
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, non-basic economy, specific flight numbers HAT110 + HAT172",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "gift card on file",
+    "refund_preference": "gift card on file",
+    "other": [
+     "wants to move trip to next day",
+     "open to EWR or PHL",
+     "requested exception/review to change destination to EWR",
+     "compare ATL-PHL and ATL-EWR",
+     "user id aarav_garcia_1177",
+     "no reservation id, lookup by user id",
+     "accepts cheapest PHL option at $207"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check balances on gift cards and certificates",
+     "look up reservation by user id mohamed_silva_9265"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate balances",
+     "wants total balances, not individual",
+     "same dates as current reservation",
+     "round trip",
+     "direct or not doesn't matter",
+     "cancel reason: change of plan",
+     "look up reservation via user id mohamed_silva_9265"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": "same dates",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "book"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed silva",
+     "raj",
+     "liam"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "mastercard ending 9363",
+    "refund_preference": null,
+    "other": [
+     "check total gift card balances",
+     "check total certificate balances",
+     "apply certificates and gift cards to reduce card charge",
+     "compare change vs new booking card charge",
+     "book three separate reservations one per passenger to use all certificates"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issues"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "add_bags"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": null,
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, not basic economy",
+    "time_constraints": "arrive before 7am at destination",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "credit_card_8003957",
+    "other": [
+     "waive change fees due to health issues",
+     "prefer JFK over LGA",
+     "requested supervisor",
+     "relaxed time requirement if no early flights",
+     "confirmed flights HAT275 + HAT226 outbound and HAT002 + HAT106 return"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "move outgoing flight to nonstop on next day",
+     "push return from sfo back by a day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "SFO",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop; HAT072; HAT278",
+    "time_constraints": "outbound 9am; return 4pm",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift_card_1646646",
+    "other": [
+     "move outgoing flight to next day",
+     "push return from SFO back by a day",
+     "no change fee"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "SE9KEL",
+     "MFRB94",
+     "HTR26G",
+     "FDZ0T5",
+     "HSR97W"
+    ],
+    "origin": "DAL",
+    "destination": "NYC",
+    "dates": [
+     "2024-05-17",
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel reservations that are hers and don't match her stated travel",
+     "leave SE9KEL alone (Ivan and Emma)",
+     "leave MFRB94 alone (May 27-30, not a conflict)",
+     "reason: assistant booked multiple flights by mistake",
+     "wants to speak to someone who can fix HTR26G cancellation"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "add_bags",
+     "compensation",
+     "info"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "not paying extra",
+     "not upgrading",
+     "leave reservation as is"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "change_cabin",
+     "info"
+    ],
+    "reservation_ids": [
+     "KC18K6",
+     "S61CZX",
+     "H8Q05L",
+     "NM1VX1"
+    ],
+    "origin": "LAX",
+    "destination": "CLT",
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "flights under 4 hours",
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "credit card ending 7238",
+    "refund_preference": null,
+    "other": [
+     "cancel KC18K6 (7 hours total)",
+     "S61CZX: check routing keeping every flight under 4 hours, else leave alone",
+     "upgrade H8Q05L at $163",
+     "hold off NM1VX1 until price is firm",
+     "will not pay $827, agreed to $647"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": "none",
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to reservation",
+     "insurance not showing online",
+     "family members have insurance"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one $500 certificate",
+    "refund_preference": null,
+    "other": [
+     "one-way",
+     "aisle and middle seats together",
+     "wants to speak to someone who can handle seating"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original flight",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "destination can be PHL or EWR",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "arriving just after midnight on the 25th",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method",
+    "other": [
+     "open to PHL or EWR",
+     "confirm both legs regular economy not basic",
+     "confirm layover time at LGA",
+     "refund to gift_card_8887175"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "next day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method",
+    "other": [
+     "not basic economy",
+     "switch whole reservation",
+     "refund any fare difference",
+     "flight numbers HAT110 + HAT172"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check balances on gift cards and certificates",
+     "look up reservation by user id mohamed_silva_9265"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate balances",
+     "look up reservation by user id mohamed_silva_9265",
+     "round trip",
+     "same dates as current reservation"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": "keep the same dates",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total balance on gift cards",
+     "total on certificates",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "book"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed silva",
+     "raj",
+     "liam"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates first, then gift cards, then master card",
+    "refund_preference": null,
+    "other": [
+     "know total balance on gift cards and certificates",
+     "keep same dates",
+     "round trip",
+     "book three separate reservations one per passenger",
+     "use all three certificates",
+     "minimize master card payment"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issue"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [
+     "19"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest economy not basic economy, early flights landing before 7am, HAT169 outbound, HAT033 return",
+    "time_constraints": "land before 7am at destination",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "visa \u20226521",
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issue",
+     "cancellation reason: health issue",
+     "roundtrip"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "move outgoing flight to nonstop on next day",
+     "push return from sfo back by a day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop outbound; return flights between 8am and 9pm",
+    "time_constraints": "return between 8am and 9pm",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift_card_6941833",
+    "other": [
+     "move outgoing flight to next day",
+     "push return from sfo back by a day",
+     "outbound flight hat072",
+     "return flight hat278"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked for the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W",
+     "SE9KEL"
+    ],
+    "origin": "DFW",
+    "destination": "JFK",
+    "dates": [
+     "2024-05-17",
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked same day",
+     "arriving in new york from dallas on may 17",
+     "leaving boston on may 22",
+     "cancel FDZ0T5 and HSR97W",
+     "leave SE9KEL alone"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "compensation",
+     "other"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "flights longer than 4 hours to cancel; flights 3 hours or less including layovers to upgrade",
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "reason for cancellation is change of plans, no health issue",
+     "wants full total for both upgrades before approving",
+     "wants to speak to a supervisor",
+     "do not touch upgrades yet"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "compensation",
+     "change_flight",
+     "insurance",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "not willing to pay extra",
+     "wants supervisor"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to booking",
+     "fix today",
+     "no transfer"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "$500 certificate",
+    "refund_preference": null,
+    "other": [
+     "one-way",
+     "same flight as may 10 ord to phl"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check balances on gift cards and certificates",
+     "look up reservation by user id mohamed_silva_9265"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "cancel",
+     "book",
+     "change_cabin"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate balances",
+     "look up reservation by user id mohamed_silva_9265",
+     "round trip",
+     "same dates"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original reservation",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original reservation",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card",
+    "other": [
+     "not basic economy",
+     "user id aarav_garcia_1177",
+     "proceed with itinerary a"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after current booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "destination open to PHL or EWR",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "info",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "M05KNL"
+    ],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, not basic economy, HAT110 ATL-LGA 14:00-16:30 + HAT172 LGA-PHL 23:00-00:00+1",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card 8887175",
+    "other": [
+     "modify M05KNL to 2024-05-24",
+     "refund $2,580 difference to gift card 8887175",
+     "prefer to keep EWR option",
+     "quote cheapest economy ATL-EWR on 2024-05-24 as cancel-and-rebook",
+     "confirm cancellation terms/fees on M05KNL"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "round trip",
+     "keep same dates"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "minimize master card charge; use certificates and gift cards",
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "cancel current reservation and book new one",
+     "keep same dates"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "same dates",
+     "waive change fees due to health"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "add_bags",
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, early flights landing before 7am, specific flight numbers HAT169 and HAT033",
+    "time_constraints": "early flights that land before 7am at destination; return leaves on the 19th",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "visa ending 6521",
+    "refund_preference": "full refund",
+    "other": [
+     "cancel VA5SGQ first then book new reservation",
+     "roundtrip DTW to JFK and back",
+     "same dates",
+     "not basic economy",
+     "add travel insurance on new booking"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight moved to next day; return from sfo pushed back by a day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "move outgoing flight to next day",
+     "move outgoing flight to nonstop",
+     "push back return from sfo by a day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "after 8am and before 9pm",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift_card_6941833",
+    "other": [
+     "move outgoing flight to next day",
+     "push back return from sfo by a day",
+     "outgoing flight hat072 at 9am",
+     "return flight hat278 at 4pm",
+     "no change fee"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W"
+    ],
+    "origin": "DAL",
+    "destination": "NYC",
+    "dates": [
+     "2025-05-17",
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked same day",
+     "cancel FDZ0T5 and HSR97W",
+     "do not touch reservation SE9KEL or other passengers",
+     "reason for cancellation: booking mixup with assistant"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "KC18K6",
+     "S61CZX"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "total journey time including layovers; cancel if over 4 hours; upgrade if 3 hours or less",
+    "time_constraints": "cancel flights with total journey time over 4 hours; upgrade flights with total journey time 3 hours or less",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel long reservations",
+     "upgrade short reservations to business where possible",
+     "transfer to a human agent",
+     "wants actual cancellation options",
+     "does not have a health issue"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "deliberate_reasoner_rules_consistency",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "user id sophia_taylor_9065"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "compensation",
+     "info"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "does not want cabin upgrade",
+     "wants to speak to someone who can fix it"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "e4_mined-fold0",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment",
+    "other": [
+     "not basic economy",
+     "user id aarav_garcia_1177",
+     "flights HAT110 and HAT172 for $207"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "e4_mined-fold0",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check balances on gift cards and certificates",
+     "user id mohamed_silva_9265"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_cabin",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "K1NW8N"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": "mastercard",
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate balances",
+     "apply $1000 certificates and $327 gift cards toward payment",
+     "card charge must stay under $2000",
+     "keep reservation as-is if over limit"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "e4_mined-fold0",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issues"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "add_bags",
+     "book"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [
+     "2024-05-19"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, arriving before 7am, specific flight numbers HAT169 and HAT033",
+    "time_constraints": "early flights arriving before 7am at destination",
+    "passengers": 1,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "visa ending 6521",
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health issues and existing insurance",
+     "not basic economy",
+     "return on may 19"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "e4_mined-fold0",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "HTR26G"
+    ],
+    "origin": "DFW",
+    "destination": "NYC",
+    "dates": [
+     "2025-05-17",
+     "2025-05-22",
+     "2025-05-16"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel four mistaken bookings, but not bookings for other people",
+     "wants to know cancellation fees before cancelling",
+     "cancel three bookings that are free to cancel",
+     "does not want to pay for HTR26G and asks about options"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "e4_mined-fold0",
+   "trial": 0,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "info"
+    ],
+    "reservation_ids": null,
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "time_constraints": "cancel: flight longer than 4 hours; upgrade: 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "wants total cost of all qualifying upgrades before any action",
+     "approved $163 upgrade for the one qualifying flight",
+     "wants long flights cancelled despite no health or weather reason",
+     "asked what cancellation options exist"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "e4_mined-fold0",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, non-basic economy, shorter connection, specific flight numbers HAT227 HAT139",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card gift_card_8887175",
+    "other": [
+     "not basic economy",
+     "avoid long LGA layover",
+     "user id aarav_garcia_1177"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "e4_mined-fold0",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate totals"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "use certificates and gift cards to reduce card charge",
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate totals",
+     "keep same dates",
+     "direct flights or not doesn't matter",
+     "wanted card charge under $2000",
+     "decided to hold off, no changes for now"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "e4_mined-fold0",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "same dates as current reservation",
+     "waive change fees due to health problem"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "cancel",
+     "book",
+     "add_bags",
+     "insurance"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [
+     "2024-01-19"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, specific flight numbers HAT169 and HAT033",
+    "time_constraints": "early flights arriving before 7am at destination; return leaves on the 19th",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "visa ending 6521",
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health problem",
+     "prefer not to cancel and rebook if another way",
+     "add insurance"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "e4_mined-fold0",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W",
+     "SE9KEL"
+    ],
+    "origin": "DAL",
+    "destination": "NYC",
+    "dates": [
+     "2025-05-17",
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel duplicate bookings FDZ0T5 and HSR97W",
+     "leave SE9KEL alone",
+     "reason: booking mistake by assistant",
+     "check profile for multiple flights same day"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "e4_mined-fold0",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "info",
+     "other"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "flights longer than 4 hours to cancel; flights 3 hours or less including layovers to upgrade",
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancellation reason is change of plan",
+     "wants total all-in price for upgrades",
+     "wants supervisor if long flights cannot be cancelled"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "e4_mined-fold0",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after original booking",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card ending 8887175",
+    "other": [
+     "not basic economy",
+     "shorter layover preferred",
+     "selected $216 option with 4-hour layover in chicago"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "e4_mined-fold0",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "gift card and certificate totals"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "K1NW8N"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates first, then gift cards, then mastercard",
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate totals",
+     "keep same dates",
+     "round trip",
+     "cancel reason: change of plan",
+     "2 free bags per passenger sufficient"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "e4_mined-fold0",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "same dates as current reservation",
+     "waive change fees due to health problem"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "cancel",
+     "book",
+     "add_bags"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [
+     "2024-01-19"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest, not basic economy, specific flight numbers HAT169 and HAT033",
+    "time_constraints": "arrive before 7am at destination; return leaves on the 19th",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "no",
+    "payment_preference": "credit_card_7686643",
+    "refund_preference": null,
+    "other": [
+     "waive change fees due to health problem and insurance",
+     "prefer not to cancel if alternative exists",
+     "cancel VA5SGQ and book HAT169 and HAT033"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "e4_mined-fold0",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W",
+     "SE9KEL"
+    ],
+    "origin": "DAL",
+    "destination": "BOS",
+    "dates": [
+     "2025-05-17",
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked same day",
+     "cancel FDZ0T5 and HSR97W as duplicate bookings",
+     "do not touch SE9KEL",
+     "cancel reason: other - duplicate booking, assistant mistake"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "e4_mined-fold0",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "info"
+    ],
+    "reservation_ids": [
+     "S61CZX",
+     "KC18K6",
+     "NM1VX1",
+     "H8Q05L"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": [
+     "sophia_silva_7557"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel only if insurance covers, otherwise leave S61CZX",
+     "wants full total cost of all proposed upgrades",
+     "agreed to $647 total for both upgrades",
+     "refuses $827 price",
+     "if $647 not honored, do nothing, leave both as they are, no charge"
+    ]
+   }
+  },
+  {
+   "task": "16",
+   "run": "e4_mined-fold0",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "next day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, not basic economy, arrives earlier in the evening, under $250, specific flight numbers HAT227 + HAT139",
+    "time_constraints": "arrives earlier in the evening, ideally under $250",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "refund to gift card 8887175",
+    "other": [
+     "not basic economy",
+     "refund $2,571",
+     "user id aarav_garcia_1177"
+    ]
+   }
+  },
+  {
+   "task": "14",
+   "run": "e4_mined-fold0",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "gift card and certificate totals"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "K1NW8N"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates first, then gift cards, then mastercard",
+    "refund_preference": null,
+    "other": [
+     "check gift card and certificate totals",
+     "keep same dates",
+     "round trip",
+     "direct or not doesn't matter",
+     "cancel reason change of plan",
+     "mastercard charge under $2000"
+    ]
+   }
+  },
+  {
+   "task": "29",
+   "run": "e4_mined-fold0",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "change fees waived due to health issue",
+     "roundtrip flights"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "add_bags"
+    ],
+    "reservation_ids": [
+     "VA5SGQ"
+    ],
+    "origin": "DTW",
+    "destination": "JFK",
+    "dates": [
+     "2025-05-17",
+     "2025-05-19"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, cheapest regular economy (not basic), specific flight numbers HAT169 and HAT033",
+    "time_constraints": "arrive before 7am both directions; return departs on the 19th",
+    "passengers": null,
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "visa ending 6521",
+    "refund_preference": null,
+    "other": [
+     "cancel under insurance due to health issue",
+     "waive change fees",
+     "rebook separately after cancellation",
+     "confirm full booking details before finalizing",
+     "total $312"
+    ]
+   }
+  },
+  {
+   "task": "42",
+   "run": "e4_mined-fold0",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "check profile for multiple flights booked on the same day"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "info"
+    ],
+    "reservation_ids": [
+     "FDZ0T5",
+     "HSR97W"
+    ],
+    "origin": "DFW",
+    "destination": "NYC",
+    "dates": [
+     "2024-05-17",
+     "2024-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "cancel flights that don't fit arriving in new york from dallas on may 17 and leaving boston on may 22",
+     "leave the ivan and emma reservation alone",
+     "cancellation reason: mixup, booked by mistake"
+    ]
+   }
+  },
+  {
+   "task": "44",
+   "run": "e4_mined-fold0",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel",
+     "change_cabin"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "flight longer than 4 hours to cancel; 3 hours or less including layovers to upgrade",
+    "time_constraints": "cancel if flight longer than 4 hours; upgrade if 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings for sophia_silva_7557"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_cabin",
+     "info"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": null,
+    "time_constraints": "cancel flights longer than 4 hours; upgrade flights 3 hours or less including layovers",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "pull up bookings under sophia_silva_7557",
+     "needs flight durations",
+     "wants to speak to someone with travel time data"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "e4_mined-fold1",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after current reservation",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "open to PHL or EWR",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "info"
+    ],
+    "reservation_ids": [
+     "M05KNL"
+    ],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": "none",
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift card",
+    "other": [
+     "open to EWR as alternative destination",
+     "open to connection",
+     "skip separate EWR booking",
+     "confirm change completion",
+     "provide updated itinerary",
+     "provide refund timeline"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "e4_mined-fold1",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight moved to next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": []
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "after 8am and before 9pm; return arrival not 3am",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": "gift card ending 6941833",
+    "refund_preference": null,
+    "other": [
+     "outbound moved to next day",
+     "return pushed back by a day",
+     "wants insurance change fees waived"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "e4_mined-fold1",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "user id sophia_taylor_9065"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "compensation",
+     "change_flight",
+     "insurance",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2025-05-22"
+    ],
+    "cabin": "basic economy",
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "no cabin change",
+     "no transfer",
+     "wants to speak to someone who can fix it"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "e4_mined-fold1",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "move to the day after current reservation",
+     "destination open to PHL or EWR",
+     "not basic economy",
+     "look up reservation from account user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest, not basic economy, original routing, search PHL and EWR",
+    "time_constraints": null,
+    "passengers": [
+     "Aarav Garcia"
+    ],
+    "bags": "none",
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method",
+    "other": [
+     "move to day after current reservation",
+     "open to PHL or EWR",
+     "rejected $207 LGA overnight connection",
+     "selected $216 itinerary"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "e4_mined-fold1",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "compensation"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "escalate"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "e4_mined-fold1",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight moved to next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": []
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing after 8am",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift_card_6941833",
+    "other": [
+     "outgoing flight moved to next day",
+     "return pushed back by a day",
+     "outgoing flight HAT072 at 9am",
+     "return flight HAT278 at 4pm"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "e4_mined-fold1",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": null,
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "next day",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "open to flying into either PHL or EWR",
+     "not basic economy",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest economy fare (not basic economy), prefer earlier arrival, one stop ok",
+    "time_constraints": "arrive earlier than midnight, prefer more reasonable arrival time",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original payment method",
+    "other": [
+     "compare PHL and EWR and pick lowest total",
+     "user id aarav_garcia_1177",
+     "selected option E: ATL-ORD-PHL arriving 19:00 for $216"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "e4_mined-fold1",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight moved to next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": []
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "departing after 8am and before 9pm",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "gift_card_6941833",
+    "other": [
+     "outgoing flight moved to next day",
+     "return pushed back by a day",
+     "outbound HAT072 at 9am",
+     "return HAT278 at 16:00"
+    ]
+   }
+  },
+  {
+   "task": "15",
+   "run": "e4_mined-fold1",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": null,
+    "origin": "ATL",
+    "destination": null,
+    "dates": null,
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "day after current reservation",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "not basic economy",
+     "destination can be PHL or EWR",
+     "look up reservation by user id aarav_garcia_1177"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [],
+    "origin": "ATL",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-24"
+    ],
+    "cabin": "economy",
+    "flight_criterion": "cheapest",
+    "time_constraints": "no landing after midnight",
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "original gift card",
+    "other": [
+     "open to PHL or EWR",
+     "not basic economy",
+     "user id aarav_garcia_1177",
+     "ATL-ORD-PHL option",
+     "refund difference $2,571"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "e4_mined-fold1",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "user id sophia_taylor_9065"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "compensation",
+     "info"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2025-05-22"
+    ],
+    "cabin": "economy",
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": [
+     "sophia taylor"
+    ],
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": "travel certificate first, then card ending 5191",
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "does not want to be transferred",
+     "does not want cabin upgrade"
+    ]
+   }
+  },
+  {
+   "task": "33",
+   "run": "e4_mined-fold1",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "change_flight"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "sfo",
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": "nonstop",
+    "time_constraints": "outgoing flight moved to next day; return pushed back by a day",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": []
+   },
+   "pre_write": {
+    "intents": [
+     "change_flight",
+     "change_cabin",
+     "add_bags"
+    ],
+    "reservation_ids": [
+     "HXDUBJ"
+    ],
+    "origin": null,
+    "destination": "SFO",
+    "dates": [],
+    "cabin": "economy",
+    "flight_criterion": "nonstop, specific flight numbers",
+    "time_constraints": "outbound 9am, return 4pm",
+    "passengers": [
+     "yara_garcia_1905"
+    ],
+    "bags": 2,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "gift card \u20261646646",
+    "other": [
+     "outbound moved to next day nonstop HAT072",
+     "return from SFO pushed back a day on HAT278",
+     "no change fees due to insurance",
+     "upgrade to business class declined",
+     "flight changes and bags in one transaction"
+    ]
+   }
+  },
+  {
+   "task": "45",
+   "run": "e4_mined-fold1",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "change_flight",
+     "change_cabin",
+     "add_bags",
+     "compensation",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [
+     "2025-05-22"
+    ],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": "full refund",
+    "other": [
+     "family emergency",
+     "no cabin upgrade",
+     "no transfer",
+     "user id sophia_taylor_9065"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "e4_mined-fold2",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to existing reservation",
+     "make an exception",
+     "speak to someone who can make an exception",
+     "not booking a new reservation"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "e4_mined-fold2",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one certificate, $500",
+    "refund_preference": null,
+    "other": [
+     "two seats together",
+     "aisle and middle seat next to each other"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "e4_mined-fold2",
+   "trial": 0,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "keep same dates",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": "JFK",
+    "destination": "SFO",
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "round trip",
+     "same dates",
+     "doesn't care about direct or stopover",
+     "cancel reason: change of plan"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "e4_mined-fold2",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one certificate, $500",
+    "refund_preference": null,
+    "other": [
+     "seats together",
+     "aisle and middle seats next to each other"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "e4_mined-fold2",
+   "trial": 1,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "sophia_taylor_9065"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "cancel"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to existing booking",
+     "check cancellation eligibility"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "e4_mined-fold2",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "sophia_taylor_9065"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "add insurance to reservation",
+     "speak to supervisor or someone who can override"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "e4_mined-fold2",
+   "trial": 1,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "keep same dates",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed_silva_9265",
+     "raj",
+     "liam"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "master card, gift cards, certificates",
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "round trip",
+     "keep same dates",
+     "three separate new reservations one per passenger",
+     "use a different certificate on each",
+     "use $500 certificate and both gift cards for mohamed",
+     "certificate_9984806 for raj",
+     "other certificate for liam"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "e4_mined-fold2",
+   "trial": 2,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2025-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "one $500 certificate",
+    "refund_preference": null,
+    "other": [
+     "one-way",
+     "seats together: aisle and middle next to each other (could not be done; will sort later)"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "e4_mined-fold2",
+   "trial": 2,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "change_flight",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "keep same dates",
+     "round trip"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "info",
+     "change_flight",
+     "cancel",
+     "book"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed silva",
+     "raj",
+     "liam"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates and gift cards, remainder on mastercard",
+    "refund_preference": null,
+    "other": [
+     "check total gift card balances",
+     "check total certificate balances",
+     "round trip keeping same dates",
+     "split into three separate reservations, one per passenger",
+     "use one certificate per reservation",
+     "use $500 certificate plus gift cards for mohamed",
+     "use $250 certificate for raj",
+     "use $250 certificate for liam"
+    ]
+   }
+  },
+  {
+   "task": "8",
+   "run": "e4_mined-fold2",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight taken on may 10",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "one-way"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book"
+    ],
+    "reservation_ids": [
+     "sophia_silva_7557"
+    ],
+    "origin": "ORD",
+    "destination": "PHL",
+    "dates": [
+     "2024-05-26"
+    ],
+    "cabin": null,
+    "flight_criterion": "exact same flight as taken on may 10",
+    "time_constraints": null,
+    "passengers": [
+     "sophia silva",
+     "kevin smith"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "$500 certificate only",
+    "refund_preference": null,
+    "other": [
+     "one-way",
+     "two seats together: aisle and middle"
+    ]
+   }
+  },
+  {
+   "task": "6",
+   "run": "e4_mined-fold2",
+   "trial": 3,
+   "success": false,
+   "open": {
+    "intents": [
+     "info",
+     "other"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": null,
+    "flight_criterion": null,
+    "time_constraints": "today",
+    "passengers": null,
+    "bags": null,
+    "insurance": "yes",
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "insurance not showing online",
+     "needs fixing today"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "PEP4E0"
+    ],
+    "origin": "CLT",
+    "destination": "PHX",
+    "dates": [
+     "2024-03-20"
+    ],
+    "cabin": "basic economy",
+    "flight_criterion": "HAT176 plus HAT097",
+    "time_constraints": null,
+    "passengers": [
+     "Sophia Taylor"
+    ],
+    "bags": 1,
+    "insurance": "yes",
+    "payment_preference": "travel certificate first, then Visa ending 9796",
+    "refund_preference": null,
+    "other": [
+     "add insurance to existing reservation PEP4E0",
+     "price out new one-way CLT to PHX for the 20th with insurance included",
+     "routing CLT-DTW-PHX same as original"
+    ]
+   }
+  },
+  {
+   "task": "23",
+   "run": "e4_mined-fold2",
+   "trial": 3,
+   "success": true,
+   "open": {
+    "intents": [
+     "info",
+     "change_cabin"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": [],
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": null,
+    "bags": null,
+    "insurance": null,
+    "payment_preference": null,
+    "refund_preference": null,
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "round trip",
+     "keep same dates"
+    ]
+   },
+   "pre_write": {
+    "intents": [
+     "cancel",
+     "book",
+     "info"
+    ],
+    "reservation_ids": [
+     "mohamed_silva_9265"
+    ],
+    "origin": null,
+    "destination": null,
+    "dates": null,
+    "cabin": "business",
+    "flight_criterion": "cheapest",
+    "time_constraints": null,
+    "passengers": [
+     "mohamed",
+     "raj",
+     "liam"
+    ],
+    "bags": "none",
+    "insurance": "no",
+    "payment_preference": "certificates first, then gift cards, then mastercard ending 9363",
+    "refund_preference": "refund to gift card",
+    "other": [
+     "total gift card balances",
+     "total certificate balances",
+     "book three separate reservations one per passenger",
+     "use all three certificates",
+     "same flights",
+     "round trip"
+    ]
+   }
+  }
+ ],
+ "loo": {
+  "open": {
+   "n": {
+    "success": 49,
+    "fail": 37
+   },
+   "any_key_field_differs": {
+    "success": 0.29,
+    "fail": 0.27
+   },
+   "field_rate": {
+    "intents": {
+     "success": 0.1,
+     "fail": 0.14
+    },
+    "reservation_ids": {
+     "success": 0.12,
+     "fail": 0.05
+    },
+    "origin": {
+     "success": 0.0,
+     "fail": 0.08
+    },
+    "destination": {
+     "success": 0.0,
+     "fail": 0.08
+    },
+    "dates": {
+     "success": 0.0,
+     "fail": 0.0
+    },
+    "cabin": {
+     "success": 0.0,
+     "fail": 0.0
+    },
+    "flight_criterion": {
+     "success": 0.0,
+     "fail": 0.11
+    },
+    "passengers": {
+     "success": 0.08,
+     "fail": 0.0
+    },
+    "bags": {
+     "success": 0.0,
+     "fail": 0.0
+    },
+    "insurance": {
+     "success": 0.0,
+     "fail": 0.0
+    },
+    "payment_preference": {
+     "success": 0.0,
+     "fail": 0.0
+    }
+   }
+  },
+  "pre_write": {
+   "n": {
+    "success": 49,
+    "fail": 37
+   },
+   "any_key_field_differs": {
+    "success": 0.84,
+    "fail": 1.0
+   },
+   "field_rate": {
+    "intents": {
+     "success": 0.37,
+     "fail": 0.76
+    },
+    "reservation_ids": {
+     "success": 0.31,
+     "fail": 0.3
+    },
+    "origin": {
+     "success": 0.16,
+     "fail": 0.08
+    },
+    "destination": {
+     "success": 0.1,
+     "fail": 0.05
+    },
+    "dates": {
+     "success": 0.39,
+     "fail": 0.3
+    },
+    "cabin": {
+     "success": 0.02,
+     "fail": 0.11
+    },
+    "flight_criterion": {
+     "success": 0.18,
+     "fail": 0.57
+    },
+    "passengers": {
+     "success": 0.1,
+     "fail": 0.41
+    },
+    "bags": {
+     "success": 0.16,
+     "fail": 0.27
+    },
+    "insurance": {
+     "success": 0.16,
+     "fail": 0.22
+    },
+    "payment_preference": {
+     "success": 0.33,
+     "fail": 0.57
+    }
+   }
+  }
+ },
+ "tokens": {
+  "in": 0,
+  "out": 0,
+  "hit": 0
+ }
+}
