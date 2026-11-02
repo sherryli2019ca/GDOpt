@@ -160,7 +160,7 @@ class PolicyFacts:
 # ---------------------------------------------------------------- τ² agent
 try:  # τ²-bench is optional for the offline audit
     from tau2.agent.llm_agent import LLMAgent, LLMAgentState  # type: ignore[import-not-found]
-    from tau2.data_model.message import AssistantMessage, MultiToolMessage, SystemMessage  # type: ignore[import-not-found]
+    from tau2.data_model.message import AssistantMessage, MultiToolMessage, SystemMessage, UserMessage  # type: ignore[import-not-found]
     from tau2.registry import registry  # type: ignore[import-not-found]
     from tau2.utils.llm_utils import generate  # type: ignore[import-not-found]
 except Exception:  # pragma: no cover
@@ -174,6 +174,30 @@ WRITE_GATE_NOTE = ("Write check (automatic): two independent readings of this co
                    "passengers, payment, amounts, or whether to act at all) is not explicitly settled, list the exact "
                    "details to the user and ask them to confirm before acting. If one reading is clearly right and the user "
                    "has already confirmed exactly those details, you may make that call.")
+
+
+PROPOSAL_ASK_RX = re.compile(r"confirm|shall i|should i|proceed|go ahead|would you like me to|do you want me to|"
+                             r"\(yes\)|reply \W*yes|is that correct|sound good|okay with|ok with", re.I)
+PROPOSAL_WRITE_RX = re.compile(r"cancel|chang|modif|updat|book|upgrad|downgrad|baggage|bag|passenger|refund|certificate|"
+                               r"compensation|transfer|charge|payment|flight", re.I)
+DERIVE_NOTE = ("Independent check (automatic): assume the user now agrees to go ahead with whatever is correct. Re-read the "
+               "policy, the user's own requests and every tool result, and make exactly the database call(s) the policy and "
+               "the user's request call for at this point (right reservation, flights, cabin, passengers, payment, amounts). "
+               "If no database action is allowed or the request is not settled, reply in text instead.")
+PROPOSAL_GATE_NOTE = ("Plan check (automatic): you were about to ask the user to confirm a plan, but two independent readings "
+                      "of this conversation disagree about which database action it should lead to. Reading A (your draft "
+                      "plan): {a}. Reading B (independent re-derivation): {b}. Before presenting anything, work out which "
+                      "reading matches the policy and what the user actually asked for (check eligibility rules, which "
+                      "reservation and flights, cabin, passengers, payment method, prices and totals, and whether an action "
+                      "is allowed at all). Then present the correct plan to the user with its exact details and ask for "
+                      "explicit confirmation, or explain what is not allowed. Do not make any database call in this turn.")
+
+
+def _is_proposal(am: Any, msgs: list) -> bool:
+    d = _as_dict(am)
+    text = d.get("content") or ""
+    return (not d.get("tool_calls") and bool(text) and any(_as_dict(m)["role"] == "tool" for m in msgs)
+            and bool(PROPOSAL_ASK_RX.search(text)) and bool(PROPOSAL_WRITE_RX.search(text)))
 
 
 def _decisive_calls(am: Any) -> list:
@@ -254,6 +278,7 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
                                  mined: Optional[list] = None, **anchor_kw: Any) -> list:
     consistency = "consistency" in modes  # also run ConsistencyChecker (hard: corrective note; soft: reasoner review)
+    proposalgate = "proposalgate" in modes  # plan put to the user is checked against an independent derivation (2026-11-02)
     writegate = "writegate" in modes  # every write/transfer re-derived independently by the reasoner (2026-10-31)
     # ``mined``: checks from tau2_mined.load_checks, run as soft review triggers next to (or without) the consistency checks
     """``AnchoredLLMAgent`` (any anchor modes) plus the certified rule guard on every step.
@@ -273,7 +298,39 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
 
         def _generate_next_message(self, message, state):
             am = self._guarded_step(message, state)
+            if proposalgate and _is_proposal(am, state.messages):
+                return self._proposal_gate(am, state)
             return self._write_gate(am, state) if writegate else am
+
+        def _proposal_gate(self, am, state):
+            """Before a plan is put to the user: does it lead to the same write as an independent re-derivation?"""
+            self.stats["proposal_checks"] = self.stats.get("proposal_checks", 0) + 1
+            base = state.system_messages + state.messages
+            rllm, rargs = (self.reasoner_llm, self.reasoner_llm_args) if self.reasoner_llm else (self.llm, self.llm_args)
+            draft = AssistantMessage(role="assistant", content=am.content)
+            a_msg = generate(model=self.llm, tools=self.tools, call_name="agent_response", **self.llm_args,
+                             messages=base + [draft, UserMessage(role="user", content="Yes, please go ahead.")])
+            b_msg = generate(model=rllm, tools=self.tools, call_name="agent_response", **rargs,
+                             messages=base + [SystemMessage(role="system", content=DERIVE_NOTE)])
+            a, b = _decisive_calls(a_msg), _decisive_calls(b_msg)
+            agree = a == b
+            cost = float(am.cost or 0.0) + float(a_msg.cost or 0.0) + float(b_msg.cost or 0.0)
+            out = am
+            if not agree:
+                self.stats["proposal_disagree"] = self.stats.get("proposal_disagree", 0) + 1
+                note = SystemMessage(role="system", content=PROPOSAL_GATE_NOTE.format(
+                    a=_fmt_calls(a) or "no database write or transfer", b=_fmt_calls(b) or "no database write or transfer"))
+                out = generate(model=rllm, tools=self.tools, messages=base + [note], call_name="agent_response", **rargs)
+                cost += float(out.cost or 0.0)
+                out.usage = self._merge_usage(am, a_msg, b_msg, out) if out.usage else am.usage
+            out.cost = cost
+            g = dict((am.raw_data or {}).get("gdopt") or {})
+            anchor = dict(g.get("anchor") or {})
+            anchor["proposalgate"] = {"draft_leads_to": _fmt_calls(a), "independent": _fmt_calls(b), "agree": agree,
+                                      "final": action_of_message(out)}
+            g["anchor"] = anchor
+            out.raw_data = dict(out.raw_data or {}, gdopt=g)
+            return out
 
         def _write_gate(self, am, state):
             """Independent re-derivation of every write / transfer by the reasoner; on disagreement, confirm first."""
@@ -363,7 +420,7 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
             return am2
 
     created: list = []
-    modes = set(modes) - {"rules", "consistency", "writegate"}
+    modes = set(modes) - {"rules", "consistency", "writegate", "proposalgate"}
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any):
         a = RuleAnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, **anchor_kw)
