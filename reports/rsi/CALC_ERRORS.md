@@ -1,5 +1,7 @@
 # What kind of errors are E4's flaky failures? (zero cost, 2026-11-02)
 
+**Correction (LEDGER.md):** most "agreed step never executed / gold write never made" cases are wrong refusals — the agent told the customer the cancel/change was not allowed — not forgotten steps. Read the bookkeeping share below as an upper bound.
+
 `examples/determinism/calc_errors.py`, `calc_errors.json`: every failed trial of the two E4 airline runs (8 trials per
 task) is compared with the task's gold write actions; the first gold write that is not reproduced is classified by
 the argument that differs (slot arguments are checked before payment amounts, so an amount difference caused by e.g.

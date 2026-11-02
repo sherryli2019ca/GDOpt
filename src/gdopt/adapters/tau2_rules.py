@@ -211,6 +211,35 @@ SPEC_NOTE = ("Pinned customer request (extracted automatically from the customer
              "of them before you close the conversation.")
 
 
+YES_RX = re.compile(r"\b(yes|yeah|yep|go ahead|proceed|confirm(ed)?|please do|sounds good|do it|that works|correct)\b", re.I)
+STEPS_PROMPT = ("An airline agent proposed the plan below and the customer agreed. List every database action the plan "
+                "commits to, as a JSON object {{\"steps\": [{{\"action\": one of cancel_reservation, "
+                "update_reservation_flights, update_reservation_baggages, update_reservation_passengers, "
+                "book_reservation, send_certificate, \"reservation_id\": id or null}}]}}. Only actions the agent "
+                "said it will do now; no options the customer did not choose.\n\nPlan:\n{plan}")
+LEDGER_NOTE = ("Plan ledger check (automatic): the customer confirmed a plan with these database actions: {agreed}. "
+               "Not executed yet: {pending}. If they are still wanted, execute them now before closing; if the plan "
+               "changed, say so explicitly to the customer. Do not repeat actions that are already done.")
+SLOT_NOTE = ("Booking attribute check (automatic): your call {call} sets {attrs}, but the customer never asked for "
+             "{what} in this conversation (or said they do not want it). Attributes of a new booking must come from what "
+             "the customer stated, not from an old reservation. Use the customer's stated wishes, or ask them.")
+
+
+def _slot_issues(msgs: list, am: Any) -> list:
+    users = " ".join((_as_dict(m).get("content") or "") for m in msgs if _as_dict(m)["role"] == "user").lower()
+    neg = lambda w: re.search(r"(\bno\b|n't|\bnot\b|without|skip)[^.?!]{0,40}" + w, users)
+    out = []
+    for tc in _as_dict(am).get("tool_calls") or []:
+        if tc["name"] != "book_reservation":
+            continue
+        a = tc.get("arguments") or {}
+        if a.get("insurance") == "yes" and (neg("insur") or "insur" not in users):
+            out.append((tc, "insurance=yes", "travel insurance"))
+        if (a.get("total_baggages") or 0) > 0 and (neg("bag") or not re.search(r"\bbag", users)):
+            out.append((tc, f"total_baggages={a.get('total_baggages')}", "checked bags"))
+    return out
+
+
 def _is_proposal(am: Any, msgs: list) -> bool:
     d = _as_dict(am)
     text = d.get("content") or ""
@@ -296,6 +325,7 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
                                  mined: Optional[list] = None, **anchor_kw: Any) -> list:
     consistency = "consistency" in modes  # also run ConsistencyChecker (hard: corrective note; soft: reasoner review)
+    ledger = "ledger" in modes  # plan ledger + slot provenance (2026-11-02)
     specpin = "specpin" in modes  # opening request pinned as a typed spec in every prompt (2026-11-02)
     proposalgate = "proposalgate" in modes  # plan put to the user is checked against an independent derivation (2026-11-02)
     writegate = "writegate" in modes  # every write/transfer re-derived independently by the reasoner (2026-10-31)
@@ -316,6 +346,78 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
         _violations = RuleGuardedLLMAgent._violations
 
         def _generate_next_message(self, message, state):
+            if ledger:
+                return self._with_ledger(message, state)
+            return self._dispatch(message, state)
+
+        def _with_ledger(self, message, state):
+            """Plan ledger (user-confirmed steps must all be executed) + slot provenance of new bookings."""
+            msgs = [_as_dict(m) for m in state.messages]
+            led = self.__dict__.setdefault("_ledger", [])
+            spent = 0.0
+            last_a = next((m for m in reversed(msgs) if m["role"] == "assistant"), None)
+            md = _as_dict(message)
+            if (md["role"] == "user" and last_a is not None and YES_RX.search(md.get("content") or "")
+                    and _is_proposal(last_a, msgs) and last_a.get("content") != self.__dict__.get("_ledger_src")):
+                r = generate(model=self.llm, tools=None, call_name="ledger_extract", **self.llm_args,
+                             messages=[UserMessage(role="user", content=STEPS_PROMPT.format(plan=last_a["content"]))])
+                spent += float(r.cost or 0.0)
+                txt = re.sub(r"^```(json)?|```$", "", (r.content or "").strip()).strip()
+                try:
+                    steps = [x for x in json.loads(txt).get("steps", []) if x.get("action") in DECISIVE_TOOLS]
+                except (ValueError, AttributeError):
+                    steps = []
+                self._ledger_src = last_a.get("content")
+                for x in steps:
+                    led.append({"action": x["action"], "reservation_id": x.get("reservation_id"), "at": len(msgs)})
+                self.stats["ledger_entries"] = self.stats.get("ledger_entries", 0) + len(steps)
+            am = self._dispatch(message, state)
+            notes, info = [], {}
+            sl = _slot_issues(list(state.messages), am)
+            if sl:
+                self.stats["slot_fires"] = self.stats.get("slot_fires", 0) + 1
+                notes += [SystemMessage(role="system", content=SLOT_NOTE.format(
+                    call=f"{tc['name']}({json.dumps(tc.get('arguments'))})", attrs=attr, what=what)) for tc, attr, what in sl]
+                info["slot"] = [attr for _, attr, _ in sl]
+            if led and not _as_dict(am).get("tool_calls"):
+                done = Counter()
+                for m in state.messages:
+                    for tc in _as_dict(m).get("tool_calls") or []:
+                        done[(tc["name"], (tc.get("arguments") or {}).get("reservation_id"))] += 1
+                        done[(tc["name"], None)] += 1
+                pending = []
+                for x in led:
+                    k = (x["action"], x["reservation_id"] if x["action"] != "book_reservation" else None)
+                    if done[k] > 0:
+                        done[k] -= 1
+                    else:
+                        pending.append(x)
+                any_write_after = any(tc["name"] in DECISIVE_TOOLS for m in state.messages[min(x["at"] for x in led):]
+                                      for tc in (_as_dict(m).get("tool_calls") or []))
+                key = json.dumps(pending, sort_keys=True)
+                if pending and any_write_after and key != self.__dict__.get("_ledger_fired"):
+                    self._ledger_fired = key
+                    self.stats["ledger_fires"] = self.stats.get("ledger_fires", 0) + 1
+                    fmt = lambda xs: "; ".join(f"{x['action']}({x['reservation_id'] or ''})" for x in xs)
+                    notes.append(SystemMessage(role="system", content=LEDGER_NOTE.format(agreed=fmt(led), pending=fmt(pending))))
+                    info["ledger_pending"] = fmt(pending)
+            if notes:
+                rllm, rargs = (self.reasoner_llm, self.reasoner_llm_args) if self.reasoner_llm else (self.llm, self.llm_args)
+                out = generate(model=rllm, tools=self.tools, call_name="agent_response", **rargs,
+                               messages=state.system_messages + state.messages + notes)
+                out.cost = float(am.cost or 0.0) + float(out.cost or 0.0) + spent
+                out.usage = self._merge_usage(am, out) if out.usage else am.usage
+                info["before"], info["after"] = action_of_message(am), action_of_message(out)
+                g = dict((am.raw_data or {}).get("gdopt") or {})
+                anchor = dict(g.get("anchor") or {})
+                anchor["ledger"] = info
+                g["anchor"] = anchor
+                out.raw_data = dict(out.raw_data or {}, gdopt=g)
+                return out
+            am.cost = float(am.cost or 0.0) + spent
+            return am
+
+        def _dispatch(self, message, state):
             if specpin:
                 return self._with_spec(message, state)
             return self._step(message, state)
@@ -480,7 +582,7 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
             return am2
 
     created: list = []
-    modes = set(modes) - {"rules", "consistency", "writegate", "proposalgate", "specpin"}
+    modes = set(modes) - {"rules", "consistency", "writegate", "proposalgate", "specpin", "ledger"}
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any):
         a = RuleAnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, **anchor_kw)
