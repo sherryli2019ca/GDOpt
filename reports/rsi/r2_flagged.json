@@ -1,0 +1,345 @@
+{
+ "flagged": [
+  {
+   "run": "hint",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:book_reservation_payment_method_count_limit"
+   ],
+   "fold": 0
+  },
+  {
+   "run": "deliberate",
+   "task": "23",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:book_reservation_payment_method_count_limit"
+   ],
+   "fold": 0
+  },
+  {
+   "run": "reasoner",
+   "task": "38",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 31,
+   "rules": [
+    "mined:send_certificate_requires_change_or_cancel"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "none",
+   "task": "21",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "none",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 35,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "veto",
+   "task": "21",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 39,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "veto",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "veto",
+   "task": "21",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 31,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "hint",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "hint",
+   "task": "21",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 33,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "checklist",
+   "task": "21",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 39,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "checklist",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 33,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "deliberate",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 33,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "reasoner",
+   "task": "21",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "reasoner",
+   "task": "21",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "deliberate_reasoner",
+   "task": "17",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "policy_reasoner",
+   "task": "17",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 26,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "policy_reasoner",
+   "task": "21",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 32,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "vote",
+   "task": "17",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 19,
+   "rules": [
+    "mined:update_baggages_requires_explicit_extra_bag_request"
+   ],
+   "fold": 1
+  },
+  {
+   "run": "veto",
+   "task": "14",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "hint",
+   "task": "14",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 35,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "hint",
+   "task": "14",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "hint",
+   "task": "14",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "checklist",
+   "task": "14",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 32,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "checklist",
+   "task": "14",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 34,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "deliberate",
+   "task": "45",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "reasoner",
+   "task": "31",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 27,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "deliberate_all",
+   "task": "14",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 23,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "deliberate_reasoner",
+   "task": "31",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 24,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "deliberate_reasoner",
+   "task": "14",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 23,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  },
+  {
+   "run": "deliberate_reasoner_rules",
+   "task": "31",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 24,
+   "rules": [
+    "mined:book_reservation_should_not_duplicate_existing_basic_economy"
+   ],
+   "fold": 2
+  }
+ ]
+}

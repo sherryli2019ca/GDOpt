@@ -1,0 +1,422 @@
+{
+ "1__none_0": {
+  "run": "none",
+  "task": "1",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "1__none_1": {
+  "run": "none",
+  "task": "1",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "39__none_1": {
+  "run": "none",
+  "task": "39",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_ineligible",
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ },
+ "1__none_2": {
+  "run": "none",
+  "task": "1",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "14__none_2": {
+  "run": "none",
+  "task": "14",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 32,
+  "prefix_len": 32
+ },
+ "32__none_2": {
+  "run": "none",
+  "task": "32",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "modify_basic_economy"
+  ],
+  "first_msg_index": 25,
+  "prefix_len": 25
+ },
+ "1__none_3": {
+  "run": "none",
+  "task": "1",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "1__veto_0": {
+  "run": "veto",
+  "task": "1",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "1__veto_1": {
+  "run": "veto",
+  "task": "1",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "32__veto_1": {
+  "run": "veto",
+  "task": "32",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "modify_basic_economy"
+  ],
+  "first_msg_index": 21,
+  "prefix_len": 21
+ },
+ "20__veto_2": {
+  "run": "veto",
+  "task": "20",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 19,
+  "prefix_len": 19
+ },
+ "39__veto_2": {
+  "run": "veto",
+  "task": "39",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 21,
+  "prefix_len": 21
+ },
+ "1__veto_3": {
+  "run": "veto",
+  "task": "1",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "45__veto_3": {
+  "run": "veto",
+  "task": "45",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 21,
+  "prefix_len": 21
+ },
+ "1__hint_0": {
+  "run": "hint",
+  "task": "1",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "1__hint_1": {
+  "run": "hint",
+  "task": "1",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "20__hint_1": {
+  "run": "hint",
+  "task": "20",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "book_payment",
+   "book_payment"
+  ],
+  "first_msg_index": 25,
+  "prefix_len": 25
+ },
+ "1__hint_2": {
+  "run": "hint",
+  "task": "1",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "14__hint_2": {
+  "run": "hint",
+  "task": "14",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 29,
+  "prefix_len": 29
+ },
+ "23__hint_2": {
+  "run": "hint",
+  "task": "23",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 29,
+  "prefix_len": 29
+ },
+ "39__hint_2": {
+  "run": "hint",
+  "task": "39",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 20,
+  "prefix_len": 20
+ },
+ "1__hint_3": {
+  "run": "hint",
+  "task": "1",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "1__checklist_0": {
+  "run": "checklist",
+  "task": "1",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ },
+ "9__checklist_0": {
+  "run": "checklist",
+  "task": "9",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 13,
+  "prefix_len": 13
+ },
+ "20__checklist_0": {
+  "run": "checklist",
+  "task": "20",
+  "trial": 0,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 22,
+  "prefix_len": 22
+ },
+ "14__checklist_1": {
+  "run": "checklist",
+  "task": "14",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 32,
+  "prefix_len": 32
+ },
+ "18__checklist_1": {
+  "run": "checklist",
+  "task": "18",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "bag_remove"
+  ],
+  "first_msg_index": 59,
+  "prefix_len": 59
+ },
+ "20__checklist_1": {
+  "run": "checklist",
+  "task": "20",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 24,
+  "prefix_len": 24
+ },
+ "41__checklist_1": {
+  "run": "checklist",
+  "task": "41",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ },
+ "9__checklist_3": {
+  "run": "checklist",
+  "task": "9",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 15,
+  "prefix_len": 15
+ },
+ "41__checklist_3": {
+  "run": "checklist",
+  "task": "41",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ },
+ "39__deliberate_1": {
+  "run": "deliberate",
+  "task": "39",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ },
+ "39__deliberate_2": {
+  "run": "deliberate",
+  "task": "39",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 19,
+  "prefix_len": 19
+ },
+ "23__deliberate_3": {
+  "run": "deliberate",
+  "task": "23",
+  "trial": 3,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 29,
+  "prefix_len": 29
+ },
+ "14__reasoner_1": {
+  "run": "reasoner",
+  "task": "14",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "book_payment"
+  ],
+  "first_msg_index": 25,
+  "prefix_len": 25
+ },
+ "9__deliberate_all_1": {
+  "run": "deliberate_all",
+  "task": "9",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 15,
+  "prefix_len": 15
+ },
+ "1__deliberate_all_2": {
+  "run": "deliberate_all",
+  "task": "1",
+  "trial": 2,
+  "success": false,
+  "rules": [
+   "cancel_ineligible"
+  ],
+  "first_msg_index": 16,
+  "prefix_len": 16
+ },
+ "9__deliberate_reasoner_1": {
+  "run": "deliberate_reasoner",
+  "task": "9",
+  "trial": 1,
+  "success": false,
+  "rules": [
+   "cancel_flown"
+  ],
+  "first_msg_index": 18,
+  "prefix_len": 18
+ }
+}

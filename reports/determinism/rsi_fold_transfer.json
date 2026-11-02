@@ -1,0 +1,67 @@
+{
+ "episodes": 2600,
+ "rules": {
+  "cheapest_not_min": {
+   "fail_eps_by_task": {
+    "20": 15,
+    "29": 29,
+    "16": 16,
+    "15": 18,
+    "35": 15,
+    "45": 1,
+    "44": 1
+   },
+   "success_eps": 78,
+   "found": 0.33,
+   "heldfires": 0.33,
+   "heldok": 0.0
+  },
+  "pax_dob_mismatch": {
+   "fail_eps_by_task": {
+    "35": 13
+   },
+   "success_eps": 0,
+   "found": 0.333,
+   "heldfires": 0.0,
+   "heldok": 0.0
+  },
+  "substitute_book": {
+   "fail_eps_by_task": {
+    "17": 6,
+    "29": 14,
+    "23": 3,
+    "31": 1
+   },
+   "success_eps": 5,
+   "found": 0.553,
+   "heldfires": 0.547,
+   "heldok": 0.45
+  },
+  "transfer_pending": {
+   "fail_eps_by_task": {
+    "44": 26,
+    "32": 9,
+    "33": 5,
+    "10": 4,
+    "23": 1,
+    "8": 9,
+    "18": 2,
+    "20": 1,
+    "7": 2,
+    "11": 1,
+    "15": 1
+   },
+   "success_eps": 19,
+   "found": 0.532,
+   "heldfires": 0.532,
+   "heldok": 0.112
+  },
+  "write_after_done": {
+   "fail_eps_by_task": {},
+   "success_eps": 7,
+   "found": 0.0,
+   "heldfires": 0.0,
+   "heldok": 0.0
+  }
+ }
+}

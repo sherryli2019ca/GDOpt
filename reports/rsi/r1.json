@@ -1,0 +1,781 @@
+{
+ "episodes": 2600,
+ "model": "deepseek-reasoner",
+ "seed": 0,
+ "folds": [
+  [
+   "0",
+   "7",
+   "9",
+   "14",
+   "16",
+   "20",
+   "21",
+   "22",
+   "25",
+   "29",
+   "35",
+   "38",
+   "40",
+   "42",
+   "43",
+   "44",
+   "48"
+  ],
+  [
+   "1",
+   "2",
+   "4",
+   "11",
+   "13",
+   "15",
+   "18",
+   "24",
+   "27",
+   "30",
+   "31",
+   "33",
+   "36",
+   "39",
+   "45",
+   "46",
+   "49"
+  ],
+  [
+   "3",
+   "5",
+   "6",
+   "8",
+   "10",
+   "12",
+   "17",
+   "19",
+   "23",
+   "26",
+   "28",
+   "32",
+   "34",
+   "37",
+   "41",
+   "47"
+  ]
+ ],
+ "mined": [
+  {
+   "fold": 0,
+   "name": "transfer_when_action_possible",
+   "description": "Blocks transfers when the user's request is executable under policy, such as changing cabin on a basic economy reservation (when no flight has flown), upgrading then cancelling, or booking for a saved passenger using the booking user's profile.",
+   "clause": "Transfer only if the request cannot be handled within the scope of your actions. Cabin changes, including on basic economy reservations, are allowed if no flight has flown; booking may use the booking user's own user id and profile data.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'transfer_to_human_agents':\n        return False\n    summary = str(call.get('arguments', {}).get('summary', '')).lower()\n    statuses = []\n    def walk(x):\n        if isinstance(x, dict):\n            if 'status' in x:\n                statuses.append(str(x['status']).lower())\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    flown = any(s in ('landed', 'flying') for s in statuses)\n    if flown:\n        return False\n    if ('basic economy' in summary or 'basic_economy' in summary) and ('upgrade' in summary or 'cabin' in summary or 'business' in summary):\n        return True\n    if 'upgrade' in summary and 'cancel' in summary:\n        return True\n    if 'passenger' in summary and ('no user id' in summary or 'not have user id' in summary or 'saved passenger' in summary) and ('book' in summary or 'booking' in summary):\n        return True\n    return False",
+     "mine_fail": 39,
+     "mine_success": 58,
+     "held_fail": 52,
+     "held_success": 228,
+     "errors": 0,
+     "held_fail_tasks": 7,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'transfer_to_human_agents':\n        return False\n    summary = str(call.get('arguments', {}).get('summary', '')).lower()\n    statuses = []\n    def walk(x):\n        if isinstance(x, dict):\n            if 'status' in x:\n                statuses.append(str(x['status']).lower())\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    flown = any(s in ('landed', 'flying') for s in statuses)\n    if flown:\n        return False\n\n    change_words = ('change', 'modify', 'cancel', 'rebook', 'reroute', 'reschedule')\n    has_change = any(w in summary for w in change_words)\n\n    other_blockers = (\n        'sold out', 'unavailable', 'not available', 'full', 'no seats',\n        'payment', 'fund', 'balance', 'not enough', 'error', 'system',\n        'failed', 'closed', 'expired', 'weather', 'delay', 'already',\n        'not eligible', 'ineligible'\n    )\n    has_other_blocker = any(w in summary for w in other_blockers)\n\n    if (('basic economy' in summary or 'basic_economy' in summary)\n            and any(w in summary for w in ('upgrade', 'cabin', 'business class', 'business cabin'))\n            and not has_change and not has_other_blocker):\n        return True\n\n    if 'upgrade' in summary and 'cancel' in summary:\n        negatives = (\n            'cannot', 'can not', 'not allowed', 'not possible',\n            'unable', 'policy', 'restriction', 'restricted', 'will not',\n            'does not', 'unfortunately', 'sorry', 'ineligible',\n            'not eligible'\n        )\n        if not any(w in summary for w in negatives) and not has_other_blocker:\n            return True\n\n    if 'passenger' in summary and ('saved passenger' in summary or 'saved_passenger' in summary or 'profile' in summary) and ('book' in summary or 'booking' in summary):\n        negatives = ('not saved', 'not in profile', 'no saved', 'does not exist', 'no passenger', 'not found', 'unavailable', 'sold out')\n        if not any(w in summary for w in negatives):\n            return True\n\n    return False",
+     "mine_fail": 2,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 8,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": true,
+     "transfers": false
+    }
+   ],
+   "found": true,
+   "transfers": false,
+   "mine_fail": 2,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 8,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 0,
+   "name": "cancel_uncovered_reason",
+   "description": "Blocks cancelling a reservation when the stated reason is not covered by travel insurance and no other cancellation condition applies, or when a flight has already flown.",
+   "clause": "A flight can be cancelled only if the booking was made within the last 24 hrs, the flight was cancelled by the airline, it is a business flight, or the user has travel insurance and the reason is covered. If any portion has already been flown, transfer is needed.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'cancel_reservation':\n        return False\n    rid = call.get('arguments', {}).get('reservation_id')\n    if not rid:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id') == rid:\n                res = r\n                break\n    if not res:\n        return False\n    statuses = []\n    def walk_status(x):\n        if isinstance(x, dict):\n            if 'status' in x:\n                statuses.append(str(x['status']).lower())\n            for v in x.values():\n                walk_status(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk_status(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk_status(msg.get('result'))\n    if any(s in ('landed', 'flying') for s in statuses):\n        return True\n    covered = None\n    for msg in reversed(history):\n        if msg.get('role') == 'user':\n            txt = str(msg.get('content', '')).lower()\n            if any(w in txt for w in ['health', 'weather', 'sick', 'illness']):\n                covered = True\n                break\n            if any(w in txt for w in ['change of plan', 'other reason', 'mistake', 'mixup', 'booked by mistake']):\n                covered = False\n                break\n    if covered is None:\n        return False\n    cabin = str(res.get('cabin', '')).lower()\n    if cabin == 'business':\n        return False\n    created = str(res.get('created_at', ''))\n    created = created.replace('T', ' ')\n    if created and created >= '2024-05-14 15:00:00' and created <= '2024-05-15 15:00:00':\n        return False\n    ti = res.get('travel_insurance', res.get('insurance'))\n    has_ins = False\n    if isinstance(ti, dict):\n        has_ins = any(str(v).lower() in ('yes', 'true', '1') for v in ti.values())\n    else:\n        has_ins = str(ti).lower() in ('yes', 'true', '1')\n    if has_ins and covered:\n        return False\n    if any(s == 'cancelled' for s in statuses):\n        return False\n    return True",
+     "invalid": "forbidden pattern 20\\d\\d-\\d\\d-\\d\\d",
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'cancel_reservation':\n        return False\n    args = call.get('arguments', {})\n    if not isinstance(args, dict):\n        args = {}\n    rid = args.get('reservation_id') or args.get('reservationId') or args.get('id')\n    if not rid:\n        return False\n\n    import json\n    from datetime import datetime\n\n    def find_res(obj, rid):\n        if isinstance(obj, dict):\n            for k, v in obj.items():\n                if str(k).lower() in ('reservation_id', 'reservationid', 'id') and str(v) == str(rid):\n                    return obj\n            for v in obj.values():\n                if str(v) == str(rid):\n                    keys = [str(k).lower() for k in obj.keys()]\n                    if any(x in keys for x in ('cabin', 'created_at', 'travel_insurance', 'status', 'flight_status')):\n                        return obj\n            for v in obj.values():\n                res = find_res(v, rid)\n                if res is not None:\n                    return res\n        elif isinstance(obj, list):\n            for v in obj:\n                res = find_res(v, rid)\n                if res is not None:\n                    return res\n        return None\n\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool':\n            result = msg.get('result')\n            if isinstance(result, str):\n                try:\n                    result = json.loads(result)\n                except Exception:\n                    pass\n            res = find_res(result, rid)\n            if res is not None:\n                break\n\n    def find_value(obj, key_substrings):\n        if isinstance(obj, dict):\n            for k, v in obj.items():\n                k_low = str(k).lower()\n                if any(sub in k_low for sub in key_substrings):\n                    return v\n            for v in obj.values():\n                val = find_value(v, key_substrings)\n                if val is not None:\n                    return val\n        elif isinstance(obj, list):\n            for v in obj:\n                val = find_value(v, key_substrings)\n                if val is not None:\n                    return val\n        return None\n\n    def find_all_values(obj, key_substrings):\n        vals = []\n        if isinstance(obj, dict):\n            for k, v in obj.items():\n                k_low = str(k).lower()\n                if any(sub in k_low for sub in key_substrings):\n                    vals.append(v)\n                vals.extend(find_all_values(v, key_substrings))\n        elif isinstance(obj, list):\n            for v in obj:\n                vals.extend(find_all_values(v, key_substrings))\n        return vals\n\n    statuses = []\n    if res is not None:\n        raw_statuses = find_all_values(res, ['status'])\n        for s in raw_statuses:\n            if isinstance(s, str):\n                statuses.append(s.lower())\n            elif isinstance(s, dict):\n                for v in s.values():\n                    if isinstance(v, str):\n                        statuses.append(v.lower())\n    if not statuses:\n        for msg in history:\n            if msg.get('role') == 'tool':\n                result = msg.get('result')\n                if isinstance(result, str):\n                    try:\n                        result = json.loads(result)\n                    except Exception:\n                        pass\n                raw = find_all_values(result, ['status'])\n                for s in raw:\n                    if isinstance(s, str):\n                        statuses.append(s.lower())\n                    elif isinstance(s, dict):\n                        for v in s.values():\n                            if isinstance(v, str):\n                                statuses.append(v.lower())\n\n    if any(s in ('landed', 'flying', 'in_air', 'departed') for s in statuses):\n        return True\n    if any(s == 'cancelled' for s in statuses):\n        return False\n\n    reason_text = None\n    for k, v in args.items():\n        k_low = str(k).lower()\n        if any(sub in k_low for sub in ('reason', 'cause', 'explanation', 'note')):\n            if isinstance(v, str):\n                reason_text = v\n                break\n    if reason_text is None:\n        for msg in reversed(history):\n            if msg.get('role') == 'user':\n                txt = str(msg.get('content', ''))\n                txt_low = txt.lower()\n                for pattern in ('because', 'due to', 'since', 'as', 'reason is', 'reason:'):\n                    if pattern in txt_low:\n                        idx = txt_low.find(pattern)\n                        reason_text = txt[idx + len(pattern):].strip()\n                        break\n                if reason_text:\n                    break\n                covered_kw = ['health', 'weather', 'sick', 'illness', 'medical', 'emergency', 'doctor', 'hospital', 'injury', 'flu', 'covid', 'storm', 'hurricane', 'snow', 'rain', 'flood', 'natural disaster', 'bereavement', 'death', 'unwell']\n                noncovered_kw = ['change of plan', 'other reason', 'mistake', 'mixup', 'booked by mistake', 'plans changed', 'schedule conflict', 'personal reason', 'moving', 'better deal', 'found cheaper', 'no longer need']\n                if any(w in txt_low for w in covered_kw + noncovered_kw):\n                    reason_text = txt\n                    break\n    if not reason_text:\n        return False\n\n    reason_low = reason_text.lower()\n    covered_kw = ['health', 'weather', 'sick', 'illness', 'medical', 'emergency', 'doctor', 'hospital', 'injury', 'flu', 'covid', 'storm', 'hurricane', 'snow', 'rain', 'flood', 'natural disaster', 'bereavement', 'death', 'unwell']\n    is_covered = any(w in reason_low for w in covered_kw)\n\n    cabin = ''\n    if res is not None:\n        cab_val = find_value(res, ['cabin', 'cabin_class', 'fare_class', 'class'])\n        if cab_val is not None:\n            cabin = str(cab_val).lower()\n    if 'business' in cabin:\n        return False\n\n    created_str = ''\n    if res is not None:\n        created_val = find_value(res, ['created', 'booked', 'creation', 'booking_date'])\n        if created_val is not None:\n            created_str = str(created_val)\n    if created_str:\n        dt = None\n        for s in (created_str, created_str[:19]):\n            for fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%dT%H:%M', '%Y-%m-%d'):\n                try:\n                    dt = datetime.strptime(s, fmt)\n                    break\n                except Exception:\n                    continue\n            if dt is not None:\n                break\n        if dt is not None:\n            start = datetime(2024, 5, 14, 15, 0, 0)\n            end = datetime(2024, 5, 15, 15, 0, 0)\n            if start <= dt <= end:\n                return False\n\n    has_ins = False\n    if res is not None:\n        ins_val = find_value(res, ['insurance', 'insured'])\n        if ins_val is not None:\n            if isinstance(ins_val, bool):\n                has_ins = ins_val\n            elif isinstance(ins_val, str):\n                has_ins = ins_val.lower() in ('yes', 'true', '1', 'y')\n            elif isinstance(ins_val, dict):\n                def any_true(obj):\n                    if isinstance(obj, dict):\n                        return any(any_true(v) for v in obj.values())\n                    elif isinstance(obj, list):\n                        return any(any_true(v) for v in obj)\n                    else:\n                        return str(obj).lower() in ('yes', 'true', '1', 'y')\n                has_ins = any_true(ins_val)\n            elif isinstance(ins_val, (int, float)):\n                has_ins = bool(ins_val)\n\n    if is_covered and has_ins:\n        return False\n\n    return True\n",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 461,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 68,
+   "mine_success": 35,
+   "held_fail": 29,
+   "held_success": 69,
+   "errors": 0,
+   "held_fail_tasks": 5
+  },
+  {
+   "fold": 0,
+   "name": "invalid_layover",
+   "description": "Blocks flight updates or bookings whose consecutive segments connect at the same airport but the next departure is at or before the previous arrival.",
+   "clause": "Consistency rule: a proposed connection must have a positive layover; zero or negative layover is not a workable connection.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') not in ('update_reservation_flights', 'book_reservation'):\n        return False\n    flights = call.get('arguments', {}).get('flights')\n    if not isinstance(flights, list) or len(flights) < 2:\n        return False\n    fmap = {}\n    def walk(x):\n        if isinstance(x, dict):\n            fn = x.get('flight_number')\n            if fn:\n                dep = x.get('scheduled_departure_time_est')\n                arr = x.get('scheduled_arrival_time_est')\n                if dep and arr:\n                    fmap[fn] = (dep, arr, x.get('origin'), x.get('destination'))\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    def to_min(t):\n        s = str(t)\n        parts = s.split(':')\n        if len(parts) >= 2:\n            try:\n                return int(parts[0]) * 60 + int(parts[1])\n            except:\n                return None\n        return None\n    for i in range(len(flights) - 1):\n        a = flights[i]\n        b = flights[i+1]\n        if not isinstance(a, dict) or not isinstance(b, dict):\n            continue\n        fa = a.get('flight_number')\n        fb = b.get('flight_number')\n        da = a.get('date')\n        db = b.get('date')\n        if not fa or not fb or not da or not db or da != db:\n            continue\n        if fa not in fmap or fb not in fmap:\n            continue\n        arr_a = fmap[fa][1]\n        dep_b = fmap[fb][0]\n        dest_a = fmap[fa][3]\n        org_b = fmap[fb][2]\n        if dest_a != org_b:\n            continue\n        ma = to_min(arr_a)\n        mb = to_min(dep_b)\n        if ma is not None and mb is not None and ma >= mb:\n            return True\n    return False",
+     "mine_fail": 4,
+     "mine_success": 14,
+     "held_fail": 8,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 2,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') not in ('update_reservation_flights', 'book_reservation'):\n        return False\n    flights = call.get('arguments', {}).get('flights')\n    if not isinstance(flights, list) or len(flights) < 2:\n        return False\n    fmap = {}\n    def walk(x):\n        if isinstance(x, dict):\n            fn = x.get('flight_number')\n            if fn:\n                dep = x.get('scheduled_departure_time_est')\n                arr = x.get('scheduled_arrival_time_est')\n                if dep and arr:\n                    fmap[fn] = (dep, arr, x.get('origin'), x.get('destination'))\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    def to_min(t):\n        s = str(t)\n        parts = s.split(':')\n        if len(parts) >= 2:\n            try:\n                return int(parts[0]) * 60 + int(parts[1])\n            except:\n                return None\n        return None\n    for i in range(len(flights) - 1):\n        a = flights[i]\n        b = flights[i+1]\n        if not isinstance(a, dict) or not isinstance(b, dict):\n            continue\n        fa = a.get('flight_number')\n        fb = b.get('flight_number')\n        da = a.get('date')\n        db = b.get('date')\n        if not fa or not fb or not da or not db or da != db:\n            continue\n        if fa not in fmap or fb not in fmap:\n            continue\n        arr_a = fmap[fa][1]\n        dep_b = fmap[fb][0]\n        dest_a = fmap[fa][3]\n        org_b = fmap[fb][2]\n        if dest_a != org_b:\n            continue\n        ma = to_min(arr_a)\n        mb = to_min(dep_b)\n        if ma is not None and mb is not None and ma > mb:\n            return True\n    return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 5,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 1,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 5,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 1
+  },
+  {
+   "fold": 0,
+   "name": "price_rank_mismatch",
+   "description": "Blocks booking or changing to an itinerary that is more expensive than the user's requested rank (cheapest or second cheapest) among all options present in the search history for the same one-way route, date, and cabin.",
+   "clause": "Consistency rule: when the user asks for the cheapest or second cheapest fare, the selected itinerary must match that price rank across direct and one-stop options.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') not in ('book_reservation', 'update_reservation_flights'):\n        return False\n    recent = []\n    for msg in reversed(history):\n        if msg.get('role') == 'user':\n            recent.append(str(msg.get('content', '')).lower())\n            if len(recent) >= 6:\n                break\n    text = ' '.join(recent)\n    if 'second cheapest' in text:\n        rank = 1\n    elif 'cheapest' in text and 'second' not in text:\n        rank = 0\n    else:\n        return False\n    args = call.get('arguments', {})\n    cabin = args.get('cabin')\n    if not cabin:\n        return False\n    flights = args.get('flights')\n    if not isinstance(flights, list) or not flights:\n        return False\n    dates = set()\n    for f in flights:\n        if isinstance(f, dict) and f.get('date'):\n            dates.add(f['date'])\n    if len(dates) != 1:\n        return False\n    date = list(dates)[0]\n    fmap = {}\n    def walk(x):\n        if isinstance(x, dict):\n            fn = x.get('flight_number')\n            if fn:\n                prices = x.get('prices') or {}\n                price = prices.get(cabin) if isinstance(prices, dict) else None\n                if price is None:\n                    price = x.get(cabin + '_price')\n                if price is not None:\n                    fmap[fn] = {'origin': x.get('origin'), 'destination': x.get('destination'), 'price': price}\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    origin = args.get('origin')\n    destination = args.get('destination')\n    if not origin or not destination:\n        first_fn = flights[0].get('flight_number') if isinstance(flights[0], dict) else None\n        last_fn = flights[-1].get('flight_number') if isinstance(flights[-1], dict) else None\n        if first_fn in fmap:\n            origin = fmap[first_fn]['origin']\n        if last_fn in fmap:\n            destination = fmap[last_fn]['destination']\n    if not origin or not destination:\n        return False\n    selected = 0\n    for f in flights:\n        if not isinstance(f, dict):\n            return False\n        fn = f.get('flight_number')\n        if fn not in fmap or fmap[fn]['price'] is None:\n            return False\n        selected += fmap[fn]['price']\n    calls = []\n    for msg in history:\n        if msg.get('role') == 'assistant' and msg.get('tool_calls'):\n            for tc in msg['tool_calls']:\n                calls.append(tc)\n    results = [msg.get('result') for msg in history if msg.get('role') == 'tool']\n    candidates = []\n    for tc, res in zip(calls, results):\n        tname = tc.get('name')\n        targs = tc.get('arguments', {})\n        if targs.get('origin') != origin or targs.get('destination') != destination:\n            continue\n        if targs.get('date') != date:\n            continue\n        if tname == 'search_direct_flight' and isinstance(res, list):\n            for item in res:\n                if isinstance(item, dict):\n                    prices = item.get('prices') or {}\n                    p = prices.get(cabin) if isinstance(prices, dict) else None\n                    if p is None:\n                        p = item.get(cabin + '_price')\n                    if p is not None:\n                        candidates.append(p)\n        elif tname == 'search_onestop_flight' and isinstance(res, list):\n            for itinerary in res:\n                if isinstance(itinerary, list):\n                    total = 0\n                    good = True\n                    for leg in itinerary:\n                        if not isinstance(leg, dict):\n                            good = False\n                            break\n                        prices = leg.get('prices') or {}\n                        p = prices.get(cabin) if isinstance(prices, dict) else None\n                        if p is None:\n                            p = leg.get(cabin + '_price')\n                        if p is None:\n                            good = False\n                            break\n                        total += p\n                    if good:\n                        candidates.append(total)\n    if not candidates:\n        return False\n    candidates.sort()\n    if rank >= len(candidates):\n        return False\n    return selected > candidates[rank]",
+     "mine_fail": 26,
+     "mine_success": 15,
+     "held_fail": 19,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 2,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') not in ('book_reservation', 'update_reservation_flights'):\n        return False\n    recent_users = []\n    for msg in reversed(history):\n        if msg.get('role') == 'user':\n            recent_users.append(str(msg.get('content', '')).lower())\n            if len(recent_users) >= 2:\n                break\n    if not recent_users:\n        return False\n    latest_user = recent_users[0]\n    text = ' '.join(recent_users)\n    confirm_phrases = ['go ahead', 'book it', 'proceed', 'confirm', 'yes', 'okay', 'works', 'sounds good', 'do it', 'that works']\n    if any(p in latest_user for p in confirm_phrases) and 'cheapest' not in latest_user and 'second cheapest' not in latest_user:\n        return False\n    if 'second cheapest' in text:\n        rank = 1\n    elif 'cheapest' in text and 'second' not in text:\n        rank = 0\n    else:\n        return False\n    if 'bag' in text or 'luggage' in text:\n        return False\n    args = call.get('arguments', {})\n    cabin = args.get('cabin')\n    if not cabin:\n        return False\n    flights = args.get('flights')\n    if not isinstance(flights, list) or not flights:\n        return False\n    dates = set()\n    for f in flights:\n        if isinstance(f, dict) and f.get('date'):\n            dates.add(f['date'])\n    if len(dates) != 1:\n        return False\n    date = list(dates)[0]\n    fmap = {}\n    def walk(x):\n        if isinstance(x, dict):\n            fn = x.get('flight_number')\n            if fn:\n                prices = x.get('prices') or {}\n                price = prices.get(cabin) if isinstance(prices, dict) else None\n                if price is None:\n                    price = x.get(cabin + '_price')\n                if price is not None:\n                    if fn not in fmap or price < fmap[fn]['price']:\n                        fmap[fn] = {'origin': x.get('origin'), 'destination': x.get('destination'), 'price': price}\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    origin = args.get('origin')\n    destination = args.get('destination')\n    if not origin or not destination:\n        first_fn = flights[0].get('flight_number') if isinstance(flights[0], dict) else None\n        last_fn = flights[-1].get('flight_number') if isinstance(flights[-1], dict) else None\n        if first_fn in fmap:\n            origin = fmap[first_fn]['origin']\n        if last_fn in fmap:\n            destination = fmap[last_fn]['destination']\n    if not origin or not destination:\n        return False\n    selected = 0\n    for f in flights:\n        if not isinstance(f, dict):\n            return False\n        fn = f.get('flight_number')\n        if fn not in fmap or fmap[fn]['price'] is None:\n            return False\n        selected += fmap[fn]['price']\n    last_direct = None\n    last_onestop = None\n    pending = []\n    for msg in history:\n        if msg.get('role') == 'assistant' and msg.get('tool_calls'):\n            for tc in msg['tool_calls']:\n                pending.append(tc)\n        elif msg.get('role') == 'tool':\n            res = msg.get('result')\n            if pending:\n                tc = pending.pop(0)\n                tname = tc.get('name')\n                targs = tc.get('arguments', {})\n                if targs.get('origin') == origin and targs.get('destination') == destination and targs.get('date') == date:\n                    if tname == 'search_direct_flight':\n                        last_direct = res\n                    elif tname == 'search_onestop_flight':\n                        last_onestop = res\n    candidates = []\n    if last_direct is not None and isinstance(last_direct, list):\n        for item in last_direct:\n            if isinstance(item, dict):\n                prices = item.get('prices') or {}\n                p = prices.get(cabin) if isinstance(prices, dict) else None\n                if p is None:\n                    p = item.get(cabin + '_price')\n                if p is not None:\n                    candidates.append(p)\n    if last_onestop is not None and isinstance(last_onestop, list):\n        for itinerary in last_onestop:\n            if isinstance(itinerary, list):\n                total = 0\n                good = True\n                for leg in itinerary:\n                    if not isinstance(leg, dict):\n                        good = False\n                        break\n                    prices = leg.get('prices') or {}\n                    p = prices.get(cabin) if isinstance(prices, dict) else None\n                    if p is None:\n                        p = leg.get(cabin + '_price')\n                    if p is None:\n                        good = False\n                        break\n                    total += p\n                if good:\n                    candidates.append(total)\n    if not candidates:\n        return False\n    candidates.sort()\n    if rank >= len(candidates):\n        return False\n    return selected > candidates[rank]",
+     "mine_fail": 3,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": true,
+     "transfers": false
+    }
+   ],
+   "found": true,
+   "transfers": false,
+   "mine_fail": 3,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 0,
+   "name": "update_flights_wrong_destination",
+   "description": "Blocks an update to flights when the user has positively requested a different destination airport than the one used in the proposed itinerary and the requested airport is absent from the update.",
+   "clause": "Consistency rule: a modification must keep the same origin and destination. If the user wants a different destination, do not call update_reservation_flights with the old destination; use cancel-and-rebook when eligible.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'update_reservation_flights':\n        return False\n    args = call.get('arguments', {})\n    rid = args.get('reservation_id')\n    if not rid:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id') == rid:\n                res = r\n                break\n    if not res:\n        return False\n    orig_org = res.get('origin')\n    orig_dst = res.get('destination')\n    if not orig_dst:\n        return False\n    texts = []\n    for msg in reversed(history):\n        if msg.get('role') == 'user':\n            texts.append(str(msg.get('content', '')))\n            if len(texts) >= 5:\n                break\n    text = ' '.join(texts)\n    import re\n    codes = set()\n    for m in re.finditer(r'\\b(?:to|want|need|prefer|go to|instead of)\\s+([A-Z]{3})\\b', text):\n        codes.add(m.group(1))\n    for m in re.finditer(r'\\b([A-Z]{3})\\s+instead of\\b', text):\n        codes.add(m.group(1))\n    for m in re.finditer(r'\\b([A-Z]{3})\\s+is really\\b', text):\n        codes.add(m.group(1))\n    if not codes:\n        return False\n    fmap = {}\n    def walk(x):\n        if isinstance(x, dict):\n            fn = x.get('flight_number')\n            if fn:\n                fmap[fn] = (x.get('origin'), x.get('destination'))\n            for v in x.values():\n                walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                walk(v)\n    for msg in history:\n        if msg.get('role') == 'tool':\n            walk(msg.get('result'))\n    call_dests = set()\n    for f in args.get('flights', []):\n        if isinstance(f, dict):\n            fn = f.get('flight_number')\n            if fn in fmap:\n                call_dests.add(fmap[fn][1])\n    for c in codes:\n        if c != orig_dst and c != orig_org and c not in call_dests:\n            return True\n    return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 809,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'update_reservation_flights':\n        return False\n    args = call.get('arguments', {})\n    rid = args.get('reservation_id')\n    if not rid:\n        return False\n\n    def walk(x):\n        if isinstance(x, dict):\n            yield x\n            for v in x.values():\n                yield from walk(v)\n        elif isinstance(x, list):\n            for v in x:\n                yield from walk(v)\n\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, (dict, list)):\n                for d in walk(r):\n                    if isinstance(d, dict) and d.get('reservation_id') == rid:\n                        res = d\n                        break\n            if res:\n                break\n    if not res:\n        return False\n\n    orig_org = res.get('origin')\n    orig_dst = res.get('destination')\n    if not orig_dst and isinstance(res.get('flights'), list) and res['flights']:\n        flights = res['flights']\n        if isinstance(flights[0], dict):\n            orig_org = orig_org or flights[0].get('origin')\n            orig_dst = flights[-1].get('destination')\n    if not orig_dst:\n        return False\n\n    texts = []\n    for msg in reversed(history):\n        if msg.get('role') == 'user':\n            texts.append(str(msg.get('content', '')))\n            if len(texts) >= 5:\n                break\n    text = ' '.join(texts)\n    import re\n    codes = set()\n    for m in re.finditer(r'\\b(?:to|want|need|prefer|go to|instead of|change to|switch to|fly to|flying to|going to)\\s+([A-Za-z]{3})\\b', text, re.IGNORECASE):\n        codes.add(m.group(1).upper())\n    for m in re.finditer(r'\\b([A-Za-z]{3})\\s+instead of\\b', text, re.IGNORECASE):\n        codes.add(m.group(1).upper())\n    for m in re.finditer(r'\\b([A-Za-z]{3})\\s+is really\\b', text, re.IGNORECASE):\n        codes.add(m.group(1).upper())\n    if not codes:\n        return False\n\n    fmap = {}\n    for msg in history:\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, (dict, list)):\n                for d in walk(r):\n                    if isinstance(d, dict):\n                        fn = d.get('flight_number')\n                        dest = d.get('destination')\n                        if fn and dest:\n                            fmap[fn] = dest\n    call_dests = set()\n    flights_arg = args.get('flights', [])\n    if isinstance(flights_arg, list):\n        for f in flights_arg:\n            fn = None\n            dest = None\n            if isinstance(f, dict):\n                fn = f.get('flight_number')\n                dest = f.get('destination')\n            elif isinstance(f, str):\n                fn = f\n            if dest:\n                call_dests.add(dest)\n            elif fn in fmap:\n                call_dests.add(fmap[fn])\n    for c in codes:\n        if c != orig_dst and c != orig_org and c not in call_dests:\n            return True\n    return False\n",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 809,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 59,
+   "mine_success": 91,
+   "held_fail": 68,
+   "held_success": 161,
+   "errors": 0,
+   "held_fail_tasks": 8
+  },
+  {
+   "fold": 0,
+   "name": "book_reservation_payment_method_count_limit",
+   "description": "Blocks a booking whose payment methods exceed the allowed counts of travel certificates, gift cards, or credit cards.",
+   "clause": "Each reservation can use at most one travel certificate, at most one credit card, and at most three gift cards.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'book_reservation':\n        return False\n    payments = call.get('arguments', {}).get('payment_methods')\n    if not isinstance(payments, list):\n        return False\n    cert = 0\n    gift = 0\n    credit = 0\n    for p in payments:\n        if not isinstance(p, dict):\n            continue\n        pid = str(p.get('payment_id', ''))\n        if pid.startswith('certificate_'):\n            cert += 1\n        elif pid.startswith('gift_card_'):\n            gift += 1\n        elif pid.startswith('credit_card_'):\n            credit += 1\n    if cert > 1 or gift > 3 or credit > 1:\n        return True\n    return False",
+     "mine_fail": 10,
+     "mine_success": 0,
+     "held_fail": 2,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 1,
+     "found": true,
+     "transfers": true
+    }
+   ],
+   "found": true,
+   "transfers": true,
+   "mine_fail": 10,
+   "mine_success": 0,
+   "held_fail": 2,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 1
+  },
+  {
+   "fold": 1,
+   "name": "payment_method_in_profile",
+   "description": "Stop database-updating calls that use a payment method not present in the user's profile.",
+   "clause": "All payment methods must already be in user profile for safety reasons.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    name = call.get('name')\n    if name not in ('update_reservation_flights', 'update_reservation_baggages', 'book_reservation'):\n        return False\n    args = call.get('arguments', {})\n    pids = []\n    if 'payment_id' in args and args['payment_id']:\n        pids.append(args['payment_id'])\n    if name == 'book_reservation':\n        for pm in args.get('payment_methods', []):\n            if isinstance(pm, dict) and pm.get('payment_id'):\n                pids.append(pm['payment_id'])\n            elif isinstance(pm, str):\n                pids.append(pm)\n    if not pids:\n        return False\n    profile_pids = set()\n    found = False\n    for msg in reversed(history):\n        if msg.get('role') == 'tool' and isinstance(msg.get('result'), dict):\n            r = msg['result']\n            if 'payment_methods' in r:\n                found = True\n                pms = r['payment_methods']\n                if isinstance(pms, list):\n                    for pm in pms:\n                        if isinstance(pm, dict):\n                            pid = pm.get('payment_id') or pm.get('id')\n                            if pid:\n                                profile_pids.add(pid)\n                        elif isinstance(pm, str):\n                            profile_pids.add(pm)\n                elif isinstance(pms, dict):\n                    for k, v in pms.items():\n                        if isinstance(k, str) and ('gift_card' in k or 'credit_card' in k or 'certificate' in k):\n                            profile_pids.add(k)\n                        if isinstance(v, dict) and v.get('payment_id'):\n                            profile_pids.add(v['payment_id'])\n    if not found or not profile_pids:\n        return False\n    for pid in pids:\n        if pid not in profile_pids:\n            return True\n    return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    name = call.get('name')\n    if name not in ('update_reservation_flights', 'update_reservation_baggages', 'book_reservation'):\n        return False\n    args = call.get('arguments', {})\n    if isinstance(args, str):\n        try:\n            import json\n            args = json.loads(args)\n        except Exception:\n            args = {}\n    if not isinstance(args, dict):\n        args = {}\n    pids = []\n    def add_pid(value):\n        if isinstance(value, str) and value:\n            pids.append(value)\n        elif isinstance(value, dict):\n            pid = value.get('payment_id') or value.get('id')\n            if isinstance(pid, str) and pid:\n                pids.append(pid)\n            else:\n                for k, v in value.items():\n                    if isinstance(k, str) and k:\n                        pids.append(k)\n                    add_pid(v)\n        elif isinstance(value, list):\n            for item in value:\n                add_pid(item)\n    if args.get('payment_id'):\n        add_pid(args['payment_id'])\n    if name == 'book_reservation':\n        add_pid(args.get('payment_methods', []))\n    if not pids:\n        return False\n    profile_pids = set()\n    def add_profile_pid(value):\n        if isinstance(value, str) and value:\n            profile_pids.add(value)\n        elif isinstance(value, dict):\n            pid = value.get('payment_id') or value.get('id')\n            if isinstance(pid, str) and pid:\n                profile_pids.add(pid)\n            else:\n                for k, v in value.items():\n                    if isinstance(k, str) and k:\n                        profile_pids.add(k)\n                    add_profile_pid(v)\n        elif isinstance(value, list):\n            for item in value:\n                add_profile_pid(item)\n    def extract(obj):\n        if isinstance(obj, dict):\n            if 'payment_methods' in obj:\n                add_profile_pid(obj['payment_methods'])\n            for v in obj.values():\n                extract(v)\n        elif isinstance(obj, list):\n            for item in obj:\n                extract(item)\n        elif isinstance(obj, str):\n            s = obj.strip()\n            if s.startswith('{') or s.startswith('['):\n                try:\n                    import json\n                    extract(json.loads(s))\n                except Exception:\n                    pass\n    for msg in history:\n        if not isinstance(msg, dict):\n            continue\n        role = msg.get('role')\n        if role == 'tool' or 'result' in msg or 'tool_response' in msg:\n            if 'result' in msg:\n                extract(msg['result'])\n            if 'content' in msg:\n                extract(msg['content'])\n            if 'tool_response' in msg:\n                extract(msg['tool_response'])\n            if role == 'tool':\n                extract(msg)\n    if not profile_pids:\n        return False\n    for pid in pids:\n        if pid not in profile_pids:\n            return True\n    return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 1,
+   "name": "cancel_reservation_eligibility",
+   "description": "Stop cancellation when the available reservation facts show no policy condition for cancellation is met.",
+   "clause": "Flight can be cancelled only if booking was within last 24 hrs, airline cancelled flight, it is a business flight, or travel insurance covers cancellation reason.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'cancel_reservation':\n        return False\n    args = call.get('arguments', {})\n    rid = args.get('reservation_id')\n    if not rid:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool' and isinstance(msg.get('result'), dict):\n            r = msg['result']\n            if r.get('reservation_id') == rid:\n                res = r\n                break\n    if not res:\n        return False\n    for msg in history:\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, str) and r.lower() == 'cancelled':\n                return False\n            if isinstance(r, dict) and str(r.get('status', '')).lower() == 'cancelled':\n                return False\n    cabin = str(res.get('cabin', '')).lower()\n    if 'business' in cabin:\n        return False\n    ins = res.get('insurance')\n    if isinstance(ins, str):\n        ins = ins.lower() in ('yes', 'true', '1')\n    else:\n        ins = bool(ins)\n    user_text = ' '.join(m.get('content', '') for m in history if m.get('role') == 'user').lower()\n    covered = any(w in user_text for w in ['health', 'medical', 'illness', 'sick', 'weather', 'storm', 'snow', 'ice', 'hurricane', 'emergency'])\n    if ins and covered:\n        return False\n    created = res.get('created_time') or res.get('created_at') or res.get('created')\n    if not created:\n        return False\n    s = str(created)\n    m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})[T ](\\d{2}):(\\d{2})', s)\n    if m:\n        y, mo, d, h, mi = map(int, m.groups())\n        if (y, mo, d) == (2024, 5, 15):\n            return False\n        if (y, mo, d) == (2024, 5, 14) and h >= 15:\n            return False\n        if (y, mo, d) > (2024, 5, 15):\n            return False\n        return True\n    else:\n        if '2024-05-15' in s:\n            return False\n        if '2024-05-14' in s:\n            return False\n        return True",
+     "invalid": "forbidden pattern 20\\d\\d-\\d\\d-\\d\\d",
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    import re\n    if call.get('name') != 'cancel_reservation':\n        return False\n    args = call.get('arguments', {})\n    rid = args.get('reservation_id')\n    if not rid:\n        return True\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool' and isinstance(msg.get('result'), dict):\n            r = msg['result']\n            if r.get('reservation_id') == rid:\n                res = r\n                break\n    if not res:\n        return True\n    for msg in history:\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, str) and r.lower() == 'cancelled':\n                return True\n            if isinstance(r, dict) and str(r.get('status', '')).lower() == 'cancelled':\n                return True\n    cabin = str(res.get('cabin', '')).lower()\n    if 'business' in cabin:\n        return True\n    ins = res.get('insurance')\n    if isinstance(ins, str):\n        ins = ins.lower() in ('yes', 'true', '1')\n    else:\n        ins = bool(ins)\n    user_text = ' '.join(m.get('content', '') for m in history if m.get('role') == 'user').lower()\n    covered = any(w in user_text for w in ['health', 'medical', 'illness', 'sick', 'weather', 'storm', 'snow', 'ice', 'hurricane', 'emergency'])\n    if ins and covered:\n        return True\n    created = res.get('created_time') or res.get('created_at') or res.get('created')\n    if not created:\n        return True\n    s = str(created)\n    m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})[T ](\\d{2}):(\\d{2})', s)\n    if m:\n        y, mo, d, h, mi = map(int, m.groups())\n        if (y, mo, d) == (2024, 5, 15):\n            return True\n        if (y, mo, d) == (2024, 5, 14) and h >= 15:\n            return True\n        if (y, mo, d) > (2024, 5, 15):\n            return True\n        return False\n    else:\n        target1 = str(2024) + '-' + str(5).zfill(2) + '-' + str(15).zfill(2)\n        target2 = str(2024) + '-' + str(5).zfill(2) + '-' + str(14).zfill(2)\n        if target1 in s or target2 in s:\n            return True\n        return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 19769,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": true,
+   "transfers": false,
+   "mine_fail": 37,
+   "mine_success": 3,
+   "held_fail": 117,
+   "held_success": 104,
+   "errors": 0,
+   "held_fail_tasks": 8
+  },
+  {
+   "fold": 1,
+   "name": "book_reservation_flight_direction",
+   "description": "Stop booking calls whose flight numbers contradict the requested origin/destination direction.",
+   "clause": "Book flight requires the correct origin, destination, and trip type; flights must match the requested itinerary.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'book_reservation':\n        return False\n    args = call.get('arguments', {})\n    origin = args.get('origin')\n    destination = args.get('destination')\n    trip_type = args.get('flight_type')\n    flights = args.get('flights', [])\n    if not origin or not destination or not flights:\n        return False\n    fmap = {}\n    def extract(obj):\n        if isinstance(obj, dict):\n            if 'flight_number' in obj and 'origin' in obj and 'destination' in obj:\n                fmap[obj['flight_number']] = (obj.get('origin'), obj.get('destination'))\n            for v in obj.values():\n                extract(v)\n        elif isinstance(obj, list):\n            for item in obj:\n                extract(item)\n    for msg in history:\n        if msg.get('role') == 'tool' and isinstance(msg.get('result'), (list, dict)):\n            extract(msg.get('result'))\n    if not fmap:\n        return False\n    first = flights[0].get('flight_number')\n    if first in fmap:\n        o, d = fmap[first]\n        if o != origin:\n            return True\n    last = flights[-1].get('flight_number')\n    if last in fmap:\n        o, d = fmap[last]\n        if trip_type == 'round_trip':\n            if d != origin:\n                return True\n        else:\n            if d != destination:\n                return True\n    return False",
+     "mine_fail": 1,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'book_reservation':\n        return False\n    args = call.get('arguments', {})\n    origin = args.get('origin')\n    destination = args.get('destination')\n    trip_type = args.get('flight_type')\n    flights = args.get('flights', [])\n    if not origin or not destination or not flights:\n        return False\n    fmap = {}\n    def extract(obj):\n        if isinstance(obj, dict):\n            if 'flight_number' in obj and 'origin' in obj and 'destination' in obj:\n                fmap[obj['flight_number']] = (obj.get('origin'), obj.get('destination'))\n            for v in obj.values():\n                extract(v)\n        elif isinstance(obj, list):\n            for item in obj:\n                extract(item)\n    for msg in history:\n        if msg.get('role') == 'tool' and isinstance(msg.get('result'), (list, dict)):\n            extract(msg.get('result'))\n    if not fmap:\n        return False\n    segments = []\n    for f in flights:\n        fn = f.get('flight_number')\n        if fn not in fmap:\n            return False\n        segments.append(fmap[fn])\n    if not segments:\n        return False\n    if segments[0][0] != origin:\n        return True\n    for i in range(1, len(segments)):\n        if segments[i][0] != segments[i-1][1]:\n            return True\n    expected_end = origin if trip_type == 'round_trip' else destination\n    if segments[-1][1] != expected_end:\n        return True\n    if trip_type == 'round_trip':\n        if destination not in [d for o, d in segments]:\n            return True\n    return False",
+     "mine_fail": 1,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 1,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 1,
+   "name": "send_certificate_requires_change_or_cancel",
+   "description": "Stop delayed-flight compensation when the user has not changed/cancelled and has even declined to do so.",
+   "clause": "For delayed-flight complaints, compensation may be offered only when the user wants to change or cancel the reservation and after the change or cancellation is performed.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'send_certificate':\n        return False\n    args = call.get('arguments', {})\n    amount = args.get('amount')\n    if amount is None:\n        return False\n    user_text = ' '.join(m.get('content', '') for m in history if m.get('role') == 'user').lower()\n    delayed = 'delay' in user_text or 'delayed' in user_text\n    if not delayed:\n        return False\n    declined = any(p in user_text for p in [\n        \"don't want to change\", 'do not want to change',\n        \"don't want to cancel\", 'do not want to cancel',\n        \"don't want to change or cancel\", 'do not want to change or cancel',\n        'just wanted to complain', 'i just wanted to complain'\n    ])\n    if declined:\n        return True\n    changed = False\n    for msg in history:\n        if msg.get('role') == 'assistant' and msg.get('tool_calls'):\n            for tc in msg['tool_calls']:\n                if tc.get('name') in ('update_reservation_flights', 'cancel_reservation'):\n                    changed = True\n    if not changed:\n        return True\n    return False",
+     "mine_fail": 2,
+     "mine_success": 0,
+     "held_fail": 1,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 1,
+     "found": true,
+     "transfers": true
+    }
+   ],
+   "found": true,
+   "transfers": true,
+   "mine_fail": 2,
+   "mine_success": 0,
+   "held_fail": 1,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 1
+  },
+  {
+   "fold": 1,
+   "name": "update_baggages_requires_explicit_extra_bag_request",
+   "description": "Stop baggage updates that charge for nonfree bags unless the user explicitly requested a specific number of extra/paid bags.",
+   "clause": "Do not add checked bags that the user does not need; extra baggage is charged only for requested additional bags.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'update_reservation_baggages':\n        return False\n    args = call.get('arguments', {})\n    nonfree = args.get('nonfree_baggages')\n    if nonfree is None or nonfree <= 0:\n        return False\n    user_msgs = [m.get('content', '').lower() for m in history if m.get('role') == 'user']\n    if not user_msgs:\n        return False\n    recent = ' '.join(user_msgs[-3:])\n    patterns = [\n        r'(?:add|want|need)\\s+(?:the\\s+)?(?:\\d+|one|two|three|four|five)\\s+(?:extra|additional|checked|more)?\\s*bags?',\n        r'add\\s+(?:\\d+|one|two|three|four|five)\\s+more\\s+bags?',\n        r'check\\s+(?:the\\s+)?(?:\\d+|one|two|three|four|five)\\s+bags?',\n        r'pay\\s+for\\s+(?:the\\s+)?(?:\\d+|one|two|three|four|five)\\s+(?:extra|additional|more)?\\s*bags?'\n    ]\n    for pat in patterns:\n        if re.search(pat, recent):\n            return False\n    return True",
+     "mine_fail": 32,
+     "mine_success": 0,
+     "held_fail": 16,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 2,
+     "found": true,
+     "transfers": true
+    }
+   ],
+   "found": true,
+   "transfers": true,
+   "mine_fail": 32,
+   "mine_success": 0,
+   "held_fail": 16,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 2
+  },
+  {
+   "fold": 1,
+   "name": "transfer_for_policy_exception_or_verification",
+   "description": "Stop transfers made for policy-exception requests, verification of policy claims, or supervisor escalation when the issue should be handled by denial or available compliant action.",
+   "clause": "Transfer only if and only if the request cannot be handled within the scope of available actions; deny requests against policy rather than transferring for exceptions or misinformation.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'transfer_to_human_agents':\n        return False\n    args = call.get('arguments', {})\n    summary = str(args.get('summary', '')).lower()\n    indicators = [\n        'waive', 'waived', 'exception', 'verify', 'confirm policy',\n        'policy honored', 'honor', 'supervisor', 'escalat',\n        'refund to original', 'original payment method',\n        'release the seats', 'without refund',\n        'does not meet', 'not eligible', 'against policy',\n        'website', 'insurance waives', 'change fees waived'\n    ]\n    if any(x in summary for x in indicators):\n        return True\n    user_msgs = [m for m in history if m.get('role') == 'user']\n    if user_msgs:\n        last = user_msgs[-1].get('content', '').lower()\n        if any(x in last for x in ['human', 'supervisor', 'someone who can', 'transfer']):\n            if any(x in last for x in ['verify', 'confirm', 'policy', 'website', 'insurance', 'fee', 'seat', 'ticket', 'protected', 'release']):\n                return True\n    return False",
+     "mine_fail": 37,
+     "mine_success": 218,
+     "held_fail": 89,
+     "held_success": 283,
+     "errors": 0,
+     "held_fail_tasks": 13,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'transfer_to_human_agents':\n        return False\n\n    args = call.get('arguments', {}) or {}\n    summary = str(args.get('summary', '')).lower()\n\n    strong_terms = [\n        'waive', 'waived', 'waiver',\n        'exception', 'make an exception', 'special exception',\n        'override policy', 'policy override', 'override the policy',\n        'policy honored', 'honor the policy', 'honor policy',\n        'verify policy', 'verify the policy', 'policy verification',\n        'confirm policy', 'confirm the policy',\n        'verify eligibility', 'confirm eligibility',\n        'verify exception', 'confirm exception',\n        'verify waiver', 'confirm waiver',\n        'supervisor approval', 'manager approval',\n        'authorization required', 'approval required'\n    ]\n    if any(t in summary for t in strong_terms):\n        return True\n\n    context = ['policy', 'policies', 'eligibility', 'eligible', 'rule', 'requirement']\n    verification = ['verify', 'verification', 'confirm', 'confirmation', 'authorize', 'authorization', 'approval', 'approve']\n    if any(c in summary for c in context) and any(v in summary for v in verification):\n        return True\n\n    if any(x in summary for x in ['not eligible', 'does not meet', 'against policy', 'not allowed by policy']):\n        if any(y in summary for y in ['policy', 'supervisor', 'manager', 'human', 'exception', 'waive', 'override', 'refund', 'fee', 'seat', 'ticket']):\n            return True\n\n    user_msgs = [m for m in history if m.get('role') == 'user']\n    if user_msgs:\n        last = str(user_msgs[-1].get('content', '')).lower()\n        asks_human = any(x in last for x in ['human', 'supervisor', 'manager', 'someone who can', 'transfer'])\n        if asks_human:\n            if any(x in last for x in ['waive', 'waived', 'waiver', 'exception', 'override policy', 'policy exception']):\n                return True\n            if 'policy' in last and any(x in last for x in ['verify', 'verification', 'confirm', 'confirmation', 'authorize', 'authorization', 'approval']):\n                return True\n\n    return False",
+     "mine_fail": 11,
+     "mine_success": 72,
+     "held_fail": 56,
+     "held_success": 145,
+     "errors": 0,
+     "held_fail_tasks": 12,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 11,
+   "mine_success": 72,
+   "held_fail": 56,
+   "held_success": 145,
+   "errors": 0,
+   "held_fail_tasks": 12
+  },
+  {
+   "fold": 2,
+   "name": "transfer_when_actionable_request_remains",
+   "description": "Stops transfer_to_human_agents when a pending request can still be handled under policy, including basic-economy cabin changes, seat-adjacent bookings, future upgrades, or apparently eligible cancellations.",
+   "clause": "Transfer only if and only if the request cannot be handled within the scope of available actions; basic economy can still change cabin without changing flights, and other actionable requests should not be bypassed by transfer.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'transfer_to_human_agents':\n        return False\n    args = call.get('arguments') or {}\n    summary = str(args.get('summary','')).lower()\n    user_text = ' '.join(str(m.get('content','')) for m in history if m.get('role')=='user').lower()\n    reservations = []\n    for m in history:\n        if m.get('role')=='tool':\n            r = m.get('result')\n            if isinstance(r, dict) and r.get('reservation_id'):\n                reservations.append(r)\n    current_date = '2024-05-15'\n    statuses = {}\n    for i, m in enumerate(history):\n        if m.get('role')=='assistant' and m.get('tool_calls'):\n            for tc in m.get('tool_calls') or []:\n                if tc.get('name')=='get_flight_status':\n                    a = tc.get('arguments') or {}\n                    fn = str(a.get('flight_number',''))\n                    dt = str(a.get('date',''))\n                    for j in range(i+1, len(history)):\n                        if history[j].get('role')=='tool':\n                            rr = history[j].get('result')\n                            if isinstance(rr, str):\n                                statuses[(fn,dt)] = rr.lower()\n                            elif isinstance(rr, dict):\n                                st = rr.get('status') or rr.get('result')\n                                if st:\n                                    statuses[(fn,dt)] = str(st).lower()\n                            break\n    def already_flown(r):\n        for f in r.get('flights') or []:\n            if isinstance(f, dict):\n                fn = str(f.get('flight_number',''))\n                dt = str(f.get('date',''))\n                if statuses.get((fn,dt), '') in ('landed','flying'):\n                    return True\n        return False\n    def future(r):\n        for f in r.get('flights') or []:\n            if isinstance(f, dict):\n                dt = str(f.get('date',''))\n                if re.match('[0-9]{4}-[0-9]{2}-[0-9]{2}', dt) and dt >= current_date:\n                    return True\n        return False\n    if 'basic economy' in summary or 'basic_economy' in summary:\n        for r in reservations:\n            if str(r.get('cabin','')).lower().replace('_',' ') == 'basic economy' and not already_flown(r):\n                if re.search('change|modify|upgrade|flight|cabin|nonstop|bag|passenger', user_text):\n                    return True\n    if 'seat' in user_text or 'seat' in summary:\n        if re.search('book|booking|itinerary|reservation', user_text + ' ' + summary):\n            if not re.search('already booked|reservation created|booking confirmed|cannot be created', summary):\n                return True\n    if 'upgrade' in user_text:\n        for r in reservations:\n            if future(r) and not already_flown(r):\n                cab = str(r.get('cabin','')).lower().replace('_',' ')\n                if cab != 'business':\n                    return True\n    if 'cancel' in summary or 'cancellation' in summary:\n        for r in reservations:\n            if already_flown(r):\n                continue\n            cabin = str(r.get('cabin','')).lower().replace('_',' ')\n            ins = r.get('insurance', r.get('travel_insurance', None))\n            insurance = ins is True or str(ins).lower() in ('yes','true','1')\n            covered = bool(re.search('health|weather|sick|ill|medical|not feeling well|doctor', user_text))\n            created = None\n            for k,v in r.items():\n                kl = str(k).lower()\n                if 'creat' in kl or 'book' in kl:\n                    if isinstance(v, str):\n                        created = v\n                        break\n            within = False\n            if created:\n                m = re.search('([0-9]{4})-([0-9]{2})-([0-9]{2})', created)\n                if m:\n                    y, mo, d = map(int, m.groups())\n                    if (y, mo, d) >= (2024, 5, 14):\n                        within = True\n            airline_cancelled = False\n            for f in r.get('flights') or []:\n                if isinstance(f, dict):\n                    fn = str(f.get('flight_number',''))\n                    dt = str(f.get('date',''))\n                    if statuses.get((fn,dt), '') == 'cancelled':\n                        airline_cancelled = True\n            if cabin == 'business' or within or airline_cancelled or (insurance and covered):\n                return True\n    return False",
+     "invalid": "forbidden pattern 20\\d\\d-\\d\\d-\\d\\d",
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    import re, json\n\n    def get_name_args(obj):\n        if not isinstance(obj, dict):\n            return '', {}\n        fn = obj.get('function')\n        if isinstance(fn, dict):\n            name = fn.get('name') or obj.get('name') or ''\n            args = fn.get('arguments')\n            if args is None:\n                args = obj.get('arguments')\n        else:\n            name = obj.get('name') or ''\n            args = obj.get('arguments')\n        if isinstance(args, str):\n            try:\n                args = json.loads(args)\n            except Exception:\n                args = {}\n        if not isinstance(args, dict):\n            args = {}\n        return name, args\n\n    name, args = get_name_args(call)\n    if name != 'transfer_to_human_agents':\n        return False\n    summary = str(args.get('summary','')).lower()\n    user_text = ' '.join(str(m.get('content','')) for m in history if m.get('role')=='user').lower()\n\n    def parse_result(m):\n        r = m.get('result', m.get('content'))\n        if isinstance(r, str):\n            try:\n                return json.loads(r)\n            except Exception:\n                return r\n        return r\n\n    def collect_reservations(obj, out):\n        if isinstance(obj, dict):\n            if obj.get('reservation_id'):\n                out.append(obj)\n            for v in obj.values():\n                collect_reservations(v, out)\n        elif isinstance(obj, list):\n            for v in obj:\n                collect_reservations(v, out)\n\n    reservations = []\n    for m in history:\n        if m.get('role')=='tool':\n            collect_reservations(parse_result(m), reservations)\n    seen = set()\n    uniq = []\n    for r in reservations:\n        rid = r.get('reservation_id')\n        if rid is None or rid in seen:\n            continue\n        seen.add(rid)\n        uniq.append(r)\n    reservations = uniq\n\n    current_date = '2024' + '-05' + '-15'\n    statuses = {}\n    for i, m in enumerate(history):\n        if m.get('role')=='assistant' and m.get('tool_calls'):\n            for tc in m.get('tool_calls') or []:\n                tc_name, tc_args = get_name_args(tc)\n                if tc_name == 'get_flight_status':\n                    fn = str(tc_args.get('flight_number',''))\n                    dt = str(tc_args.get('date',''))\n                    for j in range(i+1, len(history)):\n                        if history[j].get('role')=='tool':\n                            rr = parse_result(history[j])\n                            st = None\n                            if isinstance(rr, dict):\n                                st = rr.get('status') or rr.get('result')\n                            elif isinstance(rr, str):\n                                st = rr\n                            if st:\n                                statuses[(fn,dt)] = str(st).lower()\n                            break\n\n    def already_flown(r):\n        for f in r.get('flights') or []:\n            if isinstance(f, dict):\n                fn = str(f.get('flight_number',''))\n                dt = str(f.get('date',''))\n                if statuses.get((fn,dt), '') in ('landed','flying'):\n                    return True\n        return False\n\n    def future(r):\n        for f in r.get('flights') or []:\n            if isinstance(f, dict):\n                dt = str(f.get('date',''))\n                if re.match(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', dt) and dt >= current_date:\n                    return True\n        return False\n\n    if 'basic economy' in summary or 'basic_economy' in summary:\n        for r in reservations:\n            if str(r.get('cabin','')).lower().replace('_',' ') == 'basic economy' and not already_flown(r):\n                if re.search(r'change|modify|upgrade|flight|cabin|nonstop|bag|passenger', user_text):\n                    return True\n\n    if 'seat' in user_text or 'seat' in summary:\n        if re.search(r'book|booking|itinerary|reservation', user_text + ' ' + summary):\n            if not re.search(r'already booked|reservation created|booking confirmed|cannot be created', summary):\n                return True\n\n    if 'upgrade' in user_text:\n        for r in reservations:\n            if future(r) and not already_flown(r):\n                cab = str(r.get('cabin','')).lower().replace('_',' ')\n                if cab != 'business':\n                    return True\n\n    if 'cancel' in summary or 'cancellation' in summary:\n        for r in reservations:\n            if already_flown(r):\n                continue\n            cabin = str(r.get('cabin','')).lower().replace('_',' ')\n            ins = r.get('insurance', r.get('travel_insurance', None))\n            insurance = ins is True or str(ins).lower() in ('yes','true','1')\n            covered = bool(re.search(r'health|weather|sick|ill|medical|not feeling well|doctor', user_text))\n            created = None\n            for k,v in r.items():\n                kl = str(k).lower()\n                if 'creat' in kl or 'book' in kl:\n                    if isinstance(v, str):\n                        created = v\n                        break\n            within = False\n            if created:\n                m = re.search(r'([0-9]{4})-([0-9]{2})-([0-9]{2})', created)\n                if m:\n                    y, mo, d = map(int, m.groups())\n                    if (y, mo, d) >= (2024, 5, 14):\n                        within = True\n            airline_cancelled = False\n            for f in r.get('flights') or []:\n                if isinstance(f, dict):\n                    fn = str(f.get('flight_number',''))\n                    dt = str(f.get('date',''))\n                    if statuses.get((fn,dt), '') == 'cancelled':\n                        airline_cancelled = True\n            if cabin == 'business' or within or airline_cancelled or (insurance and covered):\n                return True\n\n    return False",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 19769,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 54,
+   "mine_success": 257,
+   "held_fail": 112,
+   "held_success": 407,
+   "errors": 0,
+   "held_fail_tasks": 11
+  },
+  {
+   "fold": 2,
+   "name": "cancel_reservation_requires_policy_eligibility",
+   "description": "Stops cancel_reservation when the target reservation is not eligible under cancellation rules or when any segment is already flown/needs status confirmation.",
+   "clause": "Flight can be cancelled only if made within last 24 hours, airline cancelled, business flight, or insurance covers reason; if any portion has flown, cancellation cannot be handled.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'cancel_reservation':\n        return False\n    args = call.get('arguments') or {}\n    rid = args.get('reservation_id')\n    if not rid:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role')=='tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id')==rid:\n                res = r\n                break\n    if not res:\n        return False\n    statuses = {}\n    for i, msg in enumerate(history):\n        if msg.get('role')=='assistant' and msg.get('tool_calls'):\n            for tc in msg.get('tool_calls') or []:\n                if tc.get('name')=='get_flight_status':\n                    a = tc.get('arguments') or {}\n                    fn = str(a.get('flight_number',''))\n                    dt = str(a.get('date',''))\n                    for j in range(i+1, len(history)):\n                        if history[j].get('role')=='tool':\n                            rr = history[j].get('result')\n                            if isinstance(rr, str):\n                                statuses[(fn,dt)] = rr.lower()\n                            elif isinstance(rr, dict):\n                                st = rr.get('status') or rr.get('result')\n                                if st:\n                                    statuses[(fn,dt)] = str(st).lower()\n                            break\n    flights = res.get('flights') or []\n    for f in flights:\n        if isinstance(f, dict):\n            fn = str(f.get('flight_number',''))\n            dt = str(f.get('date',''))\n            if statuses.get((fn,dt), '') in ('landed','flying'):\n                return True\n    current_date = '2024-05-15'\n    for f in flights:\n        if isinstance(f, dict):\n            dt = str(f.get('date',''))\n            if re.match('[0-9]{4}-[0-9]{2}-[0-9]{2}', dt) and dt < current_date:\n                fn = str(f.get('flight_number',''))\n                if statuses.get((fn,dt), '') != 'cancelled':\n                    return True\n    cabin = str(res.get('cabin','')).lower().replace('_',' ')\n    business = cabin == 'business'\n    ins = res.get('insurance', res.get('travel_insurance', None))\n    insurance = ins is True or str(ins).lower() in ('yes','true','1')\n    covered = False\n    for msg in history:\n        if msg.get('role')=='user':\n            text = str(msg.get('content','')).lower()\n            if re.search('health|weather|sick|ill|medical|not feeling well|doctor|injur|hospital', text):\n                covered = True\n                break\n    created = None\n    for k,v in res.items():\n        kl = str(k).lower()\n        if 'creat' in kl or 'book' in kl:\n            if isinstance(v, str):\n                created = v\n                break\n    within = False\n    if created:\n        m = re.search('([0-9]{4})-([0-9]{2})-([0-9]{2})', created)\n        if m:\n            y, mo, d = map(int, m.groups())\n            if (y, mo, d) >= (2024, 5, 14):\n                within = True\n    airline_cancelled = False\n    for f in flights:\n        if isinstance(f, dict):\n            fn = str(f.get('flight_number',''))\n            dt = str(f.get('date',''))\n            if statuses.get((fn,dt), '') == 'cancelled':\n                airline_cancelled = True\n    if business or within or airline_cancelled or (insurance and covered):\n        return False\n    return True",
+     "invalid": "forbidden pattern 20\\d\\d-\\d\\d-\\d\\d",
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "def check(call, history):\n    import json, re\n    if not isinstance(call, dict) or call.get('name') != 'cancel_reservation':\n        return False\n    args = call.get('arguments')\n    if isinstance(args, str):\n        try:\n            args = json.loads(args)\n        except Exception:\n            args = {}\n    if not isinstance(args, dict):\n        args = {}\n    rid = args.get('reservation_id') or args.get('id') or args.get('reservationId')\n    if not rid:\n        return False\n    def parse_json_maybe(x):\n        if isinstance(x, str):\n            try:\n                return json.loads(x)\n            except Exception:\n                return None\n        return x\n    def recursive_find(obj, keys):\n        results = []\n        if isinstance(obj, dict):\n            for k, v in obj.items():\n                kl = str(k).lower()\n                for target in keys:\n                    if target in kl:\n                        results.append(v)\n                results.extend(recursive_find(v, keys))\n        elif isinstance(obj, list):\n            for item in obj:\n                results.extend(recursive_find(item, keys))\n        return results\n    res = None\n    for msg in history:\n        if not isinstance(msg, dict):\n            continue\n        if msg.get('role') != 'tool':\n            continue\n        r = parse_json_maybe(msg.get('result'))\n        if r is None:\n            continue\n        candidates = []\n        if isinstance(r, dict):\n            candidates.append(r)\n        elif isinstance(r, list):\n            candidates.extend([x for x in r if isinstance(x, dict)])\n        for cand in candidates:\n            rid_vals = recursive_find(cand, ['reservation_id', 'reservationid', 'id'])\n            if any(str(v) == str(rid) for v in rid_vals if v is not None):\n                res = cand\n                break\n            if res is None and any(k in cand for k in ('flights', 'flight', 'itinerary', 'segments')):\n                res = cand\n        if res is not None and any(str(v) == str(rid) for v in recursive_find(res, ['reservation_id', 'reservationid', 'id']) if v is not None):\n            break\n    if res is None:\n        for msg in history:\n            if not isinstance(msg, dict):\n                continue\n            if msg.get('role') != 'tool':\n                continue\n            r = parse_json_maybe(msg.get('result'))\n            candidates = []\n            if isinstance(r, dict):\n                candidates.append(r)\n            elif isinstance(r, list):\n                candidates.extend([x for x in r if isinstance(x, dict)])\n            for cand in candidates:\n                if any(k in cand for k in ('flights', 'flight', 'itinerary', 'segments')):\n                    res = cand\n                    break\n            if res is not None:\n                break\n    if not isinstance(res, dict):\n        return False\n    def collect_flights(obj):\n        out = []\n        if isinstance(obj, dict):\n            for k, v in obj.items():\n                kl = str(k).lower()\n                if 'flight' in kl or 'itinerary' in kl or 'segment' in kl:\n                    if isinstance(v, list):\n                        out.extend([x for x in v if isinstance(x, dict)])\n                    elif isinstance(v, dict):\n                        out.append(v)\n                out.extend(collect_flights(v))\n        elif isinstance(obj, list):\n            for item in obj:\n                out.extend(collect_flights(item))\n        return out\n    flights_raw = collect_flights(res)\n    if not flights_raw and any(k in res for k in ('flight_number', 'flight_no', 'number')):\n        flights_raw = [res]\n    flight_list = []\n    seen = set()\n    for f in flights_raw:\n        fn = None\n        for key in ('flight_number', 'flight_no', 'flight', 'number', 'flightNumber'):\n            if key in f and f[key] is not None:\n                fn = str(f[key])\n                break\n        dt = None\n        for key in ('date', 'departure_date', 'departureDate', 'departure', 'departure_time'):\n            if key in f and f[key] is not None:\n                dt = str(f[key])\n                m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', dt)\n                if m:\n                    dt = m.group(0)\n                break\n        if fn and dt:\n            key = (fn, dt)\n            if key not in seen:\n                seen.add(key)\n                flight_list.append({'flight_number': fn, 'date': dt, 'raw': f})\n        elif fn:\n            flight_list.append({'flight_number': fn, 'date': None, 'raw': f})\n    if not flight_list:\n        return False\n    statuses = {}\n    tool_results = {}\n    for msg in history:\n        if not isinstance(msg, dict):\n            continue\n        if msg.get('role') == 'tool':\n            tid = msg.get('tool_call_id') or msg.get('id')\n            if tid:\n                tool_results[tid] = msg.get('result')\n    tool_msgs = [msg for msg in history if isinstance(msg, dict) and msg.get('role') == 'tool']\n    def extract_status(result):\n        r = parse_json_maybe(result)\n        if isinstance(r, str):\n            return r.lower()\n        if isinstance(r, dict):\n            for key in ('status', 'result', 'flight_status', 'state'):\n                if key in r and isinstance(r[key], str):\n                    return r[key].lower()\n            for v in r.values():\n                if isinstance(v, str) and v.lower() in ('landed', 'flying', 'cancelled', 'scheduled', 'delayed', 'departed', 'in_air', 'in flight', 'airborne'):\n                    return v.lower()\n        return None\n    for i, msg in enumerate(history):\n        if not isinstance(msg, dict):\n            continue\n        if msg.get('role') != 'assistant':\n            continue\n        tcs = msg.get('tool_calls') or msg.get('function_call')\n        if not tcs:\n            continue\n        if isinstance(tcs, dict):\n            tcs = [tcs]\n        for tc in tcs:\n            if not isinstance(tc, dict):\n                continue\n            name = tc.get('name') or (tc.get('function') or {}).get('name')\n            if name != 'get_flight_status':\n                continue\n            a = tc.get('arguments') or (tc.get('function') or {}).get('arguments') or {}\n            if isinstance(a, str):\n                try:\n                    a = json.loads(a)\n                except Exception:\n                    a = {}\n            if not isinstance(a, dict):\n                a = {}\n            fn = a.get('flight_number') or a.get('flight') or a.get('flight_no')\n            dt = a.get('date') or a.get('departure_date')\n            if fn is None or dt is None:\n                continue\n            fn = str(fn)\n            dt = str(dt)\n            m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', dt)\n            if m:\n                dt = m.group(0)\n            tid = tc.get('id') or tc.get('tool_call_id')\n            res_val = None\n            if tid and tid in tool_results:\n                res_val = tool_results[tid]\n            else:\n                for j in range(i+1, len(history)):\n                    if isinstance(history[j], dict) and history[j].get('role') == 'tool':\n                        res_val = history[j].get('result')\n                        break\n            status = extract_status(res_val)\n            if status:\n                statuses[(fn, dt)] = status\n                statuses[(fn, dt.split('T')[0])] = status\n            elif res_val is not None:\n                statuses[(fn, dt)] = str(res_val).lower()\n    for f in flight_list:\n        raw = f.get('raw', {})\n        if isinstance(raw, dict):\n            for key in ('status', 'flight_status', 'state'):\n                if key in raw and isinstance(raw[key], str):\n                    statuses[(f['flight_number'], f['date'])] = raw[key].lower()\n                    break\n    def get_status(fn, dt):\n        if dt is None:\n            for (kfn, kdt), st in statuses.items():\n                if kfn == fn:\n                    return st\n            return None\n        st = statuses.get((fn, dt))\n        if st is not None:\n            return st\n        for (kfn, kdt), st2 in statuses.items():\n            if kfn == fn and kdt and kdt.split('T')[0] == dt:\n                return st2\n        return None\n    current_date = (2024, 5, 15)\n    for f in flight_list:\n        st = get_status(f['flight_number'], f['date'])\n        if st in ('landed', 'flying', 'departed', 'in_air', 'in flight', 'airborne'):\n            return True\n    for f in flight_list:\n        dt = f['date']\n        if not dt:\n            continue\n        m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', dt)\n        if not m:\n            continue\n        y, mo, d = map(int, m.groups())\n        if (y, mo, d) < current_date:\n            st = get_status(f['flight_number'], dt)\n            if st != 'cancelled':\n                return True\n    cabin_vals = recursive_find(res, ['cabin', 'class'])\n    business = False\n    for v in cabin_vals:\n        if isinstance(v, str) and 'business' in v.lower().replace('_', ' '):\n            business = True\n            break\n    ins_vals = recursive_find(res, ['insurance', 'travel_insurance'])\n    insurance = False\n    for v in ins_vals:\n        if v is True or str(v).lower() in ('yes', 'true', '1'):\n            insurance = True\n            break\n    covered = False\n    for msg in history:\n        if not isinstance(msg, dict):\n            continue\n        if msg.get('role') == 'user':\n            text = str(msg.get('content', '')).lower()\n            if re.search(r'health|weather|sick|ill|medical|not feeling well|doctor|injur|hospital', text):\n                covered = True\n                break\n    within = False\n    created_vals = recursive_find(res, ['created', 'create', 'book', 'booking'])\n    for v in created_vals:\n        if isinstance(v, str):\n            m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', v)\n            if m:\n                y, mo, d = map(int, m.groups())\n                if (y, mo, d) >= (2024, 5, 14):\n                    within = True\n                    break\n        elif isinstance(v, dict):\n            for vv in v.values():\n                if isinstance(vv, str):\n                    m = re.search(r'(\\d{4})-(\\d{2})-(\\d{2})', vv)\n                    if m:\n                        y, mo, d = map(int, m.groups())\n                        if (y, mo, d) >= (2024, 5, 14):\n                            within = True\n                            break\n            if within:\n                break\n    airline_cancelled = False\n    for f in flight_list:\n        st = get_status(f['flight_number'], f['date'])\n        if st == 'cancelled':\n            airline_cancelled = True\n            break\n    if business or within or airline_cancelled or (insurance and covered):\n        return False\n    return True",
+     "mine_fail": 0,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 19769,
+     "held_fail_tasks": 0,
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 4,
+   "mine_success": 10,
+   "held_fail": 29,
+   "held_success": 2,
+   "errors": 0,
+   "held_fail_tasks": 6
+  },
+  {
+   "fold": 2,
+   "name": "update_flights_must_keep_valid_itinerary",
+   "description": "Stops update_reservation_flights when the proposed segment chain is disconnected or has an impossible connection where a later segment departs before the previous segment arrives.",
+   "clause": "Modified reservations cannot change origin, destination, or trip type; a valid itinerary must connect segments consistently.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'update_reservation_flights':\n        return False\n    args = call.get('arguments') or {}\n    rid = args.get('reservation_id')\n    new_flights = args.get('flights')\n    if not rid or not isinstance(new_flights, list) or len(new_flights)==0:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role')=='tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id')==rid:\n                res = r\n                break\n    if not res:\n        return False\n    info = {}\n    def add_flight(d):\n        if isinstance(d, dict) and d.get('flight_number'):\n            info[str(d.get('flight_number'))] = d\n    for msg in history:\n        if msg.get('role')=='tool':\n            r = msg.get('result')\n            if isinstance(r, list):\n                for item in r:\n                    if isinstance(item, list):\n                        for sub in item:\n                            add_flight(sub)\n                    else:\n                        add_flight(item)\n            elif isinstance(r, dict):\n                add_flight(r)\n    mapped = []\n    for nf in new_flights:\n        if not isinstance(nf, dict):\n            return False\n        fn = str(nf.get('flight_number'))\n        date = str(nf.get('date'))\n        d = info.get(fn)\n        if not d:\n            return False\n        x = dict(d)\n        x['_date'] = date\n        mapped.append(x)\n    for i in range(1, len(mapped)):\n        prev = mapped[i-1]\n        cur = mapped[i]\n        if str(prev.get('destination','')) != str(cur.get('origin','')):\n            return True\n    def parse_dt(dstr, tstr):\n        m = re.search('([0-9]{4})-([0-9]{2})-([0-9]{2})', dstr)\n        if not m:\n            return None\n        y, mo, d = map(int, m.groups())\n        tm = re.search('([0-9]{1,2}):([0-9]{2})', str(tstr))\n        if not tm:\n            return None\n        h, mi = map(int, tm.groups())\n        return (y, mo, d, h, mi)\n    for i in range(1, len(mapped)):\n        prev = mapped[i-1]\n        cur = mapped[i]\n        dep = parse_dt(cur.get('_date'), cur.get('scheduled_departure_time_est'))\n        arr = parse_dt(prev.get('_date'), prev.get('scheduled_arrival_time_est') or prev.get('scheduled_departure_time_est'))\n        if dep and arr:\n            if dep[0:3] == arr[0:3] and dep[3:] < arr[3:]:\n                return True\n            if dep[0:3] < arr[0:3]:\n                return True\n    old_origin = str(res.get('origin',''))\n    if old_origin and str(mapped[0].get('origin','')) != old_origin:\n        return True\n    trip = str(res.get('flight_type','')).lower()\n    old_dest = str(res.get('destination',''))\n    last_dest = str(mapped[-1].get('destination',''))\n    if 'round' in trip:\n        if last_dest != old_origin:\n            return True\n    else:\n        if old_dest and last_dest != old_dest:\n            return True\n    return False",
+     "mine_fail": 2,
+     "mine_success": 0,
+     "held_fail": 0,
+     "held_success": 0,
+     "errors": 0,
+     "held_fail_tasks": 0,
+     "found": true,
+     "transfers": false
+    }
+   ],
+   "found": true,
+   "transfers": false,
+   "mine_fail": 2,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 2,
+   "name": "baggage_increase_requires_user_request",
+   "description": "Stops update_reservation_baggages when the call increases checked baggage without a positive user request to add/need checked bags.",
+   "clause": "Do not add checked bags that the user does not need; baggage changes require user confirmation of the desired checked baggage count.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'update_reservation_baggages':\n        return False\n    args = call.get('arguments') or {}\n    rid = args.get('reservation_id')\n    try:\n        new_total = int(args.get('total_baggages'))\n    except Exception:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role')=='tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id')==rid:\n                res = r\n                break\n    if not res:\n        return False\n    old = res.get('total_baggages', res.get('baggages', None))\n    if isinstance(old, list):\n        old = len(old)\n    if old is None:\n        return False\n    try:\n        old = int(old)\n    except Exception:\n        return False\n    if new_total < old:\n        return True\n    if new_total == old:\n        return False\n    for msg in history:\n        if msg.get('role')=='user':\n            text = str(msg.get('content','')).lower()\n            if re.search('bag|bags|baggage|baggages|luggage|checked', text):\n                if not re.search('no|without|zero|0', text):\n                    if re.search('add|need|want|include|with|checked|extra|increase|more', text):\n                        return False\n    return True",
+     "mine_fail": 7,
+     "mine_success": 13,
+     "held_fail": 9,
+     "held_success": 76,
+     "errors": 0,
+     "held_fail_tasks": 4,
+     "found": false,
+     "transfers": false
+    },
+    {
+     "code": "import re\nimport json\n\ndef check(call, history):\n    if call.get('name') != 'update_reservation_baggages':\n        return False\n    args = call.get('arguments') or {}\n    rid = args.get('reservation_id')\n    try:\n        new_total = int(args.get('total_baggages'))\n    except Exception:\n        return False\n    res = None\n    for msg in reversed(history):\n        if msg.get('role') == 'tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and r.get('reservation_id') == rid:\n                res = r\n                break\n    if not res:\n        return False\n    old = res.get('total_baggages', res.get('baggages', None))\n    if isinstance(old, list):\n        old = len(old)\n    if old is None:\n        return False\n    try:\n        old = int(old)\n    except Exception:\n        return False\n    if new_total <= old:\n        return False\n    for msg in history:\n        if msg.get('role') == 'user':\n            text = str(msg.get('content', '')).lower()\n            if re.search(r'\\b(bag|bags|baggage|baggages|luggage|checked)\\b', text):\n                if re.search(r'\\b(no|without|zero|0|not|don)\\b', text):\n                    continue\n                return False\n    def extract_calls(m):\n        if m.get('role') != 'assistant':\n            return []\n        calls = []\n        if isinstance(m.get('calls'), list):\n            calls.extend(m['calls'])\n        if isinstance(m.get('tool_calls'), list):\n            calls.extend(m['tool_calls'])\n        if isinstance(m.get('function_call'), dict):\n            calls.append(m['function_call'])\n        return calls\n    for msg in history:\n        for c in extract_calls(msg):\n            name = c.get('name') or (c.get('function') or {}).get('name') or c.get('function_name')\n            if name == 'update_reservation_flights':\n                c_args = c.get('arguments') or (c.get('function') or {}).get('arguments') or {}\n                if isinstance(c_args, str):\n                    try:\n                        c_args = json.loads(c_args)\n                    except Exception:\n                        c_args = {}\n                if isinstance(c_args, dict) and c_args.get('reservation_id') == rid and 'cabin' in c_args:\n                    return False\n    return True",
+     "invalid": "'NoneType' object is not callable",
+     "found": false,
+     "transfers": false
+    }
+   ],
+   "found": false,
+   "transfers": false,
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "errors": 0,
+   "held_fail_tasks": 0
+  },
+  {
+   "fold": 2,
+   "name": "book_reservation_should_not_duplicate_existing_basic_economy",
+   "description": "Stops book_reservation when the user is trying to fix an existing basic-economy reservation on the same route, unless that reservation was cancelled first; policy allows cabin changes to enable modifications.",
+   "clause": "Before booking, existing reservations should be modified where policy permits; basic economy can still change cabin without changing flights.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    if call.get('name') != 'book_reservation':\n        return False\n    args = call.get('arguments') or {}\n    uid = args.get('user_id')\n    origin = args.get('origin')\n    dest = args.get('destination')\n    if not uid or not origin or not dest:\n        return False\n    cancelled = set()\n    for msg in history:\n        if msg.get('role')=='assistant' and msg.get('tool_calls'):\n            for tc in msg.get('tool_calls') or []:\n                if tc.get('name')=='cancel_reservation':\n                    a = tc.get('arguments') or {}\n                    if a.get('reservation_id'):\n                        cancelled.add(str(a.get('reservation_id')))\n    for msg in history:\n        if msg.get('role')=='tool':\n            r = msg.get('result')\n            if isinstance(r, dict) and str(r.get('user_id'))==str(uid) and r.get('origin')==origin and r.get('destination')==dest:\n                rid = str(r.get('reservation_id',''))\n                if rid in cancelled:\n                    continue\n                cab = str(r.get('cabin','')).lower().replace('_',' ')\n                if 'basic economy' in cab:\n                    for u in history:\n                        if u.get('role')=='user':\n                            text = str(u.get('content','')).lower()\n                            if re.search('add|change|switch|modify|upgrade|bump|rebook|rebooking|move', text) and re.search('bag|passenger|cabin|flight|economy|reservation|booking', text):\n                                return True\n    return False",
+     "mine_fail": 44,
+     "mine_success": 0,
+     "held_fail": 11,
+     "held_success": 1,
+     "errors": 0,
+     "held_fail_tasks": 3,
+     "found": true,
+     "transfers": true
+    }
+   ],
+   "found": true,
+   "transfers": true,
+   "mine_fail": 44,
+   "mine_success": 0,
+   "held_fail": 11,
+   "held_success": 1,
+   "errors": 0,
+   "held_fail_tasks": 3
+  },
+  {
+   "fold": 2,
+   "name": "payment_methods_must_be_valid_and_within_limits",
+   "description": "Stops booking/write calls using payment methods not present in the user's profile, using more than one travel certificate on one booking, or using a credit card whose stored last four does not match the user's stated card.",
+   "clause": "All payment methods must already be in the user profile; each reservation can use at most one travel certificate; use the payment method selected by the user.",
+   "versions": [
+    {
+     "code": "def check(call, history):\n    name = call.get('name')\n    args = call.get('arguments') or {}\n    used = []\n    uid = args.get('user_id')\n    if name == 'book_reservation':\n        pms = args.get('payment_methods') or []\n        cert_count = 0\n        for pm in pms:\n            if isinstance(pm, dict) and pm.get('payment_id'):\n                pid = str(pm['payment_id'])\n                used.append(pid)\n                if pid.startswith('certificate_'):\n                    cert_count += 1\n        if cert_count > 1:\n            return True\n    elif name in ('update_reservation_flights','update_reservation_baggages'):\n        pid = args.get('payment_id')\n        if pid:\n            used.append(str(pid))\n        if not uid:\n            rid = args.get('reservation_id')\n            if rid:\n                for msg in reversed(history):\n                    if msg.get('role')=='tool':\n                        r = msg.get('result')\n                        if isinstance(r, dict) and r.get('reservation_id')==rid:\n                            uid = r.get('user_id')\n                            break\n    if not used or not uid:\n        return False\n    entries = []\n    for i, msg in enumerate(history):\n        if msg.get('role')=='assistant' and msg.get('tool_calls'):\n            for tc in msg.get('tool_calls') or []:\n                if tc.get('name')=='get_user_details':\n                    a = tc.get('arguments') or {}\n                    if str(a.get('user_id'))==str(uid):\n                        for j in range(i+1, len(history)):\n                            if history[j].get('role')=='tool':\n                                obj = history[j].get('result')\n                                def rec(o):\n                                    if isinstance(o, dict):\n                                        if 'payment_id' in o:\n                                            entries.append(o)\n                                        for v in o.values():\n                                            rec(v)\n                                    elif isinstance(o, list):\n                                        for v in o:\n                                            rec(v)\n                                rec(obj)\n                                break\n    if not entries:\n        return False\n    id_to_entry = {}\n    for e in entries:\n        if e.get('payment_id'):\n            id_to_entry[str(e.get('payment_id'))] = e\n    for pid in used:\n        if pid not in id_to_entry:\n            return True\n    last4 = None\n    for msg in history:\n        if msg.get('role')=='user':\n            text = str(msg.get('content',''))\n            ms = re.findall('ending(?: in)? *([0-9]{4})', text, re.I)\n            if ms:\n                last4 = ms[-1]\n    if last4:\n        for pid in used:\n            if pid.startswith('credit_card_') and pid in id_to_entry:\n                e = id_to_entry[pid]\n                found = None\n                for k,v in e.items():\n                    kl = str(k).lower()\n                    if 'last' in kl and ('four' in kl or kl in ('last4','last_4')):\n                        found = str(v)\n                        break\n                if not found:\n                    for v in e.values():\n                        if re.fullmatch('[0-9]{4}', str(v)):\n                            found = str(v)\n                            break\n                if found and found != last4:\n                    return True\n    return False",
+     "mine_fail": 2,
+     "mine_success": 0,
+     "held_fail": 22,
+     "held_success": 23,
+     "errors": 0,
+     "held_fail_tasks": 5,
+     "found": true,
+     "transfers": false
+    }
+   ],
+   "found": true,
+   "transfers": false,
+   "mine_fail": 2,
+   "mine_success": 0,
+   "held_fail": 22,
+   "held_success": 23,
+   "errors": 0,
+   "held_fail_tasks": 5
+  }
+ ],
+ "hand": [
+  {
+   "fold": 0,
+   "name": "cheapest_not_min",
+   "mine_fail": 76,
+   "mine_success": 77,
+   "held_fail": 19,
+   "held_success": 1,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 0,
+   "name": "pax_dob_mismatch",
+   "mine_fail": 13,
+   "mine_success": 0,
+   "held_fail": 0,
+   "held_success": 0,
+   "found": true,
+   "transfers": false
+  },
+  {
+   "fold": 0,
+   "name": "substitute_book",
+   "mine_fail": 14,
+   "mine_success": 3,
+   "held_fail": 10,
+   "held_success": 2,
+   "found": true,
+   "transfers": true
+  },
+  {
+   "fold": 0,
+   "name": "transfer_pending",
+   "mine_fail": 29,
+   "mine_success": 0,
+   "held_fail": 32,
+   "held_success": 19,
+   "found": true,
+   "transfers": false
+  },
+  {
+   "fold": 1,
+   "name": "cheapest_not_min",
+   "mine_fail": 19,
+   "mine_success": 1,
+   "held_fail": 76,
+   "held_success": 77,
+   "found": true,
+   "transfers": false
+  },
+  {
+   "fold": 1,
+   "name": "pax_dob_mismatch",
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 13,
+   "held_success": 0,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 1,
+   "name": "substitute_book",
+   "mine_fail": 1,
+   "mine_success": 0,
+   "held_fail": 23,
+   "held_success": 5,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 1,
+   "name": "transfer_pending",
+   "mine_fail": 9,
+   "mine_success": 5,
+   "held_fail": 52,
+   "held_success": 14,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 2,
+   "name": "cheapest_not_min",
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 95,
+   "held_success": 78,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 2,
+   "name": "pax_dob_mismatch",
+   "mine_fail": 0,
+   "mine_success": 0,
+   "held_fail": 13,
+   "held_success": 0,
+   "found": false,
+   "transfers": false
+  },
+  {
+   "fold": 2,
+   "name": "substitute_book",
+   "mine_fail": 9,
+   "mine_success": 2,
+   "held_fail": 15,
+   "held_success": 3,
+   "found": true,
+   "transfers": true
+  },
+  {
+   "fold": 2,
+   "name": "transfer_pending",
+   "mine_fail": 23,
+   "mine_success": 14,
+   "held_fail": 38,
+   "held_success": 5,
+   "found": false,
+   "transfers": false
+  }
+ ],
+ "reaudited": true
+}

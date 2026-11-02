@@ -1,0 +1,38 @@
+{
+ "episodes": {
+  "success": 2186,
+  "fail": 614
+ },
+ "fires": {
+  "slot_provenance": {
+   "success": 5,
+   "fail": 15
+  },
+  "unfinished_cancel": {
+   "success": 29,
+   "fail": 28
+  }
+ },
+ "by_task": {
+  "slot_provenance": {
+   "14:fail": 4,
+   "17:fail": 4,
+   "23:fail": 2,
+   "24:success": 4,
+   "29:fail": 2,
+   "29:success": 1,
+   "35:fail": 1,
+   "6:fail": 2
+  },
+  "unfinished_cancel": {
+   "14:fail": 1,
+   "17:fail": 7,
+   "23:fail": 5,
+   "24:success": 8,
+   "31:fail": 1,
+   "35:fail": 11,
+   "35:success": 21,
+   "6:fail": 3
+  }
+ }
+}

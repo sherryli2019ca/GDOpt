@@ -1,0 +1,78 @@
+{
+ "episodes": {
+  "fail": 407,
+  "success": 1393
+ },
+ "rules": {
+  "cheapest_not_min": {
+   "calls_success": 52,
+   "calls_fail": 76,
+   "eps_success": 48,
+   "eps_fail": 72,
+   "harm_ucb95": 0.483,
+   "tasks": {
+    "35": 36,
+    "20": 33,
+    "29": 25,
+    "15": 13,
+    "16": 11,
+    "45": 1,
+    "18": 1
+   }
+  },
+  "pax_dob_mismatch": {
+   "calls_success": 0,
+   "calls_fail": 10,
+   "eps_success": 0,
+   "eps_fail": 10,
+   "harm_ucb95": 0.259,
+   "tasks": {
+    "35": 10
+   }
+  },
+  "substitute_book": {
+   "calls_success": 8,
+   "calls_fail": 15,
+   "eps_success": 4,
+   "eps_fail": 14,
+   "harm_ucb95": 0.54,
+   "tasks": {
+    "29": 9,
+    "17": 4,
+    "23": 3,
+    "31": 1,
+    "14": 1
+   }
+  },
+  "transfer_pending": {
+   "calls_success": 13,
+   "calls_fail": 44,
+   "eps_success": 13,
+   "eps_fail": 44,
+   "harm_ucb95": 0.338,
+   "tasks": {
+    "44": 17,
+    "8": 9,
+    "32": 7,
+    "34": 6,
+    "10": 4,
+    "33": 3,
+    "37": 3,
+    "18": 2
+   }
+  },
+  "write_after_done": {
+   "calls_success": 6,
+   "calls_fail": 0,
+   "eps_success": 6,
+   "eps_fail": 0,
+   "harm_ucb95": 1.0,
+   "tasks": {
+    "8": 2,
+    "37": 2,
+    "24": 1,
+    "12": 1
+   }
+  }
+ }
+}

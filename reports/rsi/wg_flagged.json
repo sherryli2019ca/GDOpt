@@ -1,0 +1,664 @@
+{
+ "flagged": [
+  {
+   "run": "e4_mined-fold2",
+   "task": "6",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 23,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 16,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "16",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "16",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "14",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 21,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "14",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 25,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 29,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 25,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 23,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 19,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 23,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 14,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 26,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 13,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 21,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 33,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 25,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 17,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 16,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "29",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 16,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 2,
+   "success": true,
+   "first_msg_index": 16,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "33",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 22,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "33",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 18,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "42",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 20,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "45",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 30,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "45",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 10,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 43,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 46,
+   "rules": [
+    "decisive_write_success_branch"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 2,
+   "success": false,
+   "first_msg_index": 32,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 38,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 0,
+   "success": false,
+   "first_msg_index": 40,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 1,
+   "success": false,
+   "first_msg_index": 28,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "e4_mined-fold0",
+   "task": "44",
+   "trial": 3,
+   "success": false,
+   "first_msg_index": 24,
+   "rules": [
+    "decisive_write"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "14",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 28,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 2,
+   "success": true,
+   "first_msg_index": 18,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "16",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 14,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "23",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 23,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 16,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 2,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "45",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 23,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "6",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 12,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "14",
+   "trial": 1,
+   "success": true,
+   "first_msg_index": 14,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "15",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 19,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "16",
+   "trial": 2,
+   "success": true,
+   "first_msg_index": 16,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "33",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 18,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "42",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "45",
+   "trial": 2,
+   "success": true,
+   "first_msg_index": 24,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "e4_mined-fold2",
+   "task": "6",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 12,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "8",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 20,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "deliberate_reasoner_rules_consistency",
+   "task": "14",
+   "trial": 3,
+   "success": true,
+   "first_msg_index": 14,
+   "rules": [
+    "first_write_success"
+   ]
+  },
+  {
+   "run": "e4_mined-fold1",
+   "task": "15",
+   "trial": 0,
+   "success": true,
+   "first_msg_index": 19,
+   "rules": [
+    "first_write_success"
+   ]
+  }
+ ]
+}

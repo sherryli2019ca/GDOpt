@@ -1,0 +1,565 @@
+{
+ "flaky": {
+  "missing_write": 14,
+  "cheapest_selection": 7,
+  "insurance": 5,
+  "extra_write": 3,
+  "amount": 2,
+  "flight_selection": 2,
+  "passengers": 1,
+  "no_write_issue": 1,
+  "bags": 1,
+  "payment_choice": 1
+ },
+ "always": {
+  "missing_write": 24,
+  "extra_write": 6,
+  "amount": 2
+ },
+ "self_correction": {
+  "success:False": 316,
+  "success:True": 15,
+  "fail:False": 62,
+  "fail:True": 7
+ },
+ "rows": [
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "15",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": false
+  },
+  {
+   "task": "23",
+   "group": "flaky",
+   "kind": "passengers",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "insurance",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "amount",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "23",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": true
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "33",
+   "group": "flaky",
+   "kind": "amount",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "42",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "flight_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "8",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "14",
+   "group": "flaky",
+   "kind": "no_write_issue",
+   "tool": null,
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "amount",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "23",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "insurance",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "insurance",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "14",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "42",
+   "group": "flaky",
+   "kind": "extra_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "flight_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "16",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "14",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "insurance",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "16",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "14",
+   "group": "flaky",
+   "kind": "bags",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "payment_choice",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "7",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "16",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "29",
+   "group": "flaky",
+   "kind": "insurance",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "44",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": true
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "15",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "15",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": false
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "15",
+   "group": "flaky",
+   "kind": "cheapest_selection",
+   "tool": "update_reservation_flights",
+   "self_correction": true
+  },
+  {
+   "task": "18",
+   "group": "always",
+   "kind": "extra_write",
+   "tool": "update_reservation_baggages",
+   "self_correction": true
+  },
+  {
+   "task": "45",
+   "group": "flaky",
+   "kind": "extra_write",
+   "tool": "update_reservation_flights",
+   "self_correction": true
+  },
+  {
+   "task": "39",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "33",
+   "group": "flaky",
+   "kind": "amount",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "23",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": true
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": false
+  },
+  {
+   "task": "23",
+   "group": "flaky",
+   "kind": "missing_write",
+   "tool": "cancel_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "6",
+   "group": "flaky",
+   "kind": "extra_write",
+   "tool": "book_reservation",
+   "self_correction": false
+  },
+  {
+   "task": "32",
+   "group": "always",
+   "kind": "missing_write",
+   "tool": "update_reservation_flights",
+   "self_correction": true
+  }
+ ],
+ "by_task": {
+  "6": {
+   "extra_write": 1
+  },
+  "7": {
+   "missing_write": 8
+  },
+  "8": {
+   "missing_write": 1
+  },
+  "14": {
+   "no_write_issue": 1,
+   "missing_write": 2,
+   "bags": 1
+  },
+  "15": {
+   "cheapest_selection": 4
+  },
+  "16": {
+   "cheapest_selection": 3
+  },
+  "18": {
+   "extra_write": 6,
+   "amount": 2
+  },
+  "23": {
+   "passengers": 1,
+   "missing_write": 4
+  },
+  "29": {
+   "insurance": 5,
+   "missing_write": 1,
+   "payment_choice": 1
+  },
+  "32": {
+   "missing_write": 8
+  },
+  "33": {
+   "amount": 2
+  },
+  "39": {
+   "missing_write": 8
+  },
+  "42": {
+   "missing_write": 1,
+   "extra_write": 1
+  },
+  "44": {
+   "flight_selection": 2,
+   "missing_write": 5
+  },
+  "45": {
+   "extra_write": 1
+  }
+ }
+}

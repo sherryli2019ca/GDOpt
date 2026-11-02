@@ -1,0 +1,82 @@
+{
+ "none": {
+  "orig": [
+   76.0,
+   60.0
+  ],
+  "with_rules": [
+   78.5,
+   62.0
+  ]
+ },
+ "veto": {
+  "orig": [
+   76.0,
+   60.0
+  ],
+  "with_rules": [
+   78.5,
+   64.0
+  ]
+ },
+ "hint": {
+  "orig": [
+   75.0,
+   64.0
+  ],
+  "with_rules": [
+   77.5,
+   66.0
+  ]
+ },
+ "checklist": {
+  "orig": [
+   71.0,
+   56.0
+  ],
+  "with_rules": [
+   74.5,
+   62.0
+  ]
+ },
+ "deliberate": {
+  "orig": [
+   79.5,
+   62.0
+  ],
+  "with_rules": [
+   79.5,
+   62.0
+  ]
+ },
+ "reasoner": {
+  "orig": [
+   80.0,
+   66.0
+  ],
+  "with_rules": [
+   80.0,
+   66.0
+  ]
+ },
+ "deliberate_all": {
+  "orig": [
+   75.5,
+   52.0
+  ],
+  "with_rules": [
+   76.5,
+   54.0
+  ]
+ },
+ "deliberate_reasoner": {
+  "orig": [
+   82.0,
+   72.0
+  ],
+  "with_rules": [
+   82.5,
+   74.0
+  ]
+ }
+}

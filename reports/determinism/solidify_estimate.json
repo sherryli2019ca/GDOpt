@@ -1,0 +1,925 @@
+{
+ "tau": 0.8,
+ "episodes": 1000,
+ "steps": 9697,
+ "sensitive_steps": 3444,
+ "sensitive_steps_in_success": 2528,
+ "levels": {
+  "coarse": {
+   "distinct_keys_in_success": 55,
+   "success_purity_weighted": 0.689,
+   "share_success_sensitive_steps_with_key_in_>=m_tasks": {
+    "1": 1.0,
+    "2": 0.985,
+    "3": 0.957,
+    "5": 0.943
+   },
+   "loo_grid": {
+    "tasks>=2,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.776,
+     "heldout_agree_success_eps": 0.688,
+     "heldout_agree_failed_eps": 0.589,
+     "fired_success_eps": 1973,
+     "fired_failed_eps": 701,
+     "rule_error_ucb95_on_success_eps": 0.329,
+     "forks": {
+      "not_sensitive": 87,
+      "succ_state:failed_branch": 17,
+      "rule=failed_branch": 38,
+      "succ_state:success_branch": 32,
+      "rule=success_branch": 21,
+      "no_rule": 24,
+      "rule=other": 5,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=2,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.227,
+     "heldout_agree_success_eps": 0.807,
+     "heldout_agree_failed_eps": 0.565,
+     "fired_success_eps": 507,
+     "fired_failed_eps": 276,
+     "rule_error_ucb95_on_success_eps": 0.224,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 74,
+      "rule=failed_branch": 12,
+      "succ_state:failed_branch": 1,
+      "succ_state:success_branch": 6,
+      "rule=success_branch": 2
+     }
+    },
+    "tasks>=2,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.067,
+     "heldout_agree_success_eps": 0.802,
+     "heldout_agree_failed_eps": 0.959,
+     "fired_success_eps": 182,
+     "fired_failed_eps": 49,
+     "rule_error_ucb95_on_success_eps": 0.253,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 86,
+      "rule=failed_branch": 2
+     }
+    },
+    "tasks>=3,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.766,
+     "heldout_agree_success_eps": 0.689,
+     "heldout_agree_failed_eps": 0.591,
+     "fired_success_eps": 1948,
+     "fired_failed_eps": 689,
+     "rule_error_ucb95_on_success_eps": 0.329,
+     "forks": {
+      "not_sensitive": 87,
+      "succ_state:failed_branch": 17,
+      "rule=failed_branch": 36,
+      "succ_state:success_branch": 30,
+      "rule=success_branch": 18,
+      "no_rule": 29,
+      "rule=other": 5,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=3,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.225,
+     "heldout_agree_success_eps": 0.808,
+     "heldout_agree_failed_eps": 0.559,
+     "fired_success_eps": 506,
+     "fired_failed_eps": 270,
+     "rule_error_ucb95_on_success_eps": 0.223,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 76,
+      "rule=failed_branch": 10,
+      "succ_state:failed_branch": 1,
+      "succ_state:success_branch": 6,
+      "rule=success_branch": 2
+     }
+    },
+    "tasks>=3,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.065,
+     "heldout_agree_success_eps": 0.807,
+     "heldout_agree_failed_eps": 0.977,
+     "fired_success_eps": 181,
+     "fired_failed_eps": 43,
+     "rule_error_ucb95_on_success_eps": 0.248,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.741,
+     "heldout_agree_success_eps": 0.696,
+     "heldout_agree_failed_eps": 0.589,
+     "fired_success_eps": 1883,
+     "fired_failed_eps": 669,
+     "rule_error_ucb95_on_success_eps": 0.322,
+     "forks": {
+      "not_sensitive": 87,
+      "succ_state:failed_branch": 17,
+      "rule=failed_branch": 36,
+      "succ_state:success_branch": 30,
+      "rule=success_branch": 18,
+      "no_rule": 29,
+      "rule=other": 5,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=5,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.214,
+     "heldout_agree_success_eps": 0.823,
+     "heldout_agree_failed_eps": 0.56,
+     "fired_success_eps": 469,
+     "fired_failed_eps": 268,
+     "rule_error_ucb95_on_success_eps": 0.209,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 76,
+      "rule=failed_branch": 10,
+      "succ_state:failed_branch": 1,
+      "succ_state:success_branch": 6,
+      "rule=success_branch": 2
+     }
+    },
+    "tasks>=5,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.063,
+     "heldout_agree_success_eps": 0.828,
+     "heldout_agree_failed_eps": 0.977,
+     "fired_success_eps": 174,
+     "fired_failed_eps": 43,
+     "rule_error_ucb95_on_success_eps": 0.227,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    }
+   }
+  },
+  "policy_lite": {
+   "distinct_keys_in_success": 170,
+   "success_purity_weighted": 0.727,
+   "share_success_sensitive_steps_with_key_in_>=m_tasks": {
+    "1": 1.0,
+    "2": 0.89,
+    "3": 0.778,
+    "5": 0.572
+   },
+   "loo_grid": {
+    "tasks>=2,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.475,
+     "heldout_agree_success_eps": 0.721,
+     "heldout_agree_failed_eps": 0.716,
+     "fired_success_eps": 1343,
+     "fired_failed_eps": 292,
+     "rule_error_ucb95_on_success_eps": 0.3,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 46,
+      "succ_state:failed_branch": 17,
+      "rule=failed_branch": 20,
+      "rule=other": 5,
+      "succ_state:success_branch": 21,
+      "rule=success_branch": 17,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=2,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.28,
+     "heldout_agree_success_eps": 0.789,
+     "heldout_agree_failed_eps": 0.836,
+     "fired_success_eps": 781,
+     "fired_failed_eps": 183,
+     "rule_error_ucb95_on_success_eps": 0.237,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 64,
+      "rule=failed_branch": 14,
+      "succ_state:success_branch": 12,
+      "rule=success_branch": 6,
+      "rule=other": 4,
+      "succ_state:failed_branch": 5,
+      "succ_state:other": 1
+     }
+    },
+    "tasks>=2,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.097,
+     "heldout_agree_success_eps": 0.745,
+     "heldout_agree_failed_eps": 0.724,
+     "fired_success_eps": 306,
+     "fired_failed_eps": 29,
+     "rule_error_ucb95_on_success_eps": 0.299,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 85,
+      "rule=other": 3,
+      "succ_state:success_branch": 1
+     }
+    },
+    "tasks>=3,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.395,
+     "heldout_agree_success_eps": 0.703,
+     "heldout_agree_failed_eps": 0.793,
+     "fired_success_eps": 1137,
+     "fired_failed_eps": 222,
+     "rule_error_ucb95_on_success_eps": 0.32,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 55,
+      "succ_state:failed_branch": 15,
+      "rule=failed_branch": 18,
+      "rule=other": 2,
+      "succ_state:success_branch": 16,
+      "rule=success_branch": 13,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=3,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.216,
+     "heldout_agree_success_eps": 0.771,
+     "heldout_agree_failed_eps": 0.876,
+     "fired_success_eps": 598,
+     "fired_failed_eps": 145,
+     "rule_error_ucb95_on_success_eps": 0.259,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 72,
+      "rule=failed_branch": 12,
+      "succ_state:success_branch": 9,
+      "rule=success_branch": 3,
+      "succ_state:failed_branch": 3,
+      "succ_state:other": 1,
+      "rule=other": 1
+     }
+    },
+    "tasks>=3,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.073,
+     "heldout_agree_success_eps": 0.722,
+     "heldout_agree_failed_eps": 1.0,
+     "fired_success_eps": 234,
+     "fired_failed_eps": 18,
+     "rule_error_ucb95_on_success_eps": 0.33,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88,
+      "succ_state:success_branch": 1
+     }
+    },
+    "tasks>=5,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.261,
+     "heldout_agree_success_eps": 0.708,
+     "heldout_agree_failed_eps": 0.821,
+     "fired_success_eps": 726,
+     "fired_failed_eps": 173,
+     "rule_error_ucb95_on_success_eps": 0.321,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 60,
+      "succ_state:failed_branch": 13,
+      "rule=failed_branch": 16,
+      "rule=other": 2,
+      "succ_state:success_branch": 10,
+      "rule=success_branch": 10,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=5,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.13,
+     "heldout_agree_success_eps": 0.798,
+     "heldout_agree_failed_eps": 0.94,
+     "fired_success_eps": 347,
+     "fired_failed_eps": 100,
+     "rule_error_ucb95_on_success_eps": 0.24,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 75,
+      "rule=failed_branch": 10,
+      "succ_state:failed_branch": 1,
+      "succ_state:success_branch": 5,
+      "rule=success_branch": 2,
+      "succ_state:other": 1,
+      "rule=other": 1
+     }
+    },
+    "tasks>=5,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.027,
+     "heldout_agree_success_eps": 0.652,
+     "heldout_agree_failed_eps": 1.0,
+     "fired_success_eps": 89,
+     "fired_failed_eps": 3,
+     "rule_error_ucb95_on_success_eps": 0.44,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    }
+   }
+  },
+  "policy_lite_nojev": {
+   "distinct_keys_in_success": 427,
+   "success_purity_weighted": 0.791,
+   "share_success_sensitive_steps_with_key_in_>=m_tasks": {
+    "1": 1.0,
+    "2": 0.357,
+    "3": 0.17,
+    "5": 0.028
+   },
+   "loo_grid": {
+    "tasks>=2,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.122,
+     "heldout_agree_success_eps": 0.821,
+     "heldout_agree_failed_eps": 0.691,
+     "fired_success_eps": 324,
+     "fired_failed_eps": 97,
+     "rule_error_ucb95_on_success_eps": 0.218,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 79,
+      "rule=other": 4,
+      "succ_state:success_branch": 5,
+      "rule=success_branch": 4,
+      "succ_state:failed_branch": 2,
+      "rule=failed_branch": 1,
+      "succ_state:other": 2
+     }
+    },
+    "tasks>=2,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.098,
+     "heldout_agree_success_eps": 0.882,
+     "heldout_agree_failed_eps": 0.774,
+     "fired_success_eps": 254,
+     "fired_failed_eps": 84,
+     "rule_error_ucb95_on_success_eps": 0.157,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 87,
+      "succ_state:success_branch": 3,
+      "rule=success_branch": 1,
+      "succ_state:failed_branch": 1
+     }
+    },
+    "tasks>=2,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.072,
+     "heldout_agree_success_eps": 0.912,
+     "heldout_agree_failed_eps": 0.766,
+     "fired_success_eps": 171,
+     "fired_failed_eps": 77,
+     "rule_error_ucb95_on_success_eps": 0.132,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 87,
+      "succ_state:success_branch": 1,
+      "rule=success_branch": 1
+     }
+    },
+    "tasks>=3,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.076,
+     "heldout_agree_success_eps": 0.885,
+     "heldout_agree_failed_eps": 0.729,
+     "fired_success_eps": 191,
+     "fired_failed_eps": 70,
+     "rule_error_ucb95_on_success_eps": 0.16,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 86,
+      "rule=other": 1,
+      "succ_state:success_branch": 3,
+      "rule=success_branch": 1,
+      "succ_state:failed_branch": 1,
+      "succ_state:other": 1
+     }
+    },
+    "tasks>=3,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.069,
+     "heldout_agree_success_eps": 0.908,
+     "heldout_agree_failed_eps": 0.781,
+     "fired_success_eps": 173,
+     "fired_failed_eps": 64,
+     "rule_error_ucb95_on_success_eps": 0.137,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 87,
+      "succ_state:success_branch": 3,
+      "rule=success_branch": 1,
+      "succ_state:failed_branch": 1
+     }
+    },
+    "tasks>=3,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.055,
+     "heldout_agree_success_eps": 0.927,
+     "heldout_agree_failed_eps": 0.781,
+     "fired_success_eps": 124,
+     "fired_failed_eps": 64,
+     "rule_error_ucb95_on_success_eps": 0.123,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 87,
+      "succ_state:success_branch": 1,
+      "rule=success_branch": 1
+     }
+    },
+    "tasks>=5,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.011,
+     "heldout_agree_success_eps": 0.556,
+     "heldout_agree_failed_eps": 0.5,
+     "fired_success_eps": 27,
+     "fired_failed_eps": 10,
+     "rule_error_ucb95_on_success_eps": 0.618,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 87,
+      "rule=other": 1,
+      "succ_state:success_branch": 2,
+      "succ_state:failed_branch": 1,
+      "succ_state:other": 1
+     }
+    },
+    "tasks>=5,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.004,
+     "heldout_agree_success_eps": 0.333,
+     "heldout_agree_failed_eps": 1.0,
+     "fired_success_eps": 9,
+     "fired_failed_eps": 4,
+     "rule_error_ucb95_on_success_eps": 0.902,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88,
+      "succ_state:success_branch": 2,
+      "succ_state:failed_branch": 1
+     }
+    },
+    "tasks>=5,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.001,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": 1.0,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 4,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    }
+   }
+  },
+  "policy": {
+   "distinct_keys_in_success": 704,
+   "success_purity_weighted": 0.86,
+   "share_success_sensitive_steps_with_key_in_>=m_tasks": {
+    "1": 1.0,
+    "2": 0.199,
+    "3": 0.046,
+    "5": 0.0
+   },
+   "loo_grid": {
+    "tasks>=2,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.037,
+     "heldout_agree_success_eps": 0.837,
+     "heldout_agree_failed_eps": 0.417,
+     "fired_success_eps": 104,
+     "fired_failed_eps": 24,
+     "rule_error_ucb95_on_success_eps": 0.235,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 85,
+      "rule=failed_branch": 2,
+      "rule=success_branch": 1
+     }
+    },
+    "tasks>=2,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.032,
+     "heldout_agree_success_eps": 0.828,
+     "heldout_agree_failed_eps": 0.353,
+     "fired_success_eps": 93,
+     "fired_failed_eps": 17,
+     "rule_error_ucb95_on_success_eps": 0.25,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=2,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.018,
+     "heldout_agree_success_eps": 0.878,
+     "heldout_agree_failed_eps": 0.214,
+     "fired_success_eps": 49,
+     "fired_failed_eps": 14,
+     "rule_error_ucb95_on_success_eps": 0.227,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.024,
+     "heldout_agree_success_eps": 0.909,
+     "heldout_agree_failed_eps": 0.353,
+     "fired_success_eps": 66,
+     "fired_failed_eps": 17,
+     "rule_error_ucb95_on_success_eps": 0.172,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.024,
+     "heldout_agree_success_eps": 0.909,
+     "heldout_agree_failed_eps": 0.353,
+     "fired_success_eps": 66,
+     "fired_failed_eps": 17,
+     "rule_error_ucb95_on_success_eps": 0.172,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.013,
+     "heldout_agree_success_eps": 0.871,
+     "heldout_agree_failed_eps": 0.214,
+     "fired_success_eps": 31,
+     "fired_failed_eps": 14,
+     "rule_error_ucb95_on_success_eps": 0.271,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    }
+   }
+  },
+  "task": {
+   "distinct_keys_in_success": 208,
+   "success_purity_weighted": 0.708,
+   "share_success_sensitive_steps_with_key_in_>=m_tasks": {
+    "1": 1.0,
+    "2": 0.0,
+    "3": 0.0,
+    "5": 0.0
+   },
+   "loo_grid": {
+    "tasks>=2,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=2,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=2,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=3,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.6": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.8": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    },
+    "tasks>=5,purity>=0.9": {
+     "coverage_of_sensitive_steps": 0.0,
+     "heldout_agree_success_eps": null,
+     "heldout_agree_failed_eps": null,
+     "fired_success_eps": 0,
+     "fired_failed_eps": 0,
+     "rule_error_ucb95_on_success_eps": null,
+     "forks": {
+      "not_sensitive": 87,
+      "no_rule": 88
+     }
+    }
+   }
+  }
+ },
+ "succ_fail_forks": 175,
+ "top_policy_lite_keys": [
+  {
+   "key": [
+    "tool:get_user_details",
+    "tool:get_reservation_details",
+    "None"
+   ],
+   "tasks": 22,
+   "acts": {
+    "tool:get_reservation_details": 160,
+    "message": 14,
+    "tool:get_flight_status": 6
+   }
+  },
+  {
+   "key": [
+    "tool:get_user_details",
+    "message",
+    "None"
+   ],
+   "tasks": 20,
+   "acts": {
+    "tool:get_reservation_details": 93,
+    "message": 48,
+    "tool:search_direct_flight": 2
+   }
+  },
+  {
+   "key": [
+    "message",
+    "message",
+    "None"
+   ],
+   "tasks": 16,
+   "acts": {
+    "tool:get_reservation_details": 122,
+    "message": 113,
+    "tool:get_user_details": 31
+   }
+  },
+  {
+   "key": [
+    "message",
+    "tool:get_reservation_details",
+    "None"
+   ],
+   "tasks": 13,
+   "acts": {
+    "tool:get_reservation_details": 51,
+    "tool:get_user_details": 24,
+    "message": 8
+   }
+  },
+  {
+   "key": [
+    "message",
+    "message",
+    "('basic_economy', 'no', False, False, None)"
+   ],
+   "tasks": 9,
+   "acts": {
+    "message": 113,
+    "tool:get_reservation_details": 8,
+    "tool:get_user_details": 6
+   }
+  },
+  {
+   "key": [
+    "message",
+    "message",
+    "('economy', 'yes', False, False, None)"
+   ],
+   "tasks": 8,
+   "acts": {
+    "message": 60,
+    "tool:search_direct_flight": 23,
+    "tool:get_user_details": 16
+   }
+  },
+  {
+   "key": [
+    "message",
+    "message",
+    "('economy', 'no', False, False, None)"
+   ],
+   "tasks": 7,
+   "acts": {
+    "message": 76,
+    "tool:list_all_airports": 9,
+    "tool:search_direct_flight": 6
+   }
+  },
+  {
+   "key": [
+    "message",
+    "message",
+    "('basic_economy', 'yes', False, False, None)"
+   ],
+   "tasks": 7,
+   "acts": {
+    "message": 87,
+    "tool:search_direct_flight": 22,
+    "tool:calculate": 11
+   }
+  },
+  {
+   "key": [
+    "message",
+    "tool:get_user_details",
+    "None"
+   ],
+   "tasks": 7,
+   "acts": {
+    "tool:get_user_details": 27,
+    "message": 2
+   }
+  },
+  {
+   "key": [
+    "message",
+    "tool:transfer_to_human_agents",
+    "('economy', 'no', False, False, None)"
+   ],
+   "tasks": 6,
+   "acts": {
+    "message": 25,
+    "tool:transfer_to_human_agents": 6,
+    "tool:update_reservation_flights": 4
+   }
+  },
+  {
+   "key": [
+    "tool:get_reservation_details",
+    "message",
+    "('basic_economy', 'no', False, False, None)"
+   ],
+   "tasks": 6,
+   "acts": {
+    "message": 11,
+    "tool:get_flight_status": 2,
+    "tool:get_user_details": 2
+   }
+  },
+  {
+   "key": [
+    "message",
+    "tool:transfer_to_human_agents",
+    "('basic_economy', 'no', False, False, None)"
+   ],
+   "tasks": 5,
+   "acts": {
+    "message": 61,
+    "tool:transfer_to_human_agents": 4,
+    "tool:get_user_details": 1
+   }
+  },
+  {
+   "key": [
+    "tool:get_reservation_details",
+    "message",
+    "('economy', 'no', False, False, None)"
+   ],
+   "tasks": 5,
+   "acts": {
+    "tool:get_flight_status": 17,
+    "message": 7,
+    "tool:search_direct_flight": 4
+   }
+  },
+  {
+   "key": [
+    "tool:get_flight_status",
+    "message",
+    "('economy', 'no', False, False, None)"
+   ],
+   "tasks": 5,
+   "acts": {
+    "message": 14,
+    "tool:search_direct_flight": 2,
+    "tool:get_flight_status": 2
+   }
+  },
+  {
+   "key": [
+    "tool:get_reservation_details",
+    "message",
+    "('basic_economy', 'yes', False, False, None)"
+   ],
+   "tasks": 5,
+   "acts": {
+    "tool:search_direct_flight": 15,
+    "message": 13,
+    "tool:search_onestop_flight": 1
+   }
+  }
+ ],
+ "cancel_predicate": {
+  "no_cancel_call": {
+   "success": 722,
+   "fail": 148
+  },
+  "forbidden": {
+   "fail": 11
+  },
+  "undecided(insurance)": {
+   "fail": 37,
+   "success": 25
+  },
+  "allowed": {
+   "success": 61,
+   "fail": 41
+  },
+  "forbidden(flown)": {
+   "fail": 5
+  }
+ }
+}

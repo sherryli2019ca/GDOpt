@@ -1,0 +1,881 @@
+{
+ "6__e4_mined-fold2_3_fork": {
+  "run": "e4_mined-fold2",
+  "task": "6",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 6,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 23,
+  "fork_index": 6,
+  "next_role": "assistant",
+  "prefix_len": 6
+ },
+ "8__deliberate_reasoner_rules_consistency_2_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "8",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 14,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 14,
+  "next_role": "assistant",
+  "prefix_len": 14
+ },
+ "15__deliberate_reasoner_rules_consistency_0_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "15",
+  "trial": 0,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 22,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "15__e4_mined-fold1_1_fork": {
+  "run": "e4_mined-fold1",
+  "task": "15",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 18,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "15__e4_mined-fold1_2_fork": {
+  "run": "e4_mined-fold1",
+  "task": "15",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 22,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "15__e4_mined-fold1_3_fork": {
+  "run": "e4_mined-fold1",
+  "task": "15",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "16__e4_mined-fold0_1_fork": {
+  "run": "e4_mined-fold0",
+  "task": "16",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 18,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "16__e4_mined-fold0_2_fork": {
+  "run": "e4_mined-fold0",
+  "task": "16",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 12,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 18,
+  "fork_index": 12,
+  "next_role": "assistant",
+  "prefix_len": 12
+ },
+ "16__e4_mined-fold0_3_fork": {
+  "run": "e4_mined-fold0",
+  "task": "16",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 18,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "14__e4_mined-fold0_2_fork": {
+  "run": "e4_mined-fold0",
+  "task": "14",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 21,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "23__deliberate_reasoner_rules_consistency_0_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "23",
+  "trial": 0,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 29,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "23__deliberate_reasoner_rules_consistency_1_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "23",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 23,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "23__deliberate_reasoner_rules_consistency_2_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "23",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 23,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "23__e4_mined-fold2_1_fork": {
+  "run": "e4_mined-fold2",
+  "task": "23",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 8,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 25,
+  "fork_index": 8,
+  "next_role": "assistant",
+  "prefix_len": 8
+ },
+ "23__e4_mined-fold2_2_fork": {
+  "run": "e4_mined-fold2",
+  "task": "23",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 26,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "29__deliberate_reasoner_rules_consistency_0_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "29",
+  "trial": 0,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 13,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "29__deliberate_reasoner_rules_consistency_1_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "29",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 3,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 33,
+  "fork_index": 3,
+  "next_role": "user",
+  "prefix_len": 3
+ },
+ "29__deliberate_reasoner_rules_consistency_2_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "29",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 25,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "29__deliberate_reasoner_rules_consistency_3_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "29",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 17,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "29__e4_mined-fold0_1_fork": {
+  "run": "e4_mined-fold0",
+  "task": "29",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "29__e4_mined-fold0_2_fork": {
+  "run": "e4_mined-fold0",
+  "task": "29",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 16,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "29__e4_mined-fold0_3_fork": {
+  "run": "e4_mined-fold0",
+  "task": "29",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "33__deliberate_reasoner_rules_consistency_1_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "33",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 10,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 16,
+  "fork_index": 10,
+  "next_role": "assistant",
+  "prefix_len": 10
+ },
+ "33__e4_mined-fold1_3_fork": {
+  "run": "e4_mined-fold1",
+  "task": "33",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 10,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 22,
+  "fork_index": 10,
+  "next_role": "assistant",
+  "prefix_len": 10
+ },
+ "42__deliberate_reasoner_rules_consistency_1_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "42",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 14,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 14,
+  "next_role": "assistant",
+  "prefix_len": 14
+ },
+ "42__e4_mined-fold0_0_fork": {
+  "run": "e4_mined-fold0",
+  "task": "42",
+  "trial": 0,
+  "success": false,
+  "first_msg_index": 14,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 20,
+  "fork_index": 14,
+  "next_role": "assistant",
+  "prefix_len": 14
+ },
+ "45__e4_mined-fold1_2_fork": {
+  "run": "e4_mined-fold1",
+  "task": "45",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 3,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 30,
+  "fork_index": 3,
+  "next_role": "user",
+  "prefix_len": 3
+ },
+ "44__deliberate_reasoner_rules_consistency_1_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "44",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 43,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "44__deliberate_reasoner_rules_consistency_2_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "44",
+  "trial": 2,
+  "success": false,
+  "first_msg_index": 12,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 32,
+  "fork_index": 12,
+  "next_role": "assistant",
+  "prefix_len": 12
+ },
+ "44__deliberate_reasoner_rules_consistency_3_fork": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "44",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 12,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 38,
+  "fork_index": 12,
+  "next_role": "assistant",
+  "prefix_len": 12
+ },
+ "44__e4_mined-fold0_0_fork": {
+  "run": "e4_mined-fold0",
+  "task": "44",
+  "trial": 0,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 40,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "44__e4_mined-fold0_1_fork": {
+  "run": "e4_mined-fold0",
+  "task": "44",
+  "trial": 1,
+  "success": false,
+  "first_msg_index": 2,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 28,
+  "fork_index": 2,
+  "next_role": "assistant",
+  "prefix_len": 2
+ },
+ "44__e4_mined-fold0_3_fork": {
+  "run": "e4_mined-fold0",
+  "task": "44",
+  "trial": 3,
+  "success": false,
+  "first_msg_index": 1,
+  "rules": [
+   "cut_fork"
+  ],
+  "cut": "fork",
+  "write_index": 24,
+  "fork_index": 1,
+  "next_role": "user",
+  "prefix_len": 1
+ },
+ "8__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "8",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "15__deliberate_reasoner_rules_consistency_1_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "15",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 18,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 18
+ },
+ "16__e4_mined-fold0_0_prewrite": {
+  "run": "e4_mined-fold0",
+  "task": "16",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 16,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 16
+ },
+ "16__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "16",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 18,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 18
+ },
+ "14__e4_mined-fold0_3_prewrite": {
+  "run": "e4_mined-fold0",
+  "task": "14",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 25,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 25
+ },
+ "23__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "23",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 19,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 19
+ },
+ "23__e4_mined-fold2_0_prewrite": {
+  "run": "e4_mined-fold2",
+  "task": "23",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 14,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 14
+ },
+ "29__e4_mined-fold0_0_prewrite": {
+  "run": "e4_mined-fold0",
+  "task": "29",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 21,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 21
+ },
+ "33__deliberate_reasoner_rules_consistency_2_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "33",
+  "trial": 2,
+  "success": true,
+  "first_msg_index": 16,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 16
+ },
+ "33__e4_mined-fold1_0_prewrite": {
+  "run": "e4_mined-fold1",
+  "task": "33",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 18,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 18
+ },
+ "42__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "42",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "45__e4_mined-fold1_1_prewrite": {
+  "run": "e4_mined-fold1",
+  "task": "45",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 10,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 10
+ },
+ "44__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "44",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 46,
+  "rules": [
+   "decisive_write_success_branch"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 46
+ },
+ "14__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "14",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 28,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 28
+ },
+ "15__deliberate_reasoner_rules_consistency_2_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "15",
+  "trial": 2,
+  "success": true,
+  "first_msg_index": 18,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 18
+ },
+ "16__deliberate_reasoner_rules_consistency_1_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "16",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 14,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 14
+ },
+ "23__e4_mined-fold2_3_prewrite": {
+  "run": "e4_mined-fold2",
+  "task": "23",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 23,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 23
+ },
+ "33__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "33",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 16,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 16
+ },
+ "42__deliberate_reasoner_rules_consistency_2_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "42",
+  "trial": 2,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "45__deliberate_reasoner_rules_consistency_0_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "45",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 23,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 23
+ },
+ "6__deliberate_reasoner_rules_consistency_1_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "6",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 12,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 12
+ },
+ "8__deliberate_reasoner_rules_consistency_1_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "8",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "14__deliberate_reasoner_rules_consistency_1_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "14",
+  "trial": 1,
+  "success": true,
+  "first_msg_index": 14,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 14
+ },
+ "15__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "15",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 19,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 19
+ },
+ "16__deliberate_reasoner_rules_consistency_2_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "16",
+  "trial": 2,
+  "success": true,
+  "first_msg_index": 16,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 16
+ },
+ "33__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "33",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 18,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 18
+ },
+ "42__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "42",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "45__deliberate_reasoner_rules_consistency_2_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "45",
+  "trial": 2,
+  "success": true,
+  "first_msg_index": 24,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 24
+ },
+ "6__e4_mined-fold2_0_prewrite": {
+  "run": "e4_mined-fold2",
+  "task": "6",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 12,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 12
+ },
+ "8__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "8",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 20,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 20
+ },
+ "14__deliberate_reasoner_rules_consistency_3_prewrite": {
+  "run": "deliberate_reasoner_rules_consistency",
+  "task": "14",
+  "trial": 3,
+  "success": true,
+  "first_msg_index": 14,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 14
+ },
+ "15__e4_mined-fold1_0_prewrite": {
+  "run": "e4_mined-fold1",
+  "task": "15",
+  "trial": 0,
+  "success": true,
+  "first_msg_index": 19,
+  "rules": [
+   "first_write_success"
+  ],
+  "cut": "prewrite",
+  "prefix_len": 19
+ }
+}
