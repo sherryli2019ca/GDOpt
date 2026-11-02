@@ -193,6 +193,24 @@ PROPOSAL_GATE_NOTE = ("Plan check (automatic): you were about to ask the user to
                       "explicit confirmation, or explain what is not allowed. Do not make any database call in this turn.")
 
 
+SPEC_PROMPT = ("Read the customer's turns of an airline customer-service chat and write down what the customer asked for. "
+               "Use ONLY what the customer said; null when not stated. JSON object with keys: intents (list of cancel, "
+               "change_flight, change_cabin, book, add_bags, change_passenger, compensation, info, other), "
+               "reservation_ids (list), cabin, flight_criterion (e.g. cheapest, nonstop, a specific flight), "
+               "time_constraints, passengers, bags, insurance, payment_preference, refund_preference.\n\nCustomer turns:\n")
+SPEC_NOTE = ("Pinned customer request (extracted automatically from the customer's opening turns): {spec}\n"
+             "Keep decisions anchored to this request:\n"
+             "1. When presenting options, lead with the option that best meets the stated criterion, computed exactly; "
+             "present it plainly and do not volunteer extra alternatives or details the customer did not ask about.\n"
+             "2. If the customer later asks for something that departs from the pinned request, say so explicitly "
+             "(what they asked first vs. now) and ask them to confirm the change before planning around it; if they "
+             "confirm, follow the new wish.\n"
+             "3. Every attribute of a new booking or change (cabin, passengers, bags, insurance, payment) must come "
+             "from what the customer stated in this conversation, never copied from an old reservation; ask if unknown.\n"
+             "4. When a multi-step plan is agreed (for example cancel and then rebook), list its steps and complete all "
+             "of them before you close the conversation.")
+
+
 def _is_proposal(am: Any, msgs: list) -> bool:
     d = _as_dict(am)
     text = d.get("content") or ""
@@ -278,6 +296,7 @@ def register_rule_agent(name: str = "gdopt_rules", rules: frozenset = CERTIFIED)
 def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_anchored", rules: frozenset = CERTIFIED,
                                  mined: Optional[list] = None, **anchor_kw: Any) -> list:
     consistency = "consistency" in modes  # also run ConsistencyChecker (hard: corrective note; soft: reasoner review)
+    specpin = "specpin" in modes  # opening request pinned as a typed spec in every prompt (2026-11-02)
     proposalgate = "proposalgate" in modes  # plan put to the user is checked against an independent derivation (2026-11-02)
     writegate = "writegate" in modes  # every write/transfer re-derived independently by the reasoner (2026-10-31)
     # ``mined``: checks from tau2_mined.load_checks, run as soft review triggers next to (or without) the consistency checks
@@ -297,6 +316,47 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
         _violations = RuleGuardedLLMAgent._violations
 
         def _generate_next_message(self, message, state):
+            if specpin:
+                return self._with_spec(message, state)
+            return self._step(message, state)
+
+        def _with_spec(self, message, state):
+            """Pin the customer's opening request as a typed spec (first 2 user turns) and keep it in the prompt."""
+            users = [_as_dict(m).get("content") or "" for m in list(state.messages) + [message]
+                     if _as_dict(m)["role"] == "user"]
+            spent = 0.0
+            if users and not getattr(self, "_spec_frozen", False):
+                key = "\n---\n".join(users[:2])
+                if key != getattr(self, "_spec_key", None):
+                    r = generate(model=self.llm, tools=None, call_name="spec_extract", **self.llm_args,
+                                 messages=[UserMessage(role="user", content=SPEC_PROMPT + key)])
+                    spent = float(r.cost or 0.0)
+                    txt = re.sub(r"^```(json)?|```$", "", (r.content or "").strip()).strip()
+                    try:
+                        spec = {k: v for k, v in json.loads(txt).items() if v not in (None, [], "")}
+                    except ValueError:
+                        spec = None
+                    self._spec, self._spec_key = spec, key
+                    self.stats["spec_extractions"] = self.stats.get("spec_extractions", 0) + 1
+                self._spec_frozen = len(users) >= 2
+            spec = getattr(self, "_spec", None)
+            if not spec:
+                return self._step(message, state)
+            orig = state.system_messages
+            state.system_messages = orig + [SystemMessage(role="system", content=SPEC_NOTE.format(spec=json.dumps(spec)))]
+            try:
+                am = self._step(message, state)
+            finally:
+                state.system_messages = orig
+            am.cost = float(am.cost or 0.0) + spent
+            g = dict((am.raw_data or {}).get("gdopt") or {})
+            anchor = dict(g.get("anchor") or {})
+            anchor["spec"] = spec
+            g["anchor"] = anchor
+            am.raw_data = dict(am.raw_data or {}, gdopt=g)
+            return am
+
+        def _step(self, message, state):
             am = self._guarded_step(message, state)
             if proposalgate and _is_proposal(am, state.messages):
                 return self._proposal_gate(am, state)
@@ -420,7 +480,7 @@ def register_rule_anchored_agent(decision_model, modes: set, name: str = "gdopt_
             return am2
 
     created: list = []
-    modes = set(modes) - {"rules", "consistency", "writegate", "proposalgate"}
+    modes = set(modes) - {"rules", "consistency", "writegate", "proposalgate", "specpin"}
 
     def factory(tools, domain_policy, llm=None, llm_args=None, **_: Any):
         a = RuleAnchoredLLMAgent(tools, domain_policy, llm, llm_args or {}, decision_model, modes, **anchor_kw)
